@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 12</title>
+</head>
+
+<body>
+<div onclick="document.location='slide005.html'">
+<center><small><a href="slide003.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide005.html">next</a></small></center>
+<hr></div>
+<h2>Events, Event Sources, and Event Listeners</h2>
+<ul>
+  <li>Example: Use <tt>JButton</tt> components for buttons; attach an <tt>ActionListener</tt> to each button</li>
+  <li><tt>ActionListener</tt> interface:
+     <pre>public interface ActionListener
+{
+   void actionPerformed(ActionEvent event);
+}</pre></li>
+  <li>Need to supply a class whose <tt>actionPerformed</tt> method contains instructions to be executed when button is clicked</li>
+  <li><tt>event</tt> parameter contains details about the event, such as the time at which it occurred</li>
+  <li>Construct an object of the listener and add it to the button:
+     <pre>ActionListener listener = new ClickListener();
+button.addActionListener(listener);</pre></li>
+</ul>
+
+       
+   
+
+<div onclick="document.location='slide005.html'"><hr>
+<center><small><a href="slide003.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide005.html">next</a></small></center>
+</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 25</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide064.html'">
+<center><small><a href="slide062.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide064.html">next</a></small></center>
+<hr></div>
+<h2>Executing SQL Statements</h2>
+<ul>
+  <li>You can also use a generic execute statement to execute queries</li>
+  <li>It returns a <tt>boolean</tt> value to indicate whether SQL command yields a result set</li>
+  <li>If there is a result set, get it with the <tt>getResultSet</tt> method</li>
+  <li>Otherwise, get the update count with the <tt>getUpdateCount</tt>
+    method
+    <pre>String command = . . . ;
+boolean hasResultSet = stat.execute(command);
+if (hasResultSet)
+{
+   ResultSet result = stat.getResultSet();
+   . . .
+{
+else
+{
+   int count = stat.getUpdateCount();
+   . . .
+}
+</pre>
+  </li>
+</ul>
+
+
+
+<div onclick="document.location='slide064.html'"><hr>
+<center><small><a href="slide062.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide064.html">next</a></small></center>
+</div>
+</body>
+</html>

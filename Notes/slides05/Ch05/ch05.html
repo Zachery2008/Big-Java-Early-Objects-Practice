@@ -1,0 +1,427 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Horstmann Chapter 5</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+<body>
+<h2>Chapter 5</h2>
+<h1>Programming Graphics</h1>
+<br>
+<h2>Chapter Goals</h2>
+<ul>
+  <li>To be able to write simple applications</li>
+  <li>To display graphical shapes such as lines and ellipses</li>
+  <li>To use colors</li>
+  <li>To display drawings consisting of many shapes</li>
+  <li>To read input from a dialog box</li>
+  <li>To develop test cases that validate the correctness of your
+programs</li>
+</ul>
+<h2>Frame Windows</h2>
+<ul>
+  <li>The <tt>JFrame</tt> class
+    <pre>	JFrame frame = new JFrame();<br>	frame.setSize(300, 400);<br>	frame.setTitle("An Empty Frame");<br>	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);<br>	frame.setVisible(true);<br></pre>
+  </li>
+  <li><tt>import javax.swing.*;</tt></li>
+</ul>
+<h2>A Frame Window</h2>
+<img src="images/frame.png" alt="">
+<br>
+<h2>File EmptyFrameViewer.java</h2>
+<iframe src="code/emptyframe/EmptyFrameViewer.java.html" class="code">
+Your browser does not support the
+&amp;amp;amp;amp;amp;amp;amp;lt;iframe&amp;amp;amp;amp;amp;amp;amp;gt;
+tag.
+</iframe>
+<h2>Self Check</h2>
+<ol>
+  <li>How do you display a square frame with a title bar that reads <tt>"Hello,
+World!"</tt>?</li>
+  <li>How can a program display two frames at once?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li>Modify the <tt>EmptyFrameViewer</tt> program as follows:
+    <pre>frame.setSize(300, 300);<br>frame.setTitle("Hello, World!");</pre>
+  </li>
+  <li>Construct two <tt>JFrame</tt> objects, set each of their sizes,
+and call <tt>setVisible(true)</tt> on each of them</li>
+</ol>
+<h2>Drawing Shapes</h2>
+<ul>
+  <li><tt>paintComponent</tt>: called whenever the component needs to
+be repainted:
+    <pre>public class RectangleComponent extends JComponent<br>{<br>   public void paintComponent(Graphics g)<br>   {<br>      // Recover Graphics2D<br>      Graphics2D g2 = (Graphics2D) g;<br>      . . .<br>   }<br>}</pre>
+  </li>
+</ul>
+<h2>Drawing Shapes<br>
+</h2>
+<ul>
+  <li><tt>Graphics</tt> class lets you manipulate the graphics state
+(such as current color)</li>
+  <li><tt>Graphics2D</tt> class has methods to draw shape objects</li>
+  <li>Use a cast to recover the <tt>Graphics2D</tt> object from the <tt>Graphics</tt>
+parameter
+    <pre>Rectangle box = new Rectangle(5, 10, 20, 30);<br>g2.draw(box);</pre>
+  </li>
+  <li><tt>java.awt</tt> package</li>
+</ul>
+<h2>Drawing Rectangles</h2>
+<img src="images/rectangles.png" alt="">
+<br>
+<h2>Rectangle Drawing Program Classes</h2>
+<ul>
+  <li><tt>RectangleComponent</tt>: its <tt>paintComponent</tt> method
+produces the drawing</li>
+  <li><tt>RectangleViewer</tt>: its <tt>main</tt> method constructs a
+frame and a <tt>RectangleComponent</tt>, adds the component to the
+frame, and makes the frame visible
+    <ol>
+      <li>Construct a frame</li>
+      <li>Construct an object of your component class: <br>
+        <tt>RectangleComponent component = new RectangleComponent();</tt></li>
+      <li>Add the component to the frame <br>
+        <tt>frame.add(component);</tt> <br>
+However, if you use an older version of Java (before Version 5), you
+must make a slightly more complicated call: <br>
+        <tt>frame.getContentPane().add(component);</tt></li>
+      <li>Make the frame visible</li>
+    </ol>
+  </li>
+</ul>
+<h2>File RectangleComponent.java</h2>
+<iframe src="code/rectangles/RectangleComponent.java.html" class="code">
+Your browser does not support the
+&amp;amp;amp;amp;amp;amp;amp;lt;iframe&amp;amp;amp;amp;amp;amp;amp;gt;
+tag.
+</iframe>
+<h2>File RectangleViewer.java</h2>
+<iframe src="code/rectangles/RectangleViewer.java.html" class="code">
+Your browser does not support the
+&amp;amp;amp;amp;amp;amp;amp;lt;iframe&amp;amp;amp;amp;amp;amp;amp;gt;
+tag.
+</iframe>
+<h2>Self Check</h2>
+<ol>
+  <li value="3">How do you modify the program to draw two squares?</li>
+  <li>How do you modify the program to draw one rectangle and one
+square?</li>
+  <li>What happens if you call <tt>g.draw(box)</tt> instead of <tt>g2.draw(box)</tt>?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="3"><tt>Rectangle box = new Rectangle(5, 10, 20, 20);</tt></li>
+  <li>Replace the call to <tt>box.translate(15, 25)</tt> with <tt>box
+= new Rectangle(20, 35, 20, 20);</tt></li>
+  <li>The compiler complains that <tt>g</tt> doesn't have a <tt>draw</tt>
+method</li>
+</ol>
+<br>
+<h2>Applets</h2>
+<ul>
+  <li>Applets are programs that run inside a web browser</li>
+  <li>To implement an applet, use this code outline:
+    <pre>public class MyApplet extends JApplet<br>{<br>   public void paint(Graphics g)<br>   {<br>      // Recover Graphics2D<br>      Graphics2D g2 = (Graphics2D) g;<br>      // Drawing instructions go here<br>      . . .<br>   }<br>}</pre>
+  </li>
+</ul>
+<h2>Applets<br>
+</h2>
+<ul>
+  <li>This is almost the same outline as for a component, with two
+minor differences:
+    <ol>
+      <li>You extend <tt>JApplet</tt>, not <tt>JComponent</tt></li>
+      <li>You place the drawing code inside the <tt>paint</tt> method,
+not inside <tt>paintComponent</tt></li>
+    </ol>
+  </li>
+  <li>To run an applet, you need an HTML file with the <tt>applet</tt>
+tag</li>
+  <li>An HTML file can have multiple applets; add a separate <tt>applet</tt>
+tag for each applet</li>
+  <li>You view applets with the applet viewer or a Java enabled browser
+    <br>
+    <tt>appletviewer RectangleApplet.html</tt></li>
+</ul>
+<h2>File RectangleApplet.java</h2>
+<iframe src="code/applet/RectangleApplet.java.html" class="code">
+Your browser does not support the
+&amp;amp;amp;amp;amp;amp;amp;lt;iframe&amp;amp;amp;amp;amp;amp;amp;gt;
+tag.
+</iframe>
+<h2>File RectangleApplet.html</h2>
+<iframe src="code/RectangleApplet.html.txt" class="code">
+Your browser does not support the
+&amp;amp;amp;amp;amp;amp;amp;lt;iframe&amp;amp;amp;amp;amp;amp;amp;gt;
+tag.
+</iframe>
+<h2>File RectangleAppletExplained.html</h2>
+<iframe src="code/RectangleAppletExplained.html.txt" class="code">
+Your browser does not support the
+&amp;amp;amp;amp;amp;amp;amp;lt;iframe&amp;amp;amp;amp;amp;amp;amp;gt;
+tag.
+</iframe>
+<h2>Applets</h2>
+<img src="images/applets.png" alt="">
+<br>
+<!-- <h2>The Evolution of the Internet</h2>
+<img src="images/mosaic.png" alt="">
+<br> -->
+<h2>Graphical Shapes</h2>
+<ul>
+  <li><tt>Rectangle</tt>, <tt>Ellipse2D.Double</tt>, and <tt>Line2D.Double</tt>
+describe graphical shapes</li>
+  <li>We won't use the <tt>.Float</tt> classes</li>
+  <li>These classes are inner classes&#8211;doesn't matter to us except for
+the <tt>import</tt> statement:
+    <pre>import java.awt.geom.Ellipse2D; // no .Double</pre>
+  </li>
+  <li>Must construct <i>and draw</i> the shape <br>
+    <pre>Ellipse2D.Double ellipse = new Ellipse2D.Double(x, y, width, height);<br>g2.draw(ellipse);</pre>
+  </li>
+</ul>
+<h2>An Ellipse<br>
+</h2>
+<img src="images/ellipse.png" alt="">
+<h2>Drawing Lines</h2>
+<ul>
+  <li>To draw a line:
+    <pre>Line2D.Double segment = new Line2D.Double(x1, y1, x2, y2);</pre>
+or,
+    <pre>Point2D.Double from = new Point2D.Double(x1, y1);<br>Point2D.Double to = new Point2D.Double(x2, y2);<br>Line2D.Double segment = new Line2D.Double(from, to);</pre>
+  </li>
+</ul>
+<h2>Drawing Strings</h2>
+<tt>g2.drawString("Message", 50, 100);</tt><br>
+&nbsp;<br>
+<img src="images/message.png" alt="">
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li value="6">Give instructions to draw a circle with center (100,
+100) and radius 25</li>
+  <li>Give instructions to draw a letter "V" by drawing two line
+segments</li>
+  <li>Give instructions to draw a string consisting of the letter "V"</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="6"><tt>g2.draw(new Ellipse2D.Double(75, 75, 50, 50);</tt></li>
+  <li>
+    <pre>Line2D.Double segment1 = new Line2D.Double(0, 0, 10, 30);<br>g2.draw(segment1);<br>Line2D.Double segment2 = new Line2D.Double(10, 30, 20, 0);<br>g2.draw(segment2);</pre>
+  </li>
+  <li><tt>g2.drawString("V", 0, 30);</tt></li>
+</ol>
+<br>
+<h2>Colors<br>
+</h2>
+<ul>
+  <li>Standard colors <span style="font-family: monospace;">Color.BLUE</span>,
+    <span style="font-family: monospace;">Color.RED</span>, <span
+ style="font-family: monospace;">Color.PINK</span> etc.<br>
+  </li>
+  <li>Specify red, green, blue between <tt>0.0F</tt> and <tt>1.0F</tt></li>
+  <tt>Color magenta = new Color(1.0F, 0.0F, 1.0F); // F = float</tt><br>
+  <li>Set color in graphics context<br>
+  </li>
+  <tt>g2.setColor(magenta);<br>
+  </tt><li>Color is used when drawing and filling shapes<br>
+  </li>
+  <tt>g2.fill(rectangle); // filled with current color<br>
+  </tt>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="9">What are the RGB color values of <tt>Color.BLUE</tt>?</li>
+  <li>How do you draw a yellow square on a red background?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="9"><tt>0.0F, 0.0F, and 0.1F</tt></li>
+  <li>First fill a big red square, then fill a small yellow square
+inside:
+    <pre>g2.setColor(Color.RED);<br>g2.fill(new Rectangle(0, 0, 200, 200));<br>g2.setColor(Color.YELLOW);<br>g2.fill(new Rectangle(50, 50, 100, 100));</pre>
+  </li>
+</ol>
+<br>
+<h2>Drawing Complex Shapes</h2>
+<ul>
+  <li>Good practice: Make a class for each graphical shape
+    <pre>class Car<br>{<br>   . . .<br>   public void draw(Graphics2D g2)<br>   {<br>      // Drawing instructions<br>      . . .<br>   }<br>}</pre>
+  </li>
+  <li>Plan complex shapes by making sketches on graph paper</li>
+</ul>
+<h2>Drawing Cars</h2>
+<ul>
+  <li>Draw two cars: one in top-left corner of window, and another in
+the bottom right</li>
+  <li>Compute bottom right position, inside <tt>paintComponent</tt>
+method:
+    <pre>int x = getWidth() - 60;<br>int y = getHeight() - 30;<br>Car car2 = new Car(x, y);</pre>
+  </li>
+  <li><tt>getWidth</tt> and <tt>getHeight</tt> are applied to object
+that executes <tt>paintComponent</tt></li>
+  <li>If window is resized <tt>paintComponent</tt> is called and car
+position recomputed</li>
+</ul>
+<img src="images/cars.png" alt="">
+<br>
+<h2>Plan Complex Shapes on Graph Paper</h2>
+<img src="images/sketch.png" alt="">
+<br>
+<h2>File CarComponent.java</h2>
+<iframe src="code/car/CarComponent.java.html" class="code">
+Your browser does not support the
+&amp;amp;amp;amp;amp;amp;amp;lt;iframe&amp;amp;amp;amp;amp;amp;amp;gt;
+tag.
+</iframe>
+<h2>File Car.java</h2>
+<iframe src="code/car/Car.java.html" class="code">
+Your browser does not support the
+&amp;amp;amp;amp;amp;amp;amp;lt;iframe&amp;amp;amp;amp;amp;amp;amp;gt;
+tag.
+</iframe>
+<h2>File CarViewer.java</h2>
+<iframe src="code/car/CarViewer.java.html" class="code">
+Your browser does not support the
+&amp;amp;amp;amp;amp;amp;amp;lt;iframe&amp;amp;amp;amp;amp;amp;amp;gt;
+tag.
+</iframe>
+<h2>Self Check</h2>
+<ol>
+  <li value="11">Which class needs to be modified to have the two cars
+positioned next to each other?</li>
+  <li>Which class needs to be modified to have the car tires painted in
+black, and what modification do you need to make?</li>
+  <li>How do you make the cars twice as big?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="11"><tt>CarComponent</tt></li>
+  <li>In the draw method of the Car class, call
+    <pre>g2.fill(frontTire);<br>g2.fill(rearTire);</pre>
+  </li>
+  <li>Double all measurements in the draw method of the <tt>Car</tt>
+class</li>
+</ol>
+<br>
+<h2>Drawing Graphical Shapes</h2>
+<img src="images/flag.png" alt="">
+<pre>Rectangle leftRectangle = new Rectangle(100, 100, 30, 60);<br>Rectangle rightRectangle = new Rectangle(160, 100, 30, 60);<br>Line2D.Double topLine<br>   = new Line2D.Double(130, 100, 160, 100);<br>Line2D.Double bottomLine<br>   = new Line2D.Double(130, 160, 160, 160);</pre>
+<br>
+<!-- <h2>Computer Graphics</h2>
+<img src="images/diagrams.png" alt="">
+<br>
+<h2>Computer Graphics</h2>
+<img src="images/scene.png" alt="">
+<img src="images/manipulated_image.png" alt="">
+<br> -->
+<h2>Reading Text Input</h2>
+<ul>
+  <li>A graphical application can obtain input by displaying a <tt>JOptionPane</tt></li>
+  <li>The <tt>showInputDialog</tt> method displays a prompt and waits
+for user input</li>
+  <li>The <tt>showInputDialog</tt> method returns the string that the
+user typed
+    <pre>String input = JOptionPane.showInputDialog("Enter x");<br>double x = Double.parseDouble(input);<br></pre>
+    <img src="images/joptionpane.png" alt=""></li>
+</ul>
+<h2>File ColorViewer.java</h2>
+<iframe src="code/color/ColorViewer.java.html" class="code">
+Your browser does not support the
+&amp;amp;amp;amp;amp;amp;amp;lt;iframe&amp;amp;amp;amp;amp;amp;amp;gt;
+tag.
+</iframe>
+<h2>File ColoredSquareComponent.java</h2>
+<iframe src="code/color/ColoredSquareComponent.java.html" class="code">
+Your browser does not support the
+&amp;amp;amp;amp;amp;amp;amp;lt;iframe&amp;amp;amp;amp;amp;amp;amp;gt;
+tag.
+</iframe>
+<h2>Output</h2>
+<img src="images/square.png" alt="">
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li value="14">Why does this program produce three separate dialog
+boxes instead of inviting the user to type all three values in a single
+dialog box?</li>
+  <li>Why does this program place the <tt>showInputDialog</tt> call
+into the <tt>main</tt> method of the <tt>ColorViewer</tt> class and
+not into the <tt>paintComponent</tt> method of the <tt>ColorComponent</tt>
+class?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="14">If the user entered a string, such as <tt>"1.0 0.7
+0.7"</tt>, you would need to break it up into three separate strings.
+That can be done, but it is more tedious to program than three calls to
+    <tt>showInputDialog</tt>.</li>
+  <li>You don't want the dialog boxes to appear every time the
+component is repainted.</li>
+</ol>
+<br>
+<h2>Comparing Visual and Numerical Information</h2>
+<ul>
+  <li>Compute intersection between circle and vertical line</li>
+  <li>Circle has radius <i>r = </i>100 and center (<i>a</i>, <i>b</i>)
+= (100, 100)</li>
+  <li>Line has constant <i>x</i> value</li>
+  <li>Calculate intersection points using mathematics: <br>
+Equation of a circle with radius <i>r</i> and center point <i>(a, b)</i>
+is <br>
+    <img src="images/circle_equation.png" alt=""> <br>
+If you know <i>x</i>, then you can solve for <i>y</i>: <br>
+    <img src="images/equation1.png" alt=""></li>
+</ul>
+<br>
+<h2>Comparing Visual and Numerical Information</h2>
+<ul>
+  <li>That is easy to compute in Java:
+    <pre>double root = Math.sqrt(r * r - (x - a) * (x - a));<br>double y1 = b + root;<br>double y2 = b - root;</pre>
+  </li>
+  <li>Plot circle, line, computed intersection points</li>
+  <li>Visual and
+numerical results should be the same</li>
+</ul>
+<h2>Intersection of a Line and a Circle</h2>
+<img src="images/intersection.png" alt="">
+<br>
+<h2>File IntersectionComponent.java</h2>
+<iframe src="code/intersection/IntersectionComponent.java.html"
+ class="code">
+Your browser does not support the
+&amp;amp;amp;amp;amp;amp;amp;lt;iframe&amp;amp;amp;amp;amp;amp;amp;gt;
+tag.
+</iframe>
+<h2>File IntersectionViewer.java</h2>
+<iframe src="code/intersection/IntersectionViewer.java.html"
+ class="code">
+Your browser does not support the
+&amp;amp;amp;amp;amp;amp;amp;lt;iframe&amp;amp;amp;amp;amp;amp;amp;gt;
+tag.
+</iframe>
+<h2>File LabeledPoint.java</h2>
+<iframe src="code/intersection/LabeledPoint.java.html" class="code">
+Your browser does not support the
+&amp;amp;amp;amp;amp;amp;amp;lt;iframe&amp;amp;amp;amp;amp;amp;amp;gt;
+tag.
+</iframe>
+<h2>Self Check</h2>
+<ol>
+  <li value="16">Suppose you make a mistake in the math, say, by using
+a + sign instead of a - sign in the formula for root. How can you tell
+that the program does not run correctly?</li>
+  <li>Which intersection points does the program draw when you provide
+an input of 0?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="16">The intersection points will be drawn at a location
+that is different from the true intersection of the line and the circle</li>
+  <li>The point (0, 100) is drawn twice</li>
+</ol>
+<br>
+</body>
+</html>

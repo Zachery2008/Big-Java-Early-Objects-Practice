@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 11</title>
+   
+</head>
+
+<body>
+<div onclick="document.location='slide008.html'">
+<center><small><a href="slide006.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide008.html">next</a></small></center>
+<hr></div>
+<h2>Generic <tt>DataSet</tt> for Measurable Objects</h2>
+<pre>public class DataSet
+{
+   . . .
+   public void add(<code class="blue">Measurable</code> x)
+   {
+      sum = sum + x.<code class="blue">getMeasure()</code>;
+      if (count == 0 || maximum.<code class="blue">getMeasure()</code> < x.<code class="blue">getMeasure()</code>)
+         maximum = x;
+      count++;
+   }
+
+   public <code class="blue">Measurable</code> getMaximum()
+   {
+      return maximum;
+   }
+
+   private double sum;
+   private <code class="blue">Measurable</code> maximum;
+   private int count;
+}</pre>
+
+
+
+<div onclick="document.location='slide008.html'"><hr>
+<center><small><a href="slide006.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide008.html">next</a></small></center>
+</div>
+</body>
+</html>

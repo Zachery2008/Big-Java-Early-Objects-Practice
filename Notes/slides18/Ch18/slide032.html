@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 18</title>
+</head>
+
+<body>
+<div onclick="document.location='slide033.html'">
+<center><small><a href="slide031.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide033.html">next</a></small></center>
+<hr></div>
+<h2>Recursive Helper Methods</h2>
+<ul>
+  <li>Sometimes it is easier to find a recursive solution if you make a
+slight change to the original problem</li>
+  <li>Consider the palindrome test of previous slide <br>
+It is a bit inefficient to construct new <tt>Sentence</tt> objects in
+every step</li>
+  <li>Rather than testing whether the sentence is a palindrome, check
+whether a substring is a palindrome:
+    <pre>/**<br>   Tests whether a substring of the sentence is a palindrome.<br>   @param start the index of the first character of the substring<br>   @param end the index of the last character of the substring<br>   @return true if the substring is a palindrome<br>*/<br>public boolean isPalindrome(int start, int end)</pre>
+  </li>
+</ul>
+
+<div onclick="document.location='slide033.html'"><hr>
+<center><small><a href="slide031.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide033.html">next</a></small></center>
+</div>
+</body>
+</html>

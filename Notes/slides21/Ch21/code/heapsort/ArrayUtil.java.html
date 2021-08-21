@@ -1,0 +1,39 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">util</font><font color="#000000">.</font><font color="#000000">Random</font><font color="#000000">;</font>
+<b><font color="#006cb8">02: </font></b>
+<b><font color="#006cb8">03: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">04: </font></b><font color="#7a9ecd">   This class contains utility methods for array </font>
+<b><font color="#006cb8">05: </font></b><font color="#7a9ecd">   manipulation.</font>
+<b><font color="#006cb8">06: </font></b><font color="#7a9ecd">*/</font>  
+<b><font color="#006cb8">07: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> <font color="#000000">ArrayUtil</font>
+<b><font color="#006cb8">08: </font></b><font color="#000000">{</font> 
+<b><font color="#006cb8">09: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">10: </font></b><font color="#7a9ecd">      Creates an array filled with random values.</font>
+<b><font color="#006cb8">11: </font></b><font color="#7a9ecd">      @param length the length of the array</font>
+<b><font color="#006cb8">12: </font></b><font color="#7a9ecd">      @param n the number of possible random values</font>
+<b><font color="#006cb8">13: </font></b><font color="#7a9ecd">      @return an array filled with length numbers between</font>
+<b><font color="#006cb8">14: </font></b><font color="#7a9ecd">      0 and n - 1</font>
+<b><font color="#006cb8">15: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">16: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">int</font><font color="#000000">[</font><font color="#000000">]</font> <font color="#000000">randomIntArray</font><font color="#000000">(</font><font color="#d05b76">int</font> <font color="#000000">length</font><font color="#000000">,</font> <font color="#d05b76">int</font> <font color="#000000">n</font><font color="#000000">)</font>
+<b><font color="#006cb8">17: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">18: </font></b>      <font color="#d05b76">int</font><font color="#000000">[</font><font color="#000000">]</font> <font color="#000000">a</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#d05b76">int</font><font color="#000000">[</font><font color="#000000">length</font><font color="#000000">]</font><font color="#000000">;</font>
+<b><font color="#006cb8">19: </font></b>      <font color="#000000">Random</font> <font color="#000000">generator</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Random</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">20: </font></b>      
+<b><font color="#006cb8">21: </font></b>      <font color="#d05b76">for</font> <font color="#000000">(</font><font color="#d05b76">int</font> <font color="#000000">i</font> <font color="#000000">=</font> <font color="#89c976">0</font><font color="#000000">;</font> <font color="#000000">i</font> <font color="#000000">&lt;</font> <font color="#000000">a</font><font color="#000000">.</font><font color="#000000">length</font><font color="#000000">;</font> <font color="#000000">i</font><font color="#000000">+</font><font color="#000000">+</font><font color="#000000">)</font>
+<b><font color="#006cb8">22: </font></b>         <font color="#000000">a</font><font color="#000000">[</font><font color="#000000">i</font><font color="#000000">]</font> <font color="#000000">=</font> <font color="#000000">generator</font><font color="#000000">.</font><font color="#000000">nextInt</font><font color="#000000">(</font><font color="#000000">n</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">23: </font></b>      
+<b><font color="#006cb8">24: </font></b>      <font color="#d05b76">return</font> <font color="#000000">a</font><font color="#000000">;</font>
+<b><font color="#006cb8">25: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">26: </font></b>
+<b><font color="#006cb8">27: </font></b>   <font color="#7a9ecd">/** </font>
+<b><font color="#006cb8">28: </font></b><font color="#7a9ecd">      Prints all elements in an array.</font>
+<b><font color="#006cb8">29: </font></b><font color="#7a9ecd">      @param a the array to print</font>
+<b><font color="#006cb8">30: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">31: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">void</font> <font color="#000000">print</font><font color="#000000">(</font><font color="#d05b76">int</font><font color="#000000">[</font><font color="#000000">]</font> <font color="#000000">a</font><font color="#000000">)</font>
+<b><font color="#006cb8">32: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">33: </font></b>      <font color="#d05b76">for</font> <font color="#000000">(</font><font color="#d05b76">int</font> <font color="#000000">i</font> <font color="#000000">=</font> <font color="#89c976">0</font><font color="#000000">;</font> <font color="#000000">i</font> <font color="#000000">&lt;</font> <font color="#000000">a</font><font color="#000000">.</font><font color="#000000">length</font><font color="#000000">;</font> <font color="#000000">i</font><font color="#000000">+</font><font color="#000000">+</font><font color="#000000">)</font>
+<b><font color="#006cb8">34: </font></b>         <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">print</font><font color="#000000">(</font><font color="#000000">a</font><font color="#000000">[</font><font color="#000000">i</font><font color="#000000">]</font> <font color="#000000">+</font> <font color="#00a99d">" "</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">35: </font></b>      <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">36: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">37: </font></b><font color="#000000">}</font>
+<b><font color="#006cb8">38: </font></b>      
+</tt></pre>

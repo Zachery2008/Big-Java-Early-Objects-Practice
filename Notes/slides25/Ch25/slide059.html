@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 25</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide060.html'">
+<center><small><a href="slide058.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide060.html">next</a></small></center>
+<hr></div>
+<h2>Connecting to the Database</h2>
+<ul>
+  <li> The <tt>init</tt> method uses the <tt>Properties</tt> class to read the file</li>
+  <li><tt>Properties</tt> class has a <tt>load</tt> method to read a file of key/value pairs from
+    a stream
+<pre>Properties props = new Properties();
+FileInputStream in = new FileInputStream(fileName);
+props.load(in);
+</pre></li>
+  <li>The <tt>getProperty</tt> method returns the value of a given key
+<pre>String driver = props.getProperty("jdbc.driver");
+</pre></li>
+<li>Now when you need a connection call
+<pre>Connection conn = SimpleDataSource.getConnection();</pre></li>
+  <li>You need to close the connection by calling
+<pre>conn.close();</pre></li>
+</ul>
+
+ 
+
+<div onclick="document.location='slide060.html'"><hr>
+<center><small><a href="slide058.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide060.html">next</a></small></center>
+</div>
+</body>
+</html>

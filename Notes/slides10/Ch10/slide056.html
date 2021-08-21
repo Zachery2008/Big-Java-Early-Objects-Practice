@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 10</title>
+</head>
+
+<body>
+<div onclick="document.location='slide057.html'">
+<center><small><a href="slide055.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide057.html">next</a></small></center>
+<hr></div>
+<h2>Fixing the Bug</h2>
+<ul>
+  <li><tt>insideVowelGroup</tt> was never reset to <tt>false</tt></li>
+  <li>Fix
+    <pre>if ("aeiouy".indexOf(ch) &gt;= 0)<br>{<br>   . . .<br>}<br>else insideVowelGroup = false;</pre>
+  </li>
+  <li>Retest: All test cases pass
+    <pre>Syllables in hello: 2<br>Syllables in yellow: 2<br>Syllables in peach.: 1</pre>
+  </li>
+  <li>Is the program now bug-free? The debugger can't answer that.</li>
+</ul>
+
+<div onclick="document.location='slide057.html'"><hr>
+<center><small><a href="slide055.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide057.html">next</a></small></center>
+</div>
+</body>
+</html>

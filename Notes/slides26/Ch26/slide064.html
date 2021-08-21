@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 26</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide065.html'">
+<center><small><a href="slide063.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide065.html">next</a></small></center>
+<hr></div>
+<h2>Example: An Item List</h2>
+<pre>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!DOCTYPE items [
+
+&lt;!ELEMENT items (item*)&gt;
+&lt;!ELEMENT item (product, quantity)&gt;
+&lt;!ELEMENT product (description, price)&gt;
+&lt;!ELEMENT quantity (#PCDATA)&gt;
+&lt;!ELEMENT description (#PCDATA)&gt;
+&lt;!ELEMENT price (#PCDATA)&gt;
+
+]&gt;
+&lt;items&gt;
+   &lt;item&gt;
+      &lt;product&gt;
+         &lt;description&gt;Ink Jet Refill Kit&lt;/description&gt;
+         &lt;price&gt;29.95&lt;/price&gt;
+      &lt;/product&gt;
+      &lt;quantity&gt;8&lt;/quantity&gt;
+   &lt;/item&gt;
+   &lt;item&gt;
+      &lt;product&gt;
+         &lt;description&gt;4-port Mini Hub&lt;/description&gt;
+         &lt;price&gt;19.95&lt;/price&gt;
+      &lt;/product&gt;
+      &lt;quantity&gt;4&lt;/quantity&gt;
+   &lt;/item&gt;
+&lt;/items&gt;</pre>
+
+ 
+
+<div onclick="document.location='slide065.html'"><hr>
+<center><small><a href="slide063.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide065.html">next</a></small></center>
+</div>
+</body>
+</html>

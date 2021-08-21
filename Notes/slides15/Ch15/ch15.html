@@ -1,0 +1,671 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 15</title>
+</head>
+  <body>
+
+<div><h2>Chapter 15</h2>    
+  
+<h1>Exception Handling</h1>
+   <br></div>
+     
+<h2>Chapter Goals</h2>
+       
+<ul>
+  <li>To learn how to throw exceptions</li>
+  <li>To be able to design your own exception classes</li>
+  <li>To understand the difference between checked and unchecked exceptions</li>
+  <li>To learn how to catch exceptions</li>
+  <li>To know when and where to catch an exception</li>
+</ul>
+ 
+<h2>Error Handling</h2>
+<ul>
+   <li>Traditional approach: Method returns error code</li>
+   <li>Problem: Forget to check for error code
+      <ul><li>Failure notification may go undetected</li></ul></li>
+   <li>Problem: Calling method may not be able to do anything about failure
+      <ul><li>Program must fail too and let its caller worry about it</li>
+      <li>Many method calls would need to be checked</li></ul></li>
+   <li>Instead of programming for success<br>
+     <tt>x.doSomething()<br></tt>
+     you would always be programming for failure:<br>
+     <tt>if (!x.doSomething()) return false;</tt></li>
+ 
+</ul>
+ 
+<h2>Throwing Exceptions</h2> 
+<ul>
+   <li>Exceptions:
+       <ul><li>Can't be overlooked</li>
+       <li>Sent directly to an exception handler&#150;not just caller of failed method</li></ul></li>
+   <li>Throw an exception object to signal an exceptional condition</li>
+   <li>Example: <tt>IllegalArgumentException</tt>: illegal parameter value
+      <pre>IllegalArgumentException exception
+      = new IllegalArgumentException("Amount exceeds balance");
+throw exception;</pre></li>
+   <li>No need to store exception object in a variable:
+      <pre>throw new IllegalArgumentException("Amount exceeds balance");</pre></li>
+   <li>When an exception is thrown, method terminates immediately
+      <ul><li>Execution continues with an exception handler</li></ul></li>
+</ul>
+ 
+<h2>Example</h2>
+<pre>public class BankAccount
+{
+   public void withdraw(double amount)
+   {
+      if (amount > balance)
+      {
+         IllegalArgumentException exception
+               = new IllegalArgumentException("Amount exceeds balance");
+         throw exception;
+      }
+      balance = balance - amount;
+   }
+   . . .
+}</pre>
+
+ 
+<h2>Hierarchy of Exception Classes</h2>
+ <img src="images/hierarchy.png" alt="">
+<br>
+
+
+<h2>Syntax 15.1: Throwing an Exception<br>
+ </h2>
+ 
+<table cellpadding="10" width="80%" border="1" bgcolor="#ffffff">
+   <tbody>
+     <tr>
+       <td>       
+      <table border="0">
+         <tbody>
+           <tr>
+             <td width="5%">&nbsp;</td>
+             <td><pre>throw <i>exceptionObject</i>;</pre></td>
+           </tr>         
+        </tbody>       
+      </table>
+       
+      <h3>Example:</h3>
+       
+      <table border="0">
+         <tbody>
+           <tr>
+             <td width="5%">&nbsp;</td>
+             <td>             
+            <pre>throw new IllegalArgumentException();</pre>
+             </td>
+           </tr>
+         
+        </tbody>       
+      </table>
+       
+      <h3>Purpose:</h3>
+To throw an exception and transfer control to a handler for this exception type</td>
+     </tr>
+  </tbody> 
+</table>
+
+
+<h2>Self Check</h2>
+<ol>
+<li>How should you modify the <tt>deposit</tt> method to ensure that the balance is never negative?</li>
+<li>Suppose you construct a new bank account object with a zero balance and then call <tt>withdraw(10)</tt>. What is the value of <tt>balance</tt> afterwards?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li>Throw an exception if the amount being deposited is less than zero.</li>
+<li>The balance is still zero because the last statement of the <tt>withdraw</tt> method was never executed.</li>
+</ol>
+<br>
+
+
+ 
+<h2>Checked and Unchecked Exceptions</h2>
+<ul>
+   <li>Two types of exceptions:
+      <ul><li>Checked
+          <ul><li>The compiler checks that you don't ignore them</li>
+          <li>Due to external circumstances that the programmer cannot prevent</li>
+          <li>Majority occur when dealing with input and output</li>
+          <li>For example, <tt>IOException</tt></li></ul></li>
+      <li>Unchecked:
+          <ul><li>Extend the class <tt>RuntimeException</tt> or <tt>Error</tt></li>
+          <li>They are the programmer's fault</li>
+          <li>Examples of runtime exceptions:
+             <pre>NumberFormatException
+IllegalArgumentException
+NullPointerException</pre></li><li>Example of error:
+<pre>OutOfMemoryError</pre></li></ul></li></ul></li>
+</ul>
+
+
+<h2>Checked and Unchecked Exceptions</h2>
+<ul>
+  <li>Categories aren't perfect:
+     <ul><li><tt>Scanner.nextInt</tt> throws unchecked <tt>InputMismatchException</tt></li>
+     <li>Programmer cannot prevent users from entering incorrect input</li>
+     <li>This choice makes the class easy to use for beginning programmers</li></ul></li>
+  <li>Deal with checked exceptions principally when programming with files and streams</li>
+  <li>For example, use a <tt>Scanner</tt> to read a file
+     <pre>String filename = . . .;
+FileReader reader = new FileReader(filename);
+Scanner in = new Scanner(reader);</pre></li>
+  <li>But, <tt>FileReader</tt> constructor can throw a <tt>FileNotFoundException</tt></li>
+</ul>
+
+
+<h2>Checked and Unchecked Exceptions</h2>
+<ul>
+  <li>Two choices:
+     <ol><li>Handle the exception</li>
+     <li>Tell compiler that you want method to be terminated when the exception occurs
+     <ul><li>Use <tt>throws</tt> specifier so method can throw a checked exception
+     <pre>public void read(String filename) throws FileNotFoundException
+{
+   FileReader reader = new FileReader(filename);
+   Scanner in = new Scanner(reader);
+   . . .
+}</pre></li>
+<li>For multiple exceptions:
+<pre>public void read(String filename)
+      throws IOException, ClassNotFoundException</pre></li>
+<li>Keep in mind inheritance hierarchy:
+<br>If method can throw an <tt>IOException</tt> and <tt>FileNotFoundException</tt>, only use <tt>IOException</tt></li></ul></li>
+</ol></li>
+   <li>Better to declare exception than to handle it incompetently</li>
+</ul>
+ 
+ 
+<h2>Syntax 15.2: Exception Specification</h2>
+<table cellpadding="10" width="94%" border="1" bgcolor="#ffffff">
+   <tbody>
+     <tr>
+       <td>       
+      <table border="0">
+         <tbody>
+           <tr>
+             <td width="5%">&nbsp;</td>
+             <td><pre><i>accessSpecifier returnType methodName</i>(parameterType parameterName, . . .)
+      <i>throws ExceptionClass</i>, <i>ExceptionClass</i>, . . .</pre></td>
+           </tr>
+         
+        </tbody>       
+      </table>
+       
+      <h3>Example:</h3>
+       
+      <table border="0">
+         <tbody>
+           <tr>
+             <td width="5%">&nbsp;</td>
+             <td><pre>public void read(BufferedReader in)
+      throws IOException</pre></td>
+           </tr>
+         
+        </tbody>       
+      </table>
+       
+      <h3>Purpose:</h3>
+To indicate the checked exceptions that this method can throw</td>
+     </tr>
+  </tbody> 
+</table>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="3">Suppose a method calls the <tt>FileReader</tt> constructor and the <tt>read</tt> method of the <tt>FileReader</tt> class, which can throw an <tt>IOException</tt>. Which <tt>throws</tt> specification should you use?</li>
+<li>Why is a <tt>NullPointerException</tt> not a checked exception?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="3">The specification throws <tt>IOException</tt> is sufficient because <tt>FileNotFoundException</tt> is a subclass of <tt>IOException</tt>.</li>
+<li>Because programmers should simply check for <tt>null</tt> pointers instead of trying to handle a <tt>NullPointerException</tt>.</li>
+</ol>
+<br>
+
+ 
+<h2>Catching Exceptions</h2>
+<ul>
+   <li>Install an exception handler with <tt>try</tt>/<tt>catch</tt> statement</li>
+   <li><tt>try</tt> block contains statements that may cause an exception</li>
+   <li><tt>catch</tt> clause contains handler for an exception type</li>
+   <li>Example:
+   <pre>try
+{
+   String filename = . . .;
+   FileReader reader = new FileReader(filename);
+   Scanner in = new Scanner(reader);
+   String input = in.next();
+   int value = Integer.parseInt(input);
+   . . .
+}
+catch (IOException exception)
+{
+   exception.printStackTrace();
+}
+catch (NumberFormatException exception)
+{
+   System.out.println("Input was not a number");
+}</pre></li>
+</ul>
+
+<h2>Catching Exceptions</h2>
+<ul>
+   <li>Statements in <tt>try</tt> block are executed</li>
+   <li>If no exceptions occur, <tt>catch</tt> clauses are skipped</li>
+   <li>If exception of matching type occurs, execution jumps to <tt>catch</tt>   clause</li>
+   <li>If exception of another type occurs, it is thrown until it is caught by another <tt>try</tt> block</li>
+   <li><tt>catch (IOException exception) block</tt>
+      <ul><li><tt>exception</tt> contains reference to the exception object that was thrown</li>
+      <li><tt>catch</tt> clause can analyze object to find out more details</li>
+      <li><tt>exception.printStackTrace()</tt>: printout of chain of method calls that lead to exception</li></ul>
+</li>
+</ul>
+ 
+
+<h2>Syntax 15.3: General Try Block </h2>
+<table cellpadding="10" width="90%" border="1" bgcolor="#ffffff">
+   <tbody>
+     <tr>
+       <td>       
+      <table border="0">
+         <tbody>
+           <tr>
+             <td width="5%">&nbsp;</td>
+             <td>             
+            <pre>try
+{
+   <i>statement
+   statement</i>
+   . . . 
+} 
+catch (<i>ExceptionClass exceptionObject</i>)
+{ 
+   <i>statement
+   statement</i>
+   . . .
+} 
+catch (<i>ExceptionClass exceptionObject</i>)
+{ 
+   <i>statement 
+   statement</i>
+   . . .
+}
+. . .</pre>
+             </td>
+           </tr>
+         
+        </tbody>       
+      </table>
+       
+      <h3>Example:</h3>
+       
+      <table border="0">
+         <tbody>
+           <tr>
+             <td width="5%">&nbsp;</td>
+             <td>             
+            <pre>try
+{
+   System.out.println("How old are you?");
+   int age = in.nextInt();
+   System.out.println("Next year, you'll be " + (age + 1));
+}
+catch (InputMismatchException exception)
+{
+   exception.printStackTrace();
+}</pre>
+             </td>
+           </tr>
+         
+        </tbody>       
+      </table>
+       
+      <h3>Purpose:</h3>
+       
+      <p>To execute one or more statements that may generate exceptions. If an exception occurs
+and it matches one of the <tt>catch</tt> clauses, execute the first one that matches. If no exception
+occurs, or an exception is thrown that doesn't match any <tt>catch</tt> clause, then skip the
+<tt>catch</tt> clauses.</p>
+                 </td>
+     </tr>
+   
+  </tbody> 
+</table>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="5">Suppose the file with the given file name exists and has no contents. Trace the flow of execution in the <tt>try</tt> block in this section.</li>
+<li>Is there a difference between catching checked and unchecked exceptions?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="5">The <tt>FileReader</tt> constructor succeeds, and in is constructed. Then the call
+<tt>in.next()</tt> throws a <tt>NoSuchElementException</tt>, and the <tt>try</tt> block is aborted. None
+of the <tt>catch</tt> clauses match, so none are executed. If none of the enclosing
+method calls catch the exception, the program terminates.</li>
+<li>No&#150;you catch both exception types in the same way, as you can see from the
+code example on page 558. Recall that <tt>IOException</tt> is a checked exception and
+<tt>NumberFormatException</tt> is an unchecked exception.</li>
+</ol>
+<br>
+
+ 
+<h2>The <tt>finally</tt> Clause<br>
+ </h2>
+ 
+<ul>
+   <li>Exception terminates current method</li>
+   <li>Danger: Can skip over essential code</li>
+   <li>Example: <br>
+     <pre>reader = new FileReader(filename);
+Scanner in = new Scanner(reader);
+readData(in);
+reader.close(); // May never get here</pre></li>
+   <li>Must execute <tt>reader.close()</tt> even if exception happens</li>
+   <li>Use <tt>finally</tt> clause for code that must be executed "no matter 
+what"</li>
+ 
+</ul>
+ 
+<h2>The <tt>finally</tt> Clause</h2>
+ 
+<pre>FileReader reader = new FileReader(filename);
+try
+{
+   Scanner in = new Scanner(reader);
+   readData(in);
+}
+finally
+{
+   reader.close(); // if an exception occurs, finally clause is also
+                   // executed before exception is passed to its handler
+}</pre>
+
+
+<h2>The <tt>finally</tt> Clause</h2>
+<ul>
+<li>Executed when <tt>try</tt> block is exited in any of three ways:
+  <ol><li>After last statement of <tt>try</tt> block</li>
+  <li>After last statement of <tt>catch</tt> clause, if this <tt>try</tt> block caught an exception</li>
+  <li>When an exception was thrown in <tt>try</tt> block and not caught</li></ol></li>
+  <li>Recommendation: don't mix <tt>catch</tt> and <tt>finally</tt> clauses in same <tt>try</tt> block</li>
+</ul>
+
+
+<h2>Syntax 15.4: The <tt>finally</tt> Clause</h2>
+<table cellpadding="10" width="80%" border="1" bgcolor="#ffffff">
+      <tbody>
+        <tr>
+          <td>                            
+      <table border="0">
+            <tbody>
+              <tr>
+                <td width="5%">&nbsp;</td>
+                <td><pre>try
+{
+   statement
+   statement
+   . . .
+}
+finally
+{
+   statement
+   statement
+   . . .
+}</pre></td>
+              </tr>
+                                       
+        </tbody>                            
+      </table>
+                               
+      <h3>Example:</h3>
+                               
+      <table border="0">
+            <tbody>
+              <tr>
+                <td width="5%">&nbsp;</td>
+                <td>             
+            <pre>FileReader reader = new FileReader(filename);
+try
+{
+   readData(reader);
+}
+finally
+{
+   reader.close();
+}</pre></td>
+              </tr>
+                                       
+        </tbody>                            
+      </table>
+                               
+      <h3>Purpose:</h3>
+To ensure that the statements in the <tt>finally</tt> clause are executed whether or not the
+statements in the <tt>try</tt> block throw an exception.</td>
+        </tr>
+  </tbody>    
+</table>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="7">Why was the <tt>reader</tt> variable declared outside the <tt>try</tt> block?</li>
+<li>Suppose the file with the given name does not exist. Trace the flow of execution of the code segment in this section.</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="7">If it had been declared inside the <tt>try</tt> block, its scope would only have extended
+to the end of the <tt>try</tt> block, and the <tt>catch</tt> clause could not have closed it.</li>
+<li>The <tt>FileReader</tt> constructor throws an exception. The <tt>finally</tt> clause is executed.
+Since <tt>reader</tt> is <tt>null</tt>, the call to <tt>close</tt> is not executed. Next, a <tt>catch</tt> clause
+that matches the <tt>FileNotFoundException</tt> is located. If none exists, the program
+terminates.</li>
+</ol>
+<br>
+
+
+<h2>Designing Your Own Exception Types</h2>
+<ul>
+   <li>You can design your own exception types&#150;subclasses of <tt>Exception</tt> or <tt>RuntimeException</tt></li>
+   <li><pre>if (amount > balance)
+{
+   throw new InsufficientFundsException(
+      "withdrawal of " + amount + " exceeds balance of " + balance);
+}</pre></li>
+   <li>Make it an unchecked exception&#150;programmer could have avoided it by 
+calling <tt>getBalance</tt> first</li>
+   <li>Extend <tt>RuntimeException</tt> or one of its subclasses</li>
+   <li>Supply two constructors
+     <ol><li>Default constructor</li>
+     <li>A constructor that accepts a message string describing reason for exception</li></ol></li>
+</ul>
+
+ 
+<h2>Designing Your Own Exception Types</h2>
+<pre>public class InsufficientFundsException
+      extends RuntimeException
+{
+   public InsufficientFundsException() {}
+
+   public InsufficientFundsException(String message)
+   {
+      super(message);
+   }
+}</pre>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="9">What is the purpose of the call <tt>super(message)</tt> in the second <tt>InsufficientFundsException</tt> constructor?</li>
+<li>Suppose you read bank account data from a file. Contrary to your expectation, the next input value is not of type <tt>double</tt>. You decide to implement a <tt>BadDataException</tt>. Which exception class should you extend?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="9">To pass the exception message string to the <tt>RuntimeException</tt> superclass.</li>
+<li><tt>Exception</tt> or <tt>IOException</tt> are both good choices. Because file corruption is
+beyond the control of the programmer, this should be a checked exception, so
+it would be wrong to extend <tt>RuntimeException</tt>.</li>
+</ol>
+<br>
+
+
+<h2>A Complete Example</h2>
+<ul>
+  <li>Program
+  <ul>
+    <li>Asks user for name of file</li>
+    <li>File expected to contain data values</li>
+    <li>First line of file contains total number of values</li>
+    <li>Remaining lines contain the data</li>
+    <li>Typical input file:
+<pre>3
+1.45
+-2.1
+0.05</pre></li>
+  </ul></li>
+</ul>
+
+
+<h2>A Complete Example</h2>
+<ul>
+  <li>What can go wrong?
+  <ul>
+    <li>File might not exist</li>
+    <li>File might have data in wrong format</li>
+  </ul></li>
+  <li>Who can detect the faults?
+  <ul>
+    <li><tt>FileReader</tt> constructor will throw an exception when file does not exist</li>
+    <li>Methods that process input need to throw exception if they find error in data format</li></ul></li>
+  <li>What exceptions can be thrown?
+  <ul>
+    <li><tt>FileNotFoundException</tt> can be thrown by <tt>FileReader</tt> constructor</li>
+    <li><tt>IOException</tt> can be thrown by <tt>close</tt> method of <tt>FileReader</tt></li>
+    <li><tt>BadDataException</tt>, a custom checked exception class</li></ul></li>
+  <li>Who can remedy the faults that the exceptions report?
+  <ul>
+    <li>Only the <tt>main</tt> method of <tt>DataSetTester</tt> program interacts with user
+    <ul><li>Catches exceptions</li>
+    <li>Prints appropriate error messages</li>
+    <li>Gives user another chance to enter a correct file</li></ul></li>
+  </ul></li>
+</ul>
+
+
+<h2>File DataSetTester.java</h2>
+<iframe src="code/DataSetTester.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>The <tt>readFile</tt> method of the <tt>DataSetReader</tt> class</h2>
+<ul>
+  <li>Constructs <tt>Scanner</tt> object</li>
+  <li>Calls <tt>readData</tt> method</li>
+  <li>Completely unconcerned with any exceptions</li>
+  <li>If there is a problem with input file, it simply passes the exception to caller
+<pre>public double[] readFile(String filename)
+      throws IOException, BadDataException
+      // FileNotFoundException is an IOException
+{
+   FileReader reader = new FileReader(filename);
+   try
+   {
+      Scanner in = new Scanner(reader);
+      readData(in);
+   }
+   finally
+   {
+      reader.close();
+   }
+   return data;
+}</pre></li>
+</ul>
+
+
+<h2>The <tt>readData</tt> method of the <tt>DataSetReader</tt> class</h2>
+<ul>
+  <li>Reads the number of values</li>
+  <li>Constructs an array</li>
+  <li>Calls <tt>readValue</tt> for each data value
+<pre>private void readData(Scanner in) throws BadDataException
+{
+   if (!in.hasNextInt())
+      throw new BadDataException("Length expected");
+   int numberOfValues = in.nextInt();
+   data = new double[numberOfValues];
+
+   for (int i = 0; i < numberOfValues; i++)
+      readValue(in, i);
+
+   if (in.hasNext())
+      throw new BadDataException("End of file expected");
+}</pre></li>
+  <li>Checks for two potential errors
+    <ol><li>File might not start with an integer</li>
+    <li>File might have additional data after reading all values</li></ol></li>
+  <li>Makes no attempt to catch any exceptions</li>
+</ul>
+
+
+<h2>The <tt>readValue</tt> method of the <tt>DataSetReader</tt> class</h2>
+<pre>private void readValue(Scanner in, int i) throws BadDataException
+{
+   if (!in.hasNextDouble())
+      throw new BadDataException("Data value expected");
+   data[i] = in.nextDouble();
+}</pre>
+
+
+<h2>Scenario</h2>
+<ol>
+  <li><tt>DataSetTester.main</tt> calls <tt>DataSetReader.readFile</tt></li>
+  <li><tt>readFile</tt> calls <tt>readData</tt></li>
+  <li><tt>readData</tt> calls <tt>readValue</tt></li>
+  <li><tt>readValue</tt> doesn't find expected value and throws <tt>BadDataException</tt></li>
+  <li><tt>readValue</tt> has no handler for exception and terminates</li>
+  <li><tt>readData</tt> has no handler for exception and terminates</li>
+  <li><tt>readFile</tt> has no handler for exception and terminates after executing <tt>finally</tt> clause</li>
+  <li><tt>DataSetTester.main</tt> has handler for <tt>BadDataException</tt>; handler prints a message, and user is given another chance to enter file name</li>
+</ol>
+
+
+<h2>File DataSetReader.java</h2>
+<iframe src="code/DataSetReader.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="11">Why doesn't the <tt>DataSetReader.readFile</tt> method catch any exceptions?</li>
+<li>Suppose the user specifies a file that exists and is empty. Trace the flow of execution.</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="11">It would not be able to do much with them. The <tt>DataSetReader</tt> class is a reusable class that may be used for systems with different languages and different user interfaces. Thus, it cannot engage in a dialog with the program user.</li>
+<li><tt>DataSetTester.main</tt> calls <tt>DataSetReader.readFile</tt>, which calls <tt>readData</tt>. The call <tt>in.hasNextInt()</tt> returns <tt>false</tt>, and <tt>readData</tt> throws a <tt>BadDataException</tt>. The <tt>readFile</tt> method doesn't catch it, so it propagates back to <tt>main</tt>, where it is caught.</li>
+</ol>
+
+</body>
+</html>

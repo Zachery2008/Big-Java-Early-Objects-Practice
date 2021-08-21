@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Horstmann Chapter 8</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+
+<body>
+<div onclick="document.location='slide030.html'">
+<center><small><a href="slide028.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide030.html">next</a></small></center>
+</div><hr>
+<h2>Simple Array Algorithms: Counting Matches</h2>
+<p>Check all elements and count the matches until you reach the end of
+the array list.</p>
+<pre>public class Bank<br>{<br>   public int count(double atLeast)<br>   {<br>      int matches = 0;<br>      for (BankAccount a : accounts)<br>      {<br>         if (a.getBalance() &gt;= atLeast) matches++;<br>            // Found a match<br>      }<br>      return matches;<br>   }<br>   . . .<br>   private ArrayList&lt;BankAccount&gt; accounts;<br>}<br></pre>
+
+<hr>
+<div onclick="document.location='slide030.html'">
+<center><small><a href="slide028.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide030.html">next</a></small></center>
+</div>
+</body>
+</html>

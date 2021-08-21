@@ -1,0 +1,43 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">util</font><font color="#000000">.</font><font color="#000000">Random</font><font color="#000000">;</font>
+<b><font color="#006cb8">02: </font></b>
+<b><font color="#006cb8">03: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">04: </font></b><font color="#7a9ecd">   This program verifies the computation of square root values</font>
+<b><font color="#006cb8">05: </font></b><font color="#7a9ecd">   by checking a mathematical property of square roots.</font>
+<b><font color="#006cb8">06: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">07: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> <font color="#000000">RootApproximatorHarness5</font>
+<b><font color="#006cb8">08: </font></b><font color="#000000">{</font>  
+<b><font color="#006cb8">09: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">void</font> <font color="#000000">main</font><font color="#000000">(</font><font color="#000000">String</font><font color="#000000">[</font><font color="#000000">]</font> <font color="#000000">args</font><font color="#000000">)</font>
+<b><font color="#006cb8">10: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">11: </font></b>      <font color="#d05b76">final</font> <font color="#d05b76">double</font> <font color="#000000">SAMPLES</font> <font color="#000000">=</font> <font color="#89c976">100</font><font color="#000000">;</font>
+<b><font color="#006cb8">12: </font></b>      <font color="#d05b76">int</font> <font color="#000000">passcount</font> <font color="#000000">=</font> <font color="#89c976">0</font><font color="#000000">;</font>
+<b><font color="#006cb8">13: </font></b>      <font color="#d05b76">int</font> <font color="#000000">failcount</font> <font color="#000000">=</font> <font color="#89c976">0</font><font color="#000000">;</font>
+<b><font color="#006cb8">14: </font></b>      <font color="#000000">Random</font> <font color="#000000">generator</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Random</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">15: </font></b>      <font color="#d05b76">for</font> <font color="#000000">(</font><font color="#d05b76">int</font> <font color="#000000">i</font> <font color="#000000">=</font> <font color="#89c976">1</font><font color="#000000">;</font> <font color="#000000">i</font> <font color="#000000">&lt;</font><font color="#000000">=</font> <font color="#000000">SAMPLES</font><font color="#000000">;</font> <font color="#000000">i</font><font color="#000000">+</font><font color="#000000">+</font><font color="#000000">)</font>
+<b><font color="#006cb8">16: </font></b>      <font color="#000000">{</font>  
+<b><font color="#006cb8">17: </font></b>         <font color="#7a9ecd">// Generate random test value</font>
+<b><font color="#006cb8">18: </font></b>
+<b><font color="#006cb8">19: </font></b>         <font color="#d05b76">double</font> <font color="#000000">x</font> <font color="#000000">=</font> <font color="#89c976">1000</font> <font color="#000000">*</font> <font color="#000000">generator</font><font color="#000000">.</font><font color="#000000">nextDouble</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">20: </font></b>         <font color="#000000">RootApproximator</font> <font color="#000000">r</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">RootApproximator</font><font color="#000000">(</font><font color="#000000">x</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">21: </font></b>         <font color="#d05b76">double</font> <font color="#000000">y</font> <font color="#000000">=</font> <font color="#000000">r</font><font color="#000000">.</font><font color="#000000">getRoot</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">22: </font></b>
+<b><font color="#006cb8">23: </font></b>         <font color="#7a9ecd">// Check that test value fulfills square property</font>
+<b><font color="#006cb8">24: </font></b>
+<b><font color="#006cb8">25: </font></b>         <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">Numeric</font><font color="#000000">.</font><font color="#000000">approxEqual</font><font color="#000000">(</font><font color="#000000">y</font> <font color="#000000">*</font> <font color="#000000">y</font><font color="#000000">,</font> <font color="#000000">x</font><font color="#000000">)</font><font color="#000000">)</font>
+<b><font color="#006cb8">26: </font></b>         <font color="#000000">{</font>
+<b><font color="#006cb8">27: </font></b>            <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">print</font><font color="#000000">(</font><font color="#00a99d">"Test passed: "</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">28: </font></b>            <font color="#000000">passcount</font><font color="#000000">+</font><font color="#000000">+</font><font color="#000000">;</font>
+<b><font color="#006cb8">29: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">30: </font></b>         <font color="#d05b76">else</font>
+<b><font color="#006cb8">31: </font></b>         <font color="#000000">{</font>
+<b><font color="#006cb8">32: </font></b>            <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">print</font><font color="#000000">(</font><font color="#00a99d">"Test failed: "</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">33: </font></b>            <font color="#000000">failcount</font><font color="#000000">+</font><font color="#000000">+</font><font color="#000000">;</font>
+<b><font color="#006cb8">34: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">35: </font></b>
+<b><font color="#006cb8">36: </font></b>         <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font><font color="#00a99d">"x = "</font> <font color="#000000">+</font> <font color="#000000">x</font>
+<b><font color="#006cb8">37: </font></b>               <font color="#000000">+</font> <font color="#00a99d">", root squared = "</font> <font color="#000000">+</font> <font color="#000000">y</font> <font color="#000000">*</font> <font color="#000000">y</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">38: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">39: </font></b>      <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font><font color="#00a99d">"Pass: "</font> <font color="#000000">+</font> <font color="#000000">passcount</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">40: </font></b>      <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font><font color="#00a99d">"Fail: "</font> <font color="#000000">+</font> <font color="#000000">failcount</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">41: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">42: </font></b><font color="#000000">}</font>
+</tt></pre>

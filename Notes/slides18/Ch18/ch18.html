@@ -1,0 +1,602 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 18</title>
+</head>
+<body>
+<div>
+<h2>Chapter 18</h2>
+<h1>Recursion</h1>
+<br>
+</div>
+<h2>Chapter Goals</h2>
+<ul>
+  <li>To learn about the method of recursion</li>
+  <li>To understand the relationship between recursion and iteration</li>
+  <li>To analyze problems that are much easier to solve by recursion
+than by iteration</li>
+  <li>To learn to "think recursively"</li>
+  <li>To be able to use recursive helper methods</li>
+  <li>To understand when the use of recursion affects the efficiency of
+an algorithm</li>
+</ul>
+<h2>Triangle Numbers</h2>
+<ul>
+  <li>Compute the area of a triangle of width <i>n</i></li>
+  <li>Assume each <tt>[]</tt> square has an area of 1</li>
+  <li>Also called the <i>n</i>th<i> triangle number</i></li>
+  <li>The third triangle number is 6<br>
+    <tt><b>[] <br>
+[][]<br>
+[][][]</b></tt></li>
+</ul>
+<h2>Outline of <tt>Triangle</tt> Class</h2>
+<pre>public class Triangle<br>{<br>   public Triangle(int aWidth)<br>   {<br>      width = aWidth;<br>   }<br><br>   public int getArea()<br>   {<br>      . . .<br>   }<br><br>   private int width;<br>}</pre>
+<h2>Handling Triangle of Width 1</h2>
+<ul>
+  <li>The triangle consists of a single square</li>
+  <li>Its area is 1</li>
+  <li>Add the code to<tt> getArea </tt>method for width 1
+    <pre>public int getArea()<br>{<br>   if (width == 1) return 1;<br>   . . .<br>}</pre>
+  </li>
+</ul>
+<h2>Handling the General Case</h2>
+<ul>
+  <li>Assume we know the area of the smaller, colored triangle<br>
+    <b><font color="#ff0000"><code class="blue">[] <br>
+[][]<br>
+[][][]</code></font><br>
+    <tt> [][][][]</tt></b></li>
+  <li>Area of larger triangle can be calculated as:<br>
+    <tt>smallerArea + width</tt></li>
+  <li>To get the area of the smaller triangle
+    <ul>
+      <li>Make a smaller triangle and ask it for its area<br>
+        <pre>Triangle smallerTriangle = new Triangle(width - 1);<br>int smallerArea = smallerTriangle.getArea();<br></pre>
+      </li>
+    </ul>
+  </li>
+</ul>
+<h2> Completed <tt>getArea </tt> method</h2>
+<pre>public int getArea()<br>{<br>   if (width == 1) return 1;<br>   Triangle smallerTriangle = new Triangle(width - 1);<br>   int smallerArea = smallerTriangle.getArea();<br>   return smallerArea + width;<br>}</pre>
+<h2>Computing the area of a triangle with width 4</h2>
+<ul>
+  <li><tt>getArea</tt> method makes a smaller triangle of width 3
+    <ul>
+      <li>It calls <tt>getArea </tt>on that triangle
+        <ul>
+          <li>That method makes a smaller triangle of width 2
+            <ul>
+              <li>It calls <tt>getArea</tt> on that triangle
+                <ul>
+                  <li>That method makes a smaller triangle of width 1</li>
+                  <li>It calls <tt>getArea</tt> on that triangle</li>
+                </ul>
+              </li>
+              <li>That method returns 1</li>
+            </ul>
+          </li>
+          <li>The method returns <tt>smallerArea + width = 1 + 2 = 3</tt></li>
+        </ul>
+      </li>
+      <li>The method returns <tt>smallerArea + width = 3 + 3 = 6</tt></li>
+    </ul>
+  </li>
+  <li>The method returns <tt>smallerArea + width = 6 + 4 = 10</tt></li>
+</ul>
+<h2>Recursion</h2>
+<ul>
+  <li>A recursive computation solves a problem by using the solution<br>
+of the same problem with simpler values</li>
+  <li>For recursion to terminate, <br>
+there must be special cases for the simplest inputs.</li>
+  <li>To complete our Triangle example, we must handle width &lt;= 0
+    <pre>if (width &lt;= 0)&nbsp; return 0;</pre>
+  </li>
+  <li>Two key requirements for recursion success:
+    <ul>
+      <li>Every recursive call must simplify the computation in some way</li>
+      <li>There must be special cases to handle the simplest
+computations directly</li>
+    </ul>
+  </li>
+</ul>
+<h2>Other Ways to Compute Triangle Numbers</h2>
+<ul>
+  <li>The area of a triangle equals the sum<br>
+    <tt>1 + 2 + 3 + . . . + width</tt></li>
+  <li>Using a simple loop:
+    <pre>double area = 0;<br>for (int i = 1; i &lt;= width; i++)<br>   area = area + i;</pre>
+  </li>
+  <li>Using math:
+    <pre>1 + 2 + . . . + n = n &times; (n + 1)/2<br>=&gt; width * (width + 1) / 2</pre>
+  </li>
+</ul>
+<h2>File Triangle.java</h2>
+<iframe src="code/triangle/Triangle.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>TriangleTester.java</h2>
+<iframe src="code/triangle/TriangleTester.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe><br>
+Output<br>
+<pre>   Enter width: <code class="blue">10</code>
+   Area = 55</pre>
+<h2>Self Check</h2>
+<ol>
+  <li>Why is the statement <tt>if (width == 1) return 1;</tt> in the <tt>getArea</tt>
+method unnecessary?</li>
+  <li>How would you modify the program to recursively compute the area
+of a square?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li>Suppose we omit the statement. When computing the area of a
+triangle with
+width 1, we compute the area of the triangle with width 0 as 0, and
+then add 1,
+to arrive at the correct area.</li>
+  <li>You would compute the smaller area recursively, then return
+    <br>
+    <tt>smallerArea + width + width - 1</tt>.
+    <pre><code class="blue">[][][]</code>[]<br><code class="blue">[][][]</code>[]<br><code
+ class="blue">[][][]</code>[]<br>[][][][]</pre>
+Of course, it would be simpler to compute
+    <br>
+    <img src="images/selfCheck2.png" alt=""></li>
+</ol>
+<br>
+<h2>Permutations</h2>
+<ul>
+  <li>Design a class that will list all permutations of a string</li>
+  <li>A permutation is a rearrangement of the letters</li>
+  <li>The string <b>"eat"</b> has six permutations <br>
+    <blockquote> <b>"eat" </b><br>
+      <b>"eta" </b><br>
+      <b>"aet"</b><br>
+      <b>"tea"</b><br>
+      <b>"tae"</b><br>
+    </blockquote>
+  </li>
+</ul>
+<h2>Public Interface of <tt>PermutationGenerator</tt></h2>
+<pre>public class PermutationGenerator<br>{<br>   public PermutationGenerator(String aWord) { . . . }<br>   ArrayList&lt;String&gt; getPermutations() { . . . }<br>}</pre>
+<h2>File PermutationGeneratorTester.java</h2>
+<iframe src="code/permute/PermutationGeneratorTester.java.html"
+ class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Output</h2>
+<pre>eat<br>eta<br>aet<br>ate<br>tea<br>tae</pre>
+<h2>To Generate All Permutations</h2>
+<ul>
+  <li>Generate all permutations that start with <b>'e'</b> , then <b>'a'</b>
+then <b>'t'</b></li>
+  <li>To generate permutations starting with <b>'e'</b>, we need to
+find all permutations of <b>"at"</b></li>
+  <li>This is the same problem with simpler inputs.</li>
+  <li>Use recursion</li>
+</ul>
+<h2>To Generate All Permutations</h2>
+<ul>
+  <li><tt>getPermutations</tt>: loop through all positions in the word
+to be permuted</li>
+  <li>For each position, compute the shorter word obtained by removing
+ith letter:
+    <pre>String shorterWord = word.substring(0, i) + word.substring(i + 1);</pre>
+  </li>
+  <li>Construct a permutation generator to get permutations of the
+shorter word
+    <pre>PermutationGenerator shorterPermutationGenerator<br>      = new PermutationGenerator(shorterWord);<br>ArrayList&lt;String&gt; shorterWordPermutations<br>      = shorterPermutationGenerator.getPermutations();</pre>
+  </li>
+</ul>
+<h2>To Generate All Permutations</h2>
+<ul>
+  <li>Finally, add the removed letter to front of all permutations of
+the shorter word
+    <pre>for (String s : shorterWordPermutations)<br>{<br>   result.add(word.charAt(i) + s);<br>}</pre>
+  </li>
+  <li>Special case: simplest possible string is the empty string;
+single permutation, itself</li>
+</ul>
+<h2>File PermutationGenerator.java</h2>
+<iframe src="code/permute/PermutationGenerator.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Self Check</h2>
+<ol>
+  <li value="3">What are all permutations of the four-letter word <tt>beat</tt>?</li>
+  <li>Our recursion for the permutation generator stops at the empty
+string. What
+simple modification would make the recursion stop at strings of length
+0 or 1?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="3">They are <tt>b</tt> followed by the six permutations
+of <tt>eat</tt>, <tt>e</tt> followed by the six permutations
+of <tt>bat</tt>, <tt>a</tt> followed by the six permutations of <tt>bet</tt>,
+and <tt>t</tt> followed by the six permutations of <tt>bea</tt>.</li>
+  <li>Simply change <tt>if (word.length() == 0)</tt> to <tt>if
+(word.length() &lt;= 1)</tt>, because a
+word with a single letter is also its sole permutation.</li>
+</ol>
+<br>
+<h2>Tracing Through Recursive Methods</h2>
+<img src="images/tracing.png" alt="">
+<br>
+<h2>Thinking Recursively</h2>
+<ul>
+  <li>Problem: test whether a sentence is a palindrome</li>
+  <li>Palindrome: a string that is equal to itself when you reverse all
+characters
+    <ul>
+      <li>A man, a plan, a canal&#8211;Panama!</li>
+      <li>Go hang a salami, I'm a lasagna hog</li>
+      <li>Madam, I'm Adam</li>
+    </ul>
+  </li>
+</ul>
+<h2>Implement <tt>isPalindrome</tt> Method</h2>
+<pre>public class Sentence<br>{<br>   /**<br>      Constructs a sentence.<br>      @param aText a string containing all characters of the sentence<br>   */<br>   public Sentence(String aText)<br>   {<br>      text = aText;<br>   }<br><br>   /**<br>      Tests whether this sentence is a palindrome.<br>      @return true if this sentence is a palindrome, false otherwise<br>   */<br>   public boolean isPalindrome()<br>   {<br>      . . .<br>   }<br><br>   private String text;<br>}</pre>
+<h2>Thinking Recursively: Step-by-Step</h2>
+<ol>
+  <li>Consider various ways to simplify inputs <br>
+Here are several possibilities:
+    <ul>
+      <li>Remove the first character</li>
+      <li>Remove the last character</li>
+      <li>Remove both the first and last characters</li>
+      <li>Remove a character from the middle</li>
+      <li>Cut the string into two halves</li>
+    </ul>
+  </li>
+</ol>
+<h2>Thinking Recursively: Step-by-Step</h2>
+<ol>
+  <li value="2">Combine solutions with simpler inputs into a solution
+of the original problem
+    <ul>
+      <li>Most promising simplification: remove first and last
+characters <br>
+"adam, I'm Ada", is a palindrome too!</li>
+      <li>Thus, a word is a palindrome if
+        <ul>
+          <li>The first and last letters match, and</li>
+          <li>Word obtained by removing the first and last letters is a
+palindrome</li>
+        </ul>
+      </li>
+      <li>What if first or last character is not a letter? Ignore it
+        <ul>
+          <li>If the first and last characters are letters, check
+whether they match; <br>
+if so, remove both and test shorter string</li>
+          <li>If last character isn't a letter, remove it and test
+shorter string</li>
+          <li>If first character isn't a letter, remove it and test
+shorter string</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+<h2>Thinking Recursively: Step-by-Step</h2>
+<ol>
+  <li value="3">Find solutions to the simplest inputs
+    <ul>
+      <li>Strings with two characters
+        <ul>
+          <li>No special case required; step two still applies</li>
+        </ul>
+      </li>
+      <li>Strings with a single character
+        <ul>
+          <li>They are palindromes</li>
+        </ul>
+      </li>
+      <li>The empty string
+        <ul>
+          <li>It is a palindrome</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+<h2>Thinking Recursively: Step-by-Step</h2>
+<ol>
+  <li value="4">Implement the solution by combining the simple cases
+and the reduction step</li>
+</ol>
+<iframe src="code/isPalindrome.java.txt" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Recursive Helper Methods</h2>
+<ul>
+  <li>Sometimes it is easier to find a recursive solution if you make a
+slight change to the original problem</li>
+  <li>Consider the palindrome test of previous slide <br>
+It is a bit inefficient to construct new <tt>Sentence</tt> objects in
+every step</li>
+  <li>Rather than testing whether the sentence is a palindrome, check
+whether a substring is a palindrome:
+    <pre>/**<br>   Tests whether a substring of the sentence is a palindrome.<br>   @param start the index of the first character of the substring<br>   @param end the index of the last character of the substring<br>   @return true if the substring is a palindrome<br>*/<br>public boolean isPalindrome(int start, int end)</pre>
+  </li>
+</ul>
+<h2>Recursive Helper Methods</h2>
+<ul>
+  <li>Then, simply call the helper method with positions that test the
+entire string:
+    <pre>public boolean isPalindrome()<br>{<br>   return isPalindrome(0, text.length() - 1);<br>}</pre>
+  </li>
+</ul>
+<h2>Recursive Helper Methods: <tt>isPalindrome</tt></h2>
+<iframe src="code/isPalindrome2.java.txt" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Self Check</h2>
+<ol>
+  <li value="5">Do we have to give the same name to both <tt>isPalindrome</tt>
+methods?</li>
+  <li>When does the recursive <tt>isPalindrome</tt> method stop
+calling itself?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="5">No&#8211;the first one could be given a different name such
+as <tt>substringIsPalindrome</tt>.</li>
+  <li>When <tt>start &gt;= end</tt>, that is, when the investigated
+string is either empty or has length 1.</li>
+</ol>
+<br>
+<h2>Fibonacci Sequence</h2>
+<ul>
+  <li>Fibonacci sequence is a sequence of numbers defined by<br>
+    <blockquote> <i>f</i><sub>1</sub>&nbsp; = &nbsp;1<br>
+      <i>f</i><sub>2</sub> &nbsp;= &nbsp;&nbsp;1<br>
+      <i>f</i><sub>n</sub>&nbsp; =&nbsp; <i>f</i><sub>n-1</sub>&nbsp;
++ <i> &nbsp;f</i><sub>n-2</sub>
+    </blockquote>
+  </li>
+  <li>First ten terms<br>
+    <blockquote>
+1, 1, 2, 3, 5, 8, 13, 21, 34, 55
+    </blockquote>
+  </li>
+</ul>
+<h2>File FibTester.java</h2>
+<iframe src="code/fib/FibTester.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Output</h2>
+<pre>Enter n: <code class="blue">50</code>
+fib(1) = 1
+fib(2) = 1
+fib(3) = 2
+fib(4) = 3
+fib(5) = 5
+fib(6) = 8
+fib(7) = 13
+. . .
+fib(50) = 12586269025</pre>
+<h2>The Efficiency of Recursion</h2>
+<ul>
+  <li>Recursive implementation of <tt>fib</tt> is straightforward</li>
+  <li>Watch the output closely as you run the test program</li>
+  <li>First few calls to <tt>fib</tt> are quite fast</li>
+  <li>For larger values, the program pauses an amazingly long time
+between outputs</li>
+  <li>To find out the problem, lets insert trace messages</li>
+</ul>
+<h2>File FibTrace.java</h2>
+<iframe src="code/fib/FibTrace.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Output</h2>
+<iframe src="code/fibOutput.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Call Tree for Computing <tt>fib(6)</tt></h2>
+<img src="images/recursiveFib.png" alt="">
+<br>
+<h2>The Efficiency of Recursion</h2>
+<ul>
+  <li>Method takes so long because it computes the same values over and
+over</li>
+  <li>The computation of <tt>fib(6)</tt> calls <tt>fib(3)</tt> three
+times</li>
+  <li>Imitate the pencil-and-paper process to avoid computing the
+values more than once</li>
+</ul>
+<h2>File FibLoop.java</h2>
+<iframe src="code/fib/FibLoop.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Output</h2>
+<pre>Enter n: <code class="blue">50</code>
+fib(1) = 1
+fib(2) = 1
+fib(3) = 2
+fib(4) = 3
+fib(5) = 5
+fib(6) = 8
+fib(7) = 13
+. . .
+fib(50) = 12586269025</pre>
+<h2>The Efficiency of Recursion</h2>
+<ul>
+  <li>Occasionally, a recursive solution runs much slower than its
+iterative counterpart</li>
+  <li>In most cases, the recursive solution is only slightly slower</li>
+  <li>The iterative <tt>isPalindrome</tt> performs only slightly
+better than recursive solution
+    <ul>
+      <li>Each recursive method call takes a certain amount of
+processor time</li>
+    </ul>
+  </li>
+  <li>Smart compilers can avoid recursive method calls if they follow
+simple patterns</li>
+  <li>Most compilers don't do that</li>
+  <li>In many cases, a recursive solution is easier to understand and
+implement correctly than an iterative solution</li>
+  <li>"To iterate is human, to recurse divine.", L. Peter Deutsch</li>
+</ul>
+<h2>Iterative <tt>isPalindrome</tt> Method</h2>
+<iframe src="code/isPalindrome3.java.txt" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Self Check</h2>
+<ol>
+  <li value="7">You can compute the factorial function either with a
+loop, using the definition
+that <i>n</i>! = 1 &times; 2 &times; . . . &times; <i>n</i>, or
+recursively, using the definition that 0! = 1 and
+    <i>n</i>! = (<i>n</i> - 1)! &times; <i>n</i>. Is the recursive
+approach inefficient in this case?</li>
+  <li>Why isn't it easy to develop an iterative solution for the
+permutation generator?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="7">No, the recursive solution is about as efficient as the
+iterative approach. Both
+require <i>n</i> - 1 multiplications to compute <i>n</i>!.</li>
+  <li>An iterative solution would have a loop whose body computes the
+next permutation
+from the previous ones. But there is no obvious mechanism for getting
+the next permutation. For example, if you already found permutations <tt>eat</tt>,
+    <tt>eta</tt>,
+and <tt>aet</tt>, it is not clear how you use that information to get
+the next permutation.
+Actually, there is an ingenious mechanism for doing just that, but it
+is far
+from obvious&#8211;see Exercise P18.12.</li>
+</ol>
+<br>
+<h2>The Limits of Computation</h2>
+<img src="images/turing.png" alt="">
+<br>
+<h2>The Limits of Computation</h2>
+<img src="images/turingMachine.png" alt="">
+<br>
+<h2>Using Mutual Recursions</h2>
+<ul>
+  <li><b>Problem:</b> to compute the value of arithmetic expressions
+such as
+    <blockquote>
+      <p><tt>3 + 4 * 5<br>
+(3 + 4) * 5<br>
+1 - (2 - (3 - (4 - 5)))<br>
+      </tt></p>
+    </blockquote>
+  </li>
+  <li>Computing expression is complicated
+    <ul>
+      <li>* and / bind more strongly than + and -</li>
+      <li>parentheses can be used to group subexpressions</li>
+    </ul>
+  </li>
+</ul>
+<h2>Syntax Diagram for Evaluating an Expression</h2>
+<img src="images/syntaxDiagrams.png" alt="">
+<br>
+<h2>Using Mutual Recursions</h2>
+<ul>
+  <li>An expression can broken down into a sequence of terms, separated
+by + or -</li>
+  <li>Each term is broken down into a sequence of factors, separated by
+* or /</li>
+  <li>Each factor is either a parenthesized expression or a number</li>
+  <li>The syntax trees represent which operations should be carried out
+first</li>
+</ul>
+<h2>Syntax Tree for Two Expressions</h2>
+<img src="images/syntaxTree.png" alt="">
+<h2>Mutually Recursive Methods</h2>
+<ul>
+  <li>In a mutual recursion, a set of cooperating methods calls each
+other repeatedly</li>
+  <li>To compute the value of an expression, implement 3 methods that
+call each other recursively
+    <ul>
+      <li><tt>getExpressionValue</tt></li>
+      <li><tt>getTermValue</tt></li>
+      <li><tt>getFactorValue</tt></li>
+    </ul>
+  </li>
+</ul>
+<h2>The <tt>getExpressionValue</tt> Method</h2>
+<pre>public int getExpressionValue()<br>{<br>   int value = getTermValue();<br>   boolean done = false;<br>   while (!done)<br>   {<br>      String next = tokenizer.peekToken();<br>      if ("+".equals(next) || "-".equals(next))<br>      {<br>         tokenizer.nextToken(); // Discard "+" or "-"<br>         int value2 = getTermValue();<br>         if ("+".equals(next)) value = value + value2;<br>         else value = value - value2;<br>      }<br>      else done = true;<br>   }<br>   return value;<br>}</pre>
+<h2>The <tt>getFactorValue</tt> Method</h2>
+<pre>public int getFactorValue()<br>{<br>   int value;<br>   String next = tokenizer.peekToken();<br>   if ("(".equals(next))<br>   {<br>      tokenizer.nextToken(); // Discard "("<br>      value = getExpressionValue();<br>      tokenizer.nextToken(); // Discard ")"<br>   }<br>   else<br>      value = Integer.parseInt(tokenizer.nextToken());<br>   return value;<br>}</pre>
+<h2>Using Mutual Recursions</h2>
+To see the mutual recursion clearly, trace through the expression <tt>(3+4)*5</tt>:
+<ul>
+  <li><tt>getExpressionValue</tt> calls <tt>getTermValue</tt>
+    <ul>
+      <li><tt>getTermValue</tt> calls <tt>getFactorValue</tt>
+        <ul>
+          <li><tt>getFactorValue</tt> consumes the <tt>(</tt> input</li>
+          <li><tt>getFactorValue</tt> calls <tt>getExpressionValue</tt>
+            <ul>
+              <li><tt>getExpressionValue</tt> returns eventually with
+the value of <tt>7</tt>, <br>
+having consumed <tt>3 + 4</tt>. This is the recursive call.</li>
+            </ul>
+          </li>
+          <li><tt>getFactorValue</tt> consumes the <tt>)</tt> input</li>
+          <li><tt>getFactorValue</tt> returns <tt>7</tt></li>
+        </ul>
+      </li>
+      <li><tt>getTermValue</tt> consumes the inputs <tt>*</tt> and <tt>5</tt>
+and returns <tt>35</tt></li>
+    </ul>
+  </li>
+  <li><tt>getExpressionValue</tt> returns <tt>35</tt></li>
+</ul>
+<h2>File Evaluator.java</h2>
+<iframe src="code/expr/Evaluator.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>File ExpressionTokenizer.java</h2>
+<iframe src="code/expr/ExpressionTokenizer.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>File EvaluatorTester.java</h2>
+<iframe src="code/expr/EvaluatorTester.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe><br>
+Output
+<pre>   Enter an expression: <code class="blue">3+4*5</code>
+   3+4*5=23</pre>
+<h2>Self Check</h2>
+<ol>
+  <li value="9">What is the difference between a term and a factor? Why
+do we need both concepts?</li>
+  <li>Why does the expression parser use mutual recursion?</li>
+  <li>What happens if you try to parse the illegal expression <tt>3+4*)5</tt>?
+Specifically,
+which method throws an exception?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="9">Factors are combined by multiplicative operators (<tt>*</tt>
+and <tt>/</tt>), terms are combined
+by additive operators (<tt>+</tt>, <tt>-</tt>). We need both so that
+multiplication can bind more
+strongly than addition.</li>
+  <li>To handle parenthesized expressions, such as <tt>2+3*(4+5)</tt>.
+The subexpression <tt>4+5</tt>
+is handled by a recursive call to <tt>getExpressionValue</tt>.</li>
+  <li>The <tt>Integer.parseInt</tt> call in <tt>getFactorValue</tt>
+throws an exception when it is
+given the string <tt>")"</tt>.</li>
+</ol>
+<br>
+</body>
+</html>

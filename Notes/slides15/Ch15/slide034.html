@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 15</title>
+</head>
+
+<body>
+<div onclick="document.location='slide035.html'">
+<center><small><a href="slide033.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide035.html">next</a></small></center>
+<hr></div>
+<h2>The <tt>readFile</tt> method of the <tt>DataSetReader</tt> class</h2>
+<ul>
+  <li>Constructs <tt>Scanner</tt> object</li>
+  <li>Calls <tt>readData</tt> method</li>
+  <li>Completely unconcerned with any exceptions</li>
+  <li>If there is a problem with input file, it simply passes the exception to caller
+<pre>public double[] readFile(String filename)
+      throws IOException, BadDataException
+      // FileNotFoundException is an IOException
+{
+   FileReader reader = new FileReader(filename);
+   try
+   {
+      Scanner in = new Scanner(reader);
+      readData(in);
+   }
+   finally
+   {
+      reader.close();
+   }
+   return data;
+}</pre></li>
+</ul>
+
+
+
+<div onclick="document.location='slide035.html'"><hr>
+<center><small><a href="slide033.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide035.html">next</a></small></center>
+</div>
+</body>
+</html>

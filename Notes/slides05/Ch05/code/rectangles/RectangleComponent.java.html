@@ -1,0 +1,28 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#000000">import</font> java<font color="#000000">.</font>awt<font color="#000000">.</font>Graphics<font color="#000000">;</font>
+<b><font color="#006cb8">02: </font></b><font color="#000000">import</font> java<font color="#000000">.</font>awt<font color="#000000">.</font>Graphics2D<font color="#000000">;</font>
+<b><font color="#006cb8">03: </font></b><font color="#000000">import</font> java<font color="#000000">.</font>awt<font color="#000000">.</font>Rectangle<font color="#000000">;</font>
+<b><font color="#006cb8">04: </font></b><font color="#000000">import</font> javax<font color="#000000">.</font>swing<font color="#000000">.</font>JPanel<font color="#000000">;</font>
+<b><font color="#006cb8">05: </font></b><font color="#000000">import</font> javax<font color="#000000">.</font>swing<font color="#000000">.</font>JComponent<font color="#000000">;</font>
+<b><font color="#006cb8">06: </font></b>
+<b><font color="#006cb8">07: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">08: </font></b><font color="#7a9ecd">   A component that draws two rectangles.</font>
+<b><font color="#006cb8">09: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">10: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> RectangleComponent <font color="#d05b76">extends</font> JComponent
+<b><font color="#006cb8">11: </font></b><font color="#000000">{</font>  
+<b><font color="#006cb8">12: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">paintComponent</font><font color="#000000">(</font>Graphics g<font color="#000000">)</font>
+<b><font color="#006cb8">13: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">14: </font></b>      <font color="#7a9ecd">// Recover Graphics2D</font>
+<b><font color="#006cb8">15: </font></b>      Graphics2D g2 <font color="#000000">=</font> <font color="#000000">(</font>Graphics2D<font color="#000000">)</font> g<font color="#000000">;</font>
+<b><font color="#006cb8">16: </font></b>
+<b><font color="#006cb8">17: </font></b>      <font color="#7a9ecd">// Construct a rectangle and draw it</font>
+<b><font color="#006cb8">18: </font></b>      Rectangle box <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Rectangle</font><font color="#000000">(</font><font color="#89c976">5</font><font color="#000000">,</font> <font color="#89c976">10</font><font color="#000000">,</font> <font color="#89c976">20</font><font color="#000000">,</font> <font color="#89c976">30</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">19: </font></b>      g2<font color="#000000">.</font><font color="#000000">draw</font><font color="#000000">(</font>box<font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">20: </font></b>
+<b><font color="#006cb8">21: </font></b>      <font color="#7a9ecd">// Move rectangle 15 units to the right and 25 units down</font>
+<b><font color="#006cb8">22: </font></b>      box<font color="#000000">.</font><font color="#000000">translate</font><font color="#000000">(</font><font color="#89c976">15</font><font color="#000000">,</font> <font color="#89c976">25</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">23: </font></b>
+<b><font color="#006cb8">24: </font></b>      <font color="#7a9ecd">// Draw moved rectangle</font>
+<b><font color="#006cb8">25: </font></b>      g2<font color="#000000">.</font><font color="#000000">draw</font><font color="#000000">(</font>box<font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">26: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">27: </font></b><font color="#000000">}</font>
+</tt></pre>

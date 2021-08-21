@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 26</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide044.html'">
+<center><small><a href="slide042.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide044.html">next</a></small></center>
+<hr></div>
+<h2>Creating XML Documents</h2>
+<ul>
+  <li>A helper method
+     <pre>private Element createItems(ArrayList&lt;LineItem&gt; items)</pre>
+     is implemented in the same way<br>&nbsp;</li>
+  <li>Build the document as follows:
+<pre>ArrayList&lt;LineItem&gt; items = . . .;
+doc = builder.newDocument();
+Element root = createItems(items);
+doc.appendChild(root);</pre></li>
+</ul>
+
+
+
+<div onclick="document.location='slide044.html'"><hr>
+<center><small><a href="slide042.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide044.html">next</a></small></center>
+</div>
+</body>
+</html>

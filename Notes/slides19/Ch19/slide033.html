@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 19</title>
+</head>
+
+<body>
+<div onclick="document.location='slide034.html'">
+<center><small><a href="slide032.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide034.html">next</a></small></center>
+<hr></div>
+<h2>Answers</h2>
+<ol>
+  <li value="7">When the preceding <tt>while</tt> loop ends, the loop
+condition must be false, that is,
+    <br>
+    <tt>iFirst &gt;= first.length</tt> or <tt>iSecond &gt;=
+second.length</tt> (De Morgan's Law).
+    <br>
+Then <tt>first.length - iFirst &lt;= 0</tt> or <tt>iSecond.length -
+iSecond &lt;= 0</tt>.</li>
+  <li>First sort 8 7 6 5. <br>
+Recursively, first sort 8 7. <br>
+Recursively, first sort 8. It's sorted. <br>
+Sort 7. It's sorted. <br>
+Merge them: 7 8. <br>
+Do the same with 6 5 to get 5 6. <br>
+Merge them to 5 6 7 8. <br>
+Do the same with 4 3 2 1: Sort 4 3 by sorting 4 and 3 and merging them
+to 3 4. <br>
+Sort 2 1 by sorting 2 and 1 and merging them to 1 2. <br>
+Merge 3 4 and 1 2 to 1 2 3 4. <br>
+Finally, merge 5 6 7 8 and 1 2 3 4 to 1 2 3 4 5 6 7 8.</li>
+</ol>
+<br>
+
+<div onclick="document.location='slide034.html'"><hr>
+<center><small><a href="slide032.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide034.html">next</a></small></center>
+</div>
+</body>
+</html>

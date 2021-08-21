@@ -1,0 +1,950 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 17</title>
+</head>
+<body>
+<div>
+<h2>Chapter 17</h2>
+<h1>Object-Oriented Design</h1>
+<br>
+</div>
+<h2>Chapter Goals</h2>
+<ul>
+  <li>To learn about the software life cycle</li>
+  <li>To learn how to discover new classes and methods</li>
+  <li>To understand the use of CRC cards for class discovery</li>
+  <li>To be able to identify inheritance, aggregation, and dependency
+relationships between classes</li>
+  <li>To master the use of UML class diagrams to describe class
+relationships</li>
+  <li>To learn how to use object-oriented design to build complex
+programs</li>
+</ul>
+<h2>The Software Life Cycle</h2>
+<ul>
+  <li>Encompasses all activities from initial analysis until
+obsolescence</li>
+  <li>Formal process for software development
+    <ul>
+      <li>Describes phases of the development process</li>
+      <li>Gives guidelines for how to carry out the phases</li>
+    </ul>
+  </li>
+  <li>Development process
+    <ul>
+      <li>Analysis</li>
+      <li>Design</li>
+      <li>Implementation</li>
+      <li>Testing</li>
+      <li>Deployment</li>
+    </ul>
+  </li>
+</ul>
+<h2> Analysis </h2>
+<ul>
+  <li>Decide what the project is suppose to do</li>
+  <li>Do not think about how the program will accomplish tasks</li>
+  <li>Output: requirements document
+    <ul>
+      <li>Describes what program will do once completed</li>
+      <li>User manual: tells how user will operate program</li>
+      <li>Performance criteria</li>
+    </ul>
+  </li>
+</ul>
+<h2>Design</h2>
+<ul>
+  <li>Plan how to implement the system</li>
+  <li>Discover structures that underlie problem to be solved</li>
+  <li>Decide what classes and methods you need</li>
+  <li>Output:
+    <ul>
+      <li>Description of classes and methods</li>
+      <li>Diagrams showing the relationships among the classes</li>
+    </ul>
+  </li>
+</ul>
+<h2>Implementation</h2>
+<ul>
+  <li>Write and compile the code</li>
+  <li>Code implements classes and methods discovered in the design phase</li>
+  <li>Output: completed program</li>
+</ul>
+<h2>Testing </h2>
+<ul>
+  <li>Run tests to verify the program works correctly</li>
+  <li>Output: a report of the tests and their results</li>
+</ul>
+<h2>Deployment</h2>
+<ul>
+  <li>Users install program</li>
+  <li>Users use program for its intended purpose</li>
+</ul>
+<h2>The Waterfall Model</h2>
+<ul>
+  <li>Sequential process of analysis, design, implementation, testing,
+and deployment</li>
+  <li>When rigidly applied, waterfall model did not work <br>
+    <img src="images/waterfall.png" alt=""></li>
+</ul>
+<h2>The Spiral Model</h2>
+<ul>
+  <li>Breaks development process down into multiple phases</li>
+  <li>Early phases focus on the construction of <i>prototypes</i></li>
+  <li>Lessons learned from development of one prototype can be applied
+to the next iteration</li>
+  <li>Problem: can lead to many iterations, and process can take too
+long to complete <br>
+    <img src="images/spiral.png" alt=""></li>
+</ul>
+<h2>Activity Levels in the Rational Unified Process</h2>
+<ul>
+  <li>Development process methodology by the inventors of UML <br>
+    <img src="images/activity_levels.png" alt=""></li>
+</ul>
+<h2>Extreme Programming</h2>
+<ul>
+  <li>Strives for simplicity</li>
+  <li>Removes formal structure</li>
+  <li>Focuses on best practices
+    <ul>
+      <li>Realistic planning</li>
+      <li>Small releases</li>
+      <li>Metaphor</li>
+      <li>Simplicity</li>
+      <li>Testing</li>
+      <li>Refactoring</li>
+      <li>Pair programming</li>
+      <li>Collective ownership</li>
+      <li>Continuous integration</li>
+      <li>40-hour week</li>
+      <li>On-site customer</li>
+      <li>Coding standards</li>
+    </ul>
+  </li>
+</ul>
+<h2>Extreme Programming</h2>
+<ul>
+  <li>Realistic planning
+    <ul>
+      <li>Customers make business decisions</li>
+      <li>Programmers make technical decisions</li>
+      <li>Update plan when it conflicts with reality</li>
+    </ul>
+  </li>
+  <li>Small releases
+    <ul>
+      <li>Release a useful system quickly </li>
+      <li>Release updates on a very short cycle</li>
+    </ul>
+  </li>
+  <li>Metaphor
+    <ul>
+      <li>Programmers have a simple shared story that explains the
+system</li>
+    </ul>
+  </li>
+</ul>
+<h2>Extreme Programming</h2>
+<ul>
+  <li>Simplicity
+    <ul>
+      <li>Design as simply as possible instead of preparing for future
+complexities</li>
+    </ul>
+  </li>
+  <li>Testing
+    <ul>
+      <li>Programmers and customers write test cases</li>
+      <li>Test continuously</li>
+    </ul>
+  </li>
+  <li>Refactoring
+    <ul>
+      <li>Restructure the system continuously to improve code and
+eliminate duplication</li>
+    </ul>
+  </li>
+</ul>
+<h2>Extreme Programming</h2>
+<ul>
+  <li>Pair programming
+    <ul>
+      <li>Two programmers write code on the same computer</li>
+    </ul>
+  </li>
+  <li>Collective ownership
+    <ul>
+      <li>All programmers can change all code as needed</li>
+    </ul>
+  </li>
+  <li>Continuous integration
+    <ul>
+      <li>Build the entire system and test it whenever a task is
+complete</li>
+    </ul>
+  </li>
+</ul>
+<h2>Extreme Programming</h2>
+<ul>
+  <li>40-hour week
+    <ul>
+      <li>Don't cover up unrealistic schedules with heroic effort</li>
+    </ul>
+  </li>
+  <li>On-site customer
+    <ul>
+      <li>A customer is accessible to the programming team at all times</li>
+    </ul>
+  </li>
+  <li>Coding standards
+    <ul>
+      <li>Follow standards that emphasize self-documenting code</li>
+    </ul>
+  </li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li>Suppose you sign a contract, promising that you will, for an
+agreed-upon price,
+design, implement, and test a software package exactly as it has been
+specified
+in a requirements document. What is the primary risk you and your
+customer
+are facing with this business arrangement?</li>
+  <li>Does Extreme Programming follow a waterfall or a spiral model?</li>
+  <li>What is the purpose of the "on-site customer" in Extreme
+Programming?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li>It is unlikely that the customer did a perfect job with the
+requirements document.
+If you don't accommodate changes, your customer may not like the
+outcome.
+If you charge for the changes, your customer may not like the cost.</li>
+  <li>An "extreme" spiral model, with lots of iterations.</li>
+  <li>To give frequent feedback as to whether the current iteration of
+the product fits customer needs.</li>
+</ol>
+<br>
+<h2>Object-Oriented Design</h2>
+<ol>
+  <li>Discover classes</li>
+  <li>Determine responsibilities of each class</li>
+  <li>Describe relationships between the classes</li>
+</ol>
+<h2>Discovering Classes</h2>
+<ul>
+  <li>A class represents some useful concept</li>
+  <li>Concrete entities: bank accounts, ellipses, and products</li>
+  <li>Abstract concepts: streams and windows</li>
+  <li>Find classes by looking for nouns in the task description</li>
+  <li>Define the behavior for each class</li>
+  <li>Find methods by looking for verbs in the task description </li>
+</ul>
+<h2>Example: Invoice</h2>
+<img src="images/invoice.png" alt="">
+<br>
+<h2>Example: Invoice</h2>
+<ul>
+  <li>Classes that come to mind: <tt>Invoice</tt>, <tt>LineItem</tt>,
+and <tt>Customer</tt></li>
+  <li>Good idea to keep a list of candidate classes</li>
+  <li>Brainstorm, simply put all ideas for classes onto the list</li>
+  <li>You can cross not useful ones later</li>
+</ul>
+<h2>Finding Classes</h2>
+<ul>
+  <li>Keep the following points in mind:
+    <ul>
+      <li>Class represents set of objects with the same behavior
+        <ul>
+          <li>Entities with multiple occurrences in problem<br>
+description are good candidates for objects</li>
+          <li>Find out what they have in common</li>
+          <li>Design classes to capture commonalities</li>
+        </ul>
+      </li>
+      <li>Represent some entities as objects, others as primitive types
+        <ul>
+          <li>Should we make a class <tt>Address</tt> or use a <tt>String</tt>?</li>
+        </ul>
+      </li>
+      <li>Not all classes can be discovered in analysis phase</li>
+      <li>Some classes may already exist</li>
+    </ul>
+  </li>
+</ul>
+<h2>CRC Card</h2>
+<ul>
+  <li>Describes a <b>c</b>lass, its <b>r</b>esponsibilities, and its <b>c</b>ollaborators</li>
+  <li>Use an index card for each class</li>
+  <li>Pick the class that should be responsible for each method (verb)</li>
+  <li>Write the responsibility onto the class card</li>
+  <li>Indicate what other classes are needed to fulfill responsibility
+(collaborators) <br>
+    <img src="images/crc.png" alt=""></li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="4">Suppose the invoice is to be saved to a file. Name a
+likely collaborator.</li>
+  <li>Looking at the invoice in Figure 4, what is a likely
+responsibility of the <tt>Customer</tt> class?</li>
+  <li>What do you do if a CRC card has ten responsibilities?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="4"><tt>FileWriter</tt></li>
+  <li>To produce the shipping address of the customer.</li>
+  <li>Reword the responsibilities so that they are at a higher level,
+or come up with
+more classes to handle the responsibilities.</li>
+</ol>
+<br>
+<h2>Relationships Between Classes</h2>
+<ul>
+  <li>Inheritance</li>
+  <li>Aggregation</li>
+  <li>Dependency</li>
+</ul>
+<h2>Inheritance</h2>
+<ul>
+  <li><i>Is-a</i> relationship</li>
+  <li>Relationship between a more general class (superclass) and<br>
+a more specialized class (subclass)</li>
+  <li>Every savings account is a bank account</li>
+  <li>Every circle is an ellipse (with equal width and height)</li>
+  <li>It is sometimes abused
+    <ul>
+      <li>Should the class <tt>Tire</tt> be a subclass of a class <tt>Circle</tt>?
+        <ul>
+          <li>The <i>has-a</i> relationship would be more appropriate</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<h2>Aggregation</h2>
+<ul>
+  <li><i>Has-a</i> relationship</li>
+  <li>Objects of one class contain references to objects of another
+class</li>
+  <li>Use an instance variable
+    <ul>
+      <li>A tire has a circle as its boundary:
+        <pre>class Tire<br>{<br>   . . .<br>   private String rating;<br>   private Circle boundary;<br>}</pre>
+      </li>
+    </ul>
+  </li>
+  <li>Every car has a tire (in fact, it has four)</li>
+</ul>
+<h2>Example</h2>
+<pre>class Car extends Vehicle<br>{<br>   . . .<br>   private Tire[] tires;<br>}</pre>
+<img src="images/uml_example.png" alt="">
+<h2>Dependency</h2>
+<ul>
+  <li><i>Uses</i> relationship</li>
+  <li>Example: many of our applications depend on the <tt>Scanner</tt>
+class to read input</li>
+  <li>Aggregation is a stronger form of dependency</li>
+  <li>Use aggregation to remember another object between method calls</li>
+</ul>
+<h2>UML Relationship Symbols</h2>
+<table border="1" cellpadding="0" cellspacing="0" width="80%">
+  <tbody>
+    <tr>
+      <th>Relationship</th>
+      <th>Symbol</th>
+      <th>Line Style</th>
+      <th>Arrow Tip</th>
+    </tr>
+    <tr>
+      <td>Inheritance</td>
+      <td align="center"><img src="images/uml_inheritance.png" alt=""></td>
+      <td>Solid</td>
+      <td>Triangle</td>
+    </tr>
+    <tr>
+      <td>Interface Implementation</td>
+      <td align="center"><img src="images/uml_interface.png" alt=""></td>
+      <td>Dotted</td>
+      <td>Triangle</td>
+    </tr>
+    <tr>
+      <td>Aggregation</td>
+      <td align="center"><img src="images/uml_aggregation.png" alt=""></td>
+      <td>Solid</td>
+      <td>Diamond</td>
+    </tr>
+    <tr>
+      <td>Dependency</td>
+      <td align="center"><img src="images/uml_dependency.png" alt=""></td>
+      <td>Dotted</td>
+      <td>Open</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Self Check</h2>
+<ol>
+  <li value="7">Consider the <tt>Bank</tt> and <tt>BankAccount</tt>
+classes of Chapter 7. How are they related?</li>
+  <li>Consider the <tt>BankAccount</tt> and <tt>SavingsAccount</tt>
+objects of Chapter 12. How are they related?</li>
+  <li>Consider the <tt>BankAccountTester</tt> class of Chapter 3.
+Which classes does it depend on?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="7">Through aggregation. The bank manages bank account
+objects.</li>
+  <li>Through inheritance.</li>
+  <li>The <tt>BankAccount</tt>, <tt>System</tt>, and <tt>PrintStream</tt>
+classes.</li>
+</ol>
+<br>
+<h2>Advanced Topic: Attributes and Methods in UML Diagrams</h2>
+<img src="images/uml_attributes.png" alt="">
+<br>
+<h2>Advanced Topic: Multiplicities</h2>
+<ul>
+  <li>any number (zero or more): *</li>
+  <li>one or more: 1..*</li>
+  <li>zero or one: 0..1</li>
+  <li>exactly one: 1 <br>
+    <img src="images/uml_multiplicities.png" alt=""></li>
+</ul>
+<h2>Aggregation and Association</h2>
+<ul>
+  <li>Association: more general relationship between classes</li>
+  <li>Use early in the design phase</li>
+  <li>A class is associated with another if you can navigate from
+objects of one class to objects of the other</li>
+  <li>Given a <tt>Bank</tt> object, you can navigate to <tt>Customer</tt>
+objects <br>
+    <img src="images/uml_association.png" alt=""></li>
+</ul>
+<h2>Five-Part Development Process</h2>
+<ol>
+  <li>Gather requirements</li>
+  <li>Use CRC cards to find classes, responsibilities, and collaborators</li>
+  <li>Use UML diagrams to record class relationships</li>
+  <li>Use <tt>javadoc</tt> to document method behavior</li>
+  <li>Implement your program</li>
+</ol>
+<h2>Printing an Invoice &#8211; Requirements</h2>
+<ul>
+  <li>Task: print out an invoice</li>
+  <li>Invoice: describes the charges for a set of products in certain
+quantities</li>
+  <li>Omit complexities
+    <ul>
+      <li>Dates, taxes, and invoice and customer numbers</li>
+    </ul>
+  </li>
+  <li>Print invoice
+    <ul>
+      <li>Billing address, all line items, amount due</li>
+    </ul>
+  </li>
+  <li>Line item
+    <ul>
+      <li>Description, unit price, quantity ordered, total price</li>
+    </ul>
+  </li>
+  <li>For simplicity, do not provide a user interface</li>
+  <li>Test program: adds line items to the invoice and then prints it</li>
+</ul>
+<h2>Sample Invoice </h2>
+<table width="80%">
+  <tbody>
+    <tr>
+      <td colspan="5" align="center">
+      <pre>I N V O I C E</pre>
+      </td>
+    </tr>
+    <tr>
+      <td width="166"><tt>Sam's Small Appliances</tt></td>
+      <td width="95">&nbsp;</td>
+      <td width="76">&nbsp;</td>
+      <td width="38">&nbsp;</td>
+      <td width="101">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="166"><tt>100 Main Street</tt></td>
+      <td width="95">&nbsp;</td>
+      <td width="76">&nbsp;</td>
+      <td width="38">&nbsp;</td>
+      <td width="101">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="166"><tt>Anytown, CA 98765</tt></td>
+      <td width="95">&nbsp;</td>
+      <td width="76">&nbsp;</td>
+      <td width="38">&nbsp;</td>
+      <td width="101">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="166">&nbsp; </td>
+      <td width="95">&nbsp;</td>
+      <td width="76">&nbsp;</td>
+      <td width="38">&nbsp;</td>
+      <td width="101">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="166"><tt>Description</tt></td>
+      <td width="95">&nbsp;</td>
+      <td width="76"><tt>Price</tt></td>
+      <td width="38">
+      <div align="center"><tt>Qty</tt></div>
+      </td>
+      <td width="101"><tt>Total</tt></td>
+    </tr>
+    <tr>
+      <td width="166"><tt>Toaster</tt></td>
+      <td width="95">&nbsp;</td>
+      <td width="76"><tt>29.95</tt></td>
+      <td width="38">
+      <div align="center"><tt>3</tt></div>
+      </td>
+      <td width="101"><tt>89.85</tt></td>
+    </tr>
+    <tr>
+      <td width="166"><tt>Hair dryer</tt></td>
+      <td width="95">&nbsp;</td>
+      <td width="76"><tt>24.95</tt></td>
+      <td width="38">
+      <div align="center"><tt>1</tt></div>
+      </td>
+      <td width="101"><tt>24.95</tt></td>
+    </tr>
+    <tr>
+      <td width="166"><tt>Car vacuum</tt></td>
+      <td width="95">&nbsp;</td>
+      <td width="76"><tt>19.99</tt></td>
+      <td width="38">
+      <div align="center"><tt>2</tt></div>
+      </td>
+      <td width="101"><tt>39.98</tt></td>
+    </tr>
+    <tr>
+      <td width="166">&nbsp;</td>
+      <td width="95">&nbsp;</td>
+      <td width="76">&nbsp;</td>
+      <td width="38">&nbsp;</td>
+      <td width="101">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="166"><tt>Amount Due:</tt> &nbsp; <tt>$154.78</tt></td>
+      <td width="95">&nbsp;</td>
+      <td width="76">&nbsp;</td>
+      <td width="38">&nbsp;</td>
+      <td width="101">&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Printing an Invoice &#8211; CRC Cards</h2>
+<ul>
+  <li>Discover classes</li>
+  <li>Nouns are possible classes
+    <pre>Invoice<br>Address<br>LineItem<br>Product<br>Description<br>Price<br>Quantity<br>Total<br>Amount Due</pre>
+  </li>
+</ul>
+<h2>Printing an Invoice &#8211; CRC Cards</h2>
+<ul>
+  <li>Analyze classes
+    <pre>Invoice<br>Address<br>LineItem    // Records the product and the quantity<br>Product<br>Description // Field of the Product class<br>Price       // Field of the Product class<br>Quantity    // Not an attribute of a Product<br>Total       // Computed&#8211;not stored anywhere<br>Amount Due  // Computed&#8211;not stored anywhere</pre>
+  </li>
+  <li>Classes after a process of elimination
+    <pre>Invoice<br>Address<br>LineItem<br>Product</pre>
+  </li>
+</ul>
+<h2>CRC Cards for Printing Invoice</h2>
+<tt>Invoice</tt> and <tt>Address</tt> must be able to format
+themselves: <br>
+<img src="images/crc_invoice.png" alt=""> &nbsp;&nbsp;&nbsp;&nbsp;<img
+ src="images/crc_address.png" alt="">
+<br>
+<h2>CRC Cards for Printing Invoice</h2>
+Add collaborators to invoice card: <br>
+<img src="images/crc_invoice2.png" alt=""><br>
+<h2>CRC Cards for Printing Invoice</h2>
+<tt>Product</tt> and <tt>LineItem</tt> CRC cards: <br>
+<img src="images/crc_product.png" alt=""> &nbsp;&nbsp;&nbsp;&nbsp;<img
+ src="images/crc_lineitem.png" alt="">
+<br>
+<h2>CRC Cards for Printing Invoice</h2>
+<tt>Invoice</tt> must be populated with products and quantities: <br>
+<img src="images/crc_invoice3.png" alt=""><br>
+<h2>Printing an Invoice &#8211; UML Diagrams</h2>
+<img src="images/invoiceclasses.png" alt="">
+<h2>Printing an Invoice &#8211; Method Documentation</h2>
+<ul>
+  <li>Use <tt>javadoc</tt> documentation to record the behavior of the
+classes</li>
+  <li>Leave the body of the methods blank</li>
+  <li>Run <tt>javadoc</tt> to obtain formatted version of
+documentation in HTML format</li>
+  <li>Advantages:
+    <ul>
+      <li>Share HTML documentation with other team members</li>
+      <li>Format is immediately useful: Java source files</li>
+      <li>Supply the comments of the key methods</li>
+    </ul>
+  </li>
+</ul>
+<h2>Method Documentation &#8211; <tt>Invoice</tt> class</h2>
+<pre>/**<br>   Describes an invoice for a set of purchased products.<br>*/<br>public class Invoice<br>{<br>   /**<br>      Adds a charge for a product to this invoice.<br>      @param aProduct the product that the customer ordered<br>      @param quantity the quantity of the product<br>   */<br>   public void add(Product aProduct, int quantity)<br>   {<br>   }<br><br>   /**<br>      Formats the invoice.<br>      @return the formatted invoice<br>   */<br>   public String format()<br>   {<br>   }<br>}</pre>
+<h2>Method Documentation &#8211; <tt>LineItem</tt> class</h2>
+<pre>/**<br>   Describes a quantity of an article to purchase and its price.<br>*/<br>public class LineItem<br>{<br>   /**<br>      Computes the total cost of this line item.<br>      @return the total price<br>   */<br>   public double getTotalPrice()<br>   {<br>   }<br><br>   /**<br>      Formats this item.<br>      @return a formatted string of this line item<br>   */<br>   public String format()<br>   {<br>   }<br>}</pre>
+<h2>Method Documentation &#8211; <tt>Product</tt> class</h2>
+<pre>/**<br>   Describes a product with a description and a price.<br>*/<br>public class Product<br>{<br>   /**<br>      Gets the product description.<br>      @return the description<br>   */<br>   public String getDescription()<br>   {<br>   }<br><br>   /**<br>      Gets the product price.<br>      @return the unit price<br>   */<br>   public double getPrice()<br>   {<br>   }<br>}</pre>
+<h2>Method Documentation &#8211; <tt>Address</tt> class </h2>
+<pre>/**<br>   Describes a mailing address.<br>*/<br>public class Address<br>{<br>   /**<br>      Formats the address.<br>      @return the address as a string with three lines<br>   */<br>   public String format()<br>   {<br>   }<br>}</pre>
+<h2>The Class Documentation in the HTML Format</h2>
+<img src="images/javadoc.png" alt="">
+<br>
+<h2>Printing an Invoice &#8211; Implementation</h2>
+<ul>
+  <li>The UML diagram will give instance variables</li>
+  <li>Look for associated classes
+    <ul>
+      <li>They yield instance variables</li>
+    </ul>
+  </li>
+</ul>
+<h2>Implementation</h2>
+<ul>
+  <li><tt>Invoice</tt> aggregates <tt>Address</tt> and <tt>LineItem</tt></li>
+  <li>Every invoice has one billing address</li>
+  <li>An invoice can have many line items:
+    <pre>public class Invoice<br>{<br>   . . .<br>   private Address billingAddress;<br>   private ArrayList&lt;LineItem&gt; items;<br>}</pre>
+  </li>
+</ul>
+<h2>Implementation</h2>
+<ul>
+  <li>A line item needs to store a Product object and quantity:
+    <pre>public class LineItem<br>{<br>   . . .<br>   private int quantity;<br>   private Product theProduct;<br>}</pre>
+  </li>
+</ul>
+<h2>Implementation</h2>
+<ul>
+  <li>The methods themselves are now very easy</li>
+  <li>Example:
+    <ul>
+      <li><tt>getTotalPrice</tt> of <tt>LineItem</tt> gets the unit
+price of the product and multiplies it with the quantity
+        <pre>/**<br>   Computes the total cost of this line item.<br>   @return the total price<br>*/<br>public double getTotalPrice()<br>{<br>   return theProduct.getPrice() * quantity;<br>}</pre>
+      </li>
+    </ul>
+  </li>
+</ul>
+<h2>File InvoiceTester.java</h2>
+<iframe src="code/invoice/InvoiceTester.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>File Invoice.java</h2>
+<iframe src="code/invoice/Invoice.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>File LineItem.java</h2>
+<iframe src="code/invoice/LineItem.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>File Product.java</h2>
+<iframe src="code/invoice/Product.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>File Address.java</h2>
+<iframe src="code/invoice/Address.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Self Check</h2>
+<ol>
+  <li value="10">Which class is responsible for computing the amount
+due? What are its collaborators for this task?</li>
+  <li>Why do the format methods return <tt>String</tt> objects instead
+of directly printing to <tt>System.out</tt>?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="10">The <tt>Invoice</tt> class is responsible for
+computing the amount due. It collaborates
+with the <tt>LineItem</tt> class.</li>
+  <li>This design decision reduces coupling. It enables us to reuse the
+classes when
+we want to show the invoice in a dialog box or on a web page.</li>
+</ol>
+<br>
+<h2>An Automatic Teller Machine &#8211; Requirements</h2>
+<ul>
+  <li>ATM is used by bank customers. A customer has a
+    <ul>
+      <li>Checking account </li>
+      <li>Savings account</li>
+      <li>Customer number </li>
+      <li>PIN</li>
+    </ul>
+  </li>
+</ul>
+<h2>An Automatic Teller Machine &#8211; Requirements </h2>
+<ul>
+  <li>Customers can select an account</li>
+  <li>The balance of the selected account is displayed</li>
+  <li>Then, customer can deposit and withdraw money</li>
+  <li>Process is repeated until the customer chooses to exit</li>
+</ul>
+<h2>An Automatic Teller Machine &#8211; Requirements </h2>
+<ul>
+  <li>Two separate interfaces:
+    <ul>
+      <li>GUI that closely mimics an actual ATM</li>
+      <li>Text-based interface</li>
+    </ul>
+  </li>
+</ul>
+<h2>An Automatic Teller Machine &#8211; Requirements </h2>
+<ul>
+  <li>GUI Interface
+    <ul>
+      <li>Keypad</li>
+      <li>Display</li>
+      <li>Buttons A, B, C</li>
+      <li>Buttons function depend on the state of the machine <br>
+        <img src="images/atm_gui.png" alt=""></li>
+    </ul>
+  </li>
+</ul>
+<h2>An Automatic Teller Machine &#8211; Requirements</h2>
+<ul>
+  <li>At start up the customer is expected to
+    <ul>
+      <li>Enter customer number </li>
+      <li>Press the A button. </li>
+      <li>The display shows:
+        <pre>Enter Customer Number<br>A = OK </pre>
+      </li>
+    </ul>
+  </li>
+</ul>
+<h2>An Automatic Teller Machine &#8211; Requirements</h2>
+<ul>
+  <li>The customer is expected to
+    <ul>
+      <li>Enter a PIN </li>
+      <li>Press A button. </li>
+      <li>The display shows:
+        <pre>Enter PIN<br>A = OK</pre>
+      </li>
+    </ul>
+  </li>
+</ul>
+<h2>An Automatic Teller Machine &#8211; Requirements</h2>
+<ul>
+  <li>Search for the customer number and PIN
+    <ul>
+      <li>If it matches a bank customer, proceed</li>
+      <li>Else return to start up screen</li>
+    </ul>
+  </li>
+</ul>
+<h2>An Automatic Teller Machine &#8211; Requirements</h2>
+<ul>
+  <li>If the customer is authorized
+    <ul>
+      <li>The display shows:
+        <pre>Select Account<br>A = Checking<br>B = Savings<br>C = Exit</pre>
+      </li>
+    </ul>
+  </li>
+</ul>
+<h2>An Automatic Teller Machine &#8211; Requirements</h2>
+<ul>
+  <li>If the user presses C
+    <ul>
+      <li>The ATM reverts to its original state</li>
+      <li>ATM asks next user to enter a customer number</li>
+    </ul>
+  </li>
+  <li>If the user presses A or B
+    <ul>
+      <li>The ATM remembers selected account</li>
+      <li> The display shows:
+        <pre>Balance = <i>balance in selected account</i>
+Enter amount and select transaction
+A = Withdraw
+B = Deposit
+C = Cancel</pre>
+      </li>
+    </ul>
+  </li>
+</ul>
+<h2>An Automatic Teller Machine &#8211; Requirements</h2>
+<ul>
+  <li>If the user presses A or B
+    <ul>
+      <li>The value entered is withdrawn or deposited</li>
+      <li>Simulation: no money is dispensed and no deposit is accepted</li>
+      <li>The ATM reverts to previous state</li>
+    </ul>
+  </li>
+  <li>If the user presses C
+    <ul>
+      <li>The ATM reverts to previous state</li>
+    </ul>
+  </li>
+</ul>
+<h2>An Automatic Teller Machine &#8211; Requirements</h2>
+<ul>
+  <li>Text-based interaction
+    <ul>
+      <li>Read input from <tt>System.in</tt> instead of the buttons</li>
+      <li>Here is a typical dialog:
+        <pre>Enter account number: <code class="blue">1</code>
+Enter PIN: <code
+ class="blue">1234</code>
+A=Checking, B=Savings, C=Quit: <code
+ class="blue">A</code>
+Balance=0.0
+A=Deposit, B=Withdrawal, C=Cancel: <code
+ class="blue">A</code>
+Amount: <code class="blue">1000</code>
+A=Checking, B=Savings, C=Quit: <code
+ class="blue">C</code></pre>
+      </li>
+    </ul>
+  </li>
+</ul>
+<h2>An Automatic Teller Machine &#8211; CRC</h2>
+<ul>
+  <li>Nouns are possible classes
+    <pre>ATM<br>User<br>Keypad<br>Display<br>Display message<br>Button<br>State<br>Bank account<br>Checking account<br>Savings account<br>Customer<br>Customer number<br>PIN<br>Bank</pre>
+  </li>
+</ul>
+<h2>CRC Cards for Automatic Teller Machine</h2>
+<img src="images/crc_customer.png" alt="">
+<img src="images/crc_bank.png" alt=""><img src="images/crc_atm.png"
+ alt="">
+<h2>ATM States</h2>
+<ol>
+  <li>START: Enter customer ID</li>
+  <li>PIN: Enter PIN</li>
+  <li>ACCOUNT: Select account</li>
+  <li>TRANSACT: Select transaction</li>
+</ol>
+<h2>State Diagram for ATM Class</h2>
+<img src="images/state_diagram.png" alt="">
+<h2>An Automatic Teller Machine &#8211; UML Diagrams</h2>
+<img src="images/atm_classes.png" alt="">
+<h2>Method Documentation <tt>ATM</tt> Class</h2>
+<pre>/**<br>   An ATM that accesses a bank.<br>*/<br>public class ATM<br>{<br>   /**<br>      Constructs an ATM for a given bank.<br>      @param aBank the bank to which this ATM connects<br>   */<br>   public ATM(Bank aBank) { }<br><br>   /**<br>      Sets the current customer number and sets state to PIN.<br>      (Precondition: state is START)<br>      @param number the customer number<br>   */<br>   public void setCustomerNumber(int number) { }<br></pre>
+<h2>Method Documentation <tt>ATM</tt> Class (Continued)</h2>
+<pre>   /**<br>      Finds customer in bank. If found sets state to ACCOUNT, else to START.<br>      (Precondition: state is PIN)<br>      @param pin the PIN of the current customer<br>   */<br>   public void selectCustomer(int pin) { }<br><br>   /**<br>      Sets current account to checking or savings. Sets state to TRANSACT.<br>      (Precondition: state is ACCOUNT or TRANSACT)<br>      @param account one of CHECKING or SAVINGS<br>   */<br>   public void selectAccount(int account) { }<br><br>   /**<br>      Withdraws amount from current account.<br>      (Precondition: state is TRANSACT)<br>      @param value the amount to withdraw<br>   */<br>   public void withdraw(double value) { }<br>   . . .<br>}</pre>
+<h2>An Automatic Teller Machine &#8211; Implementation</h2>
+<ul>
+  <li>Start implementation with classes that don't depend on others
+    <ul>
+      <li><tt>Keypad</tt></li>
+      <li><tt>BankAccount</tt> </li>
+    </ul>
+  </li>
+  <li>Then implement <tt>Customer</tt> which depends only on <tt>BankAccount</tt>
+  </li>
+  <li>This bottom-up approach allows you to test your classes
+individually</li>
+</ul>
+<h2>An Automatic Teller Machine &#8211; Implementation</h2>
+<ul>
+  <li>Aggregated classes in UML diagram give instance variables
+    <pre>private Bank theBank;</pre>
+  </li>
+  <li>From description of ATM states, it is clear that we require
+additional instance variables:
+    <pre>private int state;<br>private Customer currentCustomer;<br>private BankAccount currentAccount;</pre>
+  </li>
+</ul>
+<h2>An Automatic Teller Machine &#8211; Implementation</h2>
+<ul>
+  <li>Most methods are very straightforward to implement</li>
+  <li>Consider <tt>selectCustomer</tt>:
+    <pre>/**<br>   Finds customer in bank. If found sets state to ACCOUNT, else to START.<br>   (Precondition: state is PIN)<br>   @param pin the PIN of the current customer<br>*/</pre>
+  </li>
+  <li>Description can be almost literally translated to Java
+instructions:
+    <pre>public void selectCustomer(int pin)<br>{<br>   assert state == PIN;<br>   currentCustomer = theBank.findCustomer(customerNumber, pin);<br>   if (currentCustomer == null)<br>      state = START;<br>   else<br>      state = ACCOUNT;<br>}</pre>
+  </li>
+</ul>
+<h2>File ATM.java</h2>
+<iframe src="code/atm/ATM.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>File Bank.java</h2>
+<iframe src="code/atm/Bank.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>File Customer.java</h2>
+<iframe src="code/atm/Customer.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>File ATMViewer.java</h2>
+<iframe src="code/atm/ATMViewer.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>File ATMFrame.java</h2>
+<iframe src="code/atm/ATMFrame.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>File KeyPad.java</h2>
+<iframe src="code/atm/KeyPad.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>File ATMTester.java</h2>
+<iframe src="code/atm/ATMTester.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Output</h2>
+<pre>Enter account number: <code class="blue">1</code>
+Enter PIN: <code
+ class="blue">1234</code>
+A=Checking, B=Savings, C=Quit: <code
+ class="blue">A</code>
+Balance=0.0
+A=Deposit, B=Withdrawal, C=Cancel: <code
+ class="blue">A</code>
+Amount: <code class="blue">1000</code>
+A=Checking, B=Savings, C=Quit: <code
+ class="blue">C</code>
+. . .</pre>
+<h2>Self Check</h2>
+<ol>
+  <li value="12">Why does the <tt>Bank</tt> class in this example not
+store an array list of bank accounts?</li>
+  <li>Suppose the requirements change&#8211;you need to save the current
+account balances
+to a file after every transaction and reload them when the program
+starts.
+What is the impact of this change on the design?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="12">The bank needs to store the list of customers so that
+customers can log in. We
+need to locate all bank accounts of a customer, and we chose to simply
+store
+them in the customer class. In this program, there is no further need
+to access
+bank accounts.</li>
+  <li>The <tt>Bank</tt> class needs to have an additional
+responsibility: to load and save the
+accounts. The bank can carry out this responsibility because it has
+access to the
+customer objects and, through them, to the bank accounts.</li>
+</ol>
+<br>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 11</title>
+   
+</head>
+
+<body>
+<div onclick="document.location='slide012.html'">
+<center><small><a href="slide010.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide012.html">next</a></small></center>
+<hr></div>
+<h2>Syntax 11.2: Implementing an Interface</h2>
+<table cellpadding="10" width="80%" border="1" bgcolor="#ffffff">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><pre>public class <i>ClassName</i>
+   implements <i>InterfaceName, InterfaceName, ...</i>
+{
+      <i>// methods
+      // instance variables</i>
+}</pre></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><pre>public class BankAccount implements Measurable
+{
+   // Other BankAccount methods
+   public double getMeasure()
+   {
+      // Method implementation
+   }
+ }</pre></td></tr></tbody>
+      </table>
+      <h3>Purpose:</h3>
+     To define a new class that implements the methods of an interface  
+     </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<div onclick="document.location='slide012.html'"><hr>
+<center><small><a href="slide010.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide012.html">next</a></small></center>
+</div>
+</body>
+</html>

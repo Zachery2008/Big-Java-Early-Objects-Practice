@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Horstmann Chapter 8</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+
+<body>
+<div onclick="document.location='slide031.html'">
+<center><small><a href="slide029.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide031.html">next</a></small></center>
+</div><hr>
+<h2>Simple Array Algorithms: Finding a Value</h2>
+<p>Check all elements until you have found a match.</p>
+<pre>public class Bank<br>{<br>   public BankAccount find(int accountNumber)<br>   {<br>      for (BankAccount a : accounts)<br>      {<br>         if (a.getAccountNumber() == accountNumber) // Found a match<br>            return a;<br>      }<br>      return null; // No match in the entire array list<br>   }<br>   . . .<br>}<br></pre>
+
+<hr>
+<div onclick="document.location='slide031.html'">
+<center><small><a href="slide029.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide031.html">next</a></small></center>
+</div>
+</body>
+</html>

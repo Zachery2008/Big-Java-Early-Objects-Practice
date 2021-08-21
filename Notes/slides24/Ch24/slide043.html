@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 24</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide044.html'">
+<center><small><a href="slide042.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide044.html">next</a></small></center>
+<hr></div>
+<h2>A Server Program &#150; <tt>BankService</tt></h2>
+<ul>
+  <li><tt>BankService</tt> carries out the service</li>
+  <li>Implements the <tt>Runnable</tt> interface</li>
+  <li>Its <tt>run</tt> method will be executed in each thread that serves a client connection</li>
+  <li><tt>run</tt> gets a scanner and writer from the socket, then executes:
+<pre>public void doService() throws IOException
+{
+   while (true)
+   {
+      if (!in.hasNext()) return;
+      String command = in.next();
+      if (command.equals("QUIT")) return;
+      executeCommand(command);
+   }
+}</pre></li>
+</ul>
+
+
+
+<div onclick="document.location='slide044.html'"><hr>
+<center><small><a href="slide042.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide044.html">next</a></small></center>
+</div>
+</body>
+</html>

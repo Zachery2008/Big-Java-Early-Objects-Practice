@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 22</title>
+</head>
+
+<body>
+<div onclick="document.location='slide011.html'">
+<center><small><a href="slide009.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide011.html">next</a></small></center>
+<hr></div>
+<h2>Implementing Generic Classes</h2>
+<ul>
+  <li>Example: simple generic class that stores pairs of objects
+    <pre>Pair&lt;String, BankAccount&gt; result<br>      = new Pair&lt;String, BankAccount&gt;("Harry Hacker", harrysChecking);</pre>
+  </li>
+  <li>The <tt>getFirst</tt> and <tt>getSecond</tt> retrieve first and
+second values of pair
+    <pre>String name = result.getFirst();<br>BankAccount account = result.getSecond();</pre>
+  </li>
+  <li>Example of use: return two values at the same time (method
+returns a <tt>Pair</tt>)</li>
+  <li>Generic <tt>Pair</tt> class requires two type variables
+    <pre>public class Pair&lt;T, S&gt;</pre>
+  </li>
+</ul>
+
+<div onclick="document.location='slide011.html'"><hr>
+<center><small><a href="slide009.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide011.html">next</a></small></center>
+</div>
+</body>
+</html>

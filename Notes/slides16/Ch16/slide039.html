@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>Horstmann Chapter 16</title>
+</head>
+
+
+<body>
+<div onclick="document.location='slide040.html'">
+<center><small><a href="slide038.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide040.html">next</a></small></center>
+<hr></div>
+<h2>Reading a <tt>BankAccount</tt> Object from a File</h2>
+<ul>
+  <li><tt>readObject</tt> returns an <tt>Object</tt> reference</li>
+  <li>Need to remember the types of the objects that you saved and use a cast
+<pre>ObjectInputStream in = new ObjectInputStream(
+      new FileInputStream("bank.dat"));
+BankAccount b = (BankAccount) in.readObject();</pre></li>
+  <li><tt>readObject </tt>method can throw a <tt>ClassNotFoundException</tt></li>
+  <li>It is a checked exception</li>
+  <li>You must catch or declare it </li>
+</ul>
+ 
+
+
+<div onclick="document.location='slide040.html'"><hr>
+<center><small><a href="slide038.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide040.html">next</a></small></center>
+</div>
+</body>
+</html>

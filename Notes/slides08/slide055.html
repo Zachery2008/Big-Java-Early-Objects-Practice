@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Horstmann Chapter 8</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+
+<body>
+<div onclick="document.location='slide056.html'">
+<center><small><a href="slide054.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide056.html">next</a></small></center>
+</div><hr>
+<h2>Partially Filled Arrays</h2>
+<ul>
+  <li>Array length = maximum number of elements in array</li>
+  <li>Usually, array is partially filled</li>
+  <li>Need companion variable to keep track of current size</li>
+  <li>Uniform naming convention:<br>
+    <tt>final int DATA<b>_LENGTH</b> = 100;<br>
+double[] data = new double[DATA_LENGTH];<br>
+int data<b>Size</b> = 0;</tt></li>
+  <li>Update <tt>dataSize</tt> as array is filled:<br>
+    <tt>data[dataSize] = x;<br>
+dataSize++;</tt></li>
+</ul>
+
+<hr>
+<div onclick="document.location='slide056.html'">
+<center><small><a href="slide054.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide056.html">next</a></small></center>
+</div>
+</body>
+</html>

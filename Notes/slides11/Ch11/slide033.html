@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 11</title>
+   
+</head>
+
+<body>
+<div onclick="document.location='slide034.html'">
+<center><small><a href="slide032.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide034.html">next</a></small></center>
+<hr></div>
+<h2>Inner Classes</h2>
+<ul>
+  <li>Trivial class can be defined inside a method
+<pre>public class DataSetTester3
+{
+   public static void main(String[] args)
+   {
+      class RectangleMeasurer implements Measurer
+      {
+         . . .
+      }
+      Measurer m = new RectangleMeasurer();
+      DataSet data = new DataSet(m);
+      . . .
+   }
+}</pre></li>
+  <li>If inner class is defined inside an enclosing class, but outside its methods, it is available to all methods of enclosing class</li>
+  <li>Compiler turns an inner class into a regular class file:
+     <br><tt>DataSetTester$1$RectangleMeasurer.class</tt></li>
+</ul>
+
+
+
+<div onclick="document.location='slide034.html'"><hr>
+<center><small><a href="slide032.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide034.html">next</a></small></center>
+</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 11</title>
+   
+</head>
+
+<body>
+<div onclick="document.location='slide039.html'">
+<center><small><a href="slide037.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide039.html">next</a></small></center>
+<hr></div>
+<h2>Processing Timer Events</h2>
+<ul>
+  <li><tt>javax.swing.Timer</tt> generates equally spaced timer events</li>
+  <li>Useful whenever you want to have an object updated in regular intervals</li>
+  <li>Sends events to action listener<br>
+    <tt>public interface ActionListener<br>
+{</tt><br>
+&nbsp; &nbsp;&nbsp; <tt>void actionPerformed(ActionEvent event);<br>
+}</tt></li>
+  <li>Define a class that implements the <tt>ActionListener</tt> interface<br>
+    <tt>class MyListener implements ActionListener<br>
+{<br>
+    </tt>&nbsp; &nbsp;&nbsp; <tt>void actionPerformed(ActionEvent event)<br>
+&nbsp; &nbsp;{<br>
+&nbsp; &nbsp; &nbsp; // This action will be executed at each timer event<br>
+&nbsp; &nbsp; &nbsp; <i>Place listener action here</i><br>
+&nbsp; &nbsp;}</tt><br>
+    <tt>}<br>
+    </tt></li>
+  <li>Add listener to timer<br>
+    <tt>MyListener listener = new MyListener();<br>
+Timer t = new Timer(interval, listener);<br>
+t.start();</tt></li>
+</ul>
+
+
+
+<div onclick="document.location='slide039.html'"><hr>
+<center><small><a href="slide037.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide039.html">next</a></small></center>
+</div>
+</body>
+</html>

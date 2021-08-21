@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 18</title>
+</head>
+
+<body>
+<div onclick="document.location='slide061.html'">
+<center><small><a href="slide059.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide061.html">next</a></small></center>
+<hr></div>
+<h2>Using Mutual Recursions</h2>
+To see the mutual recursion clearly, trace through the expression <tt>(3+4)*5</tt>:
+<ul>
+  <li><tt>getExpressionValue</tt> calls <tt>getTermValue</tt>
+    <ul>
+      <li><tt>getTermValue</tt> calls <tt>getFactorValue</tt>
+        <ul>
+          <li><tt>getFactorValue</tt> consumes the <tt>(</tt> input</li>
+          <li><tt>getFactorValue</tt> calls <tt>getExpressionValue</tt>
+            <ul>
+              <li><tt>getExpressionValue</tt> returns eventually with
+the value of <tt>7</tt>, <br>
+having consumed <tt>3 + 4</tt>. This is the recursive call.</li>
+            </ul>
+          </li>
+          <li><tt>getFactorValue</tt> consumes the <tt>)</tt> input</li>
+          <li><tt>getFactorValue</tt> returns <tt>7</tt></li>
+        </ul>
+      </li>
+      <li><tt>getTermValue</tt> consumes the inputs <tt>*</tt> and <tt>5</tt>
+and returns <tt>35</tt></li>
+    </ul>
+  </li>
+  <li><tt>getExpressionValue</tt> returns <tt>35</tt></li>
+</ul>
+
+<div onclick="document.location='slide061.html'"><hr>
+<center><small><a href="slide059.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide061.html">next</a></small></center>
+</div>
+</body>
+</html>

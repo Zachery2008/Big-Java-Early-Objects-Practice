@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 12</title>
+</head>
+
+<body>
+<div onclick="document.location='slide023.html'">
+<center><small><a href="slide021.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide023.html">next</a></small></center>
+<hr></div>
+<h2>Mouse Events</h2>
+<ul>
+<li>Call <tt>repaint</tt> when you modify the shapes that <tt>paintComponent</tt> draws
+<pre>
+box.setLocation(x, y);
+repaint();</pre></li>
+<li>Mouse listener: if the mouse is pressed, listener moves the rectangle to the mouse location
+<pre>class MousePressListener implements MouseListener
+{
+   public void mousePressed(MouseEvent event)
+   {
+      int x = event.getX();
+      int y = event.getY();
+      component.moveTo(x, y);
+   }
+   // Do-nothing methods
+   public void mouseReleased(MouseEvent event) {}
+   public void mouseClicked(MouseEvent event) {}
+   public void mouseEntered(MouseEvent event) {}
+   public void mouseExited(MouseEvent event) {}
+}</pre></li>
+<li>All five methods of the interface must be implemented; unused methods can be empty</li>
+</ul>
+
+
+
+<div onclick="document.location='slide023.html'"><hr>
+<center><small><a href="slide021.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide023.html">next</a></small></center>
+</div>
+</body>
+</html>

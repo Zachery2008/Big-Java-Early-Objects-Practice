@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 23</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide062.html'">
+<center><small><a href="slide060.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide062.html">next</a></small></center>
+<hr></div>
+<h2>Selection Sort Algorithm Animation: Implementation</h2>
+<ul>
+  <li>Use a lock to synchronize access to the shared state</li>
+  <li>Add a component instance field to the algorithm class and augment the constructor to set it</li>
+  <li>That instance field is needed for
+    <ul><li>Repainting the component, and</li>
+    <li>Finding out the dimensions of the component when drawing the algorithm state</li></ul></li>
+<pre>public class SelectionSorter
+{
+   public SelectionSorter(int[] anArray, <code class="blue">JComponent aComponent</code>)
+   {
+      a = anArray;
+      sortStateLock = new ReentrantLock();
+      component = aComponent;
+   }
+   . . .
+   private JComponent component;
+}</pre>
+</ul>
+
+
+
+<div onclick="document.location='slide062.html'"><hr>
+<center><small><a href="slide060.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide062.html">next</a></small></center>
+</div>
+</body>
+</html>

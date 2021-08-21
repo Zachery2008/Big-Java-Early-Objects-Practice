@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 14</title>
+</head>
+
+<body>
+<div onclick="document.location='slide049.html'">
+<center><small><a href="slide047.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide049.html">next</a></small></center>
+<hr></div>
+<h2>How can I get notified when the user has moved a <tt>JSlider</tt>?</h2>
+<ul>
+  <li>There is no <tt>addActionListener</tt> method</li>
+  <li>There is a method
+      <br><tt>public void addChangeListener(ChangeListener l)</tt></li>
+  <li>Click on the <tt>ChangeListener</tt> link to learn more</li>
+  <li>It has a single method:
+      <br><tt>void stateChanged(ChangeEvent e)</tt></li>
+  <li>Apparently, method is called whenever user moves the slider</li>
+  <li>What is a <tt>ChangeEvent</tt>?
+     <ul><li>It inherits <tt>getSource</tt> method from superclass <tt>EventObject</tt></li>
+     <li><tt>getSource</tt>: tells us which component generated this event</li></ul></li>
+</ul>
+
+
+
+<div onclick="document.location='slide049.html'"><hr>
+<center><small><a href="slide047.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide049.html">next</a></small></center>
+</div>
+</body>
+</html>

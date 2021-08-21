@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 13</title>
+</head>
+
+<body>
+<div onclick="document.location='slide018.html'">
+<center><small><a href="slide016.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide018.html">next</a></small></center>
+<hr></div>
+<h2>Implementing the <tt>CheckingAccount</tt> Class</h2>
+<ul>
+  <li>Overrides <tt>deposit</tt> and <tt>withdraw</tt> to increment the transaction count:
+<pre>public class CheckingAccount extends BankAccount
+{
+   public void deposit(double amount) { . . . }
+   public void withdraw(double amount) { . . . }
+   public void deductFees() { . . . } // new method
+   private int transactionCount;      // new instance field
+}</pre></li>
+  <li>Each <tt>CheckingAccount</tt> object has two instance fields:
+     <ul><li><tt>balance</tt> (inherited from <tt>BankAccount</tt>)</li>
+     <li><tt>transactionCount</tt> (new to <tt>CheckingAccount</tt>)</li></ul></li>
+  <li>You can apply four methods to <tt>CheckingAccount</tt> objects:
+     <ul><li><tt>getBalance()</tt> (inherited from <tt>BankAccount</tt>)</li>
+     <li><tt>deposit(double amount)</tt> (overrides <tt>BankAccount</tt> method)</li>
+     <li><tt>withdraw(double amount)</tt> (overrides <tt>BankAccount</tt> method)</li>
+     <li><tt>deductFees()</tt> (new to <tt>CheckingAccount</tt>)</li></ul></li>
+</ul>
+
+
+
+<div onclick="document.location='slide018.html'"><hr>
+<center><small><a href="slide016.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide018.html">next</a></small></center>
+</div>
+</body>
+</html>

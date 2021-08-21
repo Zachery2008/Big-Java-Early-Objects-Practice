@@ -1,0 +1,847 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 26</title>
+
+</head>
+<body>
+<div>
+  <h2>Chapter 26</h2>
+  <h1>XML</h1>
+  <br>
+</div>
+
+
+<h2>Chapter Goals</h2>
+<ul>
+  <li>Understanding XML elements and attributes</li>
+  <li>Understanding the concept of an XML parser</li>
+  <li>Being able to read and write XML documents</li>
+  <li>Being able to design Document Type Definitions for XML documents</li>
+</ul>
+
+ 
+<h2>XML</h2>
+<ul>
+  <li>Stands for Extensible Markup Language</li>
+  <li>Lets you encode complex data in a form that the recipient can parse easily</li>
+  <li>Is independent from any programming language</li>
+</ul>
+
+ 
+<h2>Advantages of XML</h2>
+<ul>
+  <li>Example: encode product descriptions to be transferred to another computer</li>
+  <li>Na&#239;ve encoding:
+<pre>Toaster
+29.95</pre></li>
+  <li>XML encoding of the same data:
+<pre>&lt;product&gt;
+   &lt;description&gt;Toaster&lt;/description&gt;
+   &lt;price&gt;29.95&lt;/price&gt;
+&lt;/product&gt;</pre></li>
+</ul>
+
+
+<h2>Advantages of XML</h2>
+<ul>
+  <li>XLM files are readable by both computers and humans</li>
+  <li>XML formatted data is resilient to change
+    <ul>
+      <li>It is easy to add new data elements</li>
+      <li>Old programs can process the old information in the new data format</li>
+    </ul></li>
+  <li>In the na&#239;ve format a program might think the new data element is the name of the product:
+<pre>Toaster
+29.95
+General Appliances</pre></li>
+  <li>When using XML it is easy to add new elements:
+<pre>&lt;product&gt;
+   &lt;description&gt;Toaster&lt;/description&gt;
+   &lt;price&gt;29.95&lt;/price&gt;
+   &lt;manufacturer&gt;General Appliances&lt;/manufacturer&gt;
+&lt;/product&gt;</pre></li>
+</ul>
+
+ 
+<h2>Similarities between XML and HTML</h2>
+<ul>
+  <li>Both use tags</li>
+  <li>Tags are enclosed in angle brackets</li>
+  <li>A start-tag is paired with an end-tag that starts with a slash / character</li>
+  <li>HTML example:
+    <pre>&lt;li&gt;A list item&lt;/li&gt;</pre></li>
+  <li>XML example:
+    <pre>&lt;price&gt;29.95&lt;/price&gt;</pre></li>
+</ul>
+
+
+<h2>Differences Between XML and HTML</h2>
+<ul>
+  <li>XML tags are case-sensitive
+    <ul>
+      <li>&lt;LI&gt; is different from &lt;li&gt;</li>
+    </ul>
+  </li>
+  <li>Every XML start-tag must have a matching end-tag</li>
+  <li>If a tag has no end-tag, it must end in /&gt;
+        <pre>&lt;img src=&quot;hamster.jpeg&quot;/&gt;</pre></li>
+  <li>XML attribute values must be enclosed in quotes
+        <pre>&lt;img src=&quot;hamster.jpeg&quot; width=&quot;400&quot; height=&quot;300&quot;/&gt;</pre></li>
+</ul>
+
+
+<h2>Differences Between XML and HTML</h2>
+<ul>
+  <li>HTML describes web documents</li>
+  <li>XML can be used to specify many different kinds of data
+    <ul><li>VRML uses XML syntax to describe virtual reality scenes</li>
+    <li>MathML uses XML syntax to describe mathematical formulas</li>
+    <li>You can use the XML syntax to describe your own data</li></ul></li>
+  <li>XML does not tell you how to display data;
+      <br>it is a convenient format for representing data</li>
+</ul>
+
+
+<h2>Word Processing and Typesetting Systems</h2>
+<img src="images/wysiwyg.png" alt="">
+<br>
+
+
+<h2>Word Processing and Typesetting Systems</h2>
+<ul>
+  <li>A formula specified in T<sub>E</sub>X:
+    <pre>\sum_{i=1}^n i^2</pre></li>
+  <li>The T<sub>E</sub>X program typesets the summation:
+    <br><img src="images/TeX.png" alt=""></li>
+</ul>
+
+
+<h2>The Structure of an XML Document</h2>
+<ul>
+  <li> An XML data set is called a document</li>
+  <li>The document starts with a header
+    <pre>&lt;?xml version="1.0"?&gt;</pre>
+  </li>
+  <li>The data are contained in a root element
+    <pre>&lt;?xml version="1.0"?&gt;
+&lt;invoice&gt;
+   <i>more data</i>
+&lt;/invoice&gt;</pre>
+  </li>
+  <li> The document contains elements and text</li>
+</ul>
+
+
+<h2>The Structure of an XML Document</h2>
+<ul>
+  <li> An XML element has one of two forms
+    <pre>&lt;<i>elementName</i>&gt; <i>content</i> &lt;/<i>elementName</i>&gt;</pre>
+    or
+    <pre>&lt;<i>elementName</i>/&gt;</pre>
+  </li>
+  <li>The <i>content</i>s can be elements or text or both</li>
+</ul>
+
+
+<h2>The Structure of an XML Document</h2>
+<ul>
+  <li>An example of an element with both elements and text (mixed content):
+    <pre>&lt;p&gt;Use XML for &lt;strong&gt;robust&lt;/strong&gt; data formats.&lt;/p&gt;</pre></li>
+  <li>The <tt>p</tt> element contains
+    <ol><li>The text: "Use XML for "</li>
+    <li>A strong child element</li>
+    <li>More text: " data formats."</li></ol>
+  </li>
+  <li>Avoid mixed content for data descriptions (e.g. our product data)</li>
+  <li>Content that consists only of elements is called <i>element content</i></li>
+</ul>
+
+
+<h2>The Structure of an XML Document</h2>
+<ul>
+  <li>An element can have attributes</li>
+  <li>The<tt> a </tt>element in HTML has an<tt> href </tt>attribute
+<pre>&lt;a href=&quot;http://java.sun.com&quot;&gt; ... &lt;/a&gt;</pre>
+  </li>
+  <li>An attribute has a name (such as <tt>href</tt>) and a value </li>
+  <li>The attribute value is enclosed in single or double quotes</li>
+  <li>An element can have multiple attributes
+    <pre>&lt;img src="hamster.jpeg" width="400" height="300"/&gt;</pre></li>
+  <li>An element can have both attributes and content
+    <pre>&lt;a href="http://java.sun.com"&gt;Sun's Java web site&lt;/a&gt;</pre></li>
+</ul>
+
+
+<h2>The Structure of an XML Document</h2>
+<ul>
+  <li>Attribute is intended to provide information <i>about</i> the element content</li>
+  <li>Bad use of attributes:
+    <pre>&lt;product description="Toaster" price="29.95"/&gt;</pre></li>
+  <li>Good use of attributes:
+      <pre>&lt;product&gt;
+   &lt;description&gt;Toaster&lt;/description&gt;
+   &lt;price currency="USD"&gt;29.95&lt;/price&gt;
+&lt;/product&gt;</pre></li>
+  <li>In this case, the <tt>currency</tt> attribute helps interpret the element content:
+    <pre>&lt;price currency="EUR"&gt;29.95&lt;/price&gt;</pre></li>
+</ul>
+
+
+<h2>Self Check</h2>
+<ol>
+<li>Write XML code with a <tt>student</tt> element and child elements <tt>name</tt> and <tt>id</tt> that
+describe you.</li>
+<li>What does your browser do when you load an XML file, such as the <tt>items.xml</tt>
+file that is contained in the companion code for this book?</li>
+<li>Why does HTML use the <tt>src</tt> attribute to specify the source of an image instead
+of &lt;img&gt;hamster.jpeg&lt;/img&gt;?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li><pre>&lt;student&gt;
+&lt;name&gt;James Bond&lt;/name&gt;
+&lt;id&gt;007&lt;/id&gt;
+&lt;/student&gt;</pre></li>
+<li>Most browsers display a tree structure that indicates the nesting of the tags.
+Some browsers display nothing at all because they can't find any HTML tags.</li>
+<li>The text <tt>hamster.jpg</tt> is never displayed, so it should not be a part of the document.
+Instead, the <tt>src</tt> attribute tells the browser where to find the image that
+should be displayed.</li>
+</ol>
+<br>
+
+ 
+
+<h2>Parsing XML Documents</h2>
+<ul>
+  <li> A parser is a program that
+    <ul>
+      <li>Reads a document</li>
+      <li>Checks whether it is syntactically correct</li>
+      <li>Takes some action as it processes the document</li>
+    </ul>
+  </li>
+  <li>There are two kinds of XML parsers
+    <ul>
+      <li>SAX (Simple API to XML)</li>
+      <li>DOM (Document Object Model)</li>
+    </ul>
+  </li>
+</ul>
+
+ 
+<h2>Parsing XML Documents</h2>
+<ul>
+  <li>SAX parser
+    <ul>
+      <li>Event-driven</li>
+      <li>It calls a method you provide to process each construct it encounters</li>
+      <li>More efficient for handling large XML documents</li>
+      <li>Gives you the information in bits and pieces</li>
+    </ul>
+  </li>
+  <li>DOM parser
+    <ul>
+      <li>Builds a tree that represents the document</li>
+      <li>When the parser is done, you can analyze the tree</li>
+      <li>Easier to use for most applications</li>
+      <li>Parse tree gives you a complete overview of the data</li>
+      <li>DOM standard defines interfaces and methods to analyze and
+          <br>modify the tree structure that represents an XML document</li>
+    </ul>
+  </li>
+</ul>
+
+ 
+<h2>JAXP </h2>
+<ul>
+  <li>Stands for <i>Java API for XML Processing</i></li>
+  <li>For creating, reading, and writing XML documents</li>
+  <li>Specification defined by Sun Microsystems</li>
+  <li>Provides a standard mechanism for DOM parsers to read and create documents</li>
+</ul>
+ 
+
+<h2>Parsing XML Documents </h2>
+<ul>
+  <li> <tt>Document</tt> interface describes the tree structure of an XML document</li>
+  <li>A <tt>DocumentBuilder</tt> can generate an object of a class that implements
+    <tt>Document</tt> interface</li>
+  <li>Get a <tt>DocumentBuilder</tt> by calling the static <tt>newInstance</tt>
+    method of <tt>DocumentBuilderFactory</tt></li>
+  <li>Call <tt>newDocumentBuilder</tt> method of the factory to get a <tt>DocumentBuilder</tt>
+<pre>DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+DocumentBuilder builder = factory.newDocumentBuilder();
+</pre></li>
+</ul>
+ 
+<h2>Parsing XML Documents </h2>
+<ul>
+  <li> To read a document from a file
+    <pre>String fileName = . . . ;
+File f = new File(fileName);
+Document doc = builder.parse(f);</pre>
+  </li>
+<li>To read a document from a URL on the Internet
+<pre>String urlName = . . . ;
+URL u = new URL(urlName);
+Document doc = builder.parse(u);
+</pre></li>
+<li>To read from an input stream
+<pre>InputStream in = . . . ;
+Document doc = builder.parse(in);
+</pre></li>
+</ul>
+
+ 
+<h2>Parsing XML Documents </h2>
+<ul>
+  <li>You can inspect or modify the document</li>
+  <li>Easiest way of inspecting a document is <i>XPath</i> syntax</li>
+  <li>An XPath describes a node or set of nodes</li>
+  <li>XPath uses a syntax similar to directory paths</li>
+</ul>
+ 
+
+<h2>An XML Document</h2>
+<img src="images/xml.png" alt="">
+
+
+<h2>The Tree View of XML Document</h2>
+<img src="images/tree_view.png" alt="">
+
+
+<h2>Parsing XML Documents </h2>
+<ul>
+  <li>Consider the following XPath, applied to the document in Figure 4:
+    <pre>/items/item[1]/quantity</pre>
+    it selects the quantity of the first item (the value 8)</li>
+  <li>In XPath, array positions start with 1</li>
+  <li>Similarly, you can get the price of the second product as
+    <pre>/items/item[2]/product/price</pre>
+</ul>
+
+
+<h2>XPath Syntax Summary</h2>
+<table align="center" border="1" cellspacing="0" cellpadding="0" width="80%">
+<tr align="center"><th align="center">Syntax Element</th> <th align="center">Purpose</th> <th align="center">Example</th></tr>
+<tr align="center"><td align="center"><i>name</i></td> <td align="center">Matches an element</td> <td align="center"><tt>item</tt></td></tr>
+<tr align="center"><td align="center">/</td> <td align="center">Separates elements</td> <td align="center"><tt>/items/item</tt></td></tr>
+<tr align="center"><td align="center">[<i>n</i>]</td> <td align="center">Selects a value from a set</td> <td align="center"><tt>/items/item[1]</tt></td></tr>
+<tr align="center"><td align="center">@<i>name</i></td> <td align="center">Matches an attribute</td> <td align="center"><tt>price/@currency</tt></td></tr>
+<tr align="center"><td align="center">*</td> <td align="center">Matches anything</td> <td align="center"><tt>/items/*[1]</tt></td></tr>
+<tr align="center"><td align="center"><tt>count</tt></td> <td align="center">Counts matches</td> <td align="center"><tt>count(/items/item)</tt></td></tr>
+<tr align="center"><td align="center"><tt>name</tt></td> <td align="center">The name of a match</td> <td align="center"><tt>name(/items/*[1])</tt></td></tr>
+</table>
+
+
+<h2>Parsing XML Documents </h2>
+<ul>
+  <li>To get the number of items (2), use the XPath expression:
+    <pre>count(/items/item)</pre></li>
+  <li>The total number of children (2) can be obtained as:
+    <pre>count(/items/*)</pre></li>
+  <li>To select attributes, use an @ followed by the name of the attribute:
+    <pre>/items/item[2]/product/price/@currency</pre></li>
+  <li>To find out the name of a child in a document with variable/unknown structure:
+    <pre>name(/items/item[1]/*[1])</pre>
+    The result is the name of the first child of the first item, or <tt>product</tt></li>
+</ul>
+
+
+<h2>Parsing XML Documents </h2>
+<ul>
+  <li>To evaluate an XPath expression in Java, create an XPath object
+    <pre>XPathFactory xpfactory = XPathFactory.newInstance();
+XPath path = xpfactory.newXPath();</pre></li>
+  <li>Then call the <tt>evaluate</tt> method
+    <pre>String result = path.evaluate(expression, doc)</pre>
+    <ul><li><tt>expression</tt> is an XPath expression</li>
+    <li><tt>doc</tt> is the <tt>Document</tt> object that represents the XML document<br>&nbsp;</li></ul></li>
+  <li>For example,
+    <pre>String result = path.evaluate("/items/item[2]/product/price", doc)</pre>
+    sets result to the string "<tt>19.95</tt>".</li>
+</ul>
+
+
+<h2>Parsing XML Documents: An Example</h2>
+<ul>
+  <li><tt>ItemListParser</tt> parses an XML document with a list of product descriptions
+    <ul><li>Uses the <tt>LineItem</tt> and <tt>Product</tt></li></ul></li>
+  <li><tt>parse</tt> takes the file name and returns an array list of <tt>LineItem</tt> objects:
+    <pre>ItemListParser parser = new ItemListParser();
+ArrayList&lt;LineItem&gt; items = parser.parse("items.xml");</pre></li>
+  <li><tt>ItemListParser</tt> translates each XML element into an object of the corresponding Java class</li>
+</ul>
+
+
+<h2>Parsing XML Documents: An Example</h2>
+<ul>
+  <li>We first get the number of items:
+    <pre>int itemCount = Integer.parseInt(path.evaluate(
+      "count(/items/item)", doc));</pre></li>
+  <li>For each item element, we gather the product data and construct a <tt>Product</tt> object:
+    <pre>String description = path.evaluate(
+      "/items/item[" + i + "]/product/description", doc);
+double price = Double.parseDouble(path.evaluate(
+      "/items/item[" + i + "]/product/price", doc));
+Product pr = new Product(description, price);</pre></li>
+  <li>Then we construct a <tt>LineItem</tt> object, and add it to the items array list</li>
+</ul>
+
+ 
+<h2>File ItemListParser.java</h2>
+<iframe src="code/parser/ItemListParser.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File ItemListParserTester.java</h2>
+<iframe src="code/parser/ItemListParserTester.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+<br>Output
+<pre>   Ink Jet Refill Kit 29.95 8 239.6
+   4-port Mini Hub 19.95 4 79.8</pre> 
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="4">What is the result of evaluating the XPath statement <tt>/items/item[1]/quantity</tt>
+in the XML document of Figure 4?</li>
+<li>Which XPath statement yields the name of the root element of any XML
+document?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="4">8.</li>
+<li><tt>name(/*[1])</tt>.</li>
+</ol>
+<br>
+
+
+<h2>Grammars, Parsers, and Compilers</h2>
+<img src="images/parse_tree.png" alt="">
+<br>
+
+
+<h2>Grammars, Parsers, and Compilers</h2>
+<img src="images/expression.png" alt="">
+<br>
+
+
+<h2>Creating XML Documents</h2>
+<ul>
+  <li> We can build a <tt>Document</tt> object in a Java program and then save
+    it as an XML document</li>
+  <li>We need a <tt>DocumentBuilder</tt> object to create a new, empty document
+    <pre>DocumentBuilderFactory factory =
+      DocumentBuilderFactory.newInstance();
+DocumentBuilder builder = factory.newDocumentBuilder();
+Document doc = builder.newDocument();  // An empty document
+</pre>
+  </li>
+  <li>The <tt>Document</tt> class has methods to create elements and text nodes</li>
+</ul>
+
+
+<h2>Creating XML Documents</h2>
+<ul>
+  <li>To create an element use <tt>createElement</tt> method and pass it a tag
+    <pre>Element priceElement = doc.createElement("price");</pre></li>
+  <li>Use <tt>setAttribute</tt> method to add an attribute to the tag
+    <pre>priceElement.setAttribute(&quot;currency&quot;, &quot;USD&quot;);</pre></li>
+  <li>To create a text node, use <tt>createTextNode</tt> and pass it a string
+    <pre>Text textNode = doc.createTextNode("29.95");</pre></li>
+  <li>Then add the text node to the element:
+    <pre>priceElement.appendChild(textNode);</pre></li>
+</ul>
+ 
+
+<h2>DOM Interfaces for XML Document Nodes</h2>
+<img src="images/dom.png" alt="">
+<br>
+
+
+<h2>Creating XML Documents</h2>
+<ul>
+  <li>To construct the tree structure of a document, it is a good idea to use a set of helper methods</li>
+  <li>Helper method to create an element with text:
+    <pre>private Element createTextElement(String name, String text)
+{
+   Text t = doc.createTextNode(text);
+   Element e = doc.createElement(name);
+   e.appendChild(t);
+   return e;
+}</pre></li>
+  <li>To construct a price element:
+    <pre>Element priceElement = createTextElement("price", "29.95");</pre></li>
+</ul>
+
+
+<h2>Creating XML Documents</h2>
+<ul>
+  <li>Helper method to create a product element from a <tt>Product</tt> object:
+     <pre>private Element createProduct(Product p)
+{
+   Element e = doc.createElement("product");
+   e.appendChild(createTextElement("description", p.getDescription()));
+   e.appendChild(createTextElement("price", "" + p.getPrice()));
+   return e;
+}</pre></li>
+  <li><tt>createProduct</tt> is called from <tt>createItem</tt>:
+    <pre>private Element createItem(LineItem anItem)
+{
+   Element e = doc.createElement("item");
+   e.appendChild(createProduct(anItem.getProduct()));
+   e.appendChild(createTextElement(
+         "quantity", "" + anItem.getQuantity()));
+   return e;
+}</pre></li>
+</ul>
+
+
+<h2>Creating XML Documents</h2>
+<ul>
+  <li>A helper method
+     <pre>private Element createItems(ArrayList&lt;LineItem&gt; items)</pre>
+     is implemented in the same way<br>&nbsp;</li>
+  <li>Build the document as follows:
+<pre>ArrayList&lt;LineItem&gt; items = . . .;
+doc = builder.newDocument();
+Element root = createItems(items);
+doc.appendChild(root);</pre></li>
+</ul>
+
+
+<h2>Creating XML Documents</h2>
+<ul>
+  <li>There are several ways of writing an XML document</li>
+  <li>We use the <tt>LSSerializer</tt> interface</li>
+  <li>Obtain an LSSerializer with the following magic incantation:
+     <pre>DOMImplementation impl = doc.getImplementation();
+DOMImplementationLS implLS
+      = (DOMImplementationLS) impl.getFeature("LS", "3.0");
+LSSerializer ser = implLS.createLSSerializer();</pre></li>
+  <li>Then you simply use the <tt>writeToString</tt> method:
+    <pre>String str = ser.writeToString(doc);</pre></li>
+  <li>The <tt>LSSerializer</tt> produces an XML document without spaces or line breaks</li>
+</ul>
+
+ 
+<h2>File ItemListBuilder.java</h2>
+<iframe src="code/builder/ItemListBuilder.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File ItemListBuilderTester.java</h2>
+<iframe src="code/builder/ItemListBuilderTester.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Output</h2>
+<pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;items&gt;&lt;item&gt;&lt;product&gt;
+&lt;description&gt;Toaster&lt;/description&gt;&lt;price&gt;29.95&lt;/price&gt;&lt;/product&gt;
+&lt;quantity&gt;3&lt;/quantity&gt;&lt;/item&gt;&lt;item&gt;&lt;product&gt;&lt;description&gt;Hair dryer
+&lt;/description&gt;&lt;price&gt;24.95&lt;/price&gt;&lt;/product&gt;&lt;quantity&gt;1&lt;/quantity&gt;
+&lt;/item&gt;&lt;/items&gt;</pre>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="6">Suppose you need to construct a <tt>Document</tt> object that represents an XML document
+other than an item list. Which methods from the <tt>ItemListBuilder</tt> class can
+you reuse?</li>
+<li>How would you write a document to the file <tt>output.xml</tt>?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="6">The <tt>createTextElement</tt> method is useful for creating other documents.</li>
+<li>First construct a string, as described, and then use a <tt>PrintWriter</tt> to save the
+string to a file.</li>
+</ol>
+<br>
+
+
+<h2>Validating XML Documents</h2>
+<ul>
+  <li>We need to specify rules for XML documents of a particular type</li>
+  <li>There are several mechanisms for this purpose</li>
+  <li>The oldest and simplest mechanism is a Document Type Definition (DTD)</li>
+</ul>
+
+
+<h2>Document Type Definitions</h2>
+<ul>
+  <li> A DTD is a set of rules for correctly formed documents of a particular
+    type
+    <ul>
+      <li>Describes the valid attributes for each element type</li>
+      <li>Describes the valid child elements for each element type</li>
+    </ul>
+  </li>
+  <li>Valid child elements are described by an <tt>ELEMENT</tt> rule
+    <pre>&lt;!ELEMENT items (item*)&gt;
+</pre>
+  </li>
+  <li>The <tt>items</tt> element can have 0 or more item elements</li>
+  <li>Definition of an <tt>item</tt> node
+    <pre>&lt;! ELEMENT item (product, quantity)&gt;</pre>
+  </li>
+  <li>Children of the <tt>item</tt> node must be a <tt>product</tt> node followed by a <tt>quantity</tt> node</li>
+</ul>
+
+ 
+<h2>Document Type Definitions</h2>
+<ul>
+  <li>Definition of <tt>product</tt> node
+    <pre>&lt;! ELEMENT product (description, price)&gt;</pre>
+  </li>
+  <li>The other nodes
+    <pre>&lt;!ELEMENT quantity (#PCDATA)&gt;
+&lt;!ELEMENT description (#PCDATA)&gt;
+&lt;!ELEMENT price (#PCDATA)&gt;
+</pre>
+  </li>
+  <li><tt>#PCDATA</tt> refers to text, called "parsed character data" in XML terminology
+    <ul>
+      <li>Can contain any characters</li>
+      <li>Special characters have to be replaced when they occur in character data</li>
+    </ul>
+  </li>
+</ul>
+
+ 
+<h2>Replacements for Special Characters</h2>
+<table align="center" border="1" cellspacing="0" cellpadding="0" width="60%">
+<tr align="center">  <th align="center">Character</th> <th align="center">Encoding</th> <th align="center">Name</th></tr>
+<tr align="center"><td align="center">&lt;</td> <td align="center"><tt>&amp;lt;</tt></td> <td align="center">Less than (left angle bracket)</td></tr>
+<tr align="center"><td align="center">&gt;</td> <td align="center"><tt>&amp;gt;</tt></td> <td align="center">Greater than (right angle bracket)</td></tr>
+<tr align="center"><td align="center">&amp;</td> <td align="center"><tt>&amp;amp;</tt></td> <td align="center">Ampersand</td></tr>
+<tr align="center"><td align="center">'</td> <td align="center"><tt>&amp;apos;</tt></td> <td align="center">Apostrophe</td></tr>
+<tr align="center"><td align="center">"</td> <td align="center"><tt>&amp;quot;</tt></td> <td align="center">Quotation mark</td></tr>
+</table>
+
+
+ 
+<h2>DTD for Item List</h2>
+<pre>&lt;!ELEMENT items (item)*&gt;
+&lt;!ELEMENT item (product, quantity)&gt;
+&lt;!ELEMENT product (description, price)&gt;
+&lt;!ELEMENT quantity (#PCDATA)&gt;
+&lt;!ELEMENT description (#PCDATA)&gt;
+&lt;!ELEMENT price (#PCDATA)&gt;
+</pre>
+
+
+<h2>Regular Expressions for Element Content</h2>
+<table align="center" border="1" cellspacing="0" cellpadding="0" width="90%">
+  <tr><th align="center">Rule Description</th> <th align="center">Element Content</th></tr>
+<tr><td align="center"><tt>EMPTY</tt></td> <td align="center">No children allowed</td></tr>
+<tr><td align="center"><tt>(E*)</tt></td> <td align="center">Any sequence of 0 or more elements <em>E</em></td></tr>
+<tr><td align="center"><tt>(E+)</tt></td> <td align="center">Any sequence of 1 or more elements <em>E</em></td></tr>
+<tr><td align="center"><tt>(E?)</tt></td> <td align="center">Optional element <i>E</i> (0 or 1 occurrences allowed)</td></tr>
+<tr><td align="center"><tt>(E1, E2, . . . )</tt></td> <td align="center">Element <em>E<sub>1</sub></em>, followed by <em>E<sub>2</sub></em>, . . .</td></tr>
+<tr><td align="center"><tt>(E1 | E2 | . . . )</tt></td> <td align="center">Element <em>E<sub>1</sub></em> or <em>E<sub>2</sub></em> or . . .</td></tr>
+<tr><td align="center"><tt>(#PCDATA)</tt></td> <td align="center">Text only</td></tr>
+<tr><td align="center"><tt>(#PCDATA | E1 | E2 . . . )*</tt></td> <td align="center">Any sequence of text and elements <em>E<sub>1</sub></em>, <em>E<sub>2</sub></em>, . . . , in any order</td></tr>
+<tr><td align="center"><tt>ANY</tt></td> <td align="center">Any children allowed</td></tr>
+</table>
+
+
+<h2>Document Type Definitions</h2>
+<ul>
+  <li>The HTML DTD defines the <tt>img</tt> element to be <tt>EMPTY</tt>
+    <ul><li>An image has only attributes</li></ul></li>
+  <li>More interesting child rules can be formed with the regular expression operations
+      <pre>(* + ? , |)</pre></li>
+</ul>
+
+
+<h2>DTD Regular Expression Operations</h2>
+<img src="images/regular_expressions.png" alt="">
+<br>
+
+
+<h2>DTD Regular Expression Operations</h2>
+<ul>
+  <li>For example, <pre>&lt;!ELEMENT section (title, (paragraph | (image, title?))+)&gt;</pre>
+    defines an element section whose children are:
+    <ol><li>A <tt>title</tt> element</li>
+    <li>A sequence of one or more of the following:
+      <ul><li><tt>paragraph</tt> elements</li>
+      <li><tt>image</tt> elements followed by optional <tt>title</tt> elements<br>&nbsp;</li></ul></li></ol></li>
+  <li>Thus, he following is not valid
+<pre>&lt;section&gt;
+   &lt;paragraph/&gt;
+   &lt;paragraph/&gt;
+   &lt;title/&gt;
+&lt;/section&gt;</pre>
+because there is no starting <tt>title</tt>, and the <tt>title</tt> at the end doesn't follow an <tt>image</tt></li>
+</ul>
+ 
+
+<h2>Document Type Definitions</h2>
+<ul>
+  <li>A DTD gives you control over the allowed attributes of an element
+<pre>&lt;!ATTLIST <i>Element Attribute Type Default&gt;</i></pre>
+  </li>
+  <li>Type can be any sequence of character data specified as <tt>CDATA</tt></li>
+  <li>There is no practical difference between the <tt>CDATA</tt> and <tt>#PCDATA</tt></li>
+  <li>Use <tt>CDATA</tt> in attribute declarations</li>
+  <li><tt>#PCDATA</tt> in element declarations</li>
+  <li>You can also specify a finite number of choices
+    <pre>&lt;!ATTLIST price currency (USD | EUR | JPY ) #REQUIRED &gt;</pre></li>
+  <li>You can use letters, numbers, and the characters - _ for the attribute values</li>
+</ul>
+
+ 
+<h2>Common Attribute Types</h2>
+<table align="center" border="1" cellspacing="0" cellpadding="0" width="50%">
+<tr><th align="center">Type Description</th> <th align="center">Attribute Type</th></tr>
+<tr><td align="center"><tt>CDATA</tt></td> <td align="center">Any character data</td></tr>
+<tr><td align="center">(<i>V<sub>1</sub></i> | <i>V<sub>2</sub></i> | . . . )</td> <td align="center">One of <i>V<sub>1</sub></i>, <i>V<sub>2</sub></i>, . . .</td></tr>
+</table>
+
+ 
+<h2>Attribute Defaults</h2>
+<table align="center" border="1" cellspacing="0" cellpadding="0" width="80%">
+<tr><th align="center">Default Declaration</th> <th align="center">Explanation</th></tr>
+<tr><td align="center"><tt>#REQUIRED</tt></td> <td align="center">Attribute is required</td></tr>
+<tr><td align="center"><tt>#IMPLIED</tt></td> <td align="center">Attribute is optional</td></tr>
+<tr><td align="center"><em>V</em></td> <td align="center">Default attribute, to be used if attribute is not specified</td></tr>
+<tr><td align="center"><tt>#FIXED</tt> <em>V</em></td> <td align="center">Attribute must either be unspecified or contain this value</td></tr>
+</table>
+
+
+ 
+<h2>Document Type Definitions</h2>
+<ul>
+  <li><tt>#IMPLIED</tt> keyword means you can supply an attribute or not.
+    <pre>&lt;!ATTLIST price currency CDATA #IMPLIED &gt;</pre></li>
+  <li>If you omit the attribute, the application processing the XML data implicitly
+    assumes some default value</li>
+  <li>You can specify a default to be used if the attribute is not specified
+    <pre>&lt;!ATTLIST price currency CDATA "USD" &gt;</pre></li>
+  <li>To state that an attribute can only be identical to a particular value:
+    <pre>&lt;!ATTLIST price currency CDATA #FIXED "USD"&gt;</pre></li>
+</ul>
+ 
+
+<h2>Specifying a DTD in an XML Document</h2>
+<ul>
+  <li>An XML document can reference a DTD in one of two ways
+    <ol><li>The document may contain the DTD</li>
+    <li>The document may refer to a DTD stored elsewhere</li></ol></li>
+  <li>A DTD is introduced with the <tt>DOCTYPE</tt> declaration</li>
+  <li>If the document contains its DTD, the declaration looks like this:
+    <pre>&lt;!DOCTYPE <i>rootElement</i> [ <i>rules</i> ]&gt;</pre></li>
+</ul>
+
+ 
+<h2>Example: An Item List</h2>
+<pre>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!DOCTYPE items [
+
+&lt;!ELEMENT items (item*)&gt;
+&lt;!ELEMENT item (product, quantity)&gt;
+&lt;!ELEMENT product (description, price)&gt;
+&lt;!ELEMENT quantity (#PCDATA)&gt;
+&lt;!ELEMENT description (#PCDATA)&gt;
+&lt;!ELEMENT price (#PCDATA)&gt;
+
+]&gt;
+&lt;items&gt;
+   &lt;item&gt;
+      &lt;product&gt;
+         &lt;description&gt;Ink Jet Refill Kit&lt;/description&gt;
+         &lt;price&gt;29.95&lt;/price&gt;
+      &lt;/product&gt;
+      &lt;quantity&gt;8&lt;/quantity&gt;
+   &lt;/item&gt;
+   &lt;item&gt;
+      &lt;product&gt;
+         &lt;description&gt;4-port Mini Hub&lt;/description&gt;
+         &lt;price&gt;19.95&lt;/price&gt;
+      &lt;/product&gt;
+      &lt;quantity&gt;4&lt;/quantity&gt;
+   &lt;/item&gt;
+&lt;/items&gt;</pre>
+
+ 
+<h2>Specifying a DTD in an XML Document</h2>
+<ul>
+  <li>If the DTD is more complex, it is better to store it outside the XML document
+    <ul><li>Use the <tt>SYSTEM</tt> keyword
+      <PRE>&lt;!DOCTYPE items SYSTEM &quot;items.dtd&quot; &gt;</PRE></li></ul></li>
+  <li>The resource might be an URL anywhere on the Web:
+    <pre>&lt;!DOCTYPE items SYSTEM &quot;http://www.mycompany.com/dtds/items.dtd&quot;&gt;</pre></li>
+  <li>The <tt>DOCTYPE</tt> declaration can contain a <tt>PUBLIC</tt> keyword
+    <pre>&lt;!DOCTYPE faces-config PUBLIC
+   "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.0//EN"
+   "http://java.sun.com/dtd/web-facesconfig_1_0.dtd"&gt;</pre>
+If the public identifier is familiar, the program parsing the document need not spend time retrieving the DTD</li>
+</ul>
+ 
+
+<h2>Parsing and Validation</h2>
+<ul>
+  <li>When your XML document has a DTD, you can request validation when parsing</li>
+  <li>The parser will check that all child elements and attributes conform<br>
+    to the <tt>ELEMENT</tt> and <tt>ATTLIST</tt> rules in the DTD</li>
+  <li>The parser reports an error if the document is invalid</li>
+  <li>Use the <tt>setValidating</tt> method of the <tt>DocumentBuilderFactory<br>
+    </tt>before calling <tt>newDocumentBuilder</tt> method
+    <pre>DocumentBuilderFactory factory =
+      DocumentBuilderFactory.newInstance();
+factory.setValidating(true);
+DocumentBuilder builder = factory.newDocumentBuilder();
+Document doc = builder.parse(. . .);</pre>
+  </li>
+</ul>
+ 
+<h2>Parsing with Document Type Definitions</h2>
+<ul>
+  <li>When you parse an XML file with a DTD, tell the parser to ignore white space
+    <pre>factory.setValidating(true);
+factory.setIgnoringElementContentWhitespace(true);</pre></li>
+  <li>If the parser has access to a DTD, it can fill in defaults for attributes</li>
+  <li>For example, suppose a DTD defines a currency attribute for a price element:
+    <pre>&lt;!ATTLIST price currency CDATA "USD"&gt;</pre></li>
+  <li>If a document contains a <tt>price</tt> element without a <tt>currency</tt> attribute, the parser can supply the default:
+    <pre>String attributeValue = priceElement.getAttribute("currency");
+   // Gets "USD" if no currency specified</pre></li>
+</ul>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="8">How can a DTD specify that the <tt>quantity</tt> element in an <tt>item</tt> is optional?</li>
+<li>How can a DTD specify that a <tt>product</tt> element can contain a <tt>description</tt> and a <tt>price</tt> element, in any order?</li>
+<li>How can a DTD specify that the <tt>description</tt> element has an optional <tt>attribute</tt> language?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="8"><tt>&lt;!ELEMENT item (product, quantity?)&gt;</tt></li>
+<li><tt>&lt;!ELEMENT product ((description, price) | (price, description))&gt;</tt></li>
+<li><tt>&lt;!ATTLIST description language CDATA #IMPLIED&gt;</tt></li>
+</ol>
+<br>
+
+</body>
+</html> 

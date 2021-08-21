@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 13</title>
+</head>
+
+<body>
+<div onclick="document.location='slide057.html'">
+<center><small><a href="slide055.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide057.html">next</a></small></center>
+<hr></div>
+<h2>The <tt>Object.clone</tt> method</h2>
+<ul>
+  <li>Creates <i>shallow copies</i>
+      <br><img src="images/shallow-copy.png" alt=""></li>
+  <li>Does not systematically clone all subobjects</li>
+  <li>Must be used with caution</li>
+  <li>It is declared as <tt>protected</tt>; prevents from accidentally calling <tt>x.clone()</tt> if the class to which <tt>x</tt> belongs hasn't redefined <tt>clone</tt> to be <tt>public</tt></li>
+  <li>You should override the <tt>clone</tt> method with care (see Advanced Topic 13.6)</li>
+</ul>
+
+
+<div onclick="document.location='slide057.html'"><hr>
+<center><small><a href="slide055.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide057.html">next</a></small></center>
+</div>
+</body>
+</html>

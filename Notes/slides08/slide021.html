@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Horstmann Chapter 8</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+
+<body>
+<div onclick="document.location='slide022.html'">
+<center><small><a href="slide020.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide022.html">next</a></small></center>
+</div><hr>
+<h2>Auto-boxing</h2>
+<ul>
+  <li>Auto-boxing: Starting with Java 5.0, conversion between primitive
+types and the corresponding
+wrapper classes is automatic.<br>
+    <pre>Double d = 29.95; // auto-boxing; same as Double d = new Double(29.95);<br>double x = d; // auto-unboxing; same as double x = d.doubleValue();</pre>
+  </li>
+  <li>Auto-boxing even works inside arithmetic expressions
+    <pre>Double e = d + 1;</pre>
+Means:
+    <ul>
+      <li>auto-unbox <tt>d</tt> into a <tt>double</tt></li>
+      <li>add 1</li>
+      <li>auto-box the result into a new <tt>Double</tt></li>
+      <li>store a reference to the newly created wrapper object in <tt>e</tt></li>
+    </ul>
+  </li>
+</ul>
+<br>
+
+<hr>
+<div onclick="document.location='slide022.html'">
+<center><small><a href="slide020.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide022.html">next</a></small></center>
+</div>
+</body>
+</html>

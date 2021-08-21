@@ -1,0 +1,220 @@
+<pre><tt><b><font color="#006cb8">001: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">awt</font><font color="#000000">.</font><font color="#000000">BorderLayout</font><font color="#000000">;</font>
+<b><font color="#006cb8">002: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">awt</font><font color="#000000">.</font><font color="#000000">Font</font><font color="#000000">;</font>
+<b><font color="#006cb8">003: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">awt</font><font color="#000000">.</font><font color="#000000">GridLayout</font><font color="#000000">;</font>
+<b><font color="#006cb8">004: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">awt</font><font color="#000000">.</font><font color="#000000">event</font><font color="#000000">.</font><font color="#000000">ActionEvent</font><font color="#000000">;</font>
+<b><font color="#006cb8">005: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">awt</font><font color="#000000">.</font><font color="#000000">event</font><font color="#000000">.</font><font color="#000000">ActionListener</font><font color="#000000">;</font>
+<b><font color="#006cb8">006: </font></b><font color="#000000">import</font> <font color="#000000">javax</font><font color="#000000">.</font><font color="#000000">swing</font><font color="#000000">.</font><font color="#000000">ButtonGroup</font><font color="#000000">;</font>
+<b><font color="#006cb8">007: </font></b><font color="#000000">import</font> <font color="#000000">javax</font><font color="#000000">.</font><font color="#000000">swing</font><font color="#000000">.</font><font color="#000000">JButton</font><font color="#000000">;</font>
+<b><font color="#006cb8">008: </font></b><font color="#000000">import</font> <font color="#000000">javax</font><font color="#000000">.</font><font color="#000000">swing</font><font color="#000000">.</font><font color="#000000">JCheckBox</font><font color="#000000">;</font>
+<b><font color="#006cb8">009: </font></b><font color="#000000">import</font> <font color="#000000">javax</font><font color="#000000">.</font><font color="#000000">swing</font><font color="#000000">.</font><font color="#000000">JComboBox</font><font color="#000000">;</font>
+<b><font color="#006cb8">010: </font></b><font color="#000000">import</font> <font color="#000000">javax</font><font color="#000000">.</font><font color="#000000">swing</font><font color="#000000">.</font><font color="#000000">JFrame</font><font color="#000000">;</font>
+<b><font color="#006cb8">011: </font></b><font color="#000000">import</font> <font color="#000000">javax</font><font color="#000000">.</font><font color="#000000">swing</font><font color="#000000">.</font><font color="#000000">JLabel</font><font color="#000000">;</font>
+<b><font color="#006cb8">012: </font></b><font color="#000000">import</font> <font color="#000000">javax</font><font color="#000000">.</font><font color="#000000">swing</font><font color="#000000">.</font><font color="#000000">JMenu</font><font color="#000000">;</font>
+<b><font color="#006cb8">013: </font></b><font color="#000000">import</font> <font color="#000000">javax</font><font color="#000000">.</font><font color="#000000">swing</font><font color="#000000">.</font><font color="#000000">JMenuBar</font><font color="#000000">;</font>
+<b><font color="#006cb8">014: </font></b><font color="#000000">import</font> <font color="#000000">javax</font><font color="#000000">.</font><font color="#000000">swing</font><font color="#000000">.</font><font color="#000000">JMenuItem</font><font color="#000000">;</font>
+<b><font color="#006cb8">015: </font></b><font color="#000000">import</font> <font color="#000000">javax</font><font color="#000000">.</font><font color="#000000">swing</font><font color="#000000">.</font><font color="#000000">JPanel</font><font color="#000000">;</font>
+<b><font color="#006cb8">016: </font></b><font color="#000000">import</font> <font color="#000000">javax</font><font color="#000000">.</font><font color="#000000">swing</font><font color="#000000">.</font><font color="#000000">JRadioButton</font><font color="#000000">;</font>
+<b><font color="#006cb8">017: </font></b><font color="#000000">import</font> <font color="#000000">javax</font><font color="#000000">.</font><font color="#000000">swing</font><font color="#000000">.</font><font color="#000000">border</font><font color="#000000">.</font><font color="#000000">EtchedBorder</font><font color="#000000">;</font>
+<b><font color="#006cb8">018: </font></b><font color="#000000">import</font> <font color="#000000">javax</font><font color="#000000">.</font><font color="#000000">swing</font><font color="#000000">.</font><font color="#000000">border</font><font color="#000000">.</font><font color="#000000">TitledBorder</font><font color="#000000">;</font>
+<b><font color="#006cb8">019: </font></b>
+<b><font color="#006cb8">020: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">021: </font></b><font color="#7a9ecd">   This frame has a menu with commands to change the font </font>
+<b><font color="#006cb8">022: </font></b><font color="#7a9ecd">   of a text sample.</font>
+<b><font color="#006cb8">023: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">024: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> <font color="#000000">MenuFrame</font> <font color="#d05b76">extends</font> <font color="#000000">JFrame</font>
+<b><font color="#006cb8">025: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">026: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">027: </font></b><font color="#7a9ecd">      Constructs the frame.</font>
+<b><font color="#006cb8">028: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">029: </font></b>   <font color="#d05b76">public</font> <font color="#000000">MenuFrame</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">030: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">031: </font></b>      <font color="#7a9ecd">// Construct text sample     </font>
+<b><font color="#006cb8">032: </font></b>      <font color="#000000">sampleField</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">JLabel</font><font color="#000000">(</font><font color="#00a99d">"Big Java"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">033: </font></b>      <font color="#000000">add</font><font color="#000000">(</font><font color="#000000">sampleField</font><font color="#000000">,</font> <font color="#000000">BorderLayout</font><font color="#000000">.</font><font color="#000000">CENTER</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">034: </font></b>
+<b><font color="#006cb8">035: </font></b>      <font color="#7a9ecd">// Construct menu      </font>
+<b><font color="#006cb8">036: </font></b>      <font color="#000000">JMenuBar</font> <font color="#000000">menuBar</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">JMenuBar</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>     
+<b><font color="#006cb8">037: </font></b>      <font color="#000000">setJMenuBar</font><font color="#000000">(</font><font color="#000000">menuBar</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">038: </font></b>      <font color="#000000">menuBar</font><font color="#000000">.</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">createFileMenu</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">039: </font></b>      <font color="#000000">menuBar</font><font color="#000000">.</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">createFontMenu</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">040: </font></b>
+<b><font color="#006cb8">041: </font></b>      <font color="#000000">facename</font> <font color="#000000">=</font> <font color="#00a99d">"Serif"</font><font color="#000000">;</font>
+<b><font color="#006cb8">042: </font></b>      <font color="#000000">fontsize</font> <font color="#000000">=</font> <font color="#89c976">24</font><font color="#000000">;</font>
+<b><font color="#006cb8">043: </font></b>      <font color="#000000">fontstyle</font> <font color="#000000">=</font> <font color="#000000">Font</font><font color="#000000">.</font><font color="#000000">PLAIN</font><font color="#000000">;</font>
+<b><font color="#006cb8">044: </font></b>
+<b><font color="#006cb8">045: </font></b>      <font color="#000000">setSampleFont</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">046: </font></b>      <font color="#000000">setSize</font><font color="#000000">(</font><font color="#000000">FRAME_WIDTH</font><font color="#000000">,</font> <font color="#000000">FRAME_HEIGHT</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">047: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">048: </font></b>
+<b><font color="#006cb8">049: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">050: </font></b><font color="#7a9ecd">      Creates the File menu.</font>
+<b><font color="#006cb8">051: </font></b><font color="#7a9ecd">      @return the menu</font>
+<b><font color="#006cb8">052: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">053: </font></b>   <font color="#d05b76">public</font> <font color="#000000">JMenu</font> <font color="#000000">createFileMenu</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">054: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">055: </font></b>      <font color="#000000">JMenu</font> <font color="#000000">menu</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">JMenu</font><font color="#000000">(</font><font color="#00a99d">"File"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">056: </font></b>      <font color="#000000">menu</font><font color="#000000">.</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">createFileExitItem</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">057: </font></b>      <font color="#d05b76">return</font> <font color="#000000">menu</font><font color="#000000">;</font>
+<b><font color="#006cb8">058: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">059: </font></b>
+<b><font color="#006cb8">060: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">061: </font></b><font color="#7a9ecd">      Creates the File-&gt;Exit menu item and sets its action listener.</font>
+<b><font color="#006cb8">062: </font></b><font color="#7a9ecd">      @return the menu item</font>
+<b><font color="#006cb8">063: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">064: </font></b>   <font color="#d05b76">public</font> <font color="#000000">JMenuItem</font> <font color="#000000">createFileExitItem</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">065: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">066: </font></b>      <font color="#000000">JMenuItem</font> <font color="#000000">item</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">JMenuItem</font><font color="#000000">(</font><font color="#00a99d">"Exit"</font><font color="#000000">)</font><font color="#000000">;</font>      
+<b><font color="#006cb8">067: </font></b>      <font color="#d05b76">class</font> <font color="#000000">MenuItemListener</font> <font color="#d05b76">implements</font> <font color="#000000">ActionListener</font>
+<b><font color="#006cb8">068: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">069: </font></b>         <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">actionPerformed</font><font color="#000000">(</font><font color="#000000">ActionEvent</font> <font color="#000000">event</font><font color="#000000">)</font>
+<b><font color="#006cb8">070: </font></b>         <font color="#000000">{</font>
+<b><font color="#006cb8">071: </font></b>            <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">exit</font><font color="#000000">(</font><font color="#89c976">0</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">072: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">073: </font></b>      <font color="#000000">}</font>      
+<b><font color="#006cb8">074: </font></b>      <font color="#000000">ActionListener</font> <font color="#000000">listener</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">MenuItemListener</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">075: </font></b>      <font color="#000000">item</font><font color="#000000">.</font><font color="#000000">addActionListener</font><font color="#000000">(</font><font color="#000000">listener</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">076: </font></b>      <font color="#d05b76">return</font> <font color="#000000">item</font><font color="#000000">;</font>
+<b><font color="#006cb8">077: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">078: </font></b>
+<b><font color="#006cb8">079: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">080: </font></b><font color="#7a9ecd">      Creates the Font submenu.</font>
+<b><font color="#006cb8">081: </font></b><font color="#7a9ecd">      @return the menu</font>
+<b><font color="#006cb8">082: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">083: </font></b>   <font color="#d05b76">public</font> <font color="#000000">JMenu</font> <font color="#000000">createFontMenu</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">084: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">085: </font></b>      <font color="#000000">JMenu</font> <font color="#000000">menu</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">JMenu</font><font color="#000000">(</font><font color="#00a99d">"Font"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">086: </font></b>      <font color="#000000">menu</font><font color="#000000">.</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">createFaceMenu</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">087: </font></b>      <font color="#000000">menu</font><font color="#000000">.</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">createSizeMenu</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">088: </font></b>      <font color="#000000">menu</font><font color="#000000">.</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">createStyleMenu</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">089: </font></b>      <font color="#d05b76">return</font> <font color="#000000">menu</font><font color="#000000">;</font>
+<b><font color="#006cb8">090: </font></b>   <font color="#000000">}</font>  
+<b><font color="#006cb8">091: </font></b>
+<b><font color="#006cb8">092: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">093: </font></b><font color="#7a9ecd">      Creates the Face submenu.</font>
+<b><font color="#006cb8">094: </font></b><font color="#7a9ecd">      @return the menu</font>
+<b><font color="#006cb8">095: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">096: </font></b>   <font color="#d05b76">public</font> <font color="#000000">JMenu</font> <font color="#000000">createFaceMenu</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">097: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">098: </font></b>      <font color="#000000">JMenu</font> <font color="#000000">menu</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">JMenu</font><font color="#000000">(</font><font color="#00a99d">"Face"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">099: </font></b>      <font color="#000000">menu</font><font color="#000000">.</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">createFaceItem</font><font color="#000000">(</font><font color="#00a99d">"Serif"</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">100: </font></b>      <font color="#000000">menu</font><font color="#000000">.</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">createFaceItem</font><font color="#000000">(</font><font color="#00a99d">"SansSerif"</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">101: </font></b>      <font color="#000000">menu</font><font color="#000000">.</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">createFaceItem</font><font color="#000000">(</font><font color="#00a99d">"Monospaced"</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">102: </font></b>      <font color="#d05b76">return</font> <font color="#000000">menu</font><font color="#000000">;</font>
+<b><font color="#006cb8">103: </font></b>   <font color="#000000">}</font>  
+<b><font color="#006cb8">104: </font></b>
+<b><font color="#006cb8">105: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">106: </font></b><font color="#7a9ecd">      Creates the Size submenu.</font>
+<b><font color="#006cb8">107: </font></b><font color="#7a9ecd">      @return the menu</font>
+<b><font color="#006cb8">108: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">109: </font></b>   <font color="#d05b76">public</font> <font color="#000000">JMenu</font> <font color="#000000">createSizeMenu</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">110: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">111: </font></b>      <font color="#000000">JMenu</font> <font color="#000000">menu</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">JMenu</font><font color="#000000">(</font><font color="#00a99d">"Size"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">112: </font></b>      <font color="#000000">menu</font><font color="#000000">.</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">createSizeItem</font><font color="#000000">(</font><font color="#00a99d">"Smaller"</font><font color="#000000">,</font> <font color="#000000">-</font><font color="#89c976">1</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">113: </font></b>      <font color="#000000">menu</font><font color="#000000">.</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">createSizeItem</font><font color="#000000">(</font><font color="#00a99d">"Larger"</font><font color="#000000">,</font> <font color="#89c976">1</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">114: </font></b>      <font color="#d05b76">return</font> <font color="#000000">menu</font><font color="#000000">;</font>
+<b><font color="#006cb8">115: </font></b>   <font color="#000000">}</font>  
+<b><font color="#006cb8">116: </font></b>
+<b><font color="#006cb8">117: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">118: </font></b><font color="#7a9ecd">      Creates the Style submenu.</font>
+<b><font color="#006cb8">119: </font></b><font color="#7a9ecd">      @return the menu</font>
+<b><font color="#006cb8">120: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">121: </font></b>   <font color="#d05b76">public</font> <font color="#000000">JMenu</font> <font color="#000000">createStyleMenu</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">122: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">123: </font></b>      <font color="#000000">JMenu</font> <font color="#000000">menu</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">JMenu</font><font color="#000000">(</font><font color="#00a99d">"Style"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">124: </font></b>      <font color="#000000">menu</font><font color="#000000">.</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">createStyleItem</font><font color="#000000">(</font><font color="#00a99d">"Plain"</font><font color="#000000">,</font> <font color="#000000">Font</font><font color="#000000">.</font><font color="#000000">PLAIN</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">125: </font></b>      <font color="#000000">menu</font><font color="#000000">.</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">createStyleItem</font><font color="#000000">(</font><font color="#00a99d">"Bold"</font><font color="#000000">,</font> <font color="#000000">Font</font><font color="#000000">.</font><font color="#000000">BOLD</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">126: </font></b>      <font color="#000000">menu</font><font color="#000000">.</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">createStyleItem</font><font color="#000000">(</font><font color="#00a99d">"Italic"</font><font color="#000000">,</font> <font color="#000000">Font</font><font color="#000000">.</font><font color="#000000">ITALIC</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">127: </font></b>      <font color="#000000">menu</font><font color="#000000">.</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">createStyleItem</font><font color="#000000">(</font><font color="#00a99d">"Bold Italic"</font><font color="#000000">,</font> <font color="#000000">Font</font><font color="#000000">.</font><font color="#000000">BOLD</font> 
+<b><font color="#006cb8">128: </font></b>            <font color="#000000">+</font> <font color="#000000">Font</font><font color="#000000">.</font><font color="#000000">ITALIC</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">129: </font></b>      <font color="#d05b76">return</font> <font color="#000000">menu</font><font color="#000000">;</font>
+<b><font color="#006cb8">130: </font></b>   <font color="#000000">}</font>  
+<b><font color="#006cb8">131: </font></b>
+<b><font color="#006cb8">132: </font></b>
+<b><font color="#006cb8">133: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">134: </font></b><font color="#7a9ecd">      Creates a menu item to change the font face and set its action listener.</font>
+<b><font color="#006cb8">135: </font></b><font color="#7a9ecd">      @param name the name of the font face</font>
+<b><font color="#006cb8">136: </font></b><font color="#7a9ecd">      @return the menu item</font>
+<b><font color="#006cb8">137: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">138: </font></b>   <font color="#d05b76">public</font> <font color="#000000">JMenuItem</font> <font color="#000000">createFaceItem</font><font color="#000000">(</font><font color="#d05b76">final</font> <font color="#000000">String</font> <font color="#000000">name</font><font color="#000000">)</font>
+<b><font color="#006cb8">139: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">140: </font></b>      <font color="#000000">JMenuItem</font> <font color="#000000">item</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">JMenuItem</font><font color="#000000">(</font><font color="#000000">name</font><font color="#000000">)</font><font color="#000000">;</font>      
+<b><font color="#006cb8">141: </font></b>      <font color="#d05b76">class</font> <font color="#000000">MenuItemListener</font> <font color="#d05b76">implements</font> <font color="#000000">ActionListener</font>
+<b><font color="#006cb8">142: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">143: </font></b>         <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">actionPerformed</font><font color="#000000">(</font><font color="#000000">ActionEvent</font> <font color="#000000">event</font><font color="#000000">)</font>
+<b><font color="#006cb8">144: </font></b>         <font color="#000000">{</font>
+<b><font color="#006cb8">145: </font></b>            <font color="#000000">facename</font> <font color="#000000">=</font> <font color="#000000">name</font><font color="#000000">;</font>
+<b><font color="#006cb8">146: </font></b>            <font color="#000000">setSampleFont</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">147: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">148: </font></b>      <font color="#000000">}</font>      
+<b><font color="#006cb8">149: </font></b>      <font color="#000000">ActionListener</font> <font color="#000000">listener</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">MenuItemListener</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">150: </font></b>      <font color="#000000">item</font><font color="#000000">.</font><font color="#000000">addActionListener</font><font color="#000000">(</font><font color="#000000">listener</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">151: </font></b>      <font color="#d05b76">return</font> <font color="#000000">item</font><font color="#000000">;</font>
+<b><font color="#006cb8">152: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">153: </font></b>
+<b><font color="#006cb8">154: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">155: </font></b><font color="#7a9ecd">      Creates a menu item to change the font size</font>
+<b><font color="#006cb8">156: </font></b><font color="#7a9ecd">      and set its action listener.</font>
+<b><font color="#006cb8">157: </font></b><font color="#7a9ecd">      @param name the name of the menu item</font>
+<b><font color="#006cb8">158: </font></b><font color="#7a9ecd">      @param ds the amount by which to change the size</font>
+<b><font color="#006cb8">159: </font></b><font color="#7a9ecd">      @return the menu item</font>
+<b><font color="#006cb8">160: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">161: </font></b>   <font color="#d05b76">public</font> <font color="#000000">JMenuItem</font> <font color="#000000">createSizeItem</font><font color="#000000">(</font><font color="#000000">String</font> <font color="#000000">name</font><font color="#000000">,</font> <font color="#d05b76">final</font> <font color="#d05b76">int</font> <font color="#000000">ds</font><font color="#000000">)</font>
+<b><font color="#006cb8">162: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">163: </font></b>      <font color="#000000">JMenuItem</font> <font color="#000000">item</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">JMenuItem</font><font color="#000000">(</font><font color="#000000">name</font><font color="#000000">)</font><font color="#000000">;</font>      
+<b><font color="#006cb8">164: </font></b>      <font color="#d05b76">class</font> <font color="#000000">MenuItemListener</font> <font color="#d05b76">implements</font> <font color="#000000">ActionListener</font>
+<b><font color="#006cb8">165: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">166: </font></b>         <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">actionPerformed</font><font color="#000000">(</font><font color="#000000">ActionEvent</font> <font color="#000000">event</font><font color="#000000">)</font>
+<b><font color="#006cb8">167: </font></b>         <font color="#000000">{</font>
+<b><font color="#006cb8">168: </font></b>            <font color="#000000">fontsize</font> <font color="#000000">=</font> <font color="#000000">fontsize</font> <font color="#000000">+</font> <font color="#000000">ds</font><font color="#000000">;</font>
+<b><font color="#006cb8">169: </font></b>            <font color="#000000">setSampleFont</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">170: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">171: </font></b>      <font color="#000000">}</font>      
+<b><font color="#006cb8">172: </font></b>      <font color="#000000">ActionListener</font> <font color="#000000">listener</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">MenuItemListener</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">173: </font></b>      <font color="#000000">item</font><font color="#000000">.</font><font color="#000000">addActionListener</font><font color="#000000">(</font><font color="#000000">listener</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">174: </font></b>      <font color="#d05b76">return</font> <font color="#000000">item</font><font color="#000000">;</font>
+<b><font color="#006cb8">175: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">176: </font></b>
+<b><font color="#006cb8">177: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">178: </font></b><font color="#7a9ecd">      Creates a menu item to change the font style</font>
+<b><font color="#006cb8">179: </font></b><font color="#7a9ecd">      and set its action listener.</font>
+<b><font color="#006cb8">180: </font></b><font color="#7a9ecd">      @param name the name of the menu item</font>
+<b><font color="#006cb8">181: </font></b><font color="#7a9ecd">      @param style the new font style</font>
+<b><font color="#006cb8">182: </font></b><font color="#7a9ecd">      @return the menu item</font>
+<b><font color="#006cb8">183: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">184: </font></b>   <font color="#d05b76">public</font> <font color="#000000">JMenuItem</font> <font color="#000000">createStyleItem</font><font color="#000000">(</font><font color="#000000">String</font> <font color="#000000">name</font><font color="#000000">,</font> <font color="#d05b76">final</font> <font color="#d05b76">int</font> <font color="#000000">style</font><font color="#000000">)</font>
+<b><font color="#006cb8">185: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">186: </font></b>      <font color="#000000">JMenuItem</font> <font color="#000000">item</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">JMenuItem</font><font color="#000000">(</font><font color="#000000">name</font><font color="#000000">)</font><font color="#000000">;</font>      
+<b><font color="#006cb8">187: </font></b>      <font color="#d05b76">class</font> <font color="#000000">MenuItemListener</font> <font color="#d05b76">implements</font> <font color="#000000">ActionListener</font>
+<b><font color="#006cb8">188: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">189: </font></b>         <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">actionPerformed</font><font color="#000000">(</font><font color="#000000">ActionEvent</font> <font color="#000000">event</font><font color="#000000">)</font>
+<b><font color="#006cb8">190: </font></b>         <font color="#000000">{</font>
+<b><font color="#006cb8">191: </font></b>            <font color="#000000">fontstyle</font> <font color="#000000">=</font> <font color="#000000">style</font><font color="#000000">;</font>
+<b><font color="#006cb8">192: </font></b>            <font color="#000000">setSampleFont</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">193: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">194: </font></b>      <font color="#000000">}</font>      
+<b><font color="#006cb8">195: </font></b>      <font color="#000000">ActionListener</font> <font color="#000000">listener</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">MenuItemListener</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">196: </font></b>      <font color="#000000">item</font><font color="#000000">.</font><font color="#000000">addActionListener</font><font color="#000000">(</font><font color="#000000">listener</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">197: </font></b>      <font color="#d05b76">return</font> <font color="#000000">item</font><font color="#000000">;</font>
+<b><font color="#006cb8">198: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">199: </font></b>
+<b><font color="#006cb8">200: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">201: </font></b><font color="#7a9ecd">      Sets the font of the text sample.</font>
+<b><font color="#006cb8">202: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">203: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">setSampleFont</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">204: </font></b>   <font color="#000000">{</font> 
+<b><font color="#006cb8">205: </font></b>      <font color="#000000">Font</font> <font color="#000000">f</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Font</font><font color="#000000">(</font><font color="#000000">facename</font><font color="#000000">,</font> <font color="#000000">fontstyle</font><font color="#000000">,</font> <font color="#000000">fontsize</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">206: </font></b>      <font color="#000000">sampleField</font><font color="#000000">.</font><font color="#000000">setFont</font><font color="#000000">(</font><font color="#000000">f</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">207: </font></b>      <font color="#000000">sampleField</font><font color="#000000">.</font><font color="#000000">repaint</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">208: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">209: </font></b>   
+<b><font color="#006cb8">210: </font></b>   <font color="#d05b76">private</font> <font color="#000000">JLabel</font> <font color="#000000">sampleField</font><font color="#000000">;</font>
+<b><font color="#006cb8">211: </font></b>   <font color="#d05b76">private</font> <font color="#000000">String</font> <font color="#000000">facename</font><font color="#000000">;</font>
+<b><font color="#006cb8">212: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">int</font> <font color="#000000">fontstyle</font><font color="#000000">;</font>
+<b><font color="#006cb8">213: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">int</font> <font color="#000000">fontsize</font><font color="#000000">;</font>
+<b><font color="#006cb8">214: </font></b>
+<b><font color="#006cb8">215: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">static</font> <font color="#d05b76">final</font> <font color="#d05b76">int</font> <font color="#000000">FRAME_WIDTH</font> <font color="#000000">=</font> <font color="#89c976">300</font><font color="#000000">;</font>
+<b><font color="#006cb8">216: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">static</font> <font color="#d05b76">final</font> <font color="#d05b76">int</font> <font color="#000000">FRAME_HEIGHT</font> <font color="#000000">=</font> <font color="#89c976">400</font><font color="#000000">;</font>
+<b><font color="#006cb8">217: </font></b><font color="#000000">}</font>
+<b><font color="#006cb8">218: </font></b>
+<b><font color="#006cb8">219: </font></b>
+</tt></pre>

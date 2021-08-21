@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 26</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide040.html'">
+<center><small><a href="slide038.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide040.html">next</a></small></center>
+<hr></div>
+<h2>Creating XML Documents</h2>
+<ul>
+  <li>To create an element use <tt>createElement</tt> method and pass it a tag
+    <pre>Element priceElement = doc.createElement("price");</pre></li>
+  <li>Use <tt>setAttribute</tt> method to add an attribute to the tag
+    <pre>priceElement.setAttribute(&quot;currency&quot;, &quot;USD&quot;);</pre></li>
+  <li>To create a text node, use <tt>createTextNode</tt> and pass it a string
+    <pre>Text textNode = doc.createTextNode("29.95");</pre></li>
+  <li>Then add the text node to the element:
+    <pre>priceElement.appendChild(textNode);</pre></li>
+</ul>
+ 
+
+
+<div onclick="document.location='slide040.html'"><hr>
+<center><small><a href="slide038.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide040.html">next</a></small></center>
+</div>
+</body>
+</html>

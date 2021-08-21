@@ -1,0 +1,142 @@
+<pre><tt><b><font color="#006cb8">001: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">awt</font><font color="#000000">.</font><font color="#000000">Color</font><font color="#000000">;</font>
+<b><font color="#006cb8">002: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">awt</font><font color="#000000">.</font><font color="#000000">Graphics2D</font><font color="#000000">;</font>
+<b><font color="#006cb8">003: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">awt</font><font color="#000000">.</font><font color="#000000">geom</font><font color="#000000">.</font><font color="#000000">Line2D</font><font color="#000000">;</font>
+<b><font color="#006cb8">004: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">util</font><font color="#000000">.</font><font color="#000000">concurrent</font><font color="#000000">.</font><font color="#000000">locks</font><font color="#000000">.</font><font color="#000000">Lock</font><font color="#000000">;</font>
+<b><font color="#006cb8">005: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">util</font><font color="#000000">.</font><font color="#000000">concurrent</font><font color="#000000">.</font><font color="#000000">locks</font><font color="#000000">.</font><font color="#000000">ReentrantLock</font><font color="#000000">;</font>
+<b><font color="#006cb8">006: </font></b><font color="#000000">import</font> <font color="#000000">javax</font><font color="#000000">.</font><font color="#000000">swing</font><font color="#000000">.</font><font color="#000000">JComponent</font><font color="#000000">;</font>
+<b><font color="#006cb8">007: </font></b>
+<b><font color="#006cb8">008: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">009: </font></b><font color="#7a9ecd">   This class sorts an array, using the selection sort </font>
+<b><font color="#006cb8">010: </font></b><font color="#7a9ecd">   algorithm.</font>
+<b><font color="#006cb8">011: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">012: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> <font color="#000000">SelectionSorter</font>
+<b><font color="#006cb8">013: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">014: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">015: </font></b><font color="#7a9ecd">      Constructs a selection sorter.</font>
+<b><font color="#006cb8">016: </font></b><font color="#7a9ecd">      @param anArray the array to sort</font>
+<b><font color="#006cb8">017: </font></b><font color="#7a9ecd">      @param aComponent the component to be repainted when the animation </font>
+<b><font color="#006cb8">018: </font></b><font color="#7a9ecd">      pauses</font>
+<b><font color="#006cb8">019: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">020: </font></b>   <font color="#d05b76">public</font> <font color="#000000">SelectionSorter</font><font color="#000000">(</font><font color="#d05b76">int</font><font color="#000000">[</font><font color="#000000">]</font> <font color="#000000">anArray</font><font color="#000000">,</font> <font color="#000000">JComponent</font> <font color="#000000">aComponent</font><font color="#000000">)</font>
+<b><font color="#006cb8">021: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">022: </font></b>      <font color="#000000">a</font> <font color="#000000">=</font> <font color="#000000">anArray</font><font color="#000000">;</font>
+<b><font color="#006cb8">023: </font></b>      <font color="#000000">sortStateLock</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">ReentrantLock</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">024: </font></b>      <font color="#000000">component</font> <font color="#000000">=</font> <font color="#000000">aComponent</font><font color="#000000">;</font>
+<b><font color="#006cb8">025: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">026: </font></b>
+<b><font color="#006cb8">027: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">028: </font></b><font color="#7a9ecd">      Sorts the array managed by this selection sorter.</font>
+<b><font color="#006cb8">029: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">030: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">sort</font><font color="#000000">(</font><font color="#000000">)</font> 
+<b><font color="#006cb8">031: </font></b>         <font color="#d05b76">throws</font> <font color="#000000">InterruptedException</font>
+<b><font color="#006cb8">032: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">033: </font></b>      <font color="#d05b76">for</font> <font color="#000000">(</font><font color="#d05b76">int</font> <font color="#000000">i</font> <font color="#000000">=</font> <font color="#89c976">0</font><font color="#000000">;</font> <font color="#000000">i</font> <font color="#000000">&lt;</font> <font color="#000000">a</font><font color="#000000">.</font><font color="#000000">length</font> <font color="#000000">-</font> <font color="#89c976">1</font><font color="#000000">;</font> <font color="#000000">i</font><font color="#000000">+</font><font color="#000000">+</font><font color="#000000">)</font>
+<b><font color="#006cb8">034: </font></b>      <font color="#000000">{</font>  
+<b><font color="#006cb8">035: </font></b>         <font color="#d05b76">int</font> <font color="#000000">minPos</font> <font color="#000000">=</font> <font color="#000000">minimumPosition</font><font color="#000000">(</font><font color="#000000">i</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">036: </font></b>         <font color="#000000">sortStateLock</font><font color="#000000">.</font><font color="#000000">lock</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">037: </font></b>         <font color="#d05b76">try</font>
+<b><font color="#006cb8">038: </font></b>         <font color="#000000">{</font>
+<b><font color="#006cb8">039: </font></b>            <font color="#000000">swap</font><font color="#000000">(</font><font color="#000000">minPos</font><font color="#000000">,</font> <font color="#000000">i</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">040: </font></b>            <font color="#7a9ecd">// For animation</font>
+<b><font color="#006cb8">041: </font></b>            <font color="#000000">alreadySorted</font> <font color="#000000">=</font> <font color="#000000">i</font><font color="#000000">;</font>
+<b><font color="#006cb8">042: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">043: </font></b>         <font color="#d05b76">finally</font>
+<b><font color="#006cb8">044: </font></b>         <font color="#000000">{</font>
+<b><font color="#006cb8">045: </font></b>            <font color="#000000">sortStateLock</font><font color="#000000">.</font><font color="#000000">unlock</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">046: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">047: </font></b>         <font color="#000000">pause</font><font color="#000000">(</font><font color="#89c976">2</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">048: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">049: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">050: </font></b>
+<b><font color="#006cb8">051: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">052: </font></b><font color="#7a9ecd">      Finds the smallest element in a tail range of the array</font>
+<b><font color="#006cb8">053: </font></b><font color="#7a9ecd">      @param from the first position in a to compare</font>
+<b><font color="#006cb8">054: </font></b><font color="#7a9ecd">      @return the position of the smallest element in the</font>
+<b><font color="#006cb8">055: </font></b><font color="#7a9ecd">      range a[from]...a[a.length - 1]</font>
+<b><font color="#006cb8">056: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">057: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">int</font> <font color="#000000">minimumPosition</font><font color="#000000">(</font><font color="#d05b76">int</font> <font color="#000000">from</font><font color="#000000">)</font>
+<b><font color="#006cb8">058: </font></b>         <font color="#d05b76">throws</font> <font color="#000000">InterruptedException</font>
+<b><font color="#006cb8">059: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">060: </font></b>      <font color="#d05b76">int</font> <font color="#000000">minPos</font> <font color="#000000">=</font> <font color="#000000">from</font><font color="#000000">;</font>
+<b><font color="#006cb8">061: </font></b>      <font color="#d05b76">for</font> <font color="#000000">(</font><font color="#d05b76">int</font> <font color="#000000">i</font> <font color="#000000">=</font> <font color="#000000">from</font> <font color="#000000">+</font> <font color="#89c976">1</font><font color="#000000">;</font> <font color="#000000">i</font> <font color="#000000">&lt;</font> <font color="#000000">a</font><font color="#000000">.</font><font color="#000000">length</font><font color="#000000">;</font> <font color="#000000">i</font><font color="#000000">+</font><font color="#000000">+</font><font color="#000000">)</font>
+<b><font color="#006cb8">062: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">063: </font></b>         <font color="#000000">sortStateLock</font><font color="#000000">.</font><font color="#000000">lock</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">064: </font></b>         <font color="#d05b76">try</font>
+<b><font color="#006cb8">065: </font></b>         <font color="#000000">{</font>
+<b><font color="#006cb8">066: </font></b>            <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">a</font><font color="#000000">[</font><font color="#000000">i</font><font color="#000000">]</font> <font color="#000000">&lt;</font> <font color="#000000">a</font><font color="#000000">[</font><font color="#000000">minPos</font><font color="#000000">]</font><font color="#000000">)</font> <font color="#000000">minPos</font> <font color="#000000">=</font> <font color="#000000">i</font><font color="#000000">;</font>
+<b><font color="#006cb8">067: </font></b>            <font color="#7a9ecd">// For animation</font>
+<b><font color="#006cb8">068: </font></b>            <font color="#000000">markedPosition</font> <font color="#000000">=</font> <font color="#000000">i</font><font color="#000000">;</font>
+<b><font color="#006cb8">069: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">070: </font></b>         <font color="#d05b76">finally</font>
+<b><font color="#006cb8">071: </font></b>         <font color="#000000">{</font>
+<b><font color="#006cb8">072: </font></b>            <font color="#000000">sortStateLock</font><font color="#000000">.</font><font color="#000000">unlock</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">073: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">074: </font></b>         <font color="#000000">pause</font><font color="#000000">(</font><font color="#89c976">2</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">075: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">076: </font></b>      <font color="#d05b76">return</font> <font color="#000000">minPos</font><font color="#000000">;</font>
+<b><font color="#006cb8">077: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">078: </font></b>
+<b><font color="#006cb8">079: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">080: </font></b><font color="#7a9ecd">      Swaps two entries of the array.</font>
+<b><font color="#006cb8">081: </font></b><font color="#7a9ecd">      @param i the first position to swap</font>
+<b><font color="#006cb8">082: </font></b><font color="#7a9ecd">      @param j the second position to swap</font>
+<b><font color="#006cb8">083: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">084: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">void</font> <font color="#000000">swap</font><font color="#000000">(</font><font color="#d05b76">int</font> <font color="#000000">i</font><font color="#000000">,</font> <font color="#d05b76">int</font> <font color="#000000">j</font><font color="#000000">)</font>
+<b><font color="#006cb8">085: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">086: </font></b>      <font color="#d05b76">int</font> <font color="#000000">temp</font> <font color="#000000">=</font> <font color="#000000">a</font><font color="#000000">[</font><font color="#000000">i</font><font color="#000000">]</font><font color="#000000">;</font>
+<b><font color="#006cb8">087: </font></b>      <font color="#000000">a</font><font color="#000000">[</font><font color="#000000">i</font><font color="#000000">]</font> <font color="#000000">=</font> <font color="#000000">a</font><font color="#000000">[</font><font color="#000000">j</font><font color="#000000">]</font><font color="#000000">;</font>
+<b><font color="#006cb8">088: </font></b>      <font color="#000000">a</font><font color="#000000">[</font><font color="#000000">j</font><font color="#000000">]</font> <font color="#000000">=</font> <font color="#000000">temp</font><font color="#000000">;</font>
+<b><font color="#006cb8">089: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">090: </font></b>
+<b><font color="#006cb8">091: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">092: </font></b><font color="#7a9ecd">      Draws the current state of the sorting algorithm.</font>
+<b><font color="#006cb8">093: </font></b><font color="#7a9ecd">      @param g2 the graphics context</font>
+<b><font color="#006cb8">094: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">095: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">draw</font><font color="#000000">(</font><font color="#000000">Graphics2D</font> <font color="#000000">g2</font><font color="#000000">)</font>
+<b><font color="#006cb8">096: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">097: </font></b>      <font color="#000000">sortStateLock</font><font color="#000000">.</font><font color="#000000">lock</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">098: </font></b>      <font color="#d05b76">try</font>
+<b><font color="#006cb8">099: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">100: </font></b>         <font color="#d05b76">int</font> <font color="#000000">deltaX</font> <font color="#000000">=</font> <font color="#000000">component</font><font color="#000000">.</font><font color="#000000">getWidth</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">/</font> <font color="#000000">a</font><font color="#000000">.</font><font color="#000000">length</font><font color="#000000">;</font>
+<b><font color="#006cb8">101: </font></b>         <font color="#d05b76">for</font> <font color="#000000">(</font><font color="#d05b76">int</font> <font color="#000000">i</font> <font color="#000000">=</font> <font color="#89c976">0</font><font color="#000000">;</font> <font color="#000000">i</font> <font color="#000000">&lt;</font> <font color="#000000">a</font><font color="#000000">.</font><font color="#000000">length</font><font color="#000000">;</font> <font color="#000000">i</font><font color="#000000">+</font><font color="#000000">+</font><font color="#000000">)</font>
+<b><font color="#006cb8">102: </font></b>         <font color="#000000">{</font>
+<b><font color="#006cb8">103: </font></b>            <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">i</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#000000">markedPosition</font><font color="#000000">)</font>
+<b><font color="#006cb8">104: </font></b>               <font color="#000000">g2</font><font color="#000000">.</font><font color="#000000">setColor</font><font color="#000000">(</font><font color="#000000">Color</font><font color="#000000">.</font><font color="#000000">RED</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">105: </font></b>            <font color="#d05b76">else</font> <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">i</font> <font color="#000000">&lt;</font><font color="#000000">=</font> <font color="#000000">alreadySorted</font><font color="#000000">)</font>
+<b><font color="#006cb8">106: </font></b>               <font color="#000000">g2</font><font color="#000000">.</font><font color="#000000">setColor</font><font color="#000000">(</font><font color="#000000">Color</font><font color="#000000">.</font><font color="#000000">BLUE</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">107: </font></b>            <font color="#d05b76">else</font>
+<b><font color="#006cb8">108: </font></b>               <font color="#000000">g2</font><font color="#000000">.</font><font color="#000000">setColor</font><font color="#000000">(</font><font color="#000000">Color</font><font color="#000000">.</font><font color="#000000">BLACK</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">109: </font></b>            <font color="#000000">g2</font><font color="#000000">.</font><font color="#000000">draw</font><font color="#000000">(</font><font color="#d05b76">new</font> <font color="#000000">Line2D</font><font color="#000000">.</font><font color="#000000">Double</font><font color="#000000">(</font><font color="#000000">i</font> <font color="#000000">*</font> <font color="#000000">deltaX</font><font color="#000000">,</font> <font color="#89c976">0</font><font color="#000000">,</font> 
+<b><font color="#006cb8">110: </font></b>                  <font color="#000000">i</font> <font color="#000000">*</font> <font color="#000000">deltaX</font><font color="#000000">,</font> <font color="#000000">a</font><font color="#000000">[</font><font color="#000000">i</font><font color="#000000">]</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">111: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">112: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">113: </font></b>      <font color="#d05b76">finally</font>
+<b><font color="#006cb8">114: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">115: </font></b>         <font color="#000000">sortStateLock</font><font color="#000000">.</font><font color="#000000">unlock</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">116: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">117: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">118: </font></b>
+<b><font color="#006cb8">119: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">120: </font></b><font color="#7a9ecd">      Pauses the animation.</font>
+<b><font color="#006cb8">121: </font></b><font color="#7a9ecd">      @param steps the number of steps to pause</font>
+<b><font color="#006cb8">122: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">123: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">pause</font><font color="#000000">(</font><font color="#d05b76">int</font> <font color="#000000">steps</font><font color="#000000">)</font> 
+<b><font color="#006cb8">124: </font></b>         <font color="#d05b76">throws</font> <font color="#000000">InterruptedException</font>
+<b><font color="#006cb8">125: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">126: </font></b>      <font color="#000000">component</font><font color="#000000">.</font><font color="#000000">repaint</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">127: </font></b>      <font color="#000000">Thread</font><font color="#000000">.</font><font color="#000000">sleep</font><font color="#000000">(</font><font color="#000000">steps</font> <font color="#000000">*</font> <font color="#000000">DELAY</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">128: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">129: </font></b>
+<b><font color="#006cb8">130: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">int</font><font color="#000000">[</font><font color="#000000">]</font> <font color="#000000">a</font><font color="#000000">;</font>
+<b><font color="#006cb8">131: </font></b>   <font color="#d05b76">private</font> <font color="#000000">Lock</font> <font color="#000000">sortStateLock</font><font color="#000000">;</font>
+<b><font color="#006cb8">132: </font></b>
+<b><font color="#006cb8">133: </font></b>   <font color="#7a9ecd">// The component is repainted when the animation is paused</font>
+<b><font color="#006cb8">134: </font></b>   <font color="#d05b76">private</font> <font color="#000000">JComponent</font> <font color="#000000">component</font><font color="#000000">;</font>   
+<b><font color="#006cb8">135: </font></b>   
+<b><font color="#006cb8">136: </font></b>   <font color="#7a9ecd">// These fields are needed for drawing </font>
+<b><font color="#006cb8">137: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">int</font> <font color="#000000">markedPosition</font> <font color="#000000">=</font> <font color="#000000">-</font><font color="#89c976">1</font><font color="#000000">;</font>
+<b><font color="#006cb8">138: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">int</font> <font color="#000000">alreadySorted</font> <font color="#000000">=</font> <font color="#000000">-</font><font color="#89c976">1</font><font color="#000000">;</font>
+<b><font color="#006cb8">139: </font></b>
+<b><font color="#006cb8">140: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">static</font> <font color="#d05b76">final</font> <font color="#d05b76">int</font> <font color="#000000">DELAY</font> <font color="#000000">=</font> <font color="#89c976">100</font><font color="#000000">;</font>
+<b><font color="#006cb8">141: </font></b><font color="#000000">}</font>
+</tt></pre>

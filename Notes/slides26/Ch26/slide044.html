@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 26</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide045.html'">
+<center><small><a href="slide043.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide045.html">next</a></small></center>
+<hr></div>
+<h2>Creating XML Documents</h2>
+<ul>
+  <li>There are several ways of writing an XML document</li>
+  <li>We use the <tt>LSSerializer</tt> interface</li>
+  <li>Obtain an LSSerializer with the following magic incantation:
+     <pre>DOMImplementation impl = doc.getImplementation();
+DOMImplementationLS implLS
+      = (DOMImplementationLS) impl.getFeature("LS", "3.0");
+LSSerializer ser = implLS.createLSSerializer();</pre></li>
+  <li>Then you simply use the <tt>writeToString</tt> method:
+    <pre>String str = ser.writeToString(doc);</pre></li>
+  <li>The <tt>LSSerializer</tt> produces an XML document without spaces or line breaks</li>
+</ul>
+
+ 
+
+<div onclick="document.location='slide045.html'"><hr>
+<center><small><a href="slide043.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide045.html">next</a></small></center>
+</div>
+</body>
+</html>

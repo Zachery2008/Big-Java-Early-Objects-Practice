@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 6</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+
+<body>
+<div onclick="document.location='slide021.html'">
+<center><small><a href="slide019.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide021.html">next</a></small></center>
+</div><hr>
+<h2>Multiple Alternatives: Sequences of Comparisons</h2>
+<ul>
+  <li><tt>if (<i>condition1</i>)<br>
+&nbsp;&nbsp; <i>statement1</i>;<br>
+else if (<i>condition2</i>)<br>
+&nbsp;&nbsp; <i>statement2</i>;<br>
+. . .<br>
+else<br>
+&nbsp;&nbsp; <i>statement4</i>;</tt></li>
+  <li>The first matching condition is executed</li>
+  <li>Order matters<br>
+    <tt>if (richter &gt;= 0) // always passes<br>
+&nbsp; &nbsp;r = "Generally not felt by people";<br>
+else if (richter &gt;= 3.5) // not tested<br>
+&nbsp; &nbsp;r = "Felt by many people, no destruction";<br>
+. . .</tt></li>
+  <li>Don't omit <tt>else<br>
+if (richter &gt;= 8.0)<br>
+&nbsp; &nbsp;r = "Most structures fall";<br>
+if (richter &gt;= 7.0) // omitted else--ERROR<br>
+&nbsp; &nbsp;r = "Many buildings destroyed</tt></li>
+</ul>
+
+<hr>
+<div onclick="document.location='slide021.html'">
+<center><small><a href="slide019.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide021.html">next</a></small></center>
+</div>
+</body>
+</html>

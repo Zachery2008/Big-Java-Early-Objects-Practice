@@ -1,0 +1,114 @@
+<pre><tt><b><font color="#006cb8">001: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">awt</font><font color="#000000">.</font><font color="#000000">BorderLayout</font><font color="#000000">;</font>
+<b><font color="#006cb8">002: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">awt</font><font color="#000000">.</font><font color="#000000">GridLayout</font><font color="#000000">;</font>
+<b><font color="#006cb8">003: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">awt</font><font color="#000000">.</font><font color="#000000">event</font><font color="#000000">.</font><font color="#000000">ActionEvent</font><font color="#000000">;</font>
+<b><font color="#006cb8">004: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">awt</font><font color="#000000">.</font><font color="#000000">event</font><font color="#000000">.</font><font color="#000000">ActionListener</font><font color="#000000">;</font>
+<b><font color="#006cb8">005: </font></b><font color="#000000">import</font> <font color="#000000">javax</font><font color="#000000">.</font><font color="#000000">swing</font><font color="#000000">.</font><font color="#000000">JButton</font><font color="#000000">;</font>
+<b><font color="#006cb8">006: </font></b><font color="#000000">import</font> <font color="#000000">javax</font><font color="#000000">.</font><font color="#000000">swing</font><font color="#000000">.</font><font color="#000000">JPanel</font><font color="#000000">;</font>
+<b><font color="#006cb8">007: </font></b><font color="#000000">import</font> <font color="#000000">javax</font><font color="#000000">.</font><font color="#000000">swing</font><font color="#000000">.</font><font color="#000000">JTextField</font><font color="#000000">;</font>
+<b><font color="#006cb8">008: </font></b>
+<b><font color="#006cb8">009: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">010: </font></b><font color="#7a9ecd">   A component that lets the user enter a number, using </font>
+<b><font color="#006cb8">011: </font></b><font color="#7a9ecd">   a button pad labeled with digits.</font>
+<b><font color="#006cb8">012: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">013: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> <font color="#000000">KeyPad</font> <font color="#d05b76">extends</font> <font color="#000000">JPanel</font>
+<b><font color="#006cb8">014: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">015: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">016: </font></b><font color="#7a9ecd">      Constructs the keypad panel.</font>
+<b><font color="#006cb8">017: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">018: </font></b>   <font color="#d05b76">public</font> <font color="#000000">KeyPad</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">019: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">020: </font></b>      <font color="#000000">setLayout</font><font color="#000000">(</font><font color="#d05b76">new</font> <font color="#000000">BorderLayout</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">021: </font></b>   
+<b><font color="#006cb8">022: </font></b>      <font color="#7a9ecd">// Add display field</font>
+<b><font color="#006cb8">023: </font></b>   
+<b><font color="#006cb8">024: </font></b>      <font color="#000000">display</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">JTextField</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">025: </font></b>      <font color="#000000">add</font><font color="#000000">(</font><font color="#000000">display</font><font color="#000000">,</font> <font color="#00a99d">"North"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">026: </font></b>
+<b><font color="#006cb8">027: </font></b>      <font color="#7a9ecd">// Make button panel</font>
+<b><font color="#006cb8">028: </font></b>
+<b><font color="#006cb8">029: </font></b>      <font color="#000000">buttonPanel</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">JPanel</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">030: </font></b>      <font color="#000000">buttonPanel</font><font color="#000000">.</font><font color="#000000">setLayout</font><font color="#000000">(</font><font color="#d05b76">new</font> <font color="#000000">GridLayout</font><font color="#000000">(</font><font color="#89c976">4</font><font color="#000000">,</font> <font color="#89c976">3</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">031: </font></b>      
+<b><font color="#006cb8">032: </font></b>      <font color="#7a9ecd">// Add digit buttons</font>
+<b><font color="#006cb8">033: </font></b>      
+<b><font color="#006cb8">034: </font></b>      <font color="#000000">addButton</font><font color="#000000">(</font><font color="#00a99d">"7"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">035: </font></b>      <font color="#000000">addButton</font><font color="#000000">(</font><font color="#00a99d">"8"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">036: </font></b>      <font color="#000000">addButton</font><font color="#000000">(</font><font color="#00a99d">"9"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">037: </font></b>      <font color="#000000">addButton</font><font color="#000000">(</font><font color="#00a99d">"4"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">038: </font></b>      <font color="#000000">addButton</font><font color="#000000">(</font><font color="#00a99d">"5"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">039: </font></b>      <font color="#000000">addButton</font><font color="#000000">(</font><font color="#00a99d">"6"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">040: </font></b>      <font color="#000000">addButton</font><font color="#000000">(</font><font color="#00a99d">"1"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">041: </font></b>      <font color="#000000">addButton</font><font color="#000000">(</font><font color="#00a99d">"2"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">042: </font></b>      <font color="#000000">addButton</font><font color="#000000">(</font><font color="#00a99d">"3"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">043: </font></b>      <font color="#000000">addButton</font><font color="#000000">(</font><font color="#00a99d">"0"</font><font color="#000000">)</font><font color="#000000">;</font>      
+<b><font color="#006cb8">044: </font></b>      <font color="#000000">addButton</font><font color="#000000">(</font><font color="#00a99d">"."</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">045: </font></b>      
+<b><font color="#006cb8">046: </font></b>      <font color="#7a9ecd">// Add clear entry button</font>
+<b><font color="#006cb8">047: </font></b>      
+<b><font color="#006cb8">048: </font></b>      <font color="#000000">clearButton</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">JButton</font><font color="#000000">(</font><font color="#00a99d">"CE"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">049: </font></b>      <font color="#000000">buttonPanel</font><font color="#000000">.</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">clearButton</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">050: </font></b>
+<b><font color="#006cb8">051: </font></b>      <font color="#d05b76">class</font> <font color="#000000">ClearButtonListener</font> <font color="#d05b76">implements</font> <font color="#000000">ActionListener</font>
+<b><font color="#006cb8">052: </font></b>      <font color="#000000">{</font>  
+<b><font color="#006cb8">053: </font></b>         <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">actionPerformed</font><font color="#000000">(</font><font color="#000000">ActionEvent</font> <font color="#000000">event</font><font color="#000000">)</font>
+<b><font color="#006cb8">054: </font></b>         <font color="#000000">{</font>  
+<b><font color="#006cb8">055: </font></b>            <font color="#000000">display</font><font color="#000000">.</font><font color="#000000">setText</font><font color="#000000">(</font><font color="#00a99d">""</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">056: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">057: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">058: </font></b>      <font color="#000000">ActionListener</font> <font color="#000000">listener</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">ClearButtonListener</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>      
+<b><font color="#006cb8">059: </font></b>
+<b><font color="#006cb8">060: </font></b>      <font color="#000000">clearButton</font><font color="#000000">.</font><font color="#000000">addActionListener</font><font color="#000000">(</font>
+<b><font color="#006cb8">061: </font></b>            <font color="#d05b76">new</font> <font color="#000000">ClearButtonListener</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>      
+<b><font color="#006cb8">062: </font></b>      
+<b><font color="#006cb8">063: </font></b>      <font color="#000000">add</font><font color="#000000">(</font><font color="#000000">buttonPanel</font><font color="#000000">,</font> <font color="#00a99d">"Center"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">064: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">065: </font></b>
+<b><font color="#006cb8">066: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">067: </font></b><font color="#7a9ecd">      Adds a button to the button panel.</font>
+<b><font color="#006cb8">068: </font></b><font color="#7a9ecd">      @param label the button label</font>
+<b><font color="#006cb8">069: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">070: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">void</font> <font color="#000000">addButton</font><font color="#000000">(</font><font color="#d05b76">final</font> <font color="#000000">String</font> <font color="#000000">label</font><font color="#000000">)</font>
+<b><font color="#006cb8">071: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">072: </font></b>      <font color="#d05b76">class</font> <font color="#000000">DigitButtonListener</font> <font color="#d05b76">implements</font> <font color="#000000">ActionListener</font>
+<b><font color="#006cb8">073: </font></b>      <font color="#000000">{</font>  
+<b><font color="#006cb8">074: </font></b>         <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">actionPerformed</font><font color="#000000">(</font><font color="#000000">ActionEvent</font> <font color="#000000">event</font><font color="#000000">)</font>
+<b><font color="#006cb8">075: </font></b>         <font color="#000000">{</font>  
+<b><font color="#006cb8">076: </font></b>            <font color="#7a9ecd">// Don't add two decimal points</font>
+<b><font color="#006cb8">077: </font></b>            <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">label</font><font color="#000000">.</font><font color="#000000">equals</font><font color="#000000">(</font><font color="#00a99d">"."</font><font color="#000000">)</font> 
+<b><font color="#006cb8">078: </font></b>                  <font color="#000000">&amp;</font><font color="#000000">&amp;</font> <font color="#000000">display</font><font color="#000000">.</font><font color="#000000">getText</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">.</font><font color="#000000">indexOf</font><font color="#000000">(</font><font color="#00a99d">"."</font><font color="#000000">)</font> <font color="#000000">!</font><font color="#000000">=</font> <font color="#000000">-</font><font color="#89c976">1</font><font color="#000000">)</font> 
+<b><font color="#006cb8">079: </font></b>               <font color="#d05b76">return</font><font color="#000000">;</font>
+<b><font color="#006cb8">080: </font></b>
+<b><font color="#006cb8">081: </font></b>            <font color="#7a9ecd">// Append label text to button</font>
+<b><font color="#006cb8">082: </font></b>            <font color="#000000">display</font><font color="#000000">.</font><font color="#000000">setText</font><font color="#000000">(</font><font color="#000000">display</font><font color="#000000">.</font><font color="#000000">getText</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">+</font> <font color="#000000">label</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">083: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">084: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">085: </font></b>
+<b><font color="#006cb8">086: </font></b>      <font color="#000000">JButton</font> <font color="#000000">button</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">JButton</font><font color="#000000">(</font><font color="#000000">label</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">087: </font></b>      <font color="#000000">buttonPanel</font><font color="#000000">.</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">button</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">088: </font></b>      <font color="#000000">ActionListener</font> <font color="#000000">listener</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">DigitButtonListener</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">089: </font></b>      <font color="#000000">button</font><font color="#000000">.</font><font color="#000000">addActionListener</font><font color="#000000">(</font><font color="#000000">listener</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">090: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">091: </font></b>
+<b><font color="#006cb8">092: </font></b>   <font color="#7a9ecd">/** </font>
+<b><font color="#006cb8">093: </font></b><font color="#7a9ecd">      Gets the value that the user entered. </font>
+<b><font color="#006cb8">094: </font></b><font color="#7a9ecd">      @return the value in the text field of the keypad</font>
+<b><font color="#006cb8">095: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">096: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">double</font> <font color="#000000">getValue</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">097: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">098: </font></b>      <font color="#d05b76">return</font> <font color="#000000">Double</font><font color="#000000">.</font><font color="#000000">parseDouble</font><font color="#000000">(</font><font color="#000000">display</font><font color="#000000">.</font><font color="#000000">getText</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">099: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">100: </font></b>   
+<b><font color="#006cb8">101: </font></b>   <font color="#7a9ecd">/** </font>
+<b><font color="#006cb8">102: </font></b><font color="#7a9ecd">      Clears the dislay. </font>
+<b><font color="#006cb8">103: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">104: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">clear</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">105: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">106: </font></b>      <font color="#000000">display</font><font color="#000000">.</font><font color="#000000">setText</font><font color="#000000">(</font><font color="#00a99d">""</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">107: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">108: </font></b>   
+<b><font color="#006cb8">109: </font></b>   <font color="#d05b76">private</font> <font color="#000000">JPanel</font> <font color="#000000">buttonPanel</font><font color="#000000">;</font>
+<b><font color="#006cb8">110: </font></b>   <font color="#d05b76">private</font> <font color="#000000">JButton</font> <font color="#000000">clearButton</font><font color="#000000">;</font>
+<b><font color="#006cb8">111: </font></b>   <font color="#d05b76">private</font> <font color="#000000">JTextField</font> <font color="#000000">display</font><font color="#000000">;</font>
+<b><font color="#006cb8">112: </font></b><font color="#000000">}</font>
+<b><font color="#006cb8">113: </font></b>
+</tt></pre>

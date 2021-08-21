@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 25</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide063.html'">
+<center><small><a href="slide061.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide063.html">next</a></small></center>
+<hr></div>
+<h2>Executing SQL Statements</h2>
+<ul>
+  <li>If your statement has variable parts, use a <tt>PreparedStatement</tt>
+<pre>String query = "SELECT * WHERE Account_Number = ?";
+PreparedStatement stat = conn.prepareStatement(query);</pre></li>
+  <li>The <tt>?</tt> symbols denote variables that you fill in when you make an actual query</li>
+  <li>Call a <tt>set</tt> method to fill this variables
+    <pre>stat.setString(1, accountNumber);</pre>
+  <li>The first parameter the <tt>set</tt> methods denotes the variable position  (1 is the first <tt>?</tt>)</li>
+  <li>There are also methods <tt>setInt</tt> and <tt>setDouble</tt></li>
+  <li>After setting all variables, call <tt>executeQuery</tt> or <tt>executeUpdate</tt></li>
+</ul>
+
+
+
+<div onclick="document.location='slide063.html'"><hr>
+<center><small><a href="slide061.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide063.html">next</a></small></center>
+</div>
+</body>
+</html>

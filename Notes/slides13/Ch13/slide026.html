@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 13</title>
+</head>
+
+<body>
+<div onclick="document.location='slide027.html'">
+<center><small><a href="slide025.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide027.html">next</a></small></center>
+<hr></div>
+<h2>Syntax 13.3: Calling a Superclass Constructor</h2>
+<table cellpadding="10" width="80%" border="1" bgcolor="#ffffff">
+   <tbody>
+     <tr>
+       <td>
+      <table border="0">
+         <tbody>
+           <tr>
+             <td width="5%">&nbsp;</td>
+             <td><tt>ClassName(<i>parameters</i>)<br>
+ {<br>
+ &nbsp; &nbsp;super(<i>parameters</i>);<br>
+ &nbsp; &nbsp;. . .<br>
+ }</tt></td>
+           </tr>
+
+        </tbody>
+      </table>
+
+      <h3>Example:</h3>
+
+      <table border="0">
+         <tbody>
+           <tr>
+             <td width="5%">&nbsp;</td>
+             <td>
+            <pre>public CheckingAccount(double initialBalance)
+{
+   super(initialBalance);
+   transactionCount = 0;
+}</pre></td>
+           </tr>
+
+        </tbody>
+      </table>
+
+      <h3>Purpose:</h3>
+     To invoke a constructor of the superclass. Note that this statement
+must be the first statement of the subclass constructor.        </td>
+     </tr>
+  </tbody>
+</table>
+ <br>
+
+
+
+<div onclick="document.location='slide027.html'"><hr>
+<center><small><a href="slide025.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide027.html">next</a></small></center>
+</div>
+</body>
+</html>

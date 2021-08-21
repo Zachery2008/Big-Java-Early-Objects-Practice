@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 22</title>
+</head>
+
+<body>
+<div onclick="document.location='slide033.html'">
+<center><small><a href="slide031.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide033.html">next</a></small></center>
+<hr></div>
+<h2>Wildcard Types</h2>
+<ul>
+  <li>
+    <pre>public void addAll(LinkedList&lt;? extends E&gt; other)<br>{<br>   ListIterator&lt;E&gt; iter = other.listIterator();<br>   while (iter.hasNext()) add(iter.next());<br>}</pre>
+  </li>
+  <li>
+    <pre>public static &lt;E extends Comparable&lt;E&gt;&gt; E min(E[] a)</pre>
+  </li>
+  <li>
+    <pre>public static &lt;E extends Comparable&lt;? super E&gt;&gt; E min(E[] a)</pre>
+  </li>
+  <li>
+    <pre>static void reverse(List&lt;?&gt; list)</pre>
+You can think of that declaration as a shorthand for
+    <pre>static void &lt;T&gt; reverse(List&lt;T&gt; list)</pre>
+  </li>
+</ul>
+
+<div onclick="document.location='slide033.html'"><hr>
+<center><small><a href="slide031.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide033.html">next</a></small></center>
+</div>
+</body>
+</html>

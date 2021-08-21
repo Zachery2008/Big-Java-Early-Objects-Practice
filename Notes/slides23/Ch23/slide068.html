@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 23</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide069.html'">
+<center><small><a href="slide067.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide069.html">next</a></small></center>
+<hr></div>
+<h2>Selection Sort Algorithm Animation: <tt>startAnimation</tt></h2>
+<pre>public void startAnimation()
+{
+   int[] values = ArrayUtil.randomIntArray(30, 300);
+   sorter = new SelectionSorter(values, this);
+
+   class AnimationRunnable implements Runnable
+   {
+      public void run()
+      {
+         try
+         {
+            sorter.sort();
+         }
+         catch (InterruptedException exception)
+         {
+         }
+      }
+   }
+
+   Runnable r = new AnimationRunnable();
+   Thread t = new Thread(r);
+   t.start();
+}</pre>
+
+
+
+<div onclick="document.location='slide069.html'"><hr>
+<center><small><a href="slide067.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide069.html">next</a></small></center>
+</div>
+</body>
+</html>

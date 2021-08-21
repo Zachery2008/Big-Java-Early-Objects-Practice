@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 11</title>
+   
+</head>
+
+<body>
+<div onclick="document.location='slide026.html'">
+<center><small><a href="slide024.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide026.html">next</a></small></center>
+<hr></div>
+<h2>Using Interfaces for Callbacks</h2>
+<ul>
+  <li>You can define measurers to take on any kind of measurement
+<br>
+<pre>public class RectangleMeasurer implements Measurer
+{
+   public double measure(Object anObject)
+   {
+      Rectangle aRectangle = (Rectangle) anObject;
+      double area = aRectangle.getWidth() * aRectangle.getHeight();
+      return area;
+   }
+}</pre></li>
+  <li>Must cast from <tt>Object</tt> to <tt>Rectangle</tt>
+      <br><tt>Rectangle aRectangle = (Rectangle) anObject;</tt></li>
+  <li>Pass measurer to data set constructor:<br>
+    <tt>Measurer m = new RectangleMeasurer();<br>
+ DataSet data = new DataSet(m);<br>
+data.add(new Rectangle(5, 10, 20, 30));<br>
+data.add(new Rectangle(10, 20, 30, 40));<br>
+. . .</tt></li>
+</ul>
+
+
+
+<div onclick="document.location='slide026.html'"><hr>
+<center><small><a href="slide024.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide026.html">next</a></small></center>
+</div>
+</body>
+</html>

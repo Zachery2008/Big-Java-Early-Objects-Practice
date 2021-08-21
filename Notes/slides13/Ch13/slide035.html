@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 13</title>
+</head>
+
+<body>
+<div onclick="document.location='slide036.html'">
+<center><small><a href="slide034.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide036.html">next</a></small></center>
+<hr></div>
+<h2>Polymorphism</h2>
+<ul>
+   <li>In Java, type of a variable doesn't completely determine type of object to which it refers
+       <pre>BankAccount aBankAccount = new SavingsAccount(1000);
+// aBankAccount holds a reference to a SavingsAccount</pre></li>
+   <li>Method calls are determined by type of actual object, not type of object reference
+      <pre>BankAccount anAccount = new CheckingAccount();
+anAccount.deposit(1000); // Calls "deposit" from CheckingAccount</pre></li>
+   <li>Compiler needs to check that only legal methods are invoked
+       <pre>Object anObject = new BankAccount();
+anObject.deposit(1000); // Wrong!</pre></li>
+</ul>
+
+
+
+<div onclick="document.location='slide036.html'"><hr>
+<center><small><a href="slide034.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide036.html">next</a></small></center>
+</div>
+</body>
+</html>

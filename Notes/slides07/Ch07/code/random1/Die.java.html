@@ -1,0 +1,31 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#000000">import</font> java<font color="#000000">.</font>util<font color="#000000">.</font>Random<font color="#000000">;</font>
+<b><font color="#006cb8">02: </font></b>
+<b><font color="#006cb8">03: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">04: </font></b><font color="#7a9ecd">   This class models a die that, when cast, lands on a random</font>
+<b><font color="#006cb8">05: </font></b><font color="#7a9ecd">   face.</font>
+<b><font color="#006cb8">06: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">07: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> Die
+<b><font color="#006cb8">08: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">09: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">10: </font></b><font color="#7a9ecd">      Constructs a die with a given number of sides.</font>
+<b><font color="#006cb8">11: </font></b><font color="#7a9ecd">      @param s the number of sides, e.g. 6 for a normal die</font>
+<b><font color="#006cb8">12: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">13: </font></b>   <font color="#d05b76">public</font> <font color="#000000">Die</font><font color="#000000">(</font><font color="#d05b76">int</font> s<font color="#000000">)</font>
+<b><font color="#006cb8">14: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">15: </font></b>      sides <font color="#000000">=</font> s<font color="#000000">;</font>
+<b><font color="#006cb8">16: </font></b>      generator <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Random</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">17: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">18: </font></b>
+<b><font color="#006cb8">19: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">20: </font></b><font color="#7a9ecd">      Simulates a throw of the die</font>
+<b><font color="#006cb8">21: </font></b><font color="#7a9ecd">      @return the face of the die </font>
+<b><font color="#006cb8">22: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">23: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">int</font> <font color="#000000">cast</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">24: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">25: </font></b>      <font color="#d05b76">return</font> <font color="#89c976">1</font> <font color="#000000">+</font> generator<font color="#000000">.</font><font color="#000000">nextInt</font><font color="#000000">(</font>sides<font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">26: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">27: </font></b>   
+<b><font color="#006cb8">28: </font></b>   <font color="#d05b76">private</font> Random generator<font color="#000000">;</font>
+<b><font color="#006cb8">29: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">int</font> sides<font color="#000000">;</font>
+<b><font color="#006cb8">30: </font></b><font color="#000000">}</font>
+</tt></pre>

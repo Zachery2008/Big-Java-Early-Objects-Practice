@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 25</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide068.html'">
+<center><small><a href="slide066.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide068.html">next</a></small></center>
+<hr></div>
+<h2>Analyzing Query Results</h2>
+<ul>
+  <li>The other type of <tt>get</tt> method uses a string parameter for the column
+    name
+    <pre>String productCode = result.getString("Product_Code");
+</pre>
+  </li>
+  <li>Use <tt>getInt</tt> to fetch an integer column value
+<pre>int quantity = result.getInt("Quantity");</pre>
+</li>
+  <li>Use <tt>getDouble</tt> to fetch an double column value<pre>
+double unitPrice = result.getDouble("Price");</pre></li>
+</ul>
+
+ 
+
+<div onclick="document.location='slide068.html'"><hr>
+<center><small><a href="slide066.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide068.html">next</a></small></center>
+</div>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">util</font><font color="#000000">.</font><font color="#000000">ArrayList</font><font color="#000000">;</font>
+<b><font color="#006cb8">02: </font></b><font color="#000000">import</font> <font color="#000000">javax</font><font color="#000000">.</font><font color="#000000">xml</font><font color="#000000">.</font><font color="#000000">parsers</font><font color="#000000">.</font><font color="#000000">DocumentBuilder</font><font color="#000000">;</font>
+<b><font color="#006cb8">03: </font></b><font color="#000000">import</font> <font color="#000000">javax</font><font color="#000000">.</font><font color="#000000">xml</font><font color="#000000">.</font><font color="#000000">parsers</font><font color="#000000">.</font><font color="#000000">DocumentBuilderFactory</font><font color="#000000">;</font>
+<b><font color="#006cb8">04: </font></b><font color="#000000">import</font> <font color="#000000">javax</font><font color="#000000">.</font><font color="#000000">xml</font><font color="#000000">.</font><font color="#000000">parsers</font><font color="#000000">.</font><font color="#000000">ParserConfigurationException</font><font color="#000000">;</font>
+<b><font color="#006cb8">05: </font></b><font color="#000000">import</font> <font color="#000000">org</font><font color="#000000">.</font><font color="#000000">w3c</font><font color="#000000">.</font><font color="#000000">dom</font><font color="#000000">.</font><font color="#000000">Document</font><font color="#000000">;</font>
+<b><font color="#006cb8">06: </font></b><font color="#000000">import</font> <font color="#000000">org</font><font color="#000000">.</font><font color="#000000">w3c</font><font color="#000000">.</font><font color="#000000">dom</font><font color="#000000">.</font><font color="#000000">Element</font><font color="#000000">;</font>
+<b><font color="#006cb8">07: </font></b><font color="#000000">import</font> <font color="#000000">org</font><font color="#000000">.</font><font color="#000000">w3c</font><font color="#000000">.</font><font color="#000000">dom</font><font color="#000000">.</font><font color="#000000">Text</font><font color="#000000">;</font>
+<b><font color="#006cb8">08: </font></b>
+<b><font color="#006cb8">09: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">10: </font></b><font color="#7a9ecd">   Builds a DOM document for an array list of items.</font>
+<b><font color="#006cb8">11: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">12: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> <font color="#000000">ItemListBuilder</font>
+<b><font color="#006cb8">13: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">14: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">15: </font></b><font color="#7a9ecd">      Constructs an item list builder.</font>
+<b><font color="#006cb8">16: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">17: </font></b>   <font color="#d05b76">public</font> <font color="#000000">ItemListBuilder</font><font color="#000000">(</font><font color="#000000">)</font> 
+<b><font color="#006cb8">18: </font></b>         <font color="#d05b76">throws</font> <font color="#000000">ParserConfigurationException</font>
+<b><font color="#006cb8">19: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">20: </font></b>      <font color="#000000">DocumentBuilderFactory</font> <font color="#000000">factory</font> 
+<b><font color="#006cb8">21: </font></b>            <font color="#000000">=</font> <font color="#000000">DocumentBuilderFactory</font><font color="#000000">.</font><font color="#000000">newInstance</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">22: </font></b>      <font color="#000000">builder</font> <font color="#000000">=</font> <font color="#000000">factory</font><font color="#000000">.</font><font color="#000000">newDocumentBuilder</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">23: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">24: </font></b>
+<b><font color="#006cb8">25: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">26: </font></b><font color="#7a9ecd">      Builds a DOM document for an array list of items.</font>
+<b><font color="#006cb8">27: </font></b><font color="#7a9ecd">      @param items the items</font>
+<b><font color="#006cb8">28: </font></b><font color="#7a9ecd">      @return a DOM document describing the items</font>
+<b><font color="#006cb8">29: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">30: </font></b>   <font color="#d05b76">public</font> <font color="#000000">Document</font> <font color="#000000">build</font><font color="#000000">(</font><font color="#000000">ArrayList</font><font color="#000000">&lt;</font><font color="#000000">LineItem</font><font color="#000000">&gt;</font> <font color="#000000">items</font><font color="#000000">)</font>
+<b><font color="#006cb8">31: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">32: </font></b>      <font color="#000000">doc</font> <font color="#000000">=</font> <font color="#000000">builder</font><font color="#000000">.</font><font color="#000000">newDocument</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">33: </font></b>      <font color="#000000">doc</font><font color="#000000">.</font><font color="#000000">appendChild</font><font color="#000000">(</font><font color="#000000">createItems</font><font color="#000000">(</font><font color="#000000">items</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">34: </font></b>      <font color="#d05b76">return</font> <font color="#000000">doc</font><font color="#000000">;</font>
+<b><font color="#006cb8">35: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">36: </font></b>
+<b><font color="#006cb8">37: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">38: </font></b><font color="#7a9ecd">      Builds a DOM element for an array list of items.</font>
+<b><font color="#006cb8">39: </font></b><font color="#7a9ecd">      @param items the items</font>
+<b><font color="#006cb8">40: </font></b><font color="#7a9ecd">      @return a DOM element describing the items</font>
+<b><font color="#006cb8">41: </font></b><font color="#7a9ecd">   */</font>      
+<b><font color="#006cb8">42: </font></b>   <font color="#d05b76">private</font> <font color="#000000">Element</font> <font color="#000000">createItems</font><font color="#000000">(</font><font color="#000000">ArrayList</font><font color="#000000">&lt;</font><font color="#000000">LineItem</font><font color="#000000">&gt;</font> <font color="#000000">items</font><font color="#000000">)</font>
+<b><font color="#006cb8">43: </font></b>   <font color="#000000">{</font>      
+<b><font color="#006cb8">44: </font></b>      <font color="#000000">Element</font> <font color="#000000">e</font> <font color="#000000">=</font> <font color="#000000">doc</font><font color="#000000">.</font><font color="#000000">createElement</font><font color="#000000">(</font><font color="#00a99d">"items"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">45: </font></b>
+<b><font color="#006cb8">46: </font></b>      <font color="#d05b76">for</font> <font color="#000000">(</font><font color="#000000">LineItem</font> <font color="#000000">anItem</font> <font color="#000000">:</font> <font color="#000000">items</font><font color="#000000">)</font>
+<b><font color="#006cb8">47: </font></b>         <font color="#000000">e</font><font color="#000000">.</font><font color="#000000">appendChild</font><font color="#000000">(</font><font color="#000000">createItem</font><font color="#000000">(</font><font color="#000000">anItem</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">48: </font></b>
+<b><font color="#006cb8">49: </font></b>      <font color="#d05b76">return</font> <font color="#000000">e</font><font color="#000000">;</font>
+<b><font color="#006cb8">50: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">51: </font></b>
+<b><font color="#006cb8">52: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">53: </font></b><font color="#7a9ecd">      Builds a DOM element for an item.</font>
+<b><font color="#006cb8">54: </font></b><font color="#7a9ecd">      @param anItem the item</font>
+<b><font color="#006cb8">55: </font></b><font color="#7a9ecd">      @return a DOM element describing the item</font>
+<b><font color="#006cb8">56: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">57: </font></b>   <font color="#d05b76">private</font> <font color="#000000">Element</font> <font color="#000000">createItem</font><font color="#000000">(</font><font color="#000000">LineItem</font> <font color="#000000">anItem</font><font color="#000000">)</font>
+<b><font color="#006cb8">58: </font></b>   <font color="#000000">{</font>      
+<b><font color="#006cb8">59: </font></b>      <font color="#000000">Element</font> <font color="#000000">e</font> <font color="#000000">=</font> <font color="#000000">doc</font><font color="#000000">.</font><font color="#000000">createElement</font><font color="#000000">(</font><font color="#00a99d">"item"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">60: </font></b>
+<b><font color="#006cb8">61: </font></b>      <font color="#000000">e</font><font color="#000000">.</font><font color="#000000">appendChild</font><font color="#000000">(</font><font color="#000000">createProduct</font><font color="#000000">(</font><font color="#000000">anItem</font><font color="#000000">.</font><font color="#000000">getProduct</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">62: </font></b>      <font color="#000000">e</font><font color="#000000">.</font><font color="#000000">appendChild</font><font color="#000000">(</font><font color="#000000">createTextElement</font><font color="#000000">(</font>
+<b><font color="#006cb8">63: </font></b>            <font color="#00a99d">"quantity"</font><font color="#000000">,</font> <font color="#00a99d">""</font> <font color="#000000">+</font> <font color="#000000">anItem</font><font color="#000000">.</font><font color="#000000">getQuantity</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">64: </font></b>
+<b><font color="#006cb8">65: </font></b>      <font color="#d05b76">return</font> <font color="#000000">e</font><font color="#000000">;</font>
+<b><font color="#006cb8">66: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">67: </font></b>
+<b><font color="#006cb8">68: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">69: </font></b><font color="#7a9ecd">      Builds a DOM element for a product.</font>
+<b><font color="#006cb8">70: </font></b><font color="#7a9ecd">      @param p the product</font>
+<b><font color="#006cb8">71: </font></b><font color="#7a9ecd">      @return a DOM element describing the product</font>
+<b><font color="#006cb8">72: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">73: </font></b>   <font color="#d05b76">private</font> <font color="#000000">Element</font> <font color="#000000">createProduct</font><font color="#000000">(</font><font color="#000000">Product</font> <font color="#000000">p</font><font color="#000000">)</font>
+<b><font color="#006cb8">74: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">75: </font></b>      <font color="#000000">Element</font> <font color="#000000">e</font> <font color="#000000">=</font> <font color="#000000">doc</font><font color="#000000">.</font><font color="#000000">createElement</font><font color="#000000">(</font><font color="#00a99d">"product"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">76: </font></b>
+<b><font color="#006cb8">77: </font></b>      <font color="#000000">e</font><font color="#000000">.</font><font color="#000000">appendChild</font><font color="#000000">(</font><font color="#000000">createTextElement</font><font color="#000000">(</font>
+<b><font color="#006cb8">78: </font></b>            <font color="#00a99d">"description"</font><font color="#000000">,</font> <font color="#000000">p</font><font color="#000000">.</font><font color="#000000">getDescription</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">79: </font></b>      <font color="#000000">e</font><font color="#000000">.</font><font color="#000000">appendChild</font><font color="#000000">(</font><font color="#000000">createTextElement</font><font color="#000000">(</font>
+<b><font color="#006cb8">80: </font></b>            <font color="#00a99d">"price"</font><font color="#000000">,</font> <font color="#00a99d">""</font> <font color="#000000">+</font> <font color="#000000">p</font><font color="#000000">.</font><font color="#000000">getPrice</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">81: </font></b>
+<b><font color="#006cb8">82: </font></b>      <font color="#d05b76">return</font> <font color="#000000">e</font><font color="#000000">;</font>
+<b><font color="#006cb8">83: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">84: </font></b>
+<b><font color="#006cb8">85: </font></b>   <font color="#d05b76">private</font> <font color="#000000">Element</font> <font color="#000000">createTextElement</font><font color="#000000">(</font><font color="#000000">String</font> <font color="#000000">name</font><font color="#000000">,</font> <font color="#000000">String</font> <font color="#000000">text</font><font color="#000000">)</font>
+<b><font color="#006cb8">86: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">87: </font></b>      <font color="#000000">Text</font> <font color="#000000">t</font> <font color="#000000">=</font> <font color="#000000">doc</font><font color="#000000">.</font><font color="#000000">createTextNode</font><font color="#000000">(</font><font color="#000000">text</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">88: </font></b>      <font color="#000000">Element</font> <font color="#000000">e</font> <font color="#000000">=</font> <font color="#000000">doc</font><font color="#000000">.</font><font color="#000000">createElement</font><font color="#000000">(</font><font color="#000000">name</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">89: </font></b>      <font color="#000000">e</font><font color="#000000">.</font><font color="#000000">appendChild</font><font color="#000000">(</font><font color="#000000">t</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">90: </font></b>      <font color="#d05b76">return</font> <font color="#000000">e</font><font color="#000000">;</font>
+<b><font color="#006cb8">91: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">92: </font></b>
+<b><font color="#006cb8">93: </font></b>   <font color="#d05b76">private</font> <font color="#000000">DocumentBuilder</font> <font color="#000000">builder</font><font color="#000000">;</font>
+<b><font color="#006cb8">94: </font></b>   <font color="#d05b76">private</font> <font color="#000000">Document</font> <font color="#000000">doc</font><font color="#000000">;</font>
+<b><font color="#006cb8">95: </font></b><font color="#000000">}</font>
+</tt></pre>

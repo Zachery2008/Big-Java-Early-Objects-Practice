@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 21</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide041.html'">
+<center><small><a href="slide039.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide041.html">next</a></small></center>
+<hr></div>
+<h2>Computing Hash Codes</h2>
+<ul>
+  <li>Hash function for a string <tt>s</tt> from standard library
+    <pre>final int HASH_MULTIPLIER = 31;
+int h = 0;
+for (int i = 0; i < s.length(); i++)
+   h = HASH_MULTIPLIER * h + s.charAt(i)</pre>
+  </li>
+  <li>For example, the hash code of "eat" is
+    <pre>31 * (31 * 'e' + 'a') + 't' = 100184</pre></li>
+  <li>The hash code of "tea" is quite different, namely
+    <pre>31 * (31 * 't' + 'e') + 'a' = 114704</pre></li>
+</ul>
+ 
+
+
+<div onclick="document.location='slide041.html'"><hr>
+<center><small><a href="slide039.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide041.html">next</a></small></center>
+</div>
+</body>
+</html>

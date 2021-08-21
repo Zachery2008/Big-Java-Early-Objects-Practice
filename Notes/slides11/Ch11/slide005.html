@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 11</title>
+   
+</head>
+
+<body>
+<div onclick="document.location='slide006.html'">
+<center><small><a href="slide004.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide006.html">next</a></small></center>
+<hr></div>
+<h2>Using Interfaces for Code Reuse</h2>
+<ul>
+<li>The mechanics of analyzing the data is the same in all cases; details of measurement differ</li>
+<li>Classes could agree on a method <tt>getMeasure</tt> that obtains the measure to be used in the analysis</li>
+<li>We can implement a single reusable <tt>DataSet</tt> class whose <tt>add</tt> method looks like this:
+<pre>sum = sum + x.getMeasure();
+if (count == 0 || maximum.getMeasure() < x.getMeasure())
+   maximum = x;
+count++;</pre></li>
+<li>What is the type of the variable <tt>x</tt>?
+    <br><tt>x</tt> should refer to any class that has a <tt>getMeasure</tt> method</li>
+<li>In Java, an <i>interface type</i> is used to specify required operations
+<pre>public interface Measurable
+{
+   double getMeasure();
+}</pre></li>
+<li>Interface declaration lists all methods (and their signatures) that the interface type requires</li>
+</ul>
+
+
+
+<div onclick="document.location='slide006.html'"><hr>
+<center><small><a href="slide004.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide006.html">next</a></small></center>
+</div>
+</body>
+</html>

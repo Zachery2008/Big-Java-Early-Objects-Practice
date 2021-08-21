@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 15</title>
+</head>
+
+<body>
+<div onclick="document.location='slide013.html'">
+<center><small><a href="slide011.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide013.html">next</a></small></center>
+<hr></div>
+<h2>Checked and Unchecked Exceptions</h2>
+<ul>
+  <li>Two choices:
+     <ol><li>Handle the exception</li>
+     <li>Tell compiler that you want method to be terminated when the exception occurs
+     <ul><li>Use <tt>throws</tt> specifier so method can throw a checked exception
+     <pre>public void read(String filename) throws FileNotFoundException
+{
+   FileReader reader = new FileReader(filename);
+   Scanner in = new Scanner(reader);
+   . . .
+}</pre></li>
+<li>For multiple exceptions:
+<pre>public void read(String filename)
+      throws IOException, ClassNotFoundException</pre></li>
+<li>Keep in mind inheritance hierarchy:
+<br>If method can throw an <tt>IOException</tt> and <tt>FileNotFoundException</tt>, only use <tt>IOException</tt></li></ul></li>
+</ol></li>
+   <li>Better to declare exception than to handle it incompetently</li>
+</ul>
+ 
+ 
+
+<div onclick="document.location='slide013.html'"><hr>
+<center><small><a href="slide011.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide013.html">next</a></small></center>
+</div>
+</body>
+</html>

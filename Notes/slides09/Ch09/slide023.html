@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 9</title>
+  <style type="text/css">
+OL.withloweralpha { list-style-type: lower-alpha }
+  </style>
+</head>
+
+<body>
+<div onclick="document.location='slide024.html'">
+<center><small><a href="slide022.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide024.html">next</a></small></center>
+<hr></div>
+<h2>Call by Value and Call by Reference</h2>
+<ul>
+  <li>Call by value: Method parameters are copied into the parameter
+variables when a method starts</li>
+  <li>Call by reference: Methods can modify parameters</li>
+  <li>Java has call by value</li>
+  <li>A method can change state of object reference parameters,
+but cannot replace an object reference with another
+    <pre>public class BankAccount<br>{<br>   public void transfer(double amount, BankAccount otherAccount)<br>   {<br>      balance = balance - amount;<br>      double newBalance = otherAccount.balance + amount;<br>      otherAccount = new BankAccount(newBalance); // Won't work<br>   }<br>}</pre>
+  </li>
+</ul>
+
+<div onclick="document.location='slide024.html'"><hr>
+<center><small><a href="slide022.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide024.html">next</a></small></center>
+</div>
+</body>
+</html>

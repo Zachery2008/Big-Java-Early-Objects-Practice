@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 10</title>
+</head>
+
+<body>
+<div onclick="document.location='slide045.html'">
+<center><small><a href="slide043.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide045.html">next</a></small></center>
+<hr></div>
+<h2>Single-step Example</h2>
+<ul>
+  <li>Current line:
+    <pre>String input = in.next();<br>Word w = new Word(input);<br><code
+ class="blue">int syllables = w.countSyllables();</code>
+System.out.println("Syllables in " + input + ": " + syllables);</pre>
+  </li>
+  <li>When you step over method calls, you get to the next line:
+    <pre>String input = in.next();<br>Word w = new Word(input);<br>int syllables = w.countSyllables();<br><code
+ class="blue">System.out.println("Syllables in " + input + ": " + syllables);</code></pre>
+  </li>
+  <li>However, if you step into method calls, you enter the first line
+of the <tt>countSyllables</tt> method
+    <pre>public int countSyllables()<br>{<br><code class="blue">   int count = 0;</code>
+   int end = text.length() - 1;
+   . . .
+}</pre>
+  </li>
+</ul>
+
+<div onclick="document.location='slide045.html'"><hr>
+<center><small><a href="slide043.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide045.html">next</a></small></center>
+</div>
+</body>
+</html>

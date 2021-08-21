@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 26</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide060.html'">
+<center><small><a href="slide058.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide060.html">next</a></small></center>
+<hr></div>
+<h2>Document Type Definitions</h2>
+<ul>
+  <li>A DTD gives you control over the allowed attributes of an element
+<pre>&lt;!ATTLIST <i>Element Attribute Type Default&gt;</i></pre>
+  </li>
+  <li>Type can be any sequence of character data specified as <tt>CDATA</tt></li>
+  <li>There is no practical difference between the <tt>CDATA</tt> and <tt>#PCDATA</tt></li>
+  <li>Use <tt>CDATA</tt> in attribute declarations</li>
+  <li><tt>#PCDATA</tt> in element declarations</li>
+  <li>You can also specify a finite number of choices
+    <pre>&lt;!ATTLIST price currency (USD | EUR | JPY ) #REQUIRED &gt;</pre></li>
+  <li>You can use letters, numbers, and the characters - _ for the attribute values</li>
+</ul>
+
+ 
+
+<div onclick="document.location='slide060.html'"><hr>
+<center><small><a href="slide058.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide060.html">next</a></small></center>
+</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 26</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide032.html'">
+<center><small><a href="slide030.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide032.html">next</a></small></center>
+<hr></div>
+<h2>Parsing XML Documents: An Example</h2>
+<ul>
+  <li>We first get the number of items:
+    <pre>int itemCount = Integer.parseInt(path.evaluate(
+      "count(/items/item)", doc));</pre></li>
+  <li>For each item element, we gather the product data and construct a <tt>Product</tt> object:
+    <pre>String description = path.evaluate(
+      "/items/item[" + i + "]/product/description", doc);
+double price = Double.parseDouble(path.evaluate(
+      "/items/item[" + i + "]/product/price", doc));
+Product pr = new Product(description, price);</pre></li>
+  <li>Then we construct a <tt>LineItem</tt> object, and add it to the items array list</li>
+</ul>
+
+ 
+
+<div onclick="document.location='slide032.html'"><hr>
+<center><small><a href="slide030.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide032.html">next</a></small></center>
+</div>
+</body>
+</html>

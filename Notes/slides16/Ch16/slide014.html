@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>Horstmann Chapter 16</title>
+</head>
+
+
+<body>
+<div onclick="document.location='slide015.html'">
+<center><small><a href="slide013.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide015.html">next</a></small></center>
+<hr></div>
+<h2>Reading a Single Character from a File in Binary Format</h2>
+<ul>
+  <li>Use <tt>read</tt> method of <tt>InputStream</tt> class to read a single byte
+    <ul>
+      <li>returns the next byte as an int </li>
+      <li>or the integer -1 at end of file </li>
+    </ul>
+    <pre>InputStream in = . . .;
+int next = in.read();
+byte b;
+if (next != -1)
+   b = (byte) next;</pre>
+  </li>
+</ul>
+
+
+
+<div onclick="document.location='slide015.html'"><hr>
+<center><small><a href="slide013.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide015.html">next</a></small></center>
+</div>
+</body>
+</html>

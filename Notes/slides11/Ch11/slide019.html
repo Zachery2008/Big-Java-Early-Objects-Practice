@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 11</title>
+   
+</head>
+
+<body>
+<div onclick="document.location='slide020.html'">
+<center><small><a href="slide018.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide020.html">next</a></small></center>
+<hr></div>
+<h2>Polymorphism</h2>
+<ul>
+  <li>Interface variable holds reference to object of a class that implements the interface<br>
+    <tt>Measurable x;<br>
+ x = new BankAccount(10000);<br>
+ x = new Coin(0.1, "dime");</tt>
+<br>Note that the object to which <tt>x</tt> refers doesn't have type <tt>Measurable</tt>; the type of the object is some class that
+implements the <tt>Measurable</tt> interface</li>
+  <li>You can call any of the interface methods:<br>
+    <tt>double m = x.getMeasure();</tt></li>
+  <li>Which method is called?</li>
+</ul>
+
+
+
+<div onclick="document.location='slide020.html'"><hr>
+<center><small><a href="slide018.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide020.html">next</a></small></center>
+</div>
+</body>
+</html>

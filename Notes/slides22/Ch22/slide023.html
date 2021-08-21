@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 22</title>
+</head>
+
+<body>
+<div onclick="document.location='slide024.html'">
+<center><small><a href="slide022.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide024.html">next</a></small></center>
+<hr></div>
+<h2>Generic Methods</h2>
+<ul>
+  <li>When calling a generic method, you need not instantiate the type
+variables:
+    <pre>Rectangle[] rectangles = . . .;<br>ArrayUtil.print(rectangles);</pre>
+  </li>
+  <li>The compiler deduces that <tt>E</tt> is <tt>Rectangle</tt></li>
+  <li>You can also define generic methods that are not static</li>
+  <li>You can even have generic methods in generic classes</li>
+  <li>Cannot replace type variables with primitive types <br>
+e.g.: cannot use the generic <tt>print</tt> method to print an array
+of type <tt>int[]</tt></li>
+</ul>
+
+<div onclick="document.location='slide024.html'"><hr>
+<center><small><a href="slide022.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide024.html">next</a></small></center>
+</div>
+</body>
+</html>

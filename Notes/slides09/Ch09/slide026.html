@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 9</title>
+  <style type="text/css">
+OL.withloweralpha { list-style-type: lower-alpha }
+  </style>
+</head>
+
+<body>
+<div onclick="document.location='slide027.html'">
+<center><small><a href="slide025.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide027.html">next</a></small></center>
+<hr></div>
+<h2>Preconditions</h2>
+<ul>
+  <li>Method may throw exception if precondition violated&#8211;more on
+Chapter 15
+    <pre>if (amount &lt; 0) throw new IllegalArgumentException();<br>balance = balance + amount;</pre>
+  </li>
+  <li>Method doesn't have to test for precondition. (Test may be
+costly)
+    <pre>// if this makes the balance negative, it's the caller's fault<br>balance = balance + amount;</pre>
+  </li>
+</ul>
+
+<div onclick="document.location='slide027.html'"><hr>
+<center><small><a href="slide025.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide027.html">next</a></small></center>
+</div>
+</body>
+</html>

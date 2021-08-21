@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 9</title>
+  <style type="text/css">
+OL.withloweralpha { list-style-type: lower-alpha }
+  </style>
+</head>
+
+<body>
+<div onclick="document.location='slide033.html'">
+<center><small><a href="slide031.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide033.html">next</a></small></center>
+<hr></div>
+<h2>Static Methods</h2>
+<ul>
+  <li>Every method must be in a class</li>
+  <li>A static method is not invoked on an object</li>
+  <li>Why write a method that does not operate on an object?<br>
+Common reason: encapsulate some computation that involves only numbers.
+Numbers aren't objects, you can't invoke methods on them. E.g., <tt>x.sqrt()</tt>
+can never be legal in Java</li>
+  <li>
+    <pre>public class Financial<br>{<br>   public static double percentOf(double p, double a)<br>   {<br>      return (p / 100) * a;<br>   }<br>   // More financial methods can be added here.<br>}</pre>
+  </li>
+  <li>Call with class name instead of object:<br>
+    <tt>double tax = <code class="blue"><b>Financial.</b></code>percentOf(taxRate,
+total);</tt></li>
+  <li><tt>main</tt> is static&#8211;there aren't any objects yet</li>
+</ul>
+<br>
+
+<div onclick="document.location='slide033.html'"><hr>
+<center><small><a href="slide031.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide033.html">next</a></small></center>
+</div>
+</body>
+</html>

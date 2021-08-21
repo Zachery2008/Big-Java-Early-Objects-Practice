@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 27</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide014.html'">
+<center><small><a href="slide012.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide014.html">next</a></small></center>
+<hr></div>
+<h2>A Simple JSF Program</h2>
+<ul>
+  <li>This file defines an object <tt>dateTime</tt> with type <tt>java.util.Date</tt></li>
+  <li>A new object is constructed with each "request"</li>
+  <li>Whenever a browser requests the page,
+    <ul><li>A new <tt>Date</tt> object is constructed, and</li>
+    <li>It is attached to the <tt>dateTime</tt> variable</li>
+    <li>The <tt>Date</tt> constructor constructs an object with the current time</li></ul></li>
+  <li><tt>#{dateTime.time}</tt> calls <tt>getTime</tt> of <tt>dateTime</tt></li>
+  <li>The <tt>h:outputText</tt> tag converts the result of that method call to text</li>
+</ul>
+
+
+
+<div onclick="document.location='slide014.html'"><hr>
+<center><small><a href="slide012.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide014.html">next</a></small></center>
+</div>
+</body>
+</html>

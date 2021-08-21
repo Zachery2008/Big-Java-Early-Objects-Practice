@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 9</title>
+  <style type="text/css">
+OL.withloweralpha { list-style-type: lower-alpha }
+  </style>
+</head>
+
+<body>
+<div onclick="document.location='slide009.html'">
+<center><small><a href="slide007.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide009.html">next</a></small></center>
+<hr></div>
+<h2>Cohesion<br>
+</h2>
+<ul>
+  <li><tt>CashRegister</tt>, as described above, involves two concepts:
+    <i>cash register</i> and <i>coin</i></li>
+  <li>Solution: Make two classes:<br>
+    <pre>public class Coin<br>{<br>   public Coin(double aValue, String aName){ . . . }<br>   public double getValue(){ . . . }<br>   . . .<br>}<br><br>public class CashRegister<br>{<br>   public void enterPayment(int coinCount, Coin coinType) { . . . }<br>   . . .<br>}<br></pre>
+  </li>
+</ul>
+
+<div onclick="document.location='slide009.html'"><hr>
+<center><small><a href="slide007.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide009.html">next</a></small></center>
+</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 25</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide035.html'">
+<center><small><a href="slide033.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide035.html">next</a></small></center>
+<hr></div>
+<h2>Calculations</h2>
+<ul>
+  <li> Use the <tt>COUNT</tt> function to find out how many customers there are in California
+    <pre>SELECT COUNT(*) FROM Customer WHERE State = 'CA'</pre>
+  </li>
+  <li>The * means you want to calculate whole records</li>
+<li>Other functions are <tt>SUM</tt>, <tt>AVG</tt>, <tt>MAX</tt>, <tt>MIN</tt></li>
+  <li>These functions must access a specific column:
+<pre>SELECT AVG(Price) FROM Product</pre></li>
+</ul>
+ 
+
+
+<div onclick="document.location='slide035.html'"><hr>
+<center><small><a href="slide033.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide035.html">next</a></small></center>
+</div>
+</body>
+</html>

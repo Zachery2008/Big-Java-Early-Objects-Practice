@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 27</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide044.html'">
+<center><small><a href="slide042.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide044.html">next</a></small></center>
+<hr></div>
+<h2>JSF Components: Button Groups and Menus</h2>
+<ul>
+  <li>Require two properties:
+    <ul><li>the collection of possible choices</li>
+    <li>the actual choice</li></ul></li>
+  <li>The value attribute specifies the actual choice to be displayed</li>
+  <li>The collection of possible choices is defined by a nested <tt>f:selectItems</tt> tag
+<pre>&lt;h:selectOneRadio value="#{creditCard.expirationMonth}"
+      layout="pageDirection"&gt;
+   &lt;f:selectItems value="#{creditCard.monthChoices}"/&gt;
+&lt;/h:selectOneRadio&gt;</pre></li>
+  <li><tt>monthChoices</tt> must have a type that can describe a list of choices
+    <ul><li>For example, <tt>Map</tt></li>
+  <li>The keys of the map are the labels</li>
+  <li>The corresponding map values are the label values</li></ul></li>
+</ul>
+
+
+
+<div onclick="document.location='slide044.html'"><hr>
+<center><small><a href="slide042.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide044.html">next</a></small></center>
+</div>
+</body>
+</html>

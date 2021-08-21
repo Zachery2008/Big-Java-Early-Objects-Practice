@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 15</title>
+</head>
+
+<body>
+<div onclick="document.location='slide018.html'">
+<center><small><a href="slide016.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide018.html">next</a></small></center>
+<hr></div>
+<h2>Catching Exceptions</h2>
+<ul>
+   <li>Statements in <tt>try</tt> block are executed</li>
+   <li>If no exceptions occur, <tt>catch</tt> clauses are skipped</li>
+   <li>If exception of matching type occurs, execution jumps to <tt>catch</tt>   clause</li>
+   <li>If exception of another type occurs, it is thrown until it is caught by another <tt>try</tt> block</li>
+   <li><tt>catch (IOException exception) block</tt>
+      <ul><li><tt>exception</tt> contains reference to the exception object that was thrown</li>
+      <li><tt>catch</tt> clause can analyze object to find out more details</li>
+      <li><tt>exception.printStackTrace()</tt>: printout of chain of method calls that lead to exception</li></ul>
+</li>
+</ul>
+ 
+
+
+<div onclick="document.location='slide018.html'"><hr>
+<center><small><a href="slide016.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide018.html">next</a></small></center>
+</div>
+</body>
+</html>

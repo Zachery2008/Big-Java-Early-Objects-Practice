@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 11</title>
+   
+</head>
+
+<body>
+<div onclick="document.location='slide016.html'">
+<center><small><a href="slide014.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide016.html">next</a></small></center>
+<hr></div>
+<h2>Converting Between Class and Interface Types</h2>
+<ul>
+  <li>You can convert from a class type to an interface type, provided the class implements the interface</li>
+  <li><tt>BankAccount account = new BankAccount(10000);<br>
+ Measurable x = account; // OK</tt></li>
+  <li><tt>Coin dime = new Coin(0.1, "dime");<br>
+Measurable x = dime; // Also OK</tt></li>
+  <li>Cannot convert between unrelated types<br>
+    <tt>Measurable x = new Rectangle(5, 10, 20, 30); // ERROR</tt><br>
+  Because <tt>Rectangle</tt> doesn't implement <tt>Measurable</tt></li>
+</ul>
+
+
+
+<div onclick="document.location='slide016.html'"><hr>
+<center><small><a href="slide014.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide016.html">next</a></small></center>
+</div>
+</body>
+</html>

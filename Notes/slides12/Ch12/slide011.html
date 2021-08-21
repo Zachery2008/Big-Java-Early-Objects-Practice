@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 12</title>
+</head>
+
+<body>
+<div onclick="document.location='slide012.html'">
+<center><small><a href="slide010.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide012.html">next</a></small></center>
+<hr></div>
+<h2>Building Applications with Buttons</h2>
+<ul>
+  <li>Listener class adds interest and displays the new balance:
+<pre>class AddInterestListener implements ActionListener
+{
+   public void actionPerformed(ActionEvent event)
+   {
+      double interest = account.getBalance() * INTEREST_RATE / 100;
+      account.deposit(interest);
+      label.setText("balance=" + account.getBalance());
+   }
+}</pre></li>
+  <li>Add <tt>AddInterestListener</tt> as inner class so it can have access to surrounding <tt>final</tt> variables (<tt>account</tt> and <tt>label</tt>)</li>
+</ul>
+
+
+
+<div onclick="document.location='slide012.html'"><hr>
+<center><small><a href="slide010.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide012.html">next</a></small></center>
+</div>
+</body>
+</html>

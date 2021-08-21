@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 9</title>
+  <style type="text/css">
+OL.withloweralpha { list-style-type: lower-alpha }
+  </style>
+</head>
+
+<body>
+<div onclick="document.location='slide030.html'">
+<center><small><a href="slide028.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide030.html">next</a></small></center>
+<hr></div>
+<h2>Postconditions</h2>
+<ul>
+  <li>Condition that is true after a method has completed</li>
+  <li>If method call is in accordance with preconditions, it must
+ensure that postconditions are valid</li>
+  <li>There are two kinds of postconditions:
+    <ol>
+      <li>The return value is computed correctly</li>
+      <li>The object is in a certain state after the method call is
+completed</li>
+    </ol>
+  </li>
+  <li>
+    <pre>/**<br>   Deposits money into this account.<br>   (Postcondition: getBalance() &gt;= 0)<br>   @param amount the amount of money to deposit<br>   (Precondition: amount &gt;= 0)<br>*/</pre>
+  </li>
+  <li>Don't document trivial postconditions that repeat the <tt>@return</tt>
+clause</li>
+  <li>Formulate pre- and postconditions only in terms of the interface
+of the class
+    <pre>amount &lt;= getBalance() // this is the way to state a postcondition<br>amount &lt;= balance // wrong postcondition formulation</pre>
+  </li>
+  <li>Contract: If caller fulfills precondition, method must fulfill
+postcondition</li>
+</ul>
+<br>
+
+<div onclick="document.location='slide030.html'"><hr>
+<center><small><a href="slide028.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide030.html">next</a></small></center>
+</div>
+</body>
+</html>

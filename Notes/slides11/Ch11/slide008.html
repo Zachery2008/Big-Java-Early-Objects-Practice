@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 11</title>
+   
+</head>
+
+<body>
+<div onclick="document.location='slide009.html'">
+<center><small><a href="slide007.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide009.html">next</a></small></center>
+<hr></div>
+<h2>Implementing an Interface Type</h2>
+<ul>
+  <li>Use <tt>implements</tt> keyword to indicate that a class implements an interface type
+<pre>public class BankAccount <code class="blue">implements Measurable</code>
+{
+   public double getMeasure()
+   {
+      return balance;
+   }
+   <i>// Additional methods and fields</i>
+}</pre></li>
+  <li>A class can implement more than one interface type
+      <ul><li>Class must define all the methods that are required by all the interfaces it implements</li></ul></li>
+  <li>Another example:
+<pre>public class Coin implements Measurable
+{
+   public double getMeasure()
+   {
+      return value;
+   }
+   . . .
+}</pre></li>
+</ul>
+
+
+
+<div onclick="document.location='slide009.html'"><hr>
+<center><small><a href="slide007.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide009.html">next</a></small></center>
+</div>
+</body>
+</html>

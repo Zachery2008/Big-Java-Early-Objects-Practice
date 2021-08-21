@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Horstmann Chapter 8</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+
+<body>
+<div onclick="document.location='slide025.html'">
+<center><small><a href="slide023.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide025.html">next</a></small></center>
+</div><hr>
+<h2>The Generalized <tt>for</tt> Loop</h2>
+<ul>
+  <li>Traverses all elements of a collection:<br>
+    <pre>double[] data = . . .;<br>double sum = 0;<br>for (double e : data) // You should read this loop as "for each e in data"<br>{<br>   sum = sum + e;<br>}</pre>
+  </li>
+  <li>Traditional alternative:<br>
+    <pre>double[] data = . . .;<br>double sum = 0;<br>for (int i = 0; i &lt; data.length; i++)<br>{<br>   double e = data[i];<br>   sum = sum + e;<br>}<br></pre>
+  </li>
+</ul>
+
+<hr>
+<div onclick="document.location='slide025.html'">
+<center><small><a href="slide023.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide025.html">next</a></small></center>
+</div>
+</body>
+</html>

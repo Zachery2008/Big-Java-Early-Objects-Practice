@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 10</title>
+</head>
+
+<body>
+<div onclick="document.location='slide053.html'">
+<center><small><a href="slide051.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide053.html">next</a></small></center>
+<hr></div>
+<h2>Debugging the Word Constructor</h2>
+<ul>
+  <li>Supply <tt>"hello"</tt> input again</li>
+  <li>Break past the end of second loop in constructor</li>
+  <li>Inspect <tt>i</tt> and <tt>j</tt></li>
+  <li>They are 0 and 4&#8211;makes sense since the input consists of letters</li>
+  <li>Why is <tt>text</tt> set to <tt>"hell"</tt>?</li>
+  <li>Off-by-one error: Second parameter of <tt>substring</tt> is the
+first position <i>not</i> to include</li>
+  <li><tt>text = substring(i, j);<br>
+    </tt>should be<br>
+    <tt>text = substring(i, j + 1);</tt><br>
+  </li>
+</ul>
+
+<div onclick="document.location='slide053.html'"><hr>
+<center><small><a href="slide051.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide053.html">next</a></small></center>
+</div>
+</body>
+</html>

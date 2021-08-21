@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Horstmann Chapter 5</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+
+<body>
+<div onclick="document.location='slide024.html'">
+<center><small><a href="slide022.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide024.html">next</a></small></center>
+</div><hr>
+<h2>Graphical Shapes</h2>
+<ul>
+  <li><tt>Rectangle</tt>, <tt>Ellipse2D.Double</tt>, and <tt>Line2D.Double</tt>
+describe graphical shapes</li>
+  <li>We won't use the <tt>.Float</tt> classes</li>
+  <li>These classes are inner classes&#8211;doesn't matter to us except for
+the <tt>import</tt> statement:
+    <pre>import java.awt.geom.Ellipse2D; // no .Double</pre>
+  </li>
+  <li>Must construct <i>and draw</i> the shape <br>
+    <pre>Ellipse2D.Double ellipse = new Ellipse2D.Double(x, y, width, height);<br>g2.draw(ellipse);</pre>
+  </li>
+</ul>
+
+<hr>
+<div onclick="document.location='slide024.html'">
+<center><small><a href="slide022.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide024.html">next</a></small></center>
+</div>
+</body>
+</html>

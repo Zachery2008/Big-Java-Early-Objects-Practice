@@ -1,0 +1,556 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 10</title>
+</head>
+<body>
+<div>
+<h2>Chapter 10</h2>
+<h1>Testing and Debugging </h1>
+<br>
+</div>
+<h2>Chapter Goals</h2>
+<ul>
+  <li>To learn how to carry out unit tests</li>
+  <li>To understand the principles of test case selection and evaluation</li>
+  <li>To learn how to use logging</li>
+  <li>To become familiar with using a debugger</li>
+  <li>To learn strategies for effective debugging</li>
+</ul>
+<h2>Unit Tests</h2>
+<ul>
+  <li>The single most important testing tool</li>
+  <li>Checks a single method or a set of cooperating methods</li>
+  <li>You don't test the complete program that you are developing; you
+test the classes in isolation</li>
+  <li>For each test, you provide a simple class called a <i>test
+harness</i></li>
+  <li>Test harness feeds parameters to the methods being tested</li>
+</ul>
+<h2>Example: Setting Up Test Harnesses</h2>
+<ul>
+  <li>To compute the square root of <i>a</i> use a common algorithm:
+    <ol>
+      <li>Guess a value <i>x</i> that might be somewhat close to the
+desired square root (<i>x</i> = <i>a</i> is ok)</li>
+      <li>Actual square root lies between <i>x</i> and <i>a/x</i></li>
+      <li>Take midpoint (<i>x </i>+ <i>a</i>/<i>x</i>) / 2 as a
+better guess <br>
+        <img src="images/approximating-root.png" alt=""></li>
+      <li>Repeat the procedure. Stop when two successive approximations
+are very close to each other</li>
+    </ol>
+  </li>
+  <li>Method converges rapidly. Square root of 100:
+    <pre>Guess #1: 50.5<br>Guess #2: 26.24009900990099<br>Guess #3: 15.025530119986813<br>Guess #4: 10.840434673026925<br>Guess #5: 10.032578510960604<br>Guess #6: 10.000052895642693<br>Guess #7: 10.000000000139897<br>Guess #8: 10.0</pre>
+  </li>
+</ul>
+<h2>File RootApproximator.java</h2>
+<iframe src="code/root1/RootApproximator.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>File Numeric.java</h2>
+<iframe src="code/root1/Numeric.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>File RootApproximatorTester.java</h2>
+<iframe src="code/root1/RootApproximatorTester.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Testing the Program</h2>
+<ul>
+  <li>Output
+    <pre>Enter a number: <code class="blue">100</code>
+Guess #1: 50.5
+Guess #2: 26.24009900990099
+Guess #3: 15.025530119986813
+Guess #4: 10.840434673026925
+Guess #5: 10.032578510960604
+Guess #6: 10.000052895642693
+Guess #7: 10.000000000139897
+Guess #8: 10.0
+Guess #9: 10.0
+Guess #10: 10.0
+Square root: 10.0</pre>
+  </li>
+  <li>Does the <tt>RootApproximator</tt> class work correctly for all
+inputs? <br>
+It needs to be tested with more values</li>
+  <li>Re-testing with other values repetitively is not a good idea; the
+tests are not repeatable</li>
+  <li>If a problem is fixed and re-testing is needed, you would need to
+remember your inputs</li>
+  <li>Solution: Write test harnesses that make it easy to repeat unit
+tests</li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li>What is the advantage of unit testing?</li>
+  <li>Why should a test harness be repeatable?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li>It is easier to test methods and classes in isolation than it is
+to understand failures in a complex program.</li>
+  <li>It should be easy and painless to repeat a test after fixing a
+bug.</li>
+</ol>
+<br>
+<h2>Providing Test Input</h2>
+<ul>
+  <li>There are various mechanisms for providing test cases</li>
+  <li>One mechanism is to hardwire test inputs into the test harness</li>
+  <li>Simply execute the test harness whenever you fix a bug in the
+class that is being tested</li>
+  <li>Alternative: place inputs on a file instead</li>
+</ul>
+<h2>File RootApproximatorHarness1.java</h2>
+<iframe src="code/root2/RootApproximatorHarness1.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe><br>
+Output
+<pre>   square root of 100.0 = 10.0<br>   square root of 4.0 = 2.0<br>   square root of 2.0 = 1.414213562373095<br>   square root of 1.0 = 1.0<br>   square root of 0.25 = 0.5<br>   square root of 0.01 = 0.1</pre>
+<h2>Providing Test Input</h2>
+<ul>
+  <li>You can also generate test cases automatically</li>
+  <li>For few possible inputs, feasible to run through (representative)
+number of them with a loop</li>
+</ul>
+<h2>File RootApproximatorHarness2.java</h2>
+<iframe src="code/root2/RootApproximatorHarness2.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe><br>
+Output
+<pre>   square root of 1.0 = 1.0<br>   square root of 1.5 = 1.224744871391589<br>   square root of 2.0 = 1.414213562373095<br>   . . .<br>   square root of 9.0 = 3.0<br>   square root of 9.5 = 3.0822070014844885<br>   square root of 10.0 = 3.162277660168379</pre>
+<h2>Providing Test Input</h2>
+<ul>
+  <li>Previous test restricted to small subset of values</li>
+  <li>Alternative: random generation of test cases</li>
+</ul>
+<h2>File RootApproximatorHarness3.java</h2>
+<iframe src="code/root2/RootApproximatorHarness3.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe><br>
+Output
+<pre>   square root of 810.4079626570873 = 28.467665212607223<br>   square root of 480.50291114306344 = 21.9203766195534<br>   square root of 643.5463246844379 = 25.36821485017103<br>   square root of 506.5708496713842 = 22.507128863348704<br>   square root of 539.6401504334708 = 23.230156057019308<br>   square root of 795.0220214851004 = 28.196134867834285<br>   . . .</pre>
+<h2>Providing Test Input</h2>
+<ul>
+  <li>Selecting good test cases is an important skill for debugging
+programs</li>
+  <li>Test all features of the methods that you are testing</li>
+  <li>Test typical test cases <br>
+100, 1/4, 0.01, 2, 10E12, for the <tt>SquareRootApproximator</tt></li>
+  <li>Test boundary test cases: test cases that are at the boundary of
+acceptable inputs <br>
+0, for the <tt>SquareRootApproximator</tt></li>
+  <li>Programmers often make mistakes dealing with boundary conditions <br>
+Division by zero, extracting characters from empty strings, and
+accessing null pointers</li>
+  <li>Gather negative test cases: inputs that you expect program to
+reject <br>
+Example: square root of -2. Test passes if harness terminates with
+assertion failure (if assertion checking is enabled)</li>
+</ul>
+<h2>Reading Test Inputs from a File</h2>
+<ul>
+  <li>More elegant to place test values in a file</li>
+  <li>Input redirection:
+    <pre>java Program &lt; data.txt</pre>
+  </li>
+  <li>Some IDEs do not support input redirection. Then, use command
+window (shell).</li>
+  <li>Output redirection:
+    <pre>java Program &gt; output.txt</pre>
+  </li>
+</ul>
+<h2>File RootApproximatorHarness4.java</h2>
+<iframe src="code/root2/RootApproximatorHarness4.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Reading Test Inputs from a File</h2>
+<ul>
+  <li>File test.in:
+    <pre><code class="blue">1</code> 100<br><code class="blue">2</code> 4<br><code
+ class="blue">3</code> 2<br><code class="blue">4</code> 1<br><code
+ class="blue">5</code> 0.25<br><code class="blue">6</code> 0.01</pre>
+  </li>
+  <li>Run the program:
+    <pre>java RootApproximatorHarness4 &lt; test.in &gt; test.out</pre>
+  </li>
+  <li>File test.out:
+    <pre><code class="blue">1</code> square root of 100.0 = 10.0<br><code
+ class="blue">2</code> square root of 4.0 = 2.0<br><code class="blue">3</code> square root of 2.0 = 1.414213562373095<br><code
+ class="blue">4</code> square root of 1.0 = 1.0<br><code class="blue">5</code> square root of 0.25 = 0.5<br><code
+ class="blue">6</code> square root of 0.01 = 0.1</pre>
+  </li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="3">How can you repeat a unit test without having to retype
+input values?</li>
+  <li>Why is it important to test boundary cases?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="3">By putting the values in a file, or by generating them
+programmatically.</li>
+  <li>Programmers commonly make mistakes when dealing with boundary
+conditions.</li>
+</ol>
+<br>
+<h2>Test Case Evaluation</h2>
+<ul>
+  <li>How do you know whether the output is correct?</li>
+  <li>Calculate correct values by hand <br>
+E.g., for a payroll program, compute taxes manually</li>
+  <li>Supply test inputs for which you know the answer <br>
+E.g., square root of 4 is 2 and square root of 100 is 10</li>
+  <li>Verify that the output values fulfill certain properties <br>
+E.g., square root squared = original value</li>
+  <li>Use an Oracle: a slow but reliable method to compute a result for
+testing purposes <br>
+E.g., use <tt>Math.pow</tt> to slower calculate <i>x</i><sup>1/2</sup>
+(equivalent to the square root of <i>x</i>)</li>
+</ul>
+<h2>File RootApproximatorHarness5.java</h2>
+<iframe src="code/root3/RootApproximatorHarness5.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Output</h2>
+<pre>Test passed: x = 913.6505141736327, root squared = 913.6505141736328<br>Test passed: x = 810.4959723987972, root squared = 810.4959723987972<br>Test passed: x = 503.84630929985883, root squared = 503.8463092998589<br>Test passed: x = 115.4885096006315, root squared = 115.48850960063153<br>Test passed: x = 384.973238438713, root squared = 384.973238438713<br>. . .<br>Pass: 100<br>Fail: 0</pre>
+<h2>File RootApproximatorHarness6.java</h2>
+<iframe src="code/root3/RootApproximatorHarness6.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Output</h2>
+<pre>Test passed: square root = 718.3849112194539, oracle = 718.3849112194538<br>Test passed: square root = 641.2739466673618, oracle = 641.2739466673619<br>Test passed: square root = 896.3559528159169, oracle = 896.3559528159169<br>Test passed: square root = 591.4264541724909, oracle = 591.4264541724909<br>Test passed: square root = 721.029957736384, oracle = 721.029957736384<br>. . .<br>Pass: 100<br>Fail: 0</pre>
+<h2>Self Check</h2>
+<ol>
+  <li value="5">Your task is to test a class that computes sales taxes
+for an Internet shopping site. Can you use an oracle?</li>
+  <li>Your task is to test a method that computes the area of an
+arbitrary polygon. Which polygons with known areas can you use as test
+inputs?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="5">Probably not&#8211;there is no easily accessible but slow
+mechanism to compute sales taxes. You will probably need to verify the
+calculations by hand.</li>
+  <li>There are well-known formulas for the areas of triangles,
+rectangles, and regular <i>n</i>-gons.</li>
+</ol>
+<br>
+<h2>Regression Testing</h2>
+<ul>
+  <li>Save test cases</li>
+  <li>Use saved test cases in subsequent versions</li>
+  <li>A test suite is a set of tests for repeated testing</li>
+  <li>Cycling = bug that is fixed but reappears in later versions</li>
+  <li>Regression testing: repeating previous tests to ensure that known
+failures of prior versions do not appear in new versions</li>
+</ul>
+<h2>Test Coverage</h2>
+<ul>
+  <li>Black-box testing: test functionality without consideration of
+internal structure of implementation</li>
+  <li>White-box testing: take internal structure into account when
+designing tests</li>
+  <li>Test coverage: measure of how many parts of a program have been
+tested</li>
+  <li>Make sure that each part of your program is exercised at least
+once by one test case <br>
+E.g., make sure to execute each branch in at least one test case</li>
+  <li>Tip: write first test cases before program is written completely
+&#8594; gives insight into what program should do</li>
+  <li>Modern programs can be challenging to test
+    <ul>
+      <li>Graphical user interfaces (use of mouse)</li>
+      <li>Network connections (delay and failures)</li>
+      <li>There are tools to automate testing in this scenarios</li>
+      <li>Basic principles of regression testing and complete coverage
+still hold</li>
+    </ul>
+  </li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="7">Suppose you modified the code for a method. Why do you
+want to repeat tests that already passed with the previous version of
+the code?</li>
+  <li>Suppose a customer of your program finds an error. What action
+should you take beyond fixing the error?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="7">It is possible to introduce errors when modifying code.</li>
+  <li>Add a test case to the test suite that verifies that the error is
+fixed.</li>
+</ol>
+<br>
+<h2>Unit Testing with JUnit</h2>
+<ul>
+  <li>http://junit.org</li>
+  <li>Built into some IDEs like BlueJ and Eclipse</li>
+  <li>Philosophy: whenever you implement a class, also make a companion
+test class</li>
+</ul>
+<img src="images/junit.png" alt="">
+<h2>Program Trace</h2>
+<ul>
+  <li>Messages that show the path of execution
+    <pre>if (status == SINGLE)<br>{<br>   System.out.println("status is SINGLE");<br>   . . . <br>}<br>. . .</pre>
+  </li>
+  <li>Drawback: Need to remove them when testing is complete, stick
+them back in when another error is found</li>
+  <li>Solution: use the <tt>Logger</tt> class to turn off the trace
+messages without removing them from the program</li>
+</ul>
+<h2>Logging</h2>
+<ul>
+  <li>Logging messages can be deactivated when testing is complete</li>
+  <li>Use global object <tt>Logger.global</tt></li>
+  <li>Log a message
+    <pre>Logger.global.info("status is SINGLE");</pre>
+  </li>
+  <li>By default, logged messages are printed. Turn them off with
+    <pre>Logger.global.setLevel(Level.OFF);</pre>
+  </li>
+  <li>Logging can be a hassle (should not log too much nor too little)</li>
+  <li>Some programmers prefer debugging (next section) to logging</li>
+</ul>
+<h2>Logging</h2>
+<ul>
+  <li>When tracing execution flow, the most important events are
+entering and exiting a method</li>
+  <li>At the beginning of a method, print out the parameters:
+    <pre>public TaxReturn(double anIncome, int aStatus)<br>{<br>   Logger.global.info("Parameters: anIncome = " + anIncome<br>      + " aStatus = " + aStatus);<br>   . . .<br>}</pre>
+  </li>
+  <li>At the end of a method, print out the return value:
+    <pre>public double getTax()<br>{<br>   . . .<br>   Logger.global.info("Return value = " + tax);<br>   return tax;<br>}</pre>
+  </li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="9">Should logging be activated during testing or when a
+program is used by its customers?</li>
+  <li>Why is it better to send trace messages to <tt>Logger.global</tt>
+than to <tt>System.out</tt>?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="9">Logging messages report on the internal workings of
+your program&#8211;your customers
+would not want to see them. They are intended for testing only.</li>
+  <li>It is easy to deactivate <tt>Logger.global</tt> when you no
+longer want to see the trace
+messages, and to reactivate it when you need to see them again.</li>
+</ol>
+<h2>Using a Debugger</h2>
+<ul>
+  <li>Debugger = program to run your program and analyze its run-time
+behavior</li>
+  <li>A debugger lets you stop and restart your program, see contents
+of variables, and step through it</li>
+  <li>The larger your programs, the harder to debug them simply by
+logging</li>
+  <li>Debuggers can be part of your IDE (Eclipse, BlueJ) or separate
+programs (JSwat)</li>
+  <li>Three key concepts:
+    <ul>
+      <li>Breakpoints</li>
+      <li>Single-stepping</li>
+      <li>Inspecting variables</li>
+    </ul>
+  </li>
+</ul>
+<h2>The Debugger Stopping at a Breakpoint</h2>
+<img src="images/breakpoint.png" alt="">
+<h2>Inspecting Variables</h2>
+<img src="images/inspecting.png" alt="">
+<h2>Debugging</h2>
+<ul>
+  <li>Execution is suspended whenever a breakpoint is reached</li>
+  <li>In a debugger, a program runs at full speed until it reaches a
+breakpoint</li>
+  <li>When execution stops you can:
+    <ul>
+      <li>Inspect variables</li>
+      <li>Step through the program a line at a time</li>
+      <li>Or, continue running the program at full speed until it
+reaches the next breakpoint</li>
+    </ul>
+  </li>
+  <li>When program terminates, debugger stops as well</li>
+  <li>Breakpoints stay active until you remove them</li>
+  <li>Two variations of single-step command:
+    <ul>
+      <li>Step Over: skips method calls</li>
+      <li>Step Into: steps inside method calls</li>
+    </ul>
+  </li>
+</ul>
+<h2>Single-step Example</h2>
+<ul>
+  <li>Current line:
+    <pre>String input = in.next();<br>Word w = new Word(input);<br><code
+ class="blue">int syllables = w.countSyllables();</code>
+System.out.println("Syllables in " + input + ": " + syllables);</pre>
+  </li>
+  <li>When you step over method calls, you get to the next line:
+    <pre>String input = in.next();<br>Word w = new Word(input);<br>int syllables = w.countSyllables();<br><code
+ class="blue">System.out.println("Syllables in " + input + ": " + syllables);</code></pre>
+  </li>
+  <li>However, if you step into method calls, you enter the first line
+of the <tt>countSyllables</tt> method
+    <pre>public int countSyllables()<br>{<br><code class="blue">   int count = 0;</code>
+   int end = text.length() - 1;
+   . . .
+}</pre>
+  </li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="11">In the debugger, you are reaching a call to <tt>System.out.println</tt>.
+Should you step into the method or step over it?</li>
+  <li>In the debugger, you are reaching the beginning of a long method
+with a couple of loops inside. You want to find out the return value
+that is computed at the end of the method. Should you set a breakpoint,
+or should you step through the method?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="11">You should step over it because you are not interested
+in debugging the internals
+of the <tt>println</tt> method.</li>
+  <li>You should set a breakpoint. Stepping through loops can be
+tedious.</li>
+</ol>
+<br>
+<h2>Sample Debugging Session</h2>
+<ul>
+  <li><tt>Word</tt>&nbsp; class counts syllables in a word</li>
+  <li>Each group of adjacent vowels (a, e, i, o, u, y) counts as one
+syllable</li>
+  <li>However, an e at the end of a word doesn't count as a syllable</li>
+  <li>If algorithm gives count of 0, increment to 1</li>
+  <li>Constructor removes non-letters at beginning and end</li>
+</ul>
+<h2>File Word.java</h2>
+<iframe src="code/debugger/Word.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>File WordTester.java</h2>
+<iframe src="code/debugger/WordTester.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Debug the Program</h2>
+<ul>
+  <li>Buggy output (for input "<tt>hello yellow peach</tt>"):
+    <pre>Syllables in hello: 1<br>Syllables in yellow: 1<br>Syllables in peach: 1</pre>
+  </li>
+  <li>Set breakpoint in first line of <tt>countSyllables</tt> of <tt>Word</tt>
+class</li>
+  <li>Start program, supply input. Program stops at breakpoint</li>
+  <li>Method checks if final letter is <tt>'e'</tt><br>
+    <img src="images/countSyllables.png" alt=""> </li>
+  <li>Check if this works: step to line where check is made and inspect
+variable <tt>ch</tt></li>
+  <li>Should contain final letter but contains <tt>'l'</tt><br>
+  </li>
+</ul>
+<h2>More Problems Found</h2>
+<img src="images/variables.png" alt="">
+<ul>
+  <li><tt>end</tt> is set to 3, not 4</li>
+  <li><tt>text</tt> contains <tt>"hell"</tt>, not <tt>"hello"</tt></li>
+  <li>No wonder <tt>countSyllables</tt> returns 1</li>
+  <li>Culprit is elsewhere</li>
+  <li>Can't go back in time</li>
+  <li>Restart and set breakpoint in <tt>Word</tt> constructor</li>
+</ul>
+<h2>Debugging the Word Constructor</h2>
+<ul>
+  <li>Supply <tt>"hello"</tt> input again</li>
+  <li>Break past the end of second loop in constructor</li>
+  <li>Inspect <tt>i</tt> and <tt>j</tt></li>
+  <li>They are 0 and 4&#8211;makes sense since the input consists of letters</li>
+  <li>Why is <tt>text</tt> set to <tt>"hell"</tt>?</li>
+  <li>Off-by-one error: Second parameter of <tt>substring</tt> is the
+first position <i>not</i> to include</li>
+  <li><tt>text = substring(i, j);<br>
+    </tt>should be<br>
+    <tt>text = substring(i, j + 1);</tt><br>
+  </li>
+</ul>
+<h2>Debugging the Word Constructor</h2>
+<img src="images/constructor.png" alt="">
+<h2>Another Error<br>
+</h2>
+<ul>
+  <li>Fix the error</li>
+  <li>Recompile</li>
+  <li>Test again:
+    <pre>Syllables in hello: 1<br>Syllables in yellow: 1<br>Syllables in peach: 1</pre>
+  </li>
+  <li>Oh no, it's still not right</li>
+  <li>Start debugger<br>
+  </li>
+  <li>Erase all old breakpoints and set a breakpoint in <tt>countSyllables</tt>
+method</li>
+  <li>Supply input <tt>"hello"</tt><br>
+  </li>
+</ul>
+<h2>Debugging <tt>countSyllables</tt> (again)</h2>
+<ul>
+  <li>Break in the beginning of <tt>countSyllables</tt>. Then,
+single-step through loop
+    <pre>boolean insideVowelGroup = false;<br>for (int i = 0; i &lt;= end; i++)<br>{<br>   ch = Character.toLowerCase(text.charAt(i));<br>   if ("aeiouy".indexOf(ch) &gt;= 0)<br>   {<br>      // ch is a vowel<br>      if (!insideVowelGroup)<br>      {<br>         // Start of new vowel group<br>         count++;<br>         insideVowelGroup = true;<br>      }<br>   }<br>}</pre>
+  </li>
+  <li>First iteration (<tt>'h'</tt>): skips test for vowel</li>
+  <li>Second iteration (<tt>'e'</tt>): passes test, increments <tt>count</tt></li>
+  <li>Third iteration (<tt>'l'</tt>): skips test</li>
+  <li>Fifth iteration (<tt>'o'</tt>): passes test, but second <tt>if</tt>
+is skipped, and <tt>count</tt> is not incremented</li>
+</ul>
+<h2>Fixing the Bug</h2>
+<ul>
+  <li><tt>insideVowelGroup</tt> was never reset to <tt>false</tt></li>
+  <li>Fix
+    <pre>if ("aeiouy".indexOf(ch) &gt;= 0)<br>{<br>   . . .<br>}<br>else insideVowelGroup = false;</pre>
+  </li>
+  <li>Retest: All test cases pass
+    <pre>Syllables in hello: 2<br>Syllables in yellow: 2<br>Syllables in peach.: 1</pre>
+  </li>
+  <li>Is the program now bug-free? The debugger can't answer that.</li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="13">What caused the first error that was found in this
+debugging session?</li>
+  <li>What caused the second error? How was it detected?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="13">The programmer misunderstood the second parameter of
+the substring
+method&#8211;it is the index of the first character not to be included in the
+substring.</li>
+  <li>The second error was caused by failing to reset <tt>insideVowelGroup</tt>
+to false at the
+end of a vowel group. It was detected by tracing through the loop and
+noticing
+that the loop didn't enter the conditional statement that increments
+the vowel
+count.</li>
+</ol>
+<br>
+<h2>The First Bug</h2>
+<img src="images/firstbug.png" alt=""> <br>
+<h2>Therac-25 Facility</h2>
+<img src="images/therac.png" alt=""> <br>
+</body>
+</html>

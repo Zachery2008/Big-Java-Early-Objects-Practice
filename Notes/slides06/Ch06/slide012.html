@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 6</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+
+<body>
+<div onclick="document.location='slide013.html'">
+<center><small><a href="slide011.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide013.html">next</a></small></center>
+</div><hr>
+<h2>Comparing Floating-Point Numbers<br>
+</h2>
+<ul>
+  <li>To avoid roundoff errors, don't use <tt>==</tt> to compare
+floating-point numbers</li>
+  <li>To compare floating-point numbers test whether they are <i>close
+enough</i>: |<i>x</i> - <i>y</i>| &#8804; &#949;
+    <pre>final double EPSILON = 1E-14;<br>if (Math.abs(x - y) &lt;= EPSILON)<br>   // x is approximately equal to y</pre>
+  </li>
+  <li>&#949; is a small number such as 10<sup>-14</sup></li>
+</ul>
+
+<hr>
+<div onclick="document.location='slide013.html'">
+<center><small><a href="slide011.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide013.html">next</a></small></center>
+</div>
+</body>
+</html>

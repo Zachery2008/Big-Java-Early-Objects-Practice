@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Horstmann Chapter 8</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+
+<body>
+<div onclick="document.location='slide050.html'">
+<center><small><a href="slide048.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide050.html">next</a></small></center>
+</div><hr>
+<h2>Growing an Array</h2>
+<ul>
+  <li>If the array is full and you need more space, you can grow the
+array:<br>
+    <ol>
+      <li>Create a new, larger array.
+        <pre>double[] newData = new double[2 * data.length];</pre>
+      </li>
+      <li>Copy all elements into the new array
+        <pre>System.arraycopy(data, 0, newData, 0, data.length);</pre>
+      </li>
+      <li>Store the reference to the new array in the array variable
+        <pre>data = newData;</pre>
+      </li>
+    </ol>
+  </li>
+</ul>
+
+<hr>
+<div onclick="document.location='slide050.html'">
+<center><small><a href="slide048.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide050.html">next</a></small></center>
+</div>
+</body>
+</html>

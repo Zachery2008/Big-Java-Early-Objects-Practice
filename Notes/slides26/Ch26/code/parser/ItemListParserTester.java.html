@@ -1,0 +1,17 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">util</font><font color="#000000">.</font><font color="#000000">ArrayList</font><font color="#000000">;</font>
+<b><font color="#006cb8">02: </font></b>
+<b><font color="#006cb8">03: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">04: </font></b><font color="#7a9ecd">   This program parses an XML file containing an item list.</font>
+<b><font color="#006cb8">05: </font></b><font color="#7a9ecd">   It prints out the items that are described in the XML file.</font>
+<b><font color="#006cb8">06: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">07: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> <font color="#000000">ItemListParserTester</font>
+<b><font color="#006cb8">08: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">09: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">void</font> <font color="#000000">main</font><font color="#000000">(</font><font color="#000000">String</font><font color="#000000">[</font><font color="#000000">]</font> <font color="#000000">args</font><font color="#000000">)</font> <font color="#d05b76">throws</font> <font color="#000000">Exception</font>
+<b><font color="#006cb8">10: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">11: </font></b>      <font color="#000000">ItemListParser</font> <font color="#000000">parser</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">ItemListParser</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">12: </font></b>      <font color="#000000">ArrayList</font><font color="#000000">&lt;</font><font color="#000000">LineItem</font><font color="#000000">&gt;</font> <font color="#000000">items</font> <font color="#000000">=</font> <font color="#000000">parser</font><font color="#000000">.</font><font color="#000000">parse</font><font color="#000000">(</font><font color="#00a99d">"items.xml"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">13: </font></b>      <font color="#d05b76">for</font> <font color="#000000">(</font><font color="#000000">LineItem</font> <font color="#000000">anItem</font> <font color="#000000">:</font> <font color="#000000">items</font><font color="#000000">)</font>
+<b><font color="#006cb8">14: </font></b>         <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font><font color="#000000">anItem</font><font color="#000000">.</font><font color="#000000">format</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">15: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">16: </font></b><font color="#000000">}</font>
+</tt></pre>

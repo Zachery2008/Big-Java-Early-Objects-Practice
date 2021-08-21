@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 23</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide049.html'">
+<center><small><a href="slide047.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide049.html">next</a></small></center>
+<hr></div>
+<h2>Avoiding Deadlocks</h2>
+<ul>
+  <li>How can we wait for the balance to grow?</li>
+  <li>We can't simply call <tt>sleep</tt> inside <tt>withdraw</tt> method;
+    <br>thread will block all other threads that want to use <tt>balanceChangeLock</tt></li>
+  <li>In particular, no other thread can successfully execute <tt>deposit</tt></li>
+  <li>Other threads will call <tt>deposit</tt>, but will be blocked until <tt>withdraw</tt> exits</li>
+  <li>But <tt>withdraw</tt> doesn't exit until it has funds available</li>
+  <li>DEADLOCK</li>
+</ul>
+
+
+
+<div onclick="document.location='slide049.html'"><hr>
+<center><small><a href="slide047.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide049.html">next</a></small></center>
+</div>
+</body>
+</html>

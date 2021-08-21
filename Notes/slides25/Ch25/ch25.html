@@ -1,0 +1,951 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 25</title>
+
+</head>
+<body>
+<div>
+  <h2>Chapter 25</h2>
+  <h1>Relational Databases</h1>
+  <br>
+</div>
+
+
+<h2>Chapter Goals</h2>
+<ul>
+  <li>To understand how relational databases store information</li>
+  <li>To learn how to query a database with the Structured Query Language (SQL)</li>
+  <li>To connect to databases with Java Database Connectivity (JDBC)</li>
+  <li>To write database programs that insert, update, and query data in a relational
+    database</li>
+</ul>
+ 
+
+<h2>Organizing Database Information</h2>
+<ul>
+  <li>Relational database
+    <ul><li>Stores information in <i>tables</i></li>
+    <li>Each table column has a name and data type</li></ul></li>
+</ul>
+ 
+
+<h2>Product Table in a Relational Database</h2>
+<img src="images/product.png" alt="">
+
+
+<h2>Product Table</h2>
+<ul>
+  <li>Each row corresponds to a product</li>
+  <li>Column headers correspond to attributes of the product</li>
+  <li>All items in the same column are the same data type</li>
+</ul>
+
+
+<h2>SQL</h2>
+<ul>
+  <li>SQL stands for Structured Query Language</li>
+  <li>SQL is a command language for interacting with databases</li>
+  <li> Most relational databases follow the SQL standard</li>
+  <li>SQL is not case sensitive "<tt>create table</tt>" = "<tt>CREATE TABLE</tt>"</li>
+  <li>We will use uppercase letters for SQL keywords and mixed case for table and column names</li>
+</ul>
+
+ 
+<h2>Some SQL Types and Their Corresponding Java Types</h2>
+<table align="center" border="1" cellspacing="0" cellpadding="0" width="80%">
+<tr align="center"><th align="center">SQL Data Type</th> <th align="center">Java Data Type</th></tr>
+<tr align="center"><td align="center"><tt>INTEGER</tt> or <tt>INT</tt></td> <td align="center"><tt>int</tt></td></tr>
+<tr align="center"><td align="center"><tt>REAL</tt></td> <td align="center"><tt>float</tt></td></tr>
+<tr align="center"><td align="center"><tt>DOUBLE</tt></td> <td align="center"><tt>double</tt></td></tr>
+<tr align="center"><td align="center"><tt>DECIMAL</tt> (<i>m</i>, <i>n</i>)</td> <td align="center">Fixed-point decimal numbers with <i>m</i> total digits and <i>n</i> digits after the decimal point; similar to <tt>BigDecimal</tt>.</td></tr>
+<tr align="center"><td align="center"><tt>BOOLEAN</tt></td> <td align="center"><tt>boolean</tt></td></tr>
+<tr align="center"><td align="center"><tt>CHARACTER</tt> (<i>n</i>) or <tt>CHAR</tt> (<i>n</i>)</td> <td align="center">Fixed-length string of length <i>n</i>; similar to <tt>String</tt>.</td></tr>
+</table>
+
+ 
+<h2>SQL Command to Create a Table</h2>
+<pre>CREATE TABLE Product
+(
+   Product_Code CHAR(11),
+   Description CHAR(40),
+   Price DECIMAL(10, 2)
+)</pre>
+
+ 
+<h2>SQL Command to Add Data to a Database</h2>
+<ul>
+  <li> Use the <tt>INSERT INTO</tt> command to insert rows into the table</li>
+  <li>Issue one command for each row, such as
+<pre>INSERT INTO Product
+    VALUES ('257-535', 'Hair dryer', 29.95)</pre></li>
+</ul>
+
+ 
+<h2>SQL</h2>
+<ul>
+  <li>SQL uses single quotes ('), not double quotes, to delimit strings</li>
+  <li>What if you have a string that contains a single quote?
+    <ul><li>Write the single quote twice:
+    <pre>'Sam''s Small Appliances'</pre></li></ul></li>
+  <li>To remove an existing table use the <tt>DROP TABLE</tt> command
+     <pre>DROP TABLE Test</pre></li>
+</ul>
+
+
+<h2>A Customer Table</h2>
+<ul>
+  <li>Consider a Java class <tt>Customer</tt>:
+<pre>public class Customer
+{
+   . . .
+   private String name;
+   private String address;
+   private String city;
+   private String state;
+   private String zip;
+}</pre></li>
+  <li>It is simple to come up with a database table structure that allows you to store customers</li>
+</ul>
+
+<h2>A Customer Table</h2>
+<p><img src="images/customer.png" alt="">
+<br>
+
+
+<h2>An Invoice Table</h2>
+<ul>
+  <li>For other objects, it is not so easy to come up with an equivalent database table structure</li>
+  <li>Consider an invoice; each invoice object contains a reference to a customer object:
+<pre>public class Invoice
+{
+   . . .
+   private int invoiceNumber;
+   private Customer theCustomer;
+   . . .
+}</pre></li>
+  <li>You might consider simply entering all the customer data into the invoice tables
+    <ul><li>It is wasteful</li>
+    <li>It is dangerous; on a change, you can forget to update all occurrences</li></ul></li>
+  <li>In a Java program, neither of these problems occur
+    <ul><li>Multiple <tt>Invoice</tt> objects can contain references to a single <tt>Customer</tt></li></ul></li>
+</ul>
+
+
+<h2>Poor Design for an Invoice Table with Replicated Customer Data</h2>
+<img src="images/invoice.png" alt="">
+<br>
+
+
+<h2>Linking Tables</h2>
+<ul>
+  <li>Replicating the same data in multiple rows has two problems</li>
+  <li>It is wasteful to store the same information multiple times</li>
+  <li>If the data needs to change it has to be changed in multiple places</li>
+  <li>Instead you should distribute the data over multiple tables</li>
+</ul>
+
+
+<h2>Two Tables for Invoice and Customer Data</h2>
+<img src="images/invoice_customer.png" alt="">
+ 
+<h2>Linking Tables</h2>
+<ul>
+  <li> In the table above, customer data are not replicated</li>
+  <li>Customer table contains a single record for each customer</li>
+  <li>Invoice table has no customer data</li>
+  <li>The two tables are linked by the <tt>Customer_Number</tt> field</li>
+  <li>The customer number is a unique identifier
+    <ul><li>We introduced the customer number because the customer name by itself may not be unique</li></ul></li>
+</ul>
+
+ 
+<h2>Primary Keys</h2>
+<ul>
+  <li>Primary key is a column (or combination of columns) whose value uniquely
+    specifies a table record</li>
+  <li>Not all database tables need a primary key</li>
+  <li>You need a primary key if you want to establish a link from another table</li>
+  <li>Foreign key is a reference to a primary key in a linked table</li>
+  <li>Foreign keys need not be unique</li>
+</ul>
+
+
+<h2>Productivity Hint: Avoid Unnecessary Data Replication</h2>
+<img src="images/avoid_replication.png" alt="">
+<br>
+
+ 
+<h2>Implementing One-to-Many Relationships</h2>
+<ul>
+  <li> Each invoice may have many items</li>
+  <li>Do not replicate columns, one for each item</li>
+  <li>Do distribute the information in two tables, invoice and item</li>
+  <li>Link each item to its invoice with an <tt>Invoice_Number</tt> foreign key in the
+    item table</li>
+</ul>
+ 
+
+<h2>Poor Design for Invoice Table with Replicated Columns</h2>
+<img src="images/poor_design.png" alt="">
+
+ 
+<h2>Linked Invoice and Item Tables </h2>
+<img src="images/invoice_item.png" alt="">
+
+ 
+<h2>Sample Database</h2>
+<img src="images/sample_database.png" alt="">
+
+
+<h2>Self Check</h2>
+<ol>
+<li>Would a telephone number be a good primary key for a customer table?</li>
+<li>In the database of Section 25.1.3, what are all the products that customer 3176 ordered?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li>The telephone number for each customer is unique&#150;a necessary requirement
+for the primary key. However, if a customer moves and the telephone number
+changes, both the primary and all foreign keys would need to be updated.
+Therefore, a customer ID is a better choice.</li>
+<li>Customer 3176 ordered ten toasters.</li>
+</ol>
+<br>
+
+
+<h2>Queries</h2>
+<ul>
+  <li> Once the database is constructed, we can <i>query </i>it for information
+    <ul>
+      <li>What are the names and addresses of all customers?</li>
+      <li>What are the names and addresses of all customers in California?</li>
+      <li>What are the names and addresses of all customers who buy toasters?</li>
+      <li>What are the names and addresses of all customers with unpaid invoices?</li>
+    </ul>
+  </li>
+</ul>
+
+
+<h2>A Sample Database</h2>
+<img src="images/sample_database2.png" alt="">
+<br>
+
+
+<h2>Simple Query</h2>
+<ul>
+  <li> Use the SQL <tt>SELECT</tt> statement to query a database</li>
+  <li>The query to select all data from the Customer table:
+    <pre>SELECT * FROM customer
+</pre>
+  </li>
+  <li> The outcome of a query is a <i>view</i>:
+    <br><img src="images/view.png" alt=""></li>
+  <li>A view is a &quot;window&quot; through which you can see some of the database</li>
+</ul>
+
+
+<h2>An Interactive SQL Tool</h2>
+<img src="images/tool.png" alt="">
+<br>
+ 
+
+<h2>Selecting Columns</h2>
+<ul>
+  <li>You may want to view only some of the columns in the table</li>
+  <li>The query to select the city and state of all customers from the <tt>Customer</tt> table:
+    <pre>SELECT City, State FROM Customer</pre>
+    <img src="images/view2.png" alt="">
+  </li>
+</ul>
+
+ 
+<h2>Selecting Subsets</h2>
+<ul>
+  <li> You can select rows that fit a particular criteria</li>
+  <li>When you want to select a subset , use the <tt>WHERE</tt> clause</li>
+  <li>The query to find all customers in California:
+    <pre>SELECT * FROM Customer WHERE State = 'CA'</pre>
+    <img src="images/view3.png" alt="">
+  </li>
+  <li> The query to select all customers NOT in California
+<pre>SELECT * FROM Customer WHERE State <> 'CA'</pre></li>
+</ul>
+
+
+<h2>Selecting Subsets</h2>
+<ul>
+  <li>You can match patterns with <tt>LIKE</tt></li>
+  <li>The right-hand side is a string that can contain special characters
+    <ul>
+      <li>Special symbol <i>_</i> matches exactly one character</li>
+      <li>Special symbol <i>%</i> matches any character sequence</li>
+    </ul>
+  </li>
+  <li>The expression to match all <tt>Name</tt> strings whose second character is an &quot;o&quot;:
+    <pre>Name LIKE '_o%'</pre></li>
+</ul>
+
+ 
+<h2>Selecting Subsets</h2>
+<ul>
+  <li> You can combine expressions with logical connectives <tt>AND</tt>, <tt>OR</tt>, <tt>NOT</tt>
+    <pre>SELECT *
+   FROM Product
+   WHERE Price < 100
+   AND Description <> 'Toaster'</pre>
+  </li>
+<li>You can select both row and column subsets
+<pre>SELECT Name, City FROM Customer WHERE State = 'CA'</pre></li>
+</ul>
+ 
+
+<h2>Calculations</h2>
+<ul>
+  <li> Use the <tt>COUNT</tt> function to find out how many customers there are in California
+    <pre>SELECT COUNT(*) FROM Customer WHERE State = 'CA'</pre>
+  </li>
+  <li>The * means you want to calculate whole records</li>
+<li>Other functions are <tt>SUM</tt>, <tt>AVG</tt>, <tt>MAX</tt>, <tt>MIN</tt></li>
+  <li>These functions must access a specific column:
+<pre>SELECT AVG(Price) FROM Product</pre></li>
+</ul>
+ 
+
+<h2>Joins</h2>
+<ul>
+  <li> The information you want may be spread over multiple tables</li>
+  <li><em><tt>TableName.ColumnName</tt></em> denotes the column in a particular table
+    <ul><li>Use <tt>Product.Product_Code</tt> to specify the <tt>Product_Code</tt> column in the <tt>Product</tt> table </li>
+    <li>Use <tt>Item.Product_Code</tt> to specify the <tt>Product_Code</tt> column in the <tt>Item</tt> table</li></ul></li>
+  <li>To select all invoices that include a car vacuum
+<pre>SELECT Item.Invoice_Number
+   FROM Product, Item
+   WHERE Product.Description = 'Car vacuum'
+      AND Product.Product_Code = Item.Product_Code</pre>
+   <img src="images/view4.png" alt=""></li>
+</ul>
+ 
+
+<h2>Joins</h2>
+<ul>
+  <li> A query that involves multiple tables is a <i>join</i></li>
+  <li>When using a join, do these things
+    <ul><li>List all tables that are involved in the query in the FROM clause</li>
+    <li>Use the <i>TableName.ColumnName</i> syntax to refer to column names</li>
+    <li>List all join conditions in the <tt>WHERE</tt> clause <br>
+      (<i>TableName1.ColumnName1 = TableName2.ColumnName2</i>)</li></ul></li>
+</ul>
+
+
+<h2>Joins</h2>
+<ul>
+  <li>You may want to know in what cities hair dryers are popular</li>
+  <li>You need to add the <tt>Customer</tt> table to the query&#150;it contains the customer addresses</li>
+  <li>Customers are referenced by invoices, add that table as well:
+<pre>SELECT Customer.City, Customer.State, Customer.Zip
+   FROM Product, Item, Invoice, Customer
+   WHERE Product.Description = 'Hair dryer'
+      AND Product.Product_Code = Item.Product_Code
+      AND Item.Invoice_Number = Invoice.Invoice_Number
+      AND Invoice.Customer_Number = Customer.Customer_Number</pre>
+  <img src="images/view5.png" alt=""></li>
+</ul>
+
+
+<h2>Joining Tables without Specifying a Link Condition</h2>
+<pre>SELECT Invoice.Invoice_Number, Customer.Name
+   FROM Invoice, Customer</pre>
+<img src="images/bad_join.png" alt="">
+<br>
+
+
+<h2>Joining Tables without Specifying a Link Condition</h2>
+<pre>SELECT Invoice.Invoice_Number, Customer.Name
+   FROM Invoice, Customer
+   WHERE Invoice.Customer_Number = Customer.Customer_Number</pre>
+<img src="images/good_join.png" alt="">
+<br>
+
+ 
+<h2>Updating and Deleting Data</h2>
+<ul>
+  <li>The <tt>DELETE</tt> and <tt>UPDATE</tt> commands modify the database</li>
+  <li>The <tt>DELETE</tt> command deletes rows</li>
+  <li>To delete all customers in California
+    <pre>DELETE FROM Customer WHERE State = 'CA'</pre>
+  </li>
+</ul>
+ 
+<h2>Updating and Deleting Data</h2>
+<ul>
+  <li>The <tt>UPDATE</tt> query lets you update columns of all records that fulfill a certain
+    condition</li>
+  <li>To add one to the quantity of every item in invoice number <tt>11731</tt>
+<pre>UPDATE Item
+   SET Quantity = Quantity + 1
+   WHERE Invoice_Number = '11731'</pre></li>
+  <li>Update multiple column values by specifying multiple update expressions
+    <br>in the <tt>SET</tt> clause, separated by commas</li>
+  <li>Both <tt>UPDATE</tt> and <tt>DELETE</tt> return the number of rows updated or deleted</li>
+</ul>
+ 
+
+<h2>Self Check</h2>
+<ol>
+<li value="3">How do you query the names of all customers that are not from Alaska or Hawaii?</li>
+<li>How do you query all invoice numbers of all customers in Hawaii?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="3"><tt>SELECT Name FROM Customer WHERE State <> 'AK' AND State <> 'HI'</tt></li>
+<li><pre>SELECT Invoice.Invoice_Number FROM Invoice, Customer
+   WHERE Invoice.Invoice_Number = Customer.Customer_Number
+   AND Customer.State = 'HI'</pre></li>
+</ol>
+<br>
+
+
+<h2>Databases and Privacy</h2>
+<img src="images/sscard.png" alt="">
+<br>
+
+
+<h2>Installing a Database</h2>
+<ul>
+  <li>A wide variety of database systems are available. Among them are
+  <ul><li>High-performance commercial databases, such as Oracle, IBM DB2, or</li>
+  <li>Microsoft SQL Server</li>
+  <li>Open-source databases, such as PostgreSQL or MySQL</li>
+  <li>Lightweight Java databases, such as McKoi and HSQLDB</li>
+  <li>Desktop databases, such as Microsoft Access</li></ul></li>
+</ul>
+
+
+<h2>Installing a Database</h2>
+<ul>
+  <li>Detailed instructions for installing a database vary widely</li>
+  <li>General sequence of steps on how to install a database and test your installation:
+<ol><li>Obtain the database program</li>
+  <li>Read the installation instructions</li>
+  <li>Install the program (may even need to compile from source code)</li>
+  <li>Start the database</li>
+  <li>Set up user accounts</li>
+  <li>Run a test:
+<pre>CREATE TABLE Test (Name CHAR(20))
+INSERT INTO Test VALUES ('Romeo')
+SELECT * FROM Test
+DROP TABLE Test</pre>
+Note that you may need a special terminator for each SQL statement (e.g. ';')</li></ol></li>
+</ul>
+
+
+<h2>JDBC</h2>
+<ul>
+  <li>JDBC: Java Database Connectivity</li>
+  <li>You need a JDBC driver to access a database from a Java program</li>
+  <li>Different databases require different drivers</li>
+  <li>Drivers may be supplied by the database manufacturer or a third party</li>
+  <li>When your Java program issues SQL commands,
+     <br>the driver forwards them to the database and lets your program analyze the results</li>
+</ul>
+
+
+<h2>JDBC Architecture</h2>
+<img src="images/jdbc.png" alt="">
+<br>
+
+
+<h2>Testing the JDBC Driver</h2>
+<ol>
+  <li>Find the class path for the driver, e.g.
+        <pre>c:\mckoi\mkjdbc.jar</pre></li>
+  <li>Find the name of the driver class that you need to load, e.g.
+    <pre>com.mckoi.JDBCDriver</pre></li>
+  <li>Find the name of the database URL that your driver expects
+    <pre><i>jdbc:subprotocol:driver-specific data</i>
+jdbc:mckoi://localhost/</pre></li>
+</ol>
+
+
+<h2>Testing the JDBC Driver</h2>
+<ol>
+  <li value="4">Edit the file <tt>database.properties</tt> and supply
+    <ul><li>The driver class name</li>
+    <li>The database URL</li>
+    <li>Your database user name</li>
+    <li>Your database password</li></ul></li>
+  <li>Compile the program as
+    <pre>javac TestDB.java</pre></li>
+  <li>Run the program as
+    <pre>java -classpath driver_class_path;. TestDB database.properties
+java -classpath driver_class_path:. TestDB database.properties</pre></li>
+</ol>
+
+
+<h2>Testing the JDBC Driver: Possible Problems</h2>
+<ul>
+  <li>Missing driver
+    <ul><li>Check the class path and the driver name</li></ul></li>
+  <li>Driver cannot connect to the database
+    <ul><li>The database may not be started</li>
+    <li>Database may not be reachable</li></ul></li>
+  <li>Failed login
+    <ul><li>Check the database name, user name, and password</li></ul></li>
+  <li>A missing <tt>Test</tt> table
+    <ul><li>Make sure you create and populate the table as described in the database test</li></ul></li>
+</ul>
+
+
+<h2>File TestDB.java</h2>
+<iframe src="code/test/TestDB.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File SimpleDataSource.java</h2>
+<iframe src="code/test/SimpleDataSource.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File database.properties</h2>
+<iframe src="code/test/database.properties.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="5">After installing a database system, how can you test that it is properly installed?</li>
+<li>You are starting a Java database program to connect to the McKoi database and
+get the following error message:
+<pre>Exception in thread "main" java.lang.ClassNotFoundException:
+com.mckoi.JDBCDriver</pre>
+What is the most likely cause of this error?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="5">Connect to the database with a program that lets you execute SQL instructions.
+Try creating a small database table, adding a record, and selecting all records.
+Then drop the table again.</li>
+<li>You didn't set the class path correctly. The JAR file containing the JDBC driver
+must be on the class path.</li>
+</ol>
+<br>
+
+ 
+<h2>Database Programming in Java: Connecting to the Database</h2>
+<ul>
+  <li>Use a <tt>Connection </tt>object to access a database from a Java program</li>
+  <li>Load the database driver</li>
+  <li>Ask the <tt>DriverManager</tt> for a connection</li>
+  <li>When you are done, close the database connection
+  <pre>String driver = . . .;
+String url = . . .;
+String username = . . .;
+String password = . . .;
+
+
+Class.forName(driver); // Load driver
+Connection conn = DeviceManager.getConnection(url, username, password);
+
+. . .
+
+conn.close();
+</pre></li>
+</ul>
+<h2>Connecting to the Database</h2>
+<ul>
+  <li>Decouple connection management from the other database code</li>
+  <li>We supply a <tt>SimpleDataSource</tt> class to do this</li>
+  <li>Call its static <tt>init</tt> method with the name of the database configuration file
+    <pre>SimpleDataSource.init("database.properties");</pre></li>
+  <li>Configuration file is a text file containing four lines
+    <pre>jdbc.driver= . . .
+jdbc.url= . . .
+jdbc.username= . . .
+jdbc.password= . . .</pre></li>
+</ul>
+ 
+<h2>Connecting to the Database</h2>
+<ul>
+  <li> The <tt>init</tt> method uses the <tt>Properties</tt> class to read the file</li>
+  <li><tt>Properties</tt> class has a <tt>load</tt> method to read a file of key/value pairs from
+    a stream
+<pre>Properties props = new Properties();
+FileInputStream in = new FileInputStream(fileName);
+props.load(in);
+</pre></li>
+  <li>The <tt>getProperty</tt> method returns the value of a given key
+<pre>String driver = props.getProperty("jdbc.driver");
+</pre></li>
+<li>Now when you need a connection call
+<pre>Connection conn = SimpleDataSource.getConnection();</pre></li>
+  <li>You need to close the connection by calling
+<pre>conn.close();</pre></li>
+</ul>
+
+ 
+<h2>Executing SQL Statements</h2>
+<ul>
+  <li> A <tt>Connection</tt> object can create <tt>Statement</tt> objects
+    <pre>Statement stat = conn.createStatement();
+</pre>
+  </li>
+  <li>The <tt>execute</tt> method of the <tt>Statement</tt> class executes a SQL
+    statement
+<pre>stat.execute("CREATE TABLE Test (Name CHAR(20))");
+stat.execute("INSERT INTO Test VALUES ('Romeo')");</pre></li>
+<li>Use <tt>executeQuery</tt> method of the <tt>Statement</tt> class to issue a query
+    <pre>String query = "SELECT * FROM Test";
+ResultSet result = stat.executeQuery(query);</pre>
+  </li>
+  <li >The result of a SQL query is returned in a <tt>ResultSet</tt> object</li>
+</ul>
+
+
+<h2>Executing SQL Statements</h2>
+<ul>
+  <li>Use the <tt>executeUpdate</tt> method of the <tt>Statement</tt> class to
+    execute an <tt>UPDATE</tt> statement </li>
+  <li>The method returns the number of rows effected
+    <pre>String command = "UPDATE Item"
+      + " SET Quantity = Quantity + 1"
+      + " WHERE Invoice_Number = '11731'";
+int count = stat.executeUpdate(command);</pre></li>
+</ul>
+
+
+<h2>Executing SQL Statements</h2>
+<ul>
+  <li>If your statement has variable parts, use a <tt>PreparedStatement</tt>
+<pre>String query = "SELECT * WHERE Account_Number = ?";
+PreparedStatement stat = conn.prepareStatement(query);</pre></li>
+  <li>The <tt>?</tt> symbols denote variables that you fill in when you make an actual query</li>
+  <li>Call a <tt>set</tt> method to fill this variables
+    <pre>stat.setString(1, accountNumber);</pre>
+  <li>The first parameter the <tt>set</tt> methods denotes the variable position  (1 is the first <tt>?</tt>)</li>
+  <li>There are also methods <tt>setInt</tt> and <tt>setDouble</tt></li>
+  <li>After setting all variables, call <tt>executeQuery</tt> or <tt>executeUpdate</tt></li>
+</ul>
+
+
+<h2>Executing SQL Statements</h2>
+<ul>
+  <li>You can also use a generic execute statement to execute queries</li>
+  <li>It returns a <tt>boolean</tt> value to indicate whether SQL command yields a result set</li>
+  <li>If there is a result set, get it with the <tt>getResultSet</tt> method</li>
+  <li>Otherwise, get the update count with the <tt>getUpdateCount</tt>
+    method
+    <pre>String command = . . . ;
+boolean hasResultSet = stat.execute(command);
+if (hasResultSet)
+{
+   ResultSet result = stat.getResultSet();
+   . . .
+{
+else
+{
+   int count = stat.getUpdateCount();
+   . . .
+}
+</pre>
+  </li>
+</ul>
+
+
+<h2>Executing SQL Statements</h2>
+<ul>
+  <li>You can reuse a <tt>Statement</tt> or <tt>PreparedStatement</tt> object</li>
+  <li>For each statement, you should only have one active <tt>ResultSet</tt></li>
+  <li>If you need to look at multiple result sets at the same time, create multiple
+    <tt>Statement</tt> objects</li>
+  <li>Close the current <tt>ResultSet</tt> before issuing a new query on the same
+    statement
+    <pre>result.close();
+</pre>
+  </li>
+  <li>When you are done with a <tt>Statement</tt> object, close it
+    <pre>stat.close();</pre>
+    That will also close the <tt>ResultSet</tt></li>
+</ul>
+ 
+
+<h2>Analyzing Query Results</h2>
+<ul>
+  <li>Use the<tt> next</tt> method of the <tt>ResultSet</tt> to iterate through
+    the query results a row at a time</li>
+  <li>When a result set is first returned from an <tt>executeQuery</tt>, no row
+    data are available</li>
+  <li>Use the <tt>next</tt> method to move to the first row</li>
+  <li>The <tt>next</tt> method returns a boolean value indicating whether more
+    rows of data are available
+    <pre>while (result.next())
+{
+   <i>Inspect column data from the current row</i>
+}</pre></li>
+</ul>
+
+
+<h2>Analyzing Query Results</h2>
+<ul>
+  <li>To get the column values from a row, use one of the various <tt>get</tt>
+    methods</li>
+  <li>There are two get methods for each type of data (string, integer, double
+    . . .)</li>
+  <li>One uses an integer parameter that indicates the column position </li>
+  <li>Column positions start at 1
+    <pre>String productCode = result.getString(1);
+</pre>
+  </li>
+</ul>
+
+
+<h2>Analyzing Query Results</h2>
+<ul>
+  <li>The other type of <tt>get</tt> method uses a string parameter for the column
+    name
+    <pre>String productCode = result.getString("Product_Code");
+</pre>
+  </li>
+  <li>Use <tt>getInt</tt> to fetch an integer column value
+<pre>int quantity = result.getInt("Quantity");</pre>
+</li>
+  <li>Use <tt>getDouble</tt> to fetch an double column value<pre>
+double unitPrice = result.getDouble("Price");</pre></li>
+</ul>
+
+ 
+<h2>Result Set Meta Data</h2>
+<ul>
+  <li>Result set meta data describes the properties of the result set</li>
+  <li>Use the <tt>ResultSetMetaData</tt> class to find out the column names in an unknown table</li>
+  <li>You can get the meta data object form the result set
+    <pre>
+ResultSetMetaData metaData = result.getMetaData();</pre>
+  </li>
+</ul>
+
+
+<h2>Result Set Meta Data</h2>
+<ul>
+  <li>Use <tt>getColumnCount</tt> method to get the number of columns</li>
+  <li>Use <tt>getColumnLabel</tt> method to get the name of each column</li>
+  <li>Use <tt>getColumnDisplaySize</tt> method to get the column width
+    <pre>for (int i = 1; i <= metaData.getColumnCount(); i++)
+{
+   String columnName = metaData.getColumnLabel(i);
+   int columnSize = metaData.getColumnDisplaySize(i);
+   . . .
+}</pre>
+  </li>
+</ul>
+
+
+<h2>Result Set Meta Data</h2>
+<ul>
+  <li>The following program reads a file containing SQL statements and executes
+    them</li>
+  <li>If there is a result set, the result set is printed </li>
+  <li>Meta data from the result set is used to determine the column count and
+    column label</li>
+  <li>Run the program as
+<pre>java ExecSQL database.properties product.sql
+</pre></li>
+  <li>Or interactively as<pre>java ExecSQL database.properties
+</pre></li>
+</ul>
+
+
+<h2>File Product.sql</h2>
+<iframe src="code/invoice/Product.sql.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File ExecSQL.java</h2>
+<iframe src="code/invoice/ExecSQL.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="7">Suppose you want to test whether there are any customers in Hawaii. Issue the statement
+<pre>ResultSet result = stat.executeQuery(
+      "SELECT * FROM Customer WHERE State = 'HI'");</pre>
+Which Boolean expression answers your question?</li>
+<li>Suppose you want to know how many customers are in Hawaii. What is an efficient way to get this answer?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="7"><tt>result.hasNext()</tt>. If there is at least one result, then <tt>hasNext</tt> returns <tt>true</tt>.</li>
+<li><pre>ResultSet result = stat.executeQuery(
+      "SELECT COUNT(*) FROM Customer WHERE State = 'HI'");
+result.next();
+int count = result.getInt(1);</pre>
+Note that the following alternative is significantly slower if there are many such
+customers.
+<pre>ResultSet result = stat.executeQuery(
+      "SELECT * FROM Customer WHERE State = 'HI'");
+while (result.next()) count++; // Inefficient</pre></li>
+</ol>
+<br>
+
+
+<h2>Case Study: A Bank Database</h2>
+<ul>
+  <li> This is a reimplementation of the ATM simulation</li>
+  <li>In the simulation each customer has:
+    <ul><li>A customer number</li>
+    <li>A PIN</li>
+    <li>A checking account</li>
+    <li>A savings account</li></ul></li>
+  <li>The data will be stored in two tables in a database</li>
+</ul>
+
+ 
+<h2>Tables for ATMSimulation</h2>
+<img src="images/atm_tables.png" alt="">
+<br>
+
+ 
+<h2>Case Study: A Bank Database</h2>
+<ul>
+  <li>The <tt>Bank</tt> class needs to connect to the database whenever it is
+    asked to find a customer</li>
+  <li>Its <tt>findCustomer</tt> method
+    <ul>
+      <li>Connects to the database</li>
+      <li>Selects the customer with the given account number
+        <pre>SELECT * FROM BankCustomer WHERE Customer_Number = . . .</pre></li>
+      <li>Verifies the PIN</li>
+      <li>Creates an customer object from the database information</li>
+    </ul>
+  </li>
+</ul>
+
+
+<h2>Case Study: A Bank Database</h2>
+<pre>public Customer findCustomer(int customerNumber, int pin)
+       throws SQLException
+{
+   Connection conn = SimpleDataSource.getConnection();
+   try
+   {
+      Customer c = null;
+      PreparedStatement stat = conn.prepareStatement(
+            "SELECT * FROM BankCustomer WHERE Customer_Number = ?");
+      stat.setInt(1, customerNumber);
+
+      ResultSet result = stat.executeQuery();
+      if (result.next() &amp;&amp; pin == result.getInt("PIN"))
+         c = new Customer(customerNumber,
+               result.getInt("Checking_Account_Number"),
+               result.getInt("Savings_Account_Number"));
+      return c;
+   }
+   finally
+   {
+      conn.close();
+   }
+}</pre>
+
+
+<h2>Case Study: A Bank Database</h2>
+<ul>
+  <li> The <tt>BankAccount</tt> methods are different now</li>
+  <li>The <tt>getBalance</tt> method gets the balance from the database</li>
+  <li>The <tt>withdraw</tt> and <tt>deposit</tt> methods update the database immediately</li>
+</ul>
+ 
+
+<h2>Case Study: A Bank Database</h2>
+<pre>public double getBalance()
+      throws SQLException
+{
+   Connection conn = SimpleDataSource.getConnection();
+   try
+   {
+      double balance = 0
+      PreparedStatement stat = conn.prepareStatement(
+            "SELECT Balance FROM Account WHERE Account_Number = ?");
+      stat.setInt(1, accountNumber);
+
+      ResultSet result = stat.executeQuery();
+      if (result.next())
+         balance = result.getDouble(1);
+      return balance;
+   }
+   finally
+   {
+      conn.close();
+   }
+}</pre>
+
+
+<h2>Case Study: A Bank Database</h2>
+<pre>public void deposit(double amount)
+      throws SQLException
+{
+   Connection conn = SimpleDataSource.getConnection();
+   try
+   {
+      PreparedStatement stat = conn.prepareStatement(
+            "UPDATE Account"
+            + " SET Balance = Balance + ?"
+            + " WHERE Account_Number = ?");
+      stat.setDouble(1, amount);
+      stat.setInt(2, accountNumber);
+      stat.executeUpdate();
+   }
+   finally
+   {
+      conn.close();
+   }
+}</pre>
+
+
+<h2>File Bank.java</h2>
+<iframe src="code/bank/Bank.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File BankAccount.java</h2>
+<iframe src="code/bank/BankAccount.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="9">Why doesn't the <tt>Bank</tt> class store an array of <tt>Customer</tt> objects?</li>
+<li>Why do the <tt>BankAccount</tt> methods throw an <tt>SQLException</tt> instead of catching it?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="9">The customer data are stored in the database. The <tt>Bank</tt> class is now merely a
+conduit to the data.</li>
+<li>The methods are not equipped to handle the exception. What could they do?
+Print an error report? To the console or a GUI window? In which language?</li>
+</ol>
+<br>
+
+</body>
+</html>

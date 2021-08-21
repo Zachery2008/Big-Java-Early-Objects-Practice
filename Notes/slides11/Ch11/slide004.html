@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 11</title>
+   
+</head>
+
+<body>
+<div onclick="document.location='slide005.html'">
+<center><small><a href="slide003.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide005.html">next</a></small></center>
+<hr></div>
+<h2>Using Interfaces for Code Reuse</h2>
+<ul>
+  <li>Or suppose we wanted to find the coin with the highest value among a set of coins. We would need to modify the <tt>DataSet</tt> class again
+<pre>public class DataSet // Modified for Coin objects
+{
+   . . .
+   public void add(Coin x)
+   {
+      sum = sum + x.getValue();
+      if (count == 0 || maximum.getValue() < x.getValue())
+         maximum = x;
+      count++;
+   }
+
+   public Coin getMaximum()
+   {
+      return maximum;
+   }
+
+   private double sum;
+   private Coin maximum;
+   private int count;
+}</pre></li>
+</ul>
+
+
+
+<div onclick="document.location='slide005.html'"><hr>
+<center><small><a href="slide003.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide005.html">next</a></small></center>
+</div>
+</body>
+</html>

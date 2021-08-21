@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 25</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide058.html'">
+<center><small><a href="slide056.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide058.html">next</a></small></center>
+<hr></div>
+<h2>Database Programming in Java: Connecting to the Database</h2>
+<ul>
+  <li>Use a <tt>Connection </tt>object to access a database from a Java program</li>
+  <li>Load the database driver</li>
+  <li>Ask the <tt>DriverManager</tt> for a connection</li>
+  <li>When you are done, close the database connection
+  <pre>String driver = . . .;
+String url = . . .;
+String username = . . .;
+String password = . . .;
+
+
+Class.forName(driver); // Load driver
+Connection conn = DeviceManager.getConnection(url, username, password);
+
+. . .
+
+conn.close();
+</pre></li>
+</ul>
+
+<div onclick="document.location='slide058.html'"><hr>
+<center><small><a href="slide056.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide058.html">next</a></small></center>
+</div>
+</body>
+</html>

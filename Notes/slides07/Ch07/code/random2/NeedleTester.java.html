@@ -1,0 +1,24 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">02: </font></b><font color="#7a9ecd">   This program simulates the Buffon needle experiment </font>
+<b><font color="#006cb8">03: </font></b><font color="#7a9ecd">   and prints the resulting approximations of pi.</font>
+<b><font color="#006cb8">04: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">05: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> NeedleTester
+<b><font color="#006cb8">06: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">07: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">void</font> <font color="#000000">main</font><font color="#000000">(</font>String<font color="#000000">[</font><font color="#000000">]</font> args<font color="#000000">)</font>
+<b><font color="#006cb8">08: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">09: </font></b>      Needle n <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Needle</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">10: </font></b>      <font color="#d05b76">final</font> <font color="#d05b76">int</font> TRIES1 <font color="#000000">=</font> <font color="#89c976">10000</font><font color="#000000">;</font>
+<b><font color="#006cb8">11: </font></b>      <font color="#d05b76">final</font> <font color="#d05b76">int</font> TRIES2 <font color="#000000">=</font> <font color="#89c976">1000000</font><font color="#000000">;</font>
+<b><font color="#006cb8">12: </font></b>
+<b><font color="#006cb8">13: </font></b>      <font color="#d05b76">for</font> <font color="#000000">(</font><font color="#d05b76">int</font> i <font color="#000000">=</font> <font color="#89c976">1</font><font color="#000000">;</font> i <font color="#000000">&lt;</font><font color="#000000">=</font> TRIES1<font color="#000000">;</font> i<font color="#000000">+</font><font color="#000000">+</font><font color="#000000">)</font>
+<b><font color="#006cb8">14: </font></b>         n<font color="#000000">.</font><font color="#000000">drop</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">15: </font></b>      System<font color="#000000">.</font>out<font color="#000000">.</font><font color="#000000">printf</font><font color="#000000">(</font><font color="#00a99d">"Tries = %d, Tries / Hits = %8.5f\n"</font><font color="#000000">,</font>
+<b><font color="#006cb8">16: </font></b>            TRIES1<font color="#000000">,</font> <font color="#000000">(</font><font color="#d05b76">double</font><font color="#000000">)</font> n<font color="#000000">.</font><font color="#000000">getTries</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">/</font> n<font color="#000000">.</font><font color="#000000">getHits</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">17: </font></b>
+<b><font color="#006cb8">18: </font></b>      <font color="#d05b76">for</font> <font color="#000000">(</font><font color="#d05b76">int</font> i <font color="#000000">=</font> TRIES1 <font color="#000000">+</font> <font color="#89c976">1</font><font color="#000000">;</font> i <font color="#000000">&lt;</font><font color="#000000">=</font> TRIES2<font color="#000000">;</font> i<font color="#000000">+</font><font color="#000000">+</font><font color="#000000">)</font>
+<b><font color="#006cb8">19: </font></b>         n<font color="#000000">.</font><font color="#000000">drop</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">20: </font></b>      System<font color="#000000">.</font>out<font color="#000000">.</font><font color="#000000">printf</font><font color="#000000">(</font><font color="#00a99d">"Tries = %d, Tries / Hits = %8.5f\n"</font><font color="#000000">,</font>
+<b><font color="#006cb8">21: </font></b>            TRIES2<font color="#000000">,</font> <font color="#000000">(</font><font color="#d05b76">double</font><font color="#000000">)</font> n<font color="#000000">.</font><font color="#000000">getTries</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">/</font> n<font color="#000000">.</font><font color="#000000">getHits</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">22: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">23: </font></b><font color="#000000">}</font>
+</tt></pre>

@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 24</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide032.html'">
+<center><small><a href="slide030.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide032.html">next</a></small></center>
+<hr></div>
+<h2>A Client Program &#150; Sockets </h2>
+<ul>
+  <li>A socket is an object that encapsulates a TCP/IP connection</li>
+  <li>There is a <i>socket</i> on both ends of a connection</li>
+  <li>Syntax to create a socket in a Java program
+    <pre>Socket s = new Socket(<i>hostname, portnumber</i>);</pre>
+  </li>
+  <li>Code to connect to the HTTP port of server, java.sun.com
+    <pre>final int HTTP_PORT = 80;
+Socket s = new Socket("java.sun.com", HTTP_PORT);</pre>
+  </li>
+  <li>If it can't find the host, the <tt>Socket</tt> constructor throws an <tt>UnknownHostException</tt>
+  </li>
+</ul>
+ 
+
+
+<div onclick="document.location='slide032.html'"><hr>
+<center><small><a href="slide030.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide032.html">next</a></small></center>
+</div>
+</body>
+</html>

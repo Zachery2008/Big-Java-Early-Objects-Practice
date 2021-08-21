@@ -1,0 +1,806 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 13</title>
+</head>
+  <body>
+<div><h2>Chapter 13</h2>
+
+
+<h1>Inheritance </h1>
+ <br></div>
+
+<h2>Chapter Goals</h2>
+<ul>
+  <li>To learn about inheritance</li>
+  <li>To understand how to inherit and override superclass methods</li>
+  <li>To be able to invoke superclass constructors</li>
+  <li>To learn about <tt>protected</tt> and package access control</li>
+  <li>To understand the common superclass <tt>Object</tt> and to override its <tt>toString</tt> and <tt>equals</tt> methods</li>
+</ul>
+
+
+<h2>An Introduction to Inheritance</h2>
+<ul>
+   <li>Inheritance: extend classes by adding methods and fields</li>
+   <li>Example: Savings account = bank account with interest
+<pre>class SavingsAccount <b>extends</b> BankAccount
+{
+   <i>new methods
+   new instance fields</i>
+}</pre></li>
+   <li><tt>SavingsAccount</tt> automatically inherits all methods and instance fields of <tt>BankAccount</tt>
+   <pre>SavingsAccount collegeFund = new SavingsAccount(10);
+// Savings account with 10% interest
+collegeFund.deposit(500);
+// OK to use BankAccount method with SavingsAccount object</pre></li>
+   <li>Extended class = <i>superclass</i> (<tt>BankAccount</tt>), extending class = <i>subclass</i> (<tt>Savings</tt>)</li>
+   <li>Inheriting from class &ne; implementing interface: subclass inherits behavior and state</li>
+  <li>One advantage of inheritance is code reuse</li>
+</ul>
+
+
+<h2>An Inheritance Diagram</h2>
+<ul>
+   <li>Every class extends the <tt>Object</tt> class either directly or indirectly
+       <br><img src="images/inheritance-diagram.png" alt=""></li>
+</ul>
+
+
+<h2>An Introduction to Inheritance</h2>
+<ul>
+  <li>In subclass, specify added instance fields, added methods, and changed or overridden methods
+      <pre>public class SavingsAccount extends BankAccount
+{
+   public SavingsAccount(double rate)
+   {
+      interestRate = rate;
+   }
+
+   public void addInterest()
+   {
+      double interest = getBalance() * interestRate / 100;
+      deposit(interest);
+   }
+
+   private double interestRate;
+}</pre></li>
+  <li>Encapsulation: <tt>addInterest</tt> calls <tt>getBalance</tt> rather than updating the <tt>balance</tt> field of the superclass (field is <tt>private</tt>)</li>
+  <li>Note that <tt>addInterest</tt> calls <tt>getBalance</tt> without specifying an implicit parameter (the calls apply to the same object)</li>
+</ul>
+
+
+<h2>Layout of a Subclass Object</h2>
+<ul>
+  <li><tt>SavingsAccount</tt> object inherits the <tt>balance</tt> instance field from <tt>BankAccount</tt>, and gains one additional instance field: <tt>interestRate</tt>:
+  <br><img src="images/subobject.png" alt=""></li>
+</ul>
+
+
+<h2>Syntax 13.1: Inheritance</h2>
+<table cellpadding="10" width="90%" border="1" bgcolor="#ffffff">
+   <tbody>
+     <tr>
+       <td>
+      <table border="0">
+         <tbody>
+           <tr>
+             <td width="5%">&nbsp;</td>
+             <td><tt>class <i>SubclassName</i> extends <i>SuperclassName</i><br>
+  { <br>
+  &nbsp; &nbsp;<i>methods <br>
+  &nbsp; &nbsp;instance fields </i><br>
+  }</tt><br>
+             </td>
+           </tr>
+
+        </tbody>
+      </table>
+
+      <h3>Example:</h3>
+
+      <table border="0">
+         <tbody>
+           <tr>
+             <td width="5%">&nbsp;</td>
+             <td>
+            <pre>public class SavingsAccount extends BankAccount
+{
+   public SavingsAccount(double rate)
+   {
+      interestRate = rate;
+   }
+
+   public void addInterest()
+   {
+      double interest = getBalance() * interestRate / 100;
+      deposit(interest);
+   }
+
+   private double interestRate;
+}</pre>
+             </td>
+           </tr>
+
+        </tbody>
+      </table>
+
+      <h3>Purpose:</h3>
+  To define a new class that inherits from an existing class, and define
+the  methods and instance fields that are added in the new class.
+      </td>
+     </tr>
+
+  </tbody>
+</table>
+ <br>
+
+
+<h2>Self Check</h2>
+<ol>
+<li>Which instance fields does an object of class <tt>SavingsAccount</tt> have?</li>
+<li>Name four methods that you can apply to <tt>SavingsAccount</tt> objects</li>
+<li>If the class <tt>Manager</tt> extends the class <tt>Employee</tt>, which class is the superclass and which is the subclass?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li>Two instance fields: <tt>balance</tt> and <tt>interestRate</tt>.</li>
+<li><tt>deposit</tt>, <tt>withdraw</tt>, <tt>getBalance</tt>, and <tt>addInterest</tt>.</li>
+<li><tt>Manager</tt> is the subclass; <tt>Employee</tt> is the superclass.</li>
+</ol>
+<br>
+
+
+<h2>Inheritance Hierarchies</h2>
+<ul>
+   <li>Sets of classes can form complex inheritance hierarchies</li>
+   <li>Example:
+       <br><img src="images/reptiles.png" alt=""></li>
+</ul>
+
+
+<h2>Inheritance Hierarchies Example: Swing hierarchy</h2>
+<img src="images/swing.png" alt="">
+<ul>
+   <li>Superclass <tt>JComponent</tt> has methods <tt>getWidth</tt>, <tt>
+getHeight</tt></li>
+   <li><tt>AbstractButton</tt> class has methods to set/get button text and
+ icon</li>
+</ul>
+
+
+<h2>A Simpler Example: Hierarchy of Bank Accounts</h2>
+<ul>
+  <li>Consider a bank that offers its customers the following account types:
+    <ol><li>Checking account: no interest; small number of free transactions per month, additional transactions are charged a small fee</li>
+    <li>Savings account: earns interest that compounds monthly</li></ol></li>
+  <li>Inheritance hierarchy:
+      <br><img src="images/account.png" alt=""></li>
+  <li>All bank accounts support the <tt>getBalance</tt> method</li>
+  <li>All bank accounts support the <tt>deposit</tt> and <tt>withdraw</tt> methods, but the implementations differ</li>
+  <li>Checking account needs a method <tt>deductFees</tt>; savings account needs a method <tt>addInterest</tt></li>
+</ul>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="4">What is the purpose of the <tt>JTextComponent</tt> class in Figure 4?</li>
+<li>Which instance field will we need to add to the <tt>CheckingAccount</tt> class?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="4">To express the common behavior of text fields and text components.</li>
+<li>We need a counter that counts the number of withdrawals and deposits.</li>
+</ol>
+<br>
+
+
+<h2>Inheriting Methods</h2>
+<ul>
+   <li>Override method:
+      <ul><li>Supply a different implementation of a method that exists in the superclass</li>
+      <li>Must have same signature (same name and same parameter types)</li>
+      <li>If method is applied to an object of the subclass type, the overriding method is executed</li></ul></li>
+   <li>Inherit method:
+      <ul><li>Don't supply a new implementation of a method that exists in superclass</li>
+       <li>Superclass method can be applied to the subclass objects</li></ul></li>
+   <li>Add method:
+      <ul><li>Supply a new method that doesn't exist in the superclass</li>
+      <li>New method can be applied only to subclass objects</li></ul></li>
+</ul>
+
+
+<h2>Inheriting Instance Fields</h2>
+<ul>
+   <li>Can't override fields</li>
+   <li>Inherit field: All fields from the superclass are automatically inherited</li>
+   <li>Add field: Supply a new field that doesn't exist in the superclass</li>
+   <li>What if you define a new field with the same name as a superclass field?
+      <ul><li>Each object would have two instance fields of the same name</li>
+      <li>Fields can hold different values</li>
+      <li>Legal but extremely undesirable</li></ul></li>
+</ul>
+
+
+<h2>Implementing the <tt>CheckingAccount</tt> Class</h2>
+<ul>
+  <li>Overrides <tt>deposit</tt> and <tt>withdraw</tt> to increment the transaction count:
+<pre>public class CheckingAccount extends BankAccount
+{
+   public void deposit(double amount) { . . . }
+   public void withdraw(double amount) { . . . }
+   public void deductFees() { . . . } // new method
+   private int transactionCount;      // new instance field
+}</pre></li>
+  <li>Each <tt>CheckingAccount</tt> object has two instance fields:
+     <ul><li><tt>balance</tt> (inherited from <tt>BankAccount</tt>)</li>
+     <li><tt>transactionCount</tt> (new to <tt>CheckingAccount</tt>)</li></ul></li>
+  <li>You can apply four methods to <tt>CheckingAccount</tt> objects:
+     <ul><li><tt>getBalance()</tt> (inherited from <tt>BankAccount</tt>)</li>
+     <li><tt>deposit(double amount)</tt> (overrides <tt>BankAccount</tt> method)</li>
+     <li><tt>withdraw(double amount)</tt> (overrides <tt>BankAccount</tt> method)</li>
+     <li><tt>deductFees()</tt> (new to <tt>CheckingAccount</tt>)</li></ul></li>
+</ul>
+
+
+<h2>Inherited Fields are Private</h2>
+<ul>
+   <li>Consider <tt>deposit</tt> method of <tt>CheckingAccount</tt>
+<pre>public void deposit(double amount)
+{
+   transactionCount++;
+   // now add amount to balance
+   . . .
+}</pre></li>
+   <li>Can't just add <tt>amount</tt> to <tt>balance</tt></li>
+   <li><tt>balance</tt> is a <i>private</i> field of the superclass</li>
+   <li>A subclass has no access to private fields of its superclass</li>
+   <li>Subclass must use public interface</li>
+</ul>
+
+<h2>Invoking a Superclass Method<br>
+ </h2>
+
+<ul>
+   <li>Can't just call<br>
+     <tt>deposit(amount)<br>
+     </tt>in <tt>deposit</tt> method of <tt>CheckingAccount</tt><br>
+   </li>
+   <li>That is the same as<br>
+     <tt>this.deposit(amount)</tt></li>
+   <li>Calls the same method (infinite recursion)</li>
+   <li>Instead, invoke <i>superclass method</i><br>
+     <tt><b><code class="blue">super</code></b>.deposit(amount)</tt></li>
+   <li>Now calls <tt>deposit</tt> method of <tt>BankAccount</tt> class</li>
+   <li>Complete method:
+<pre>public void deposit(double amount)
+{
+   transactionCount++;
+   // Now add amount to balance
+   super.deposit(amount);
+}</pre></li>
+</ul>
+
+<h2>Syntax 13.2: Calling a Superclass Method</h2>
+<table cellpadding="10" width="80%" border="1" bgcolor="#ffffff">
+   <tbody>
+     <tr>
+       <td>
+      <table border="0">
+         <tbody>
+           <tr>
+             <td width="5%">&nbsp;</td>
+             <td><tt>super.<i>methodName</i>(<i>parameters</i>)</tt><br>
+             </td>
+           </tr>
+
+        </tbody>
+      </table>
+
+      <h3>Example:</h3>
+
+      <table border="0">
+         <tbody>
+           <tr>
+             <td width="5%">&nbsp;</td>
+             <td><tt>public void deposit(double amount)<br>
+  {<br>
+  &nbsp; &nbsp;transactionCount++;<br>
+  &nbsp; &nbsp;super.deposit(amount);<br>
+  }</tt></td>
+           </tr>
+
+        </tbody>
+      </table>
+
+      <h3>Purpose:</h3>
+     To call a method of the superclass instead of the method of the current
+class        </td>
+     </tr>
+
+  </tbody>
+</table>
+ <br>
+
+
+<h2>Implementing Remaining Methods</h2>
+<pre>public class CheckingAccount extends BankAccount
+{
+   . . .
+   public void withdraw(double amount)
+   {
+      transactionCount++;
+      // Now subtract amount from balance
+      <code class="blue">super</code>.withdraw(amount);
+   }
+
+   public void deductFees()
+   {
+      if (transactionCount > FREE_TRANSACTIONS)
+      {
+         double fees = TRANSACTION_FEE
+            * (transactionCount - FREE_TRANSACTIONS);
+         <code class="blue">super</code>.withdraw(fees);
+      }
+      transactionCount = 0;
+   }
+   . . .
+   private static final int FREE_TRANSACTIONS = 3;
+   private static final double TRANSACTION_FEE = 2.0;
+}</pre>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="6">Why does the <tt>withdraw</tt> method of the <tt>CheckingAccount</tt> class call <tt>super.withdraw</tt>?</li>
+<li>Why does the <tt>deductFees</tt> method set the transaction count to zero?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="6">It needs to reduce the balance, and it cannot access the balance field directly.</li>
+<li>So that the count can reflect the number of transactions for the following month.</li>
+</ol>
+<br>
+
+
+<h2>Common Error: Shadowing Instance Fields</h2>
+<ul>
+  <li>A subclass has no access to the private instance fields of the superclass</li>
+  <li>Beginner's error: "solve" this problem by adding another instance field with same name:
+<pre>public class CheckingAccount extends BankAccount
+{
+   public void deposit(double amount)
+   {
+      transactionCount++;
+      balance = balance + amount;
+   }
+   . . .
+   private double balance; // Don't
+}</pre></li>
+  <li>Now the deposit method compiles, but it doesn't update the correct balance!
+      <br><img src="images/shadowing.png" alt=""></li>
+</ul>
+
+
+<h2>Subclass Construction</h2>
+<ul>
+   <li><tt>super</tt> followed by a parenthesis indicates a call to the superclass constructor
+<pre>public class CheckingAccount extends BankAccount
+{
+   public CheckingAccount(double initialBalance)
+   {
+      // Construct superclass
+      <code class="blue">super(initialBalance);</code>
+      // Initialize transaction count
+      transactionCount = 0;
+   }
+   . . .
+}</pre></li>
+   <li>Must be the <i>first</i> statement in subclass constructor</li>
+   <li>If subclass constructor doesn't call superclass constructor, default superclass constructor is used
+      <ul><li>Default constructor: constructor with no parameters</li>
+      <li>If all constructors of the superclass require parameters, then the compiler reports an error</li></ul></li>   
+</ul>
+
+
+<h2>Syntax 13.3: Calling a Superclass Constructor</h2>
+<table cellpadding="10" width="80%" border="1" bgcolor="#ffffff">
+   <tbody>
+     <tr>
+       <td>
+      <table border="0">
+         <tbody>
+           <tr>
+             <td width="5%">&nbsp;</td>
+             <td><tt>ClassName(<i>parameters</i>)<br>
+ {<br>
+ &nbsp; &nbsp;super(<i>parameters</i>);<br>
+ &nbsp; &nbsp;. . .<br>
+ }</tt></td>
+           </tr>
+
+        </tbody>
+      </table>
+
+      <h3>Example:</h3>
+
+      <table border="0">
+         <tbody>
+           <tr>
+             <td width="5%">&nbsp;</td>
+             <td>
+            <pre>public CheckingAccount(double initialBalance)
+{
+   super(initialBalance);
+   transactionCount = 0;
+}</pre></td>
+           </tr>
+
+        </tbody>
+      </table>
+
+      <h3>Purpose:</h3>
+     To invoke a constructor of the superclass. Note that this statement
+must be the first statement of the subclass constructor.        </td>
+     </tr>
+  </tbody>
+</table>
+ <br>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="8">Why didn't the <tt>SavingsAccount</tt> constructor in Section 13.1 call its superclass constructor?</li>
+<li>When you invoke a superclass method with the <tt>super</tt> keyword, does the call have to be the first statement of the subclass method?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="8">It was content to use the default constructor of the superclass, which sets the balance to zero.</li>
+<li>No&#150;this is a requirement only for constructors. For example, the <tt>SavingsAccount.deposit</tt> method first increments the transaction count, then calls the superclass method.</li>
+</ol>
+<br>
+
+
+<h2>Converting Between Subclass and Superclass Types</h2>
+<ul>
+   <li>Ok to convert subclass reference to superclass reference
+   <pre>SavingsAccount collegeFund = new SavingsAccount(10);
+BankAccount anAccount = collegeFund;
+Object anObject = collegeFund;</pre></li>
+   <li>The three object references stored in <tt>collegeFund</tt>, <tt>anAccount</tt>, and <tt>anObject</tt> all refer to the same object of type <tt>SavingsAccount</tt>
+      <br><img src="images/same-object.png" alt=""></li>
+</ul>
+
+
+<h2>Converting Between Subclass and Superclass Types</h2>
+<ul>
+   <li>Superclass references don't know the full story:
+     <pre>anAccount.deposit(1000); // OK
+anAccount.addInterest();
+// No--not a method of the class to which anAccount belongs</pre></li>
+   <li>When you convert between a subclass object to its superclass type:
+      <ul><li>The value of the reference stays the same&#150;it is the memory location of the object</li>
+      <li>But, less information is known about the object</li></ul></li>
+   <li>Why would anyone want to know <i>less</i> about an object?
+      <ul><li>Reuse code that knows about the superclass but not the subclass:
+<pre>public void transfer(double amount, BankAccount other)
+{
+   withdraw(amount);
+   other.deposit(amount);
+}</pre>Can be used to transfer money from any type of <tt>BankAccount</tt></li></ul></li>
+</ul>
+
+
+<h2>Converting Between Subclass and Superclass Types</h2>
+<ul>
+<li>Occasionally you need to convert from a superclass reference to a subclass reference
+    <pre>BankAccount anAccount = (BankAccount) anObject;</pre></li>
+<li>This cast is dangerous: if you are wrong, an exception is thrown</li>
+<li>Solution: use the <tt>instanceof</tt> operator</li>
+<li><tt>instanceof</tt>: tests whether an object belongs to a particular type
+<pre>
+if (anObject instanceof BankAccount)
+{
+   BankAccount anAccount = (BankAccount) anObject;
+   . . .
+}</pre></li>
+</ul>
+
+
+<h2>Syntax 13.4: The <tt>instanceof</tt> Operator</h2>
+<table cellpadding="10" width="80%" border="1" bgcolor="#ffffff">
+<tbody>
+<tr>
+<td>
+<table border="0">
+<tbody>
+<tr>
+<td width="5%">&nbsp;</td>
+<td><i><tt>object</tt></i> <tt>instanceof
+<i>TypeName</i></tt><br />
+</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Example:</h3>
+
+<table border="0">
+<tbody>
+<tr>
+<td width="5%">&nbsp;</td>
+<td><pre>if (anObject instanceof BankAccount)
+{
+   BankAccount anAccount = (BankAccount) anObject;
+   . . .
+}</pre></td>
+</tr>
+</tbody>
+</table>
+
+<h3>Purpose:</h3>
+
+To return <tt>true</tt> if the <i>object</i> is an instance of <i>TypeName</i> (or one of its subtypes), and <tt>false</tt> otherwise</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="10">Why did the second parameter of the <tt>transfer</tt> method have to be of type <tt>BankAccount</tt> and not, for example, <tt>SavingsAccount</tt>?</li>
+<li>Why can't we change the second parameter of the <tt>transfer</tt> method to the type <tt>Object</tt>?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="10">We want to use the method for all kinds of bank accounts. Had we used a
+parameter of type <tt>SavingsAccount</tt>, we couldn't have called the method with a
+<tt>CheckingAccount</tt> object.</li>
+<li>We cannot invoke the <tt>deposit</tt> method on a variable of type <tt>Object</tt>.</li>
+</ol>
+<br>
+
+<h2>Polymorphism</h2>
+<ul>
+   <li>In Java, type of a variable doesn't completely determine type of object to which it refers
+       <pre>BankAccount aBankAccount = new SavingsAccount(1000);
+// aBankAccount holds a reference to a SavingsAccount</pre></li>
+   <li>Method calls are determined by type of actual object, not type of object reference
+      <pre>BankAccount anAccount = new CheckingAccount();
+anAccount.deposit(1000); // Calls "deposit" from CheckingAccount</pre></li>
+   <li>Compiler needs to check that only legal methods are invoked
+       <pre>Object anObject = new BankAccount();
+anObject.deposit(1000); // Wrong!</pre></li>
+</ul>
+
+
+<h2>Polymorphism</h2>
+<ul>
+   <li>Polymorphism: ability to refer to objects of multiple types with varying behavior</li>
+   <li>Polymorphism at work:
+      <pre>public void transfer(double amount, BankAccount other)
+{
+   withdraw(amount); // Shortcut for this.withdraw(amount)
+   other.deposit(amount);
+}</pre></li>
+   <li>Depending on types of <tt>amount</tt> and <tt>other</tt>, different versions of <tt>withdraw</tt> and <tt>deposit</tt> are called</li>
+</ul>
+
+
+<h2>File AccountTester.java</h2>
+<iframe src="code/AccountTester.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File BankAccount.java</h2>
+<iframe src="code/BankAccount.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+<h2>File CheckingAccount.java</h2>
+<iframe src="code/CheckingAccount.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File SavingsAccount.java</h2>
+<iframe src="code/SavingsAccount.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Output</h2>
+<pre>Mom's savings balance = $7035.0
+Harry's checking balance = $1116.0</pre>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="12">If <tt>a</tt> is a variable of type <tt>BankAccount</tt> that holds a non-null reference, what do you know about the object to which a refers?</li>
+<li>If <tt>a</tt> refers to a checking account, what is the effect of calling <tt>a.transfer(1000, a)</tt>?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="12">The object is an instance of <tt>BankAccount</tt> or one of its subclasses.</li>
+<li>The balance of a is unchanged, and the transaction count is incremented twice.</li>
+</ol>
+<br>
+
+
+<h2>Access Control</h2>
+<ul>
+<li>Java has four levels of controlling access to fields, methods, and classes:
+  <ul><li><tt>public</tt> access
+      <ul><li>Can be accessed by methods of all classes</li></ul></li>
+  <li><tt>private</tt> access
+      <ul><li>Can be accessed only by the methods of their own class</li></ul></li>
+  <li><tt>protected</tt> access
+      <ul><li>See Advanced Topic 13.3</li></ul></li>
+  <li>package access
+      <ul><li>The default, when no access modifier is given</li>
+      <li>Can be accessed by all classes in the same package</li>
+      <li>Good default for classes, but extremely unfortunate for fields</li></ul></li>
+  </ul>
+</li>
+</ul>
+
+<h2>Recommended Access Levels</h2>
+<ul>
+   <li>Instance and static fields: Always <tt>private</tt>. Exceptions:
+      <ul><li><tt>public static final</tt> constants are useful and safe</li>
+      <li>Some objects, such as <tt>System.out</tt>, need to be accessible to all programs (<tt>public</tt>)</li>
+      <li>Occasionally, classes in a package must collaborate very closely (give some fields package access); inner classes are usually better</li></ul>
+   <li>Methods: <tt>public</tt> or <tt>private</tt></li>
+   <li>Classes and interfaces: <tt>public</tt> or package
+       <ul><li>Better alternative to package access: inner classes
+       <ul><li>In general, inner classes should not be <tt>public</tt> (some exceptions exist, e.g., <tt>Ellipse2D.Double</tt>)</li></ul></li></ul></li>
+   <li>Beware of accidental package access (forgetting <tt>public</tt> or <tt>private</tt>)</li>
+</ul>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="14">What is a common reason for defining package-visible instance fields?</li>
+<li>If a class with a public constructor has package access, who can construct objects of it?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="14">Accidentally forgetting the <tt>private</tt> modifier.</li>
+<li>Any methods of classes in the same package.</li>
+</ol>
+<br>
+
+
+<h2><tt>Object</tt>: The Cosmic Superclass</h2>
+<ul>
+   <li>All classes defined without an explicit <tt>extends</tt> clause automatically extend <tt>Object</tt>
+       <br><img src="images/object.png" alt=""></li>
+   <li>Most useful methods:
+     <ul><li><tt>String toString()</tt></li>
+     <li><tt>boolean equals(Object otherObject)</tt></li>
+     <li><tt>Object clone()</tt></li></ul></li>
+   <li>Good idea to override these methods in your classes</li>
+</ul>
+
+
+<h2>Overriding the <tt>toString</tt> Method</h2>
+<ul>
+   <li>Returns a string representation of the object</li>
+   <li>Useful for debugging:
+<pre>Rectangle box = new Rectangle(5, 10, 20, 30);
+String s = box.toString();
+// Sets s to "java.awt.Rectangle[x=5,y=10,width=20,height=30]"</pre></li>
+   <li><tt>toString</tt> is called whenever you concatenate a string with an object:
+       <br><tt>"box=" + box;
+       <br>// Result: "box=java.awt.Rectangle[x=5,y=10,width=20,height=30]"</tt></li>
+   <li><tt>Object.toString</tt> prints class name and the <i>hash code</i> of the object
+       <pre>BankAccount momsSavings = new BankAccount(5000);
+String s = momsSavings.toString();
+// Sets s to something like "BankAccount@d24606bf"</pre></li>
+</ul>
+
+
+<h2>Overriding the <tt>toString</tt> Method</h2>
+<ul>
+   <li>To provide a nicer representation of an object, override <tt>toString</tt>:<br>
+     <pre>public String toString()
+{
+   return "BankAccount[balance=" + balance + "]";
+}</pre></li>
+  <li>This works better:
+<pre>BankAccount momsSavings = new BankAccount(5000);
+String s = momsSavings.toString();
+// Sets s to "BankAccount[balance=5000]"</pre></li>
+</ul>
+
+
+<h2>Overriding the <tt>equals</tt> Method</h2>
+<ul>
+  <li><tt>equals</tt> tests for equal <i>contents</i>
+      <br><img src="images/equal-objects.png" alt=""></li>
+  <li><tt>==</tt> tests for equal <i>location</i>
+      <br><img src="images/same-object-refs.png" alt=""></li>
+</ul>
+
+
+<h2>Overriding the <tt>equals</tt> Method</h2>
+<ul>
+  <li>Define the <tt>equals</tt> method to test whether two objects have equal state</li>
+  <li>When redefining <tt>equals</tt> method, you cannot change object signature; use a <i>cast</i> instead:
+<pre>public class Coin
+{
+   . . .
+   public boolean equals(Object otherObject)
+   {
+      Coin other = (Coin) otherObject;
+      return name.equals(other.name) &amp;&amp; value == other.value;
+   }
+   . . .
+}</pre></li>
+<li>You should also override the <tt>hashCode</tt> method so that equal objects have the same hash code</li>
+</ul>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="16">Should the call <tt>x.equals(x)</tt> always return <tt>true</tt>?</li>
+<li>Can you implement <tt>equals</tt> in terms of <tt>toString</tt>? Should you?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="16">It certainly should&#150;unless, of course, <tt>x</tt> is <tt>null</tt>.</li>
+<li>If <tt>toString</tt> returns a string that describes all instance fields, you can simply call
+<tt>toString</tt> on the implicit and explicit parameters, and compare the results. However,
+comparing the fields is more efficient than converting them into strings.</li>
+</ol>
+<br>
+
+
+<h2>Overriding the <tt>clone</tt> Method</h2>
+<ul>
+  <li>Copying an object reference gives two references to same object
+    <br><tt>BankAccount account2 = account;</tt></li>
+  <li>Sometimes, need to make a copy of the object
+      <br><img src="images/cloning.png" alt=""></li>
+  <li>Define <tt>clone</tt> method to make new object (see Advanced Topic 13.6)</li>
+  <li>Use <tt>clone</tt>:
+    <br><tt>BankAccount clonedAccount = (BankAccount) account.clone();</tt></li>
+  <li>Must cast return value because return type is <tt>Object</tt></li>
+</ul>
+
+<h2>The <tt>Object.clone</tt> method</h2>
+<ul>
+  <li>Creates <i>shallow copies</i>
+      <br><img src="images/shallow-copy.png" alt=""></li>
+  <li>Does not systematically clone all subobjects</li>
+  <li>Must be used with caution</li>
+  <li>It is declared as <tt>protected</tt>; prevents from accidentally calling <tt>x.clone()</tt> if the class to which <tt>x</tt> belongs hasn't redefined <tt>clone</tt> to be <tt>public</tt></li>
+  <li>You should override the <tt>clone</tt> method with care (see Advanced Topic 13.6)</li>
+</ul>
+
+<h2>Scripting Languages</h2>
+<img src="images/script.png" alt="">
+
+
+</body>
+</html>

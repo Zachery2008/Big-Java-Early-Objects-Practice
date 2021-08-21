@@ -1,0 +1,46 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">awt</font><font color="#000000">.</font><font color="#000000">event</font><font color="#000000">.</font><font color="#000000">MouseListener</font><font color="#000000">;</font>
+<b><font color="#006cb8">02: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">awt</font><font color="#000000">.</font><font color="#000000">event</font><font color="#000000">.</font><font color="#000000">MouseEvent</font><font color="#000000">;</font>
+<b><font color="#006cb8">03: </font></b><font color="#000000">import</font> <font color="#000000">javax</font><font color="#000000">.</font><font color="#000000">swing</font><font color="#000000">.</font><font color="#000000">JFrame</font><font color="#000000">;</font>
+<b><font color="#006cb8">04: </font></b>
+<b><font color="#006cb8">05: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">06: </font></b><font color="#7a9ecd">   This program displays a RectangleComponent.</font>
+<b><font color="#006cb8">07: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">08: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> <font color="#000000">RectangleComponentViewer</font>
+<b><font color="#006cb8">09: </font></b><font color="#000000">{</font>  
+<b><font color="#006cb8">10: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">void</font> <font color="#000000">main</font><font color="#000000">(</font><font color="#000000">String</font><font color="#000000">[</font><font color="#000000">]</font> <font color="#000000">args</font><font color="#000000">)</font>
+<b><font color="#006cb8">11: </font></b>   <font color="#000000">{</font>        
+<b><font color="#006cb8">12: </font></b>      <font color="#d05b76">final</font> <font color="#000000">RectangleComponent</font> <font color="#000000">component</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">RectangleComponent</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">13: </font></b>
+<b><font color="#006cb8">14: </font></b>      <font color="#7a9ecd">// Add mouse press listener         </font>
+<b><font color="#006cb8">15: </font></b>
+<b><font color="#006cb8">16: </font></b>      <font color="#d05b76">class</font> <font color="#000000">MousePressListener</font> <font color="#d05b76">implements</font> <font color="#000000">MouseListener</font>
+<b><font color="#006cb8">17: </font></b>      <font color="#000000">{</font>  
+<b><font color="#006cb8">18: </font></b>         <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">mousePressed</font><font color="#000000">(</font><font color="#000000">MouseEvent</font> <font color="#000000">event</font><font color="#000000">)</font>
+<b><font color="#006cb8">19: </font></b>         <font color="#000000">{</font>  
+<b><font color="#006cb8">20: </font></b>            <font color="#d05b76">int</font> <font color="#000000">x</font> <font color="#000000">=</font> <font color="#000000">event</font><font color="#000000">.</font><font color="#000000">getX</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">21: </font></b>            <font color="#d05b76">int</font> <font color="#000000">y</font> <font color="#000000">=</font> <font color="#000000">event</font><font color="#000000">.</font><font color="#000000">getY</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">22: </font></b>            <font color="#000000">component</font><font color="#000000">.</font><font color="#000000">moveTo</font><font color="#000000">(</font><font color="#000000">x</font><font color="#000000">,</font> <font color="#000000">y</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">23: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">24: </font></b>
+<b><font color="#006cb8">25: </font></b>         <font color="#7a9ecd">// Do-nothing methods</font>
+<b><font color="#006cb8">26: </font></b>         <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">mouseReleased</font><font color="#000000">(</font><font color="#000000">MouseEvent</font> <font color="#000000">event</font><font color="#000000">)</font> <font color="#000000">{</font><font color="#000000">}</font>
+<b><font color="#006cb8">27: </font></b>         <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">mouseClicked</font><font color="#000000">(</font><font color="#000000">MouseEvent</font> <font color="#000000">event</font><font color="#000000">)</font> <font color="#000000">{</font><font color="#000000">}</font>
+<b><font color="#006cb8">28: </font></b>         <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">mouseEntered</font><font color="#000000">(</font><font color="#000000">MouseEvent</font> <font color="#000000">event</font><font color="#000000">)</font> <font color="#000000">{</font><font color="#000000">}</font>
+<b><font color="#006cb8">29: </font></b>         <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">mouseExited</font><font color="#000000">(</font><font color="#000000">MouseEvent</font> <font color="#000000">event</font><font color="#000000">)</font> <font color="#000000">{</font><font color="#000000">}</font>
+<b><font color="#006cb8">30: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">31: </font></b>         
+<b><font color="#006cb8">32: </font></b>      <font color="#000000">MouseListener</font> <font color="#000000">listener</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">MousePressListener</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">33: </font></b>      <font color="#000000">component</font><font color="#000000">.</font><font color="#000000">addMouseListener</font><font color="#000000">(</font><font color="#000000">listener</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">34: </font></b>
+<b><font color="#006cb8">35: </font></b>      <font color="#000000">JFrame</font> <font color="#000000">frame</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">JFrame</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">36: </font></b>      <font color="#000000">frame</font><font color="#000000">.</font><font color="#000000">add</font><font color="#000000">(</font><font color="#000000">component</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">37: </font></b>
+<b><font color="#006cb8">38: </font></b>      <font color="#000000">frame</font><font color="#000000">.</font><font color="#000000">setSize</font><font color="#000000">(</font><font color="#000000">FRAME_WIDTH</font><font color="#000000">,</font> <font color="#000000">FRAME_HEIGHT</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">39: </font></b>      <font color="#000000">frame</font><font color="#000000">.</font><font color="#000000">setDefaultCloseOperation</font><font color="#000000">(</font><font color="#000000">JFrame</font><font color="#000000">.</font><font color="#000000">EXIT_ON_CLOSE</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">40: </font></b>      <font color="#000000">frame</font><font color="#000000">.</font><font color="#000000">setVisible</font><font color="#000000">(</font><font color="#d05b76">true</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">41: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">42: </font></b>
+<b><font color="#006cb8">43: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">static</font> <font color="#d05b76">final</font> <font color="#d05b76">int</font> <font color="#000000">FRAME_WIDTH</font> <font color="#000000">=</font> <font color="#89c976">300</font><font color="#000000">;</font>
+<b><font color="#006cb8">44: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">static</font> <font color="#d05b76">final</font> <font color="#d05b76">int</font> <font color="#000000">FRAME_HEIGHT</font> <font color="#000000">=</font> <font color="#89c976">400</font><font color="#000000">;</font>
+<b><font color="#006cb8">45: </font></b><font color="#000000">}</font> 
+</tt></pre>

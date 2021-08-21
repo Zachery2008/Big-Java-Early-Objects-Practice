@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 19</title>
+</head>
+
+<body>
+<div onclick="document.location='slide025.html'">
+<center><small><a href="slide023.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide025.html">next</a></small></center>
+<hr></div>
+<h2>Implementing Linked Lists</h2>
+<pre>public class LinkedList<br>{<br>   public LinkedList()<br>   {<br>      first = null;<br>   }<br><br>   public Object getFirst()<br>   {<br>      if (first == null)<br>         throw new NoSuchElementException();<br>      return first.data;<br>   }<br><br>   . . .<br>   <code
+ class="blue">private Node first;</code>
+}</pre>
+
+<div onclick="document.location='slide025.html'"><hr>
+<center><small><a href="slide023.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide025.html">next</a></small></center>
+</div>
+</body>
+</html>

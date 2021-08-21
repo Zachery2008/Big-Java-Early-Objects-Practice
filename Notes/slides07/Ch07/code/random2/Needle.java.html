@@ -1,0 +1,56 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#000000">import</font> java<font color="#000000">.</font>util<font color="#000000">.</font>Random<font color="#000000">;</font>
+<b><font color="#006cb8">02: </font></b>
+<b><font color="#006cb8">03: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">04: </font></b><font color="#7a9ecd">   This class simulates a needle in the Buffon needle experiment.</font>
+<b><font color="#006cb8">05: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">06: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> Needle
+<b><font color="#006cb8">07: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">08: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">09: </font></b><font color="#7a9ecd">      Constructs a needle.</font>
+<b><font color="#006cb8">10: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">11: </font></b>   <font color="#d05b76">public</font> <font color="#000000">Needle</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">12: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">13: </font></b>      hits <font color="#000000">=</font> <font color="#89c976">0</font><font color="#000000">;</font>
+<b><font color="#006cb8">14: </font></b>      tries <font color="#000000">=</font> <font color="#89c976">0</font><font color="#000000">;</font>
+<b><font color="#006cb8">15: </font></b>      generator <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Random</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">16: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">17: </font></b>
+<b><font color="#006cb8">18: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">19: </font></b><font color="#7a9ecd">      Drops the needle on the grid of lines and </font>
+<b><font color="#006cb8">20: </font></b><font color="#7a9ecd">      remembers whether the needle hit a line.</font>
+<b><font color="#006cb8">21: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">22: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">drop</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">23: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">24: </font></b>      <font color="#d05b76">double</font> ylow <font color="#000000">=</font> <font color="#89c976">2</font> <font color="#000000">*</font> generator<font color="#000000">.</font><font color="#000000">nextDouble</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">25: </font></b>      <font color="#d05b76">double</font> angle <font color="#000000">=</font> <font color="#89c976">180</font> <font color="#000000">*</font> generator<font color="#000000">.</font><font color="#000000">nextDouble</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">26: </font></b>      
+<b><font color="#006cb8">27: </font></b>      <font color="#7a9ecd">// Computes high point of needle</font>
+<b><font color="#006cb8">28: </font></b>      
+<b><font color="#006cb8">29: </font></b>      <font color="#d05b76">double</font> yhigh <font color="#000000">=</font> ylow <font color="#000000">+</font> Math<font color="#000000">.</font><font color="#000000">sin</font><font color="#000000">(</font>Math<font color="#000000">.</font><font color="#000000">toRadians</font><font color="#000000">(</font>angle<font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">30: </font></b>      <font color="#d05b76">if</font> <font color="#000000">(</font>yhigh <font color="#000000">&gt;</font><font color="#000000">=</font> <font color="#89c976">2</font><font color="#000000">)</font> hits<font color="#000000">+</font><font color="#000000">+</font><font color="#000000">;</font>    
+<b><font color="#006cb8">31: </font></b>      tries<font color="#000000">+</font><font color="#000000">+</font><font color="#000000">;</font>
+<b><font color="#006cb8">32: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">33: </font></b>
+<b><font color="#006cb8">34: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">35: </font></b><font color="#7a9ecd">      Gets the number of times the needle hit a line.</font>
+<b><font color="#006cb8">36: </font></b><font color="#7a9ecd">      @return the hit count</font>
+<b><font color="#006cb8">37: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">38: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">int</font> <font color="#000000">getHits</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">39: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">40: </font></b>      <font color="#d05b76">return</font> hits<font color="#000000">;</font>
+<b><font color="#006cb8">41: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">42: </font></b>
+<b><font color="#006cb8">43: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">44: </font></b><font color="#7a9ecd">      Gets the total number of times the needle was dropped.</font>
+<b><font color="#006cb8">45: </font></b><font color="#7a9ecd">      @return the try count</font>
+<b><font color="#006cb8">46: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">47: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">int</font> <font color="#000000">getTries</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">48: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">49: </font></b>      <font color="#d05b76">return</font> tries<font color="#000000">;</font>
+<b><font color="#006cb8">50: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">51: </font></b>        
+<b><font color="#006cb8">52: </font></b>   <font color="#d05b76">private</font> Random generator<font color="#000000">;</font>
+<b><font color="#006cb8">53: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">int</font> hits<font color="#000000">;</font>
+<b><font color="#006cb8">54: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">int</font> tries<font color="#000000">;</font>
+<b><font color="#006cb8">55: </font></b><font color="#000000">}</font>
+</tt></pre>

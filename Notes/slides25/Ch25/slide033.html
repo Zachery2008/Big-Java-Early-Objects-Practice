@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 25</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide034.html'">
+<center><small><a href="slide032.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide034.html">next</a></small></center>
+<hr></div>
+<h2>Selecting Subsets</h2>
+<ul>
+  <li> You can combine expressions with logical connectives <tt>AND</tt>, <tt>OR</tt>, <tt>NOT</tt>
+    <pre>SELECT *
+   FROM Product
+   WHERE Price < 100
+   AND Description <> 'Toaster'</pre>
+  </li>
+<li>You can select both row and column subsets
+<pre>SELECT Name, City FROM Customer WHERE State = 'CA'</pre></li>
+</ul>
+ 
+
+
+<div onclick="document.location='slide034.html'"><hr>
+<center><small><a href="slide032.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide034.html">next</a></small></center>
+</div>
+</body>
+</html>

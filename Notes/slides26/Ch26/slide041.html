@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 26</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide042.html'">
+<center><small><a href="slide040.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide042.html">next</a></small></center>
+<hr></div>
+<h2>Creating XML Documents</h2>
+<ul>
+  <li>To construct the tree structure of a document, it is a good idea to use a set of helper methods</li>
+  <li>Helper method to create an element with text:
+    <pre>private Element createTextElement(String name, String text)
+{
+   Text t = doc.createTextNode(text);
+   Element e = doc.createElement(name);
+   e.appendChild(t);
+   return e;
+}</pre></li>
+  <li>To construct a price element:
+    <pre>Element priceElement = createTextElement("price", "29.95");</pre></li>
+</ul>
+
+
+
+<div onclick="document.location='slide042.html'"><hr>
+<center><small><a href="slide040.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide042.html">next</a></small></center>
+</div>
+</body>
+</html>

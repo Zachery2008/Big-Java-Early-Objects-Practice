@@ -1,0 +1,690 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 9</title>
+  <style type="text/css">
+OL.withloweralpha { list-style-type: lower-alpha }
+  </style>
+</head>
+<body>
+<div>
+<h2>Chapter 9</h2>
+<h1>Designing Classes </h1>
+<br>
+</div>
+<h2>Chapter Goals</h2>
+<ul>
+  <li>To learn how to choose appropriate classes to implement</li>
+  <li>To understand the concepts of cohesion and coupling</li>
+  <li>To minimize the use of side effects</li>
+  <li>To document the responsibilities of methods and their callers
+with preconditions and postconditions</li>
+  <li>To understand the difference between instance methods and static
+methods</li>
+  <li>To introduce the concept of static fields</li>
+  <li>To understand the scope rules for local variables and instance
+fields</li>
+  <li>To learn about packages</li>
+</ul>
+<br>
+<h2>Choosing Classes</h2>
+<ul>
+  <li>A class represents a single concept from the problem domain</li>
+  <li>Name for a class should be a noun that describes concept</li>
+  <li>Concepts from mathematics:
+    <pre>Point<br>Rectangle<br>Ellipse</pre>
+  </li>
+  <li>Concepts from real life
+    <pre>BankAccount<br>CashRegister</pre>
+  </li>
+</ul>
+<h2>Choosing Classes</h2>
+<ul>
+  <li>Actors (end in -er, -or)&#8211;objects do some kinds of work for you
+    <pre>Scanner<br>Random // better name: RandomNumberGenerator</pre>
+  </li>
+  <li>Utility classes&#8211;no objects, only static methods and constants
+    <pre>Math</pre>
+  </li>
+  <li>Program starters: only have a <tt>main</tt> method</li>
+  <li>Don't turn actions into classes:<br>
+    <tt>Paycheck</tt> is better name than <tt>ComputePaycheck</tt></li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li>What is the rule of thumb for finding classes?</li>
+  <li>Your job is to write a program that plays chess. Might <tt>ChessBoard</tt>
+be an appropriate class? How about <tt>NextMove</tt>?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li>Look for nouns in the problem description</li>
+  <li>Yes (<tt>ChessBoard</tt>) and no (<tt>NextMove</tt>)</li>
+</ol>
+<br>
+<h2>Cohesion</h2>
+<ul>
+  <li>A class should represent a single concept</li>
+  <li>The public interface of a class is cohesive if all of its
+features are related to the concept that the class represents</li>
+  <li>This class lacks cohesion:<br>
+    <pre>public class CashRegister<br>{<br>   public void enterPayment(int dollars, int quarters, int dimes,<br>                            int nickels, int pennies)<br>   . . .<br>   public static final double NICKEL_VALUE = 0.05;<br>   public static final double DIME_VALUE = 0.1;<br>   public static final double QUARTER_VALUE = 0.25;<br>   . . .<br>}<br></pre>
+  </li>
+</ul>
+<h2>Cohesion<br>
+</h2>
+<ul>
+  <li><tt>CashRegister</tt>, as described above, involves two concepts:
+    <i>cash register</i> and <i>coin</i></li>
+  <li>Solution: Make two classes:<br>
+    <pre>public class Coin<br>{<br>   public Coin(double aValue, String aName){ . . . }<br>   public double getValue(){ . . . }<br>   . . .<br>}<br><br>public class CashRegister<br>{<br>   public void enterPayment(int coinCount, Coin coinType) { . . . }<br>   . . .<br>}<br></pre>
+  </li>
+</ul>
+<h2>Coupling</h2>
+<ul>
+  <li>A class <i>depends</i> on another if it uses objects of that
+class</li>
+  <li><tt>CashRegister</tt> depends on <tt>Coin</tt> to determine the
+value of the payment</li>
+  <li><tt>Coin</tt> does not depend on <tt>CashRegister</tt><br>
+  </li>
+  <li>High Coupling = many class dependencies</li>
+  <li>Minimize coupling to minimize the impact of interface changes</li>
+  <li>To visualize relationships draw class diagrams <br>
+  </li>
+  <li>UML: Unified Modeling Language. Notation for object-oriented
+analysis and design</li>
+</ul>
+<h2>Coupling</h2>
+<img src="images/dependency.png" alt="">
+<br>
+<h2>High and Low Coupling between Classes</h2>
+<img src="images/coupling.png" alt="">
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li value="3">Why is the <tt>CashRegister</tt> class from Chapter 4
+not cohesive?</li>
+  <li>Why does the <tt>Coin</tt> class not depend on the <tt>CashRegister</tt>
+class?</li>
+  <li>Why should coupling be minimized between classes?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="3">Some of its features deal with payments, others with
+coin values</li>
+  <li>None of the coin operations require the <tt>CashRegister</tt>
+class</li>
+  <li>If a class doesn't depend on another, it is not affected by
+interface changes in the other class</li>
+</ol>
+<br>
+<h2>Accessors, Mutators and Immutable Classes</h2>
+<ul>
+  <li>Accessor: does not change the state of the implicit parameter
+    <pre>double balance = account.getBalance();</pre>
+  </li>
+  <li>Mutator: modifies the object on which it is invoked
+    <pre>account.deposit(1000);</pre>
+  </li>
+  <li> Immutable class: has no mutator methods (e.g., <tt>String</tt>)
+    <pre>String name = "John Q. Public";<br>String uppercased = name.toUpperCase(); // name is not changed</pre>
+  </li>
+  <li>It is safe to give out references to objects of immutable
+classes; no code can modify the object at an unexpected time</li>
+</ul>
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li value="6">Is the <tt>substring</tt> method of the <tt>String</tt>
+class an accessor or a mutator?</li>
+  <li>Is the <tt>Rectangle</tt> class immutable?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="6">It is an accessor&#8211;calling <tt>substring</tt> doesn't
+modify the string on which the method is invoked. In fact, all methods
+of the <tt>String</tt> class are accessors</li>
+  <li>No&#8211;<tt>translate</tt> is a mutator</li>
+</ol>
+<br>
+<h2>Side Effects</h2>
+<ul>
+  <li>Side effect of a method: any externally observable data
+modification
+    <pre>public void transfer(double amount, BankAccount other)<br>{<br>   balance = balance - amount;<br>   other.balance = other.balance + amount; // Modifies explicit parameter<br>}</pre>
+  </li>
+  <li>Updating explicit parameter can be surprising to programmers; it
+is best to avoid it if possible</li>
+</ul>
+<h2>Side Effects</h2>
+<ul>
+  <li>Another example of a side effect is output<br>
+    <pre>public void printBalance() // Not recommended<br>{<br>   System.out.println("The balance is now $" + balance);<br>}</pre>
+Bad idea: message is in English, and relies on <tt>System.out</tt><br>
+It is best to decouple input/output from the actual work of your classes</li>
+  <li>You should minimize side effects that go beyond modification of
+the implicit parameter</li>
+</ul>
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li value="8">If <tt>a</tt> refers to a bank account, then the call <tt>a.deposit(100)</tt>
+modifies the bank account object. Is that a side effect?</li>
+  <li>Consider the <tt>DataSet</tt> class of Chapter 7. Suppose we add
+a method
+    <pre>void read(Scanner in)<br>{<br>   while (in.hasNextDouble())<br>      add(in.nextDouble());<br>}</pre>
+Does this method have a side effect?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="8">No&#8211;a side effect of a method is any change outside the
+implicit parameter</li>
+  <li>Yes&#8211;the method affects the state of the <tt>Scanner</tt>
+parameter</li>
+</ol>
+<br>
+<h2>Common Error: Trying to Modify Primitive Type Parameters</h2>
+<ul>
+  <li>
+    <pre>void transfer(double amount, double otherBalance)<img
+ src="images/two.png" alt=""><br>{<br>   balance = balance - amount;<br>   otherBalance = otherBalance + amount;<br>}<img
+ src="images/three.png" alt=""></pre>
+  </li>
+  <li>Won't work</li>
+  <li>Scenario:<br>
+    <pre>double savingsBalance = 1000;<br>harrysChecking.transfer(500, savingsBalance);<img
+ src="images/one.png" alt=""><br>System.out.println(savingsBalance);<img
+ src="images/four.png" alt=""><br>    </pre>
+  </li>
+  <li>In Java, a method can never change parameters of primitive type</li>
+</ul>
+<h2>Modifying a Numeric Parameter has No Effect on Caller</h2>
+<img src="images/numeric-param.png" alt="">
+<br>
+<h2>Call by Value and Call by Reference</h2>
+<ul>
+  <li>Call by value: Method parameters are copied into the parameter
+variables when a method starts</li>
+  <li>Call by reference: Methods can modify parameters</li>
+  <li>Java has call by value</li>
+  <li>A method can change state of object reference parameters,
+but cannot replace an object reference with another
+    <pre>public class BankAccount<br>{<br>   public void transfer(double amount, BankAccount otherAccount)<br>   {<br>      balance = balance - amount;<br>      double newBalance = otherAccount.balance + amount;<br>      otherAccount = new BankAccount(newBalance); // Won't work<br>   }<br>}</pre>
+  </li>
+</ul>
+<h2>Call by Value Example</h2>
+<tt>harrysChecking.transfer(500, savingsAccount);</tt><br>
+&nbsp;<br>
+<img src="images/reference-param.png" alt="">
+<h2>Preconditions</h2>
+<ul>
+  <li>Precondition: Requirement that the caller of a method must meet</li>
+  <li>Publish preconditions so the caller won't call methods with bad
+parameters</li>
+  <li>
+    <pre>/**<br>   Deposits money into this account.<br>   @param amount the amount of money to deposit<br>   (Precondition: amount &gt;= 0)<br>*/</pre>
+  </li>
+  <li>Typical use:
+    <ul>
+      <li>To restrict the parameters of a method</li>
+      <li>To require that a method is only called when the object is in
+an
+appropriate state</li>
+    </ul>
+  </li>
+  <li>If precondition is violated, method is not responsible for
+computing the correct result. It is free to do <i>anything</i>.</li>
+</ul>
+<h2>Preconditions</h2>
+<ul>
+  <li>Method may throw exception if precondition violated&#8211;more on
+Chapter 15
+    <pre>if (amount &lt; 0) throw new IllegalArgumentException();<br>balance = balance + amount;</pre>
+  </li>
+  <li>Method doesn't have to test for precondition. (Test may be
+costly)
+    <pre>// if this makes the balance negative, it's the caller's fault<br>balance = balance + amount;</pre>
+  </li>
+</ul>
+<h2>Preconditions</h2>
+<ul>
+  <li>Method can do an assertion check
+    <pre>assert amount &gt;= 0;<br>balance = balance + amount;<br></pre>
+To enable assertion checking: <tt>java -enableassertions MyProg</tt> <br>
+You can turn assertions off after you have tested your program, so that
+it runs at maximum
+speed</li>
+  <li>Many beginning programmers silently return to the caller
+    <pre>if (amount &lt; 0) return; // Not recommended; hard to debug<br>balance = balance + amount;</pre>
+  </li>
+</ul>
+<h2>Syntax 9.1: Assertion</h2>
+<table bgcolor="#ffffff" border="1" cellpadding="10" width="70%">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td>
+            <pre>assert <i>condition</i>;</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td>
+            <pre>assert amount &gt;= 0;</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+To assert that a condition is fulfilled. If assertion checking is
+enabled and the condition is
+false, an assertion error is thrown.</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Postconditions</h2>
+<ul>
+  <li>Condition that is true after a method has completed</li>
+  <li>If method call is in accordance with preconditions, it must
+ensure that postconditions are valid</li>
+  <li>There are two kinds of postconditions:
+    <ol>
+      <li>The return value is computed correctly</li>
+      <li>The object is in a certain state after the method call is
+completed</li>
+    </ol>
+  </li>
+  <li>
+    <pre>/**<br>   Deposits money into this account.<br>   (Postcondition: getBalance() &gt;= 0)<br>   @param amount the amount of money to deposit<br>   (Precondition: amount &gt;= 0)<br>*/</pre>
+  </li>
+  <li>Don't document trivial postconditions that repeat the <tt>@return</tt>
+clause</li>
+  <li>Formulate pre- and postconditions only in terms of the interface
+of the class
+    <pre>amount &lt;= getBalance() // this is the way to state a postcondition<br>amount &lt;= balance // wrong postcondition formulation</pre>
+  </li>
+  <li>Contract: If caller fulfills precondition, method must fulfill
+postcondition</li>
+</ul>
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li value="10">Why might you want to add a precondition to a method
+that you provide for other programmers?</li>
+  <li>When you implement a method with a precondition and you notice
+that the caller did not fulfill the precondition, do you have to notify
+the caller?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="10">Then you don't have to worry about checking for
+invalid values&#8211;it becomes the caller's responsibility</li>
+  <li>No&#8211;you can take any action that is convenient for you</li>
+</ol>
+<br>
+<h2>Static Methods</h2>
+<ul>
+  <li>Every method must be in a class</li>
+  <li>A static method is not invoked on an object</li>
+  <li>Why write a method that does not operate on an object?<br>
+Common reason: encapsulate some computation that involves only numbers.
+Numbers aren't objects, you can't invoke methods on them. E.g., <tt>x.sqrt()</tt>
+can never be legal in Java</li>
+  <li>
+    <pre>public class Financial<br>{<br>   public static double percentOf(double p, double a)<br>   {<br>      return (p / 100) * a;<br>   }<br>   // More financial methods can be added here.<br>}</pre>
+  </li>
+  <li>Call with class name instead of object:<br>
+    <tt>double tax = <code class="blue"><b>Financial.</b></code>percentOf(taxRate,
+total);</tt></li>
+  <li><tt>main</tt> is static&#8211;there aren't any objects yet</li>
+</ul>
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li value="12">Suppose Java had no static methods. Then all methods
+of the <tt>Math</tt> class would be instance methods. How would you
+compute the square root of x?</li>
+  <li>Harry turns in his homework assignment, a program that plays
+tic-tac-toe. His solution consists of a single class with many static
+methods. Why is this not an object-oriented solution?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="12">
+    <pre>Math m = new Math();<br>y = m.sqrt(x);</pre>
+  </li>
+  <li>In an object-oriented solution, the <tt>main</tt> method would
+construct objects of classes Game, Player, and the like. Most methods
+would be instance methods that depend on the state of these objects.</li>
+</ol>
+<br>
+<h2>Static Fields</h2>
+<ul>
+  <li>A static field belongs to the class, not to any object of the
+class. Also called <i>class field</i>.</li>
+  <li>
+    <pre>public class BankAccount<br>{<br>   . . .<br>   private double balance;<br>   private int accountNumber;<br>   private static int lastAssignedNumber = 1000;<br>}</pre>
+If <tt>lastAssignedNumber</tt> was not <tt>static</tt>, each instance
+of <tt>BankAccount</tt> would have its own value of <tt>lastAssignedNumber</tt></li>
+  <li>
+    <pre>public BankAccount()<br>{<br>   // Generates next account number to be assigned<br>   lastAssignedNumber++; // Updates the static field<br>   // Assigns field to account number of this bank account<br>   accountNumber = lastAssignedNumber; // Sets the instance field<br>}</pre>
+  </li>
+  <li>Minimize the use of static fields. (Static final fields are ok.)</li>
+</ul>
+<h2>Static Fields</h2>
+<ul>
+  <li>Three ways to initialize:
+    <ol>
+      <li>Do nothing. Field is with 0 (for numbers), <tt>false</tt>
+(for <tt>boolean</tt> values), or <tt>null</tt> (for objects)</li>
+      <li>Use an explicit initializer, such as
+        <pre>public class BankAccount<br>{<br>   . . .<br>   private static int lastAssignedNumber = 1000; // Executed once,<br>                                                 // when class is loaded<br>}</pre>
+      </li>
+      <li>Use a static initialization block</li>
+    </ol>
+  </li>
+  <li>Static fields should always be declared as <tt>private</tt></li>
+  <li>Exception: Static constants, which may be either private or public<br>
+    <pre>public class BankAccount<br>{<br>   . . .<br>   public static final double OVERDRAFT_FEE = 5; // Refer to it as<br>                                                 // BankAccount.OVERDRAFT_FEE<br>}</pre>
+  </li>
+</ul>
+<h2>A Static Field and Instance Fields</h2>
+<img src="images/static-field.png" alt="">
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li value="14">Name two static fields of the <tt>System</tt> class.</li>
+  <li>Harry tells you that he has found a great way to avoid those
+pesky objects: Put all code into a single class and declare all methods
+and fields <tt>static</tt>. Then <tt>main</tt> can call the other
+static methods, and all of them can access the static fields. Will
+Harry's plan work? Is it a good idea?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="14"><tt>System.in</tt> and <tt>System.out</tt></li>
+  <li>Yes, it works. Static methods can access static fields of the
+same class. But it is a terrible idea. As your programming tasks get
+more complex, you will want to use objects and classes to organize your
+programs.</li>
+</ol>
+<br>
+<h2>Scope of Local Variables</h2>
+<ul>
+  <li>Scope of variable: Region of program in which the variable can be
+accessed</li>
+  <li>Scope of a local variable extends from its declaration to end of
+the block that encloses it</li>
+  <li>Sometimes the same variable name is used in two methods:
+    <pre>public class RectangleTester<br>{<br>   public static double area(Rectangle rect)<br>   {<br>      <b>double r</b> = rect.getWidth() * rect.getHeight();<br>      return r;<br>   }<br>   public static void main(String[] args)<br>   {<br>      <b>Rectangle r</b> = new Rectangle(5, 10, 20, 30);<br>      double a = area(r);<br>      System.out.println(r);<br>   }<br>}</pre>
+These variables are independent from each other; their scopes are
+disjoint </li>
+</ul>
+<h2>Scope of Local Variables</h2>
+<ul>
+  <li>Scope of a local variable cannot contain the definition of
+another variable with the same name
+    <pre><b>Rectangle r</b> = new Rectangle(5, 10, 20, 30);<br>if (x &gt;= 0)<br>{<br>   double r = Math.sqrt(x);<br>   // Error&#8211;can't declare another variable called r here<br>   . . .<br>}</pre>
+  </li>
+  <li>However, can have local variables with identical names if scopes
+do not overlap
+    <pre>if (x &gt;= 0)<br>{<br>   double r = Math.sqrt(x);<br>   . . .<br>} // Scope of r ends here<br>else<br>{<br>   Rectangle r = new Rectangle(5, 10, 20, 30);<br>   // OK&#8211;it is legal to declare another r here<br>   . . .<br>}</pre>
+  </li>
+</ul>
+<h2>Scope of Class Members</h2>
+<ul>
+  <li>Private members have class scope: You can access all members in
+any method of the class</li>
+  <li>Must qualify public members outside scope
+    <pre>Math.sqrt<br>harrysChecking.getBalance</pre>
+  </li>
+  <li>Inside a method, no need to qualify fields or methods that belong
+to the same class</li>
+  <li>An unqualified instance field or method name refers to the <tt>this</tt>
+parameter
+    <pre>public class BankAccount<br>{<br>   public void transfer(double amount, BankAccount other)<br>   {<br>      withdraw(amount); // i.e., this.withdraw(amount);<br>      other.deposit(amount);<br>   }<br>   . . .<br>}</pre>
+  </li>
+</ul>
+<h2>Overlapping Scope</h2>
+<ul>
+  <li>A local variable can <i>shadow</i> a field with the same name</li>
+  <li>Local scope wins over class scope<br>
+    <pre>public class Coin<br>{<br>   . . .<br>   public double getExchangeValue(double exchangeRate)<br>   {<br>      double value; // Local variable<br>      . . .<br>      return value;<br>   }<br>   private String name;<br>   private double value; // Field with the same name<br>}</pre>
+  </li>
+  <li>Access shadowed fields by qualifying them with the <tt>this</tt>
+reference
+    <pre>value = this.value * exchangeRate;</pre>
+  </li>
+</ul>
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li value="16">Consider the <tt>deposit</tt> method of the <tt>BankAccount</tt>
+class. What is the scope of the variables <tt>amount</tt> and <tt>newBalance</tt>?</li>
+  <li>What is the scope of the <tt>balance</tt> field of the <tt>BankAccount</tt>
+class?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="16">The scope of <tt>amount</tt> is the entire <tt>deposit</tt>
+method. The scope of <tt>newBalance</tt> starts at the point at which
+the variable is defined and extends to the end of the method.</li>
+  <li>It starts at the beginning of the class and ends at the end of
+the class.</li>
+</ol>
+<br>
+<h2>Organizing Related Classes into Packages</h2>
+<ul>
+  <li>Package: Set of related classes</li>
+  <li>To put classes in a package, you must place a line
+    <pre>package packageName;</pre>
+as the first instruction in the source file containing the classes</li>
+  <li>Package name consists of one or more identifiers separated by
+periods</li>
+  <li>For example, to put the <tt>Financial</tt> class introduced into
+a package named <tt>com.horstmann.bigjava</tt>, the <tt>Financial.java
+    </tt> file must start as follows:
+    <pre>package com.horstmann.bigjava;<br><br>public class Financial<br>{<br>   . . .<br>}</pre>
+  </li>
+  <li>Default package has no name, no <tt>package</tt> statement</li>
+</ul>
+<h2>Organizing Related Classes into Packages</h2>
+<table border="1" cellpadding="2" cellspacing="2" width="100%">
+  <tbody>
+    <tr>
+      <td valign="top">Package<br>
+      </td>
+      <td valign="top">Purpose<br>
+      </td>
+      <td valign="top">Sample Class<br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>java.lang</tt><br>
+      </td>
+      <td valign="top">Language support<br>
+      </td>
+      <td valign="top"><tt>Math</tt><br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>java.util</tt><br>
+      </td>
+      <td valign="top">Utilities<br>
+      </td>
+      <td valign="top"><tt>Random</tt><br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>java.io</tt><br>
+      </td>
+      <td valign="top">Input and output<br>
+      </td>
+      <td valign="top"><tt>PrintStream</tt><br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>java.awt</tt><br>
+      </td>
+      <td valign="top">Abstract Windowing Toolkit<br>
+      </td>
+      <td valign="top"><tt>Color</tt><br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>java.applet</tt><br>
+      </td>
+      <td valign="top">Applets<br>
+      </td>
+      <td valign="top"><tt>Applet</tt><br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>java.net</tt><br>
+      </td>
+      <td valign="top">Networking<br>
+      </td>
+      <td valign="top"><tt>Socket</tt><br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>java.sql</tt><br>
+      </td>
+      <td valign="top">Database Access<br>
+      </td>
+      <td valign="top"><tt>ResultSet</tt><br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>javax.swing</tt><br>
+      </td>
+      <td valign="top">Swing user interface<br>
+      </td>
+      <td valign="top"><tt>JButton</tt><br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>org.omg.CORBA</tt><br>
+      </td>
+      <td valign="top">Common Object Request Broker Architecture<br>
+      </td>
+      <td valign="top"><tt>IntHolder</tt><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h2>Syntax 9.2: Package Specification</h2>
+<table bgcolor="#ffffff" border="1" cellpadding="10" width="70%">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td>
+            <pre>package <i>packageName</i>;</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td>
+            <pre>package com.horstmann.bigjava;</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+To declare that all classes in this file belong to a particular package</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2>Importing Packages</h2>
+<ul>
+  <li>Can always use class without importing<br>
+    <pre>java.util.Scanner in = new java.util.Scanner(System.in);</pre>
+  </li>
+  <li>Tedious to use fully qualified name</li>
+  <li>Import lets you use shorter class name<br>
+    <pre>import java.util.Scanner;<br>. . .<br>Scanner in = new Scanner(System.in)</pre>
+  </li>
+  <li>Can import all classes in a package<br>
+    <pre>import java.util.*;<br></pre>
+  </li>
+  <li>Never need to import <tt>java.lang</tt></li>
+  <li>You don't need to import other classes in the same package</li>
+</ul>
+<h2>Package Names and Locating Classes</h2>
+<ul>
+  <li>Use packages to avoid name clashes<br>
+    <tt>java.util.Timer</tt> vs. <tt>javax.swing.Timer</tt></li>
+  <li>Package names should be unambiguous</li>
+  <li>Recommendation: start with reversed domain name<br>
+    <tt><b>com.horstmann</b>.bigjava<br>
+    <b>edu.sjsu.cs</b>.walters</tt>: for Bertha Walters' classes
+(walters@cs.sjsu.edu)</li>
+  <li>Path name should match package name<br>
+    <tt>com/horstmann/bigjava/Financial.java</tt></li>
+  <li>Path name starts with class path<br>
+    <tt>export CLASSPATH=/home/walters/lib:.<br>
+set CLASSPATH=c:\home\walters\lib;.</tt></li>
+  <li>Class path contains the base directories that may contain package
+directories</li>
+</ul>
+<h2>Base Directories and Subdirectories for Packages</h2>
+<img src="images/classpath.png" alt="">
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li value="18">Which of the following are packages?
+    <ol class="withloweralpha">
+      <li><tt>java</tt></li>
+      <li><tt>java.lang</tt></li>
+      <li><tt>java.util</tt></li>
+      <li><tt>java.lang.Math</tt></li>
+    </ol>
+  </li>
+  <li>Can you write a Java program without ever using import statements?</li>
+  <li>Suppose your homework assignments are located in the directory <tt>/home/me/cs101</tt>
+(<tt>c:\me\cs101</tt> on Windows). Your instructor tells you to place
+your homework into packages. In which directory do you place the class <tt>hw1.problem1.TicTacToeTester</tt>?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="18">
+    <ol class="withloweralpha">
+      <li>No</li>
+      <li>Yes</li>
+      <li>Yes</li>
+      <li>No</li>
+    </ol>
+  </li>
+  <li>Yes&#8211;if you use fully qualified names for all classes, such as <tt>java.util.Random</tt>
+and <tt>java.awt.Rectangle</tt></li>
+  <li><tt>/home/me/cs101/hw1/problem1</tt> or, on Windows, <tt>c:\me\cs101\hw1\problem1</tt></li>
+</ol>
+<br>
+<h2>The Explosive Growth of Personal Computers</h2>
+<img src="images/visicalc.png" alt="">
+<br>
+</body>
+</html>

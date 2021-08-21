@@ -1,0 +1,38 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">02: </font></b><font color="#7a9ecd">   A deposit runnable makes periodic deposits to a bank account.</font>
+<b><font color="#006cb8">03: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">04: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> <font color="#000000">DepositRunnable</font> <font color="#d05b76">implements</font> <font color="#000000">Runnable</font>
+<b><font color="#006cb8">05: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">06: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">07: </font></b><font color="#7a9ecd">      Constructs a deposit runnable.</font>
+<b><font color="#006cb8">08: </font></b><font color="#7a9ecd">      @param anAccount the account into which to deposit money</font>
+<b><font color="#006cb8">09: </font></b><font color="#7a9ecd">      @param anAmount the amount to deposit in each repetition</font>
+<b><font color="#006cb8">10: </font></b><font color="#7a9ecd">      @param aCount the number of repetitions</font>
+<b><font color="#006cb8">11: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">12: </font></b>   <font color="#d05b76">public</font> <font color="#000000">DepositRunnable</font><font color="#000000">(</font><font color="#000000">BankAccount</font> <font color="#000000">anAccount</font><font color="#000000">,</font> <font color="#d05b76">double</font> <font color="#000000">anAmount</font><font color="#000000">,</font>
+<b><font color="#006cb8">13: </font></b>         <font color="#d05b76">int</font> <font color="#000000">aCount</font><font color="#000000">)</font>
+<b><font color="#006cb8">14: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">15: </font></b>      <font color="#000000">account</font> <font color="#000000">=</font> <font color="#000000">anAccount</font><font color="#000000">;</font>
+<b><font color="#006cb8">16: </font></b>      <font color="#000000">amount</font> <font color="#000000">=</font> <font color="#000000">anAmount</font><font color="#000000">;</font>
+<b><font color="#006cb8">17: </font></b>      <font color="#000000">count</font> <font color="#000000">=</font> <font color="#000000">aCount</font><font color="#000000">;</font>
+<b><font color="#006cb8">18: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">19: </font></b>
+<b><font color="#006cb8">20: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">run</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">21: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">22: </font></b>      <font color="#d05b76">try</font>
+<b><font color="#006cb8">23: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">24: </font></b>         <font color="#d05b76">for</font> <font color="#000000">(</font><font color="#d05b76">int</font> <font color="#000000">i</font> <font color="#000000">=</font> <font color="#89c976">1</font><font color="#000000">;</font> <font color="#000000">i</font> <font color="#000000">&lt;</font><font color="#000000">=</font> <font color="#000000">count</font><font color="#000000">;</font> <font color="#000000">i</font><font color="#000000">+</font><font color="#000000">+</font><font color="#000000">)</font>
+<b><font color="#006cb8">25: </font></b>         <font color="#000000">{</font>
+<b><font color="#006cb8">26: </font></b>            <font color="#000000">account</font><font color="#000000">.</font><font color="#000000">deposit</font><font color="#000000">(</font><font color="#000000">amount</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">27: </font></b>            <font color="#000000">Thread</font><font color="#000000">.</font><font color="#000000">sleep</font><font color="#000000">(</font><font color="#000000">DELAY</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">28: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">29: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">30: </font></b>      <font color="#d05b76">catch</font> <font color="#000000">(</font><font color="#000000">InterruptedException</font> <font color="#000000">exception</font><font color="#000000">)</font> <font color="#000000">{</font><font color="#000000">}</font>
+<b><font color="#006cb8">31: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">32: </font></b>
+<b><font color="#006cb8">33: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">static</font> <font color="#d05b76">final</font> <font color="#d05b76">int</font> <font color="#000000">DELAY</font> <font color="#000000">=</font> <font color="#89c976">1</font><font color="#000000">;</font> 
+<b><font color="#006cb8">34: </font></b>   <font color="#d05b76">private</font> <font color="#000000">BankAccount</font> <font color="#000000">account</font><font color="#000000">;</font>
+<b><font color="#006cb8">35: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">double</font> <font color="#000000">amount</font><font color="#000000">;</font>
+<b><font color="#006cb8">36: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">int</font> <font color="#000000">count</font><font color="#000000">;</font>
+<b><font color="#006cb8">37: </font></b><font color="#000000">}</font>
+</tt></pre>

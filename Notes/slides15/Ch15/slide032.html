@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 15</title>
+</head>
+
+<body>
+<div onclick="document.location='slide033.html'">
+<center><small><a href="slide031.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide033.html">next</a></small></center>
+<hr></div>
+<h2>A Complete Example</h2>
+<ul>
+  <li>What can go wrong?
+  <ul>
+    <li>File might not exist</li>
+    <li>File might have data in wrong format</li>
+  </ul></li>
+  <li>Who can detect the faults?
+  <ul>
+    <li><tt>FileReader</tt> constructor will throw an exception when file does not exist</li>
+    <li>Methods that process input need to throw exception if they find error in data format</li></ul></li>
+  <li>What exceptions can be thrown?
+  <ul>
+    <li><tt>FileNotFoundException</tt> can be thrown by <tt>FileReader</tt> constructor</li>
+    <li><tt>IOException</tt> can be thrown by <tt>close</tt> method of <tt>FileReader</tt></li>
+    <li><tt>BadDataException</tt>, a custom checked exception class</li></ul></li>
+  <li>Who can remedy the faults that the exceptions report?
+  <ul>
+    <li>Only the <tt>main</tt> method of <tt>DataSetTester</tt> program interacts with user
+    <ul><li>Catches exceptions</li>
+    <li>Prints appropriate error messages</li>
+    <li>Gives user another chance to enter a correct file</li></ul></li>
+  </ul></li>
+</ul>
+
+
+
+<div onclick="document.location='slide033.html'"><hr>
+<center><small><a href="slide031.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide033.html">next</a></small></center>
+</div>
+</body>
+</html>

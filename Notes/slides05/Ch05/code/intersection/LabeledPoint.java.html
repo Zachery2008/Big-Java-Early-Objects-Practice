@@ -1,0 +1,48 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#000000">import</font> java<font color="#000000">.</font>awt<font color="#000000">.</font>Graphics2D<font color="#000000">;</font>
+<b><font color="#006cb8">02: </font></b><font color="#000000">import</font> java<font color="#000000">.</font>awt<font color="#000000">.</font>geom<font color="#000000">.</font>Ellipse2D<font color="#000000">;</font>
+<b><font color="#006cb8">03: </font></b>
+<b><font color="#006cb8">04: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">05: </font></b><font color="#7a9ecd">   A point with a label showing the point's coordinates.</font>
+<b><font color="#006cb8">06: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">07: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> LabeledPoint
+<b><font color="#006cb8">08: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">09: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">10: </font></b><font color="#7a9ecd">      Construct a labeled point.</font>
+<b><font color="#006cb8">11: </font></b><font color="#7a9ecd">      @param anX the x coordinate</font>
+<b><font color="#006cb8">12: </font></b><font color="#7a9ecd">      @param aY the y coordinate</font>
+<b><font color="#006cb8">13: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">14: </font></b>   <font color="#d05b76">public</font> <font color="#000000">LabeledPoint</font><font color="#000000">(</font><font color="#d05b76">double</font> anX<font color="#000000">,</font> <font color="#d05b76">double</font> aY<font color="#000000">)</font>
+<b><font color="#006cb8">15: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">16: </font></b>      x <font color="#000000">=</font> anX<font color="#000000">;</font>
+<b><font color="#006cb8">17: </font></b>      y <font color="#000000">=</font> aY<font color="#000000">;</font>
+<b><font color="#006cb8">18: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">19: </font></b>
+<b><font color="#006cb8">20: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">21: </font></b><font color="#7a9ecd">      Draws the point as a small circle with a coordinate label.</font>
+<b><font color="#006cb8">22: </font></b><font color="#7a9ecd">      @param g2 the graphics context</font>
+<b><font color="#006cb8">23: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">24: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">draw</font><font color="#000000">(</font>Graphics2D g2<font color="#000000">)</font>
+<b><font color="#006cb8">25: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">26: </font></b>      <font color="#7a9ecd">// Draw a small circle centered around (x, y)</font>
+<b><font color="#006cb8">27: </font></b>
+<b><font color="#006cb8">28: </font></b>      Ellipse2D<font color="#000000">.</font>Double circle <font color="#000000">=</font> <font color="#d05b76">new</font> Ellipse2D<font color="#000000">.</font><font color="#000000">Double</font><font color="#000000">(</font>
+<b><font color="#006cb8">29: </font></b>            x <font color="#000000">-</font> SMALL_CIRCLE_RADIUS<font color="#000000">,</font>
+<b><font color="#006cb8">30: </font></b>            y <font color="#000000">-</font> SMALL_CIRCLE_RADIUS<font color="#000000">,</font>
+<b><font color="#006cb8">31: </font></b>            <font color="#89c976">2</font> <font color="#000000">*</font> SMALL_CIRCLE_RADIUS<font color="#000000">,</font>
+<b><font color="#006cb8">32: </font></b>            <font color="#89c976">2</font> <font color="#000000">*</font> SMALL_CIRCLE_RADIUS<font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">33: </font></b>
+<b><font color="#006cb8">34: </font></b>      g2<font color="#000000">.</font><font color="#000000">draw</font><font color="#000000">(</font>circle<font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">35: </font></b>    
+<b><font color="#006cb8">36: </font></b>      <font color="#7a9ecd">// Draw the label</font>
+<b><font color="#006cb8">37: </font></b>
+<b><font color="#006cb8">38: </font></b>      String label <font color="#000000">=</font> <font color="#00a99d">"("</font> <font color="#000000">+</font> x <font color="#000000">+</font> <font color="#00a99d">","</font> <font color="#000000">+</font> y <font color="#000000">+</font> <font color="#00a99d">")"</font><font color="#000000">;</font>
+<b><font color="#006cb8">39: </font></b>
+<b><font color="#006cb8">40: </font></b>      g2<font color="#000000">.</font><font color="#000000">drawString</font><font color="#000000">(</font>label<font color="#000000">,</font> <font color="#000000">(</font><font color="#d05b76">float</font><font color="#000000">)</font> x<font color="#000000">,</font> <font color="#000000">(</font><font color="#d05b76">float</font><font color="#000000">)</font> y<font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">41: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">42: </font></b>
+<b><font color="#006cb8">43: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">static</font> <font color="#d05b76">final</font> <font color="#d05b76">double</font> SMALL_CIRCLE_RADIUS <font color="#000000">=</font> <font color="#89c976">2</font><font color="#000000">;</font>
+<b><font color="#006cb8">44: </font></b>
+<b><font color="#006cb8">45: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">double</font> x<font color="#000000">;</font>
+<b><font color="#006cb8">46: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">double</font> y<font color="#000000">;</font>
+<b><font color="#006cb8">47: </font></b><font color="#000000">}</font>
+</tt></pre>

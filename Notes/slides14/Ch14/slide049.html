@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 14</title>
+</head>
+
+<body>
+<div onclick="document.location='slide050.html'">
+<center><small><a href="slide048.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide050.html">next</a></small></center>
+<hr></div>
+<h2>How can I tell to which value the user has set a <tt>JSlider</tt>?</h2>
+<ul>
+  <li>Now we have a plan:
+     <ol><li>Add a change event listener to each slider</li>
+     <li>When slider is changed, <tt>stateChanged</tt> method is called</li>
+     <li>Find out the new value of the slider</li>
+     <li>Recompute color value</li>
+     <li>Repaint color panel</li></ol></li>
+  <li>Need to get the current value of the slider</li>
+  <li>Look at all the methods that start with get; you find:
+      <br><tt>public int getValue()</tt>
+      <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the slider's value.</li>
+</ul>
+
+
+
+<div onclick="document.location='slide050.html'"><hr>
+<center><small><a href="slide048.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide050.html">next</a></small></center>
+</div>
+</body>
+</html>

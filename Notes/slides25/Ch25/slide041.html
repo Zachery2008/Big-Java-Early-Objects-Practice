@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 25</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide042.html'">
+<center><small><a href="slide040.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide042.html">next</a></small></center>
+<hr></div>
+<h2>Updating and Deleting Data</h2>
+<ul>
+  <li>The <tt>UPDATE</tt> query lets you update columns of all records that fulfill a certain
+    condition</li>
+  <li>To add one to the quantity of every item in invoice number <tt>11731</tt>
+<pre>UPDATE Item
+   SET Quantity = Quantity + 1
+   WHERE Invoice_Number = '11731'</pre></li>
+  <li>Update multiple column values by specifying multiple update expressions
+    <br>in the <tt>SET</tt> clause, separated by commas</li>
+  <li>Both <tt>UPDATE</tt> and <tt>DELETE</tt> return the number of rows updated or deleted</li>
+</ul>
+ 
+
+
+<div onclick="document.location='slide042.html'"><hr>
+<center><small><a href="slide040.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide042.html">next</a></small></center>
+</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 11</title>
+   
+</head>
+
+<body>
+<div onclick="document.location='slide004.html'">
+<center><small><a href="slide002.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide004.html">next</a></small></center>
+<hr></div>
+<h2>Using Interfaces for Code Reuse</h2>
+<ul>
+  <li>Use <i>interface types</i> to make code more reusable</li>
+  <li>In Chap. 7, we created a <tt>DataSet</tt> to find the average and maximum of a set of values (<i>numbers</i>)</li>
+  <li>What if we want to find the average and maximum of a set of <tt>BankAccount</tt> values?
+<pre>public class DataSet // Modified for BankAccount objects
+{
+   . . .
+   public void add(BankAccount x)
+   {
+      sum = sum + x.getBalance();
+      if (count == 0 || maximum.getBalance() < x.getBalance())
+         maximum = x;
+      count++;
+   }
+
+   public BankAccount getMaximum()
+   {
+      return maximum;
+   }
+
+   private double sum;
+   private BankAccount maximum;
+   private int count;
+}</pre></li>
+</ul>
+
+
+
+<div onclick="document.location='slide004.html'"><hr>
+<center><small><a href="slide002.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide004.html">next</a></small></center>
+</div>
+</body>
+</html>

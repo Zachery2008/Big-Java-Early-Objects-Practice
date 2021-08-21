@@ -1,0 +1,23 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">02: </font></b><font color="#7a9ecd">   This class tests the CashRegister class.</font>
+<b><font color="#006cb8">03: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">04: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> CashRegisterTester
+<b><font color="#006cb8">05: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">06: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">void</font> <font color="#000000">main</font><font color="#000000">(</font>String<font color="#000000">[</font><font color="#000000">]</font> args<font color="#000000">)</font>
+<b><font color="#006cb8">07: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">08: </font></b>      CashRegister register <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">CashRegister</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">09: </font></b>
+<b><font color="#006cb8">10: </font></b>      register<font color="#000000">.</font><font color="#000000">recordPurchase</font><font color="#000000">(</font><font color="#89c976">0.75</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">11: </font></b>      register<font color="#000000">.</font><font color="#000000">recordPurchase</font><font color="#000000">(</font><font color="#89c976">1.50</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">12: </font></b>      register<font color="#000000">.</font><font color="#000000">enterPayment</font><font color="#000000">(</font><font color="#89c976">2</font><font color="#000000">,</font> <font color="#89c976">0</font><font color="#000000">,</font> <font color="#89c976">5</font><font color="#000000">,</font> <font color="#89c976">0</font><font color="#000000">,</font> <font color="#89c976">0</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">13: </font></b>      System<font color="#000000">.</font>out<font color="#000000">.</font><font color="#000000">print</font><font color="#000000">(</font><font color="#00a99d">"Change="</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">14: </font></b>      System<font color="#000000">.</font>out<font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font>register<font color="#000000">.</font><font color="#000000">giveChange</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">15: </font></b>
+<b><font color="#006cb8">16: </font></b>      register<font color="#000000">.</font><font color="#000000">recordPurchase</font><font color="#000000">(</font><font color="#89c976">2.25</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">17: </font></b>      register<font color="#000000">.</font><font color="#000000">recordPurchase</font><font color="#000000">(</font><font color="#89c976">19.25</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">18: </font></b>      register<font color="#000000">.</font><font color="#000000">enterPayment</font><font color="#000000">(</font><font color="#89c976">23</font><font color="#000000">,</font> <font color="#89c976">2</font><font color="#000000">,</font> <font color="#89c976">0</font><font color="#000000">,</font> <font color="#89c976">0</font><font color="#000000">,</font> <font color="#89c976">0</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">19: </font></b>      System<font color="#000000">.</font>out<font color="#000000">.</font><font color="#000000">print</font><font color="#000000">(</font><font color="#00a99d">"Change="</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">20: </font></b>      System<font color="#000000">.</font>out<font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font>register<font color="#000000">.</font><font color="#000000">giveChange</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">21: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">22: </font></b><font color="#000000">}</font>
+</tt></pre>

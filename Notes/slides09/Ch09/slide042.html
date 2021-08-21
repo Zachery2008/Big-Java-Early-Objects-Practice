@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 9</title>
+  <style type="text/css">
+OL.withloweralpha { list-style-type: lower-alpha }
+  </style>
+</head>
+
+<body>
+<div onclick="document.location='slide043.html'">
+<center><small><a href="slide041.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide043.html">next</a></small></center>
+<hr></div>
+<h2>Scope of Class Members</h2>
+<ul>
+  <li>Private members have class scope: You can access all members in
+any method of the class</li>
+  <li>Must qualify public members outside scope
+    <pre>Math.sqrt<br>harrysChecking.getBalance</pre>
+  </li>
+  <li>Inside a method, no need to qualify fields or methods that belong
+to the same class</li>
+  <li>An unqualified instance field or method name refers to the <tt>this</tt>
+parameter
+    <pre>public class BankAccount<br>{<br>   public void transfer(double amount, BankAccount other)<br>   {<br>      withdraw(amount); // i.e., this.withdraw(amount);<br>      other.deposit(amount);<br>   }<br>   . . .<br>}</pre>
+  </li>
+</ul>
+
+<div onclick="document.location='slide043.html'"><hr>
+<center><small><a href="slide041.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide043.html">next</a></small></center>
+</div>
+</body>
+</html>

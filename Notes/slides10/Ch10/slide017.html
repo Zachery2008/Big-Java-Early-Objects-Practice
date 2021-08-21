@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 10</title>
+</head>
+
+<body>
+<div onclick="document.location='slide018.html'">
+<center><small><a href="slide016.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide018.html">next</a></small></center>
+<hr></div>
+<h2>Providing Test Input</h2>
+<ul>
+  <li>Selecting good test cases is an important skill for debugging
+programs</li>
+  <li>Test all features of the methods that you are testing</li>
+  <li>Test typical test cases <br>
+100, 1/4, 0.01, 2, 10E12, for the <tt>SquareRootApproximator</tt></li>
+  <li>Test boundary test cases: test cases that are at the boundary of
+acceptable inputs <br>
+0, for the <tt>SquareRootApproximator</tt></li>
+  <li>Programmers often make mistakes dealing with boundary conditions <br>
+Division by zero, extracting characters from empty strings, and
+accessing null pointers</li>
+  <li>Gather negative test cases: inputs that you expect program to
+reject <br>
+Example: square root of -2. Test passes if harness terminates with
+assertion failure (if assertion checking is enabled)</li>
+</ul>
+
+<div onclick="document.location='slide018.html'"><hr>
+<center><small><a href="slide016.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide018.html">next</a></small></center>
+</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 13</title>
+</head>
+
+<body>
+<div onclick="document.location='slide050.html'">
+<center><small><a href="slide048.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide050.html">next</a></small></center>
+<hr></div>
+<h2>Overriding the <tt>toString</tt> Method</h2>
+<ul>
+   <li>Returns a string representation of the object</li>
+   <li>Useful for debugging:
+<pre>Rectangle box = new Rectangle(5, 10, 20, 30);
+String s = box.toString();
+// Sets s to "java.awt.Rectangle[x=5,y=10,width=20,height=30]"</pre></li>
+   <li><tt>toString</tt> is called whenever you concatenate a string with an object:
+       <br><tt>"box=" + box;
+       <br>// Result: "box=java.awt.Rectangle[x=5,y=10,width=20,height=30]"</tt></li>
+   <li><tt>Object.toString</tt> prints class name and the <i>hash code</i> of the object
+       <pre>BankAccount momsSavings = new BankAccount(5000);
+String s = momsSavings.toString();
+// Sets s to something like "BankAccount@d24606bf"</pre></li>
+</ul>
+
+
+
+<div onclick="document.location='slide050.html'"><hr>
+<center><small><a href="slide048.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide050.html">next</a></small></center>
+</div>
+</body>
+</html>

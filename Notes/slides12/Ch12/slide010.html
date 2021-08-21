@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 12</title>
+</head>
+
+<body>
+<div onclick="document.location='slide011.html'">
+<center><small><a href="slide009.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide011.html">next</a></small></center>
+<hr></div>
+<h2>Building Applications with Buttons</h2>
+<ul>
+  <li>Example: investment viewer program; whenever button is clicked, interest is added, and new balance is displayed
+      <br><img src="images/addinterest.png" alt=""></li>
+  <li>Construct an object of the <tt>JButton</tt> class:
+      <br><tt>JButton button = new JButton("Add Interest");</tt></li>
+  <li>We need a user interface component that displays a message:
+      <br><tt>JLabel label = new JLabel("balance=" + account.getBalance());</tt></li>
+  <li>Use a <tt>JPanel</tt> container to group multiple user interface components together:
+      <br><tt>JPanel panel = new JPanel();<br>
+      panel.add(button);<br>
+      panel.add(label);<br>
+      frame.add(panel);</tt></li>
+</ul>
+
+
+
+<div onclick="document.location='slide011.html'"><hr>
+<center><small><a href="slide009.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide011.html">next</a></small></center>
+</div>
+</body>
+</html>

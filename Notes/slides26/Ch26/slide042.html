@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 26</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide043.html'">
+<center><small><a href="slide041.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide043.html">next</a></small></center>
+<hr></div>
+<h2>Creating XML Documents</h2>
+<ul>
+  <li>Helper method to create a product element from a <tt>Product</tt> object:
+     <pre>private Element createProduct(Product p)
+{
+   Element e = doc.createElement("product");
+   e.appendChild(createTextElement("description", p.getDescription()));
+   e.appendChild(createTextElement("price", "" + p.getPrice()));
+   return e;
+}</pre></li>
+  <li><tt>createProduct</tt> is called from <tt>createItem</tt>:
+    <pre>private Element createItem(LineItem anItem)
+{
+   Element e = doc.createElement("item");
+   e.appendChild(createProduct(anItem.getProduct()));
+   e.appendChild(createTextElement(
+         "quantity", "" + anItem.getQuantity()));
+   return e;
+}</pre></li>
+</ul>
+
+
+
+<div onclick="document.location='slide043.html'"><hr>
+<center><small><a href="slide041.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide043.html">next</a></small></center>
+</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 24</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide043.html'">
+<center><small><a href="slide041.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide043.html">next</a></small></center>
+<hr></div>
+<h2>A Server Program</h2>
+<ul>
+  <li>The server waits for clients to connect on a certain port
+     <ul><li>We choose 8888</li></ul></li>
+  <li>To listen for incoming connections, use a server socket</li>
+  <li>To construct a server socket, provide the port number
+<pre>ServerSocket server = new ServerSocket(8888); </pre></li>
+  <li>Use the <tt>accept</tt> method to wait for client connection and obtain
+    a socket
+    <pre>Socket s = server.accept();
+BankService service = new BankService(s, bank);</pre>
+  </li>
+</ul>
+  
+
+
+<div onclick="document.location='slide043.html'"><hr>
+<center><small><a href="slide041.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide043.html">next</a></small></center>
+</div>
+</body>
+</html>

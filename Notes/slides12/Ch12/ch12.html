@@ -1,0 +1,279 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 12</title>
+</head>
+  <body>
+<div><h2>Chapter 12</h2>
+     
+  
+<h1>Event Handling</h1>
+   <br></div>
+     
+<h2>Chapter Goals</h2>
+       
+<ul>
+    <li>To understand the Java event model</li>
+    <li>To install action and mouse event listeners</li>
+    <li>To accept input from buttons, text fields, and the mouse</li>
+</ul>
+
+
+<h2>Events, Event Sources, and Event Listeners</h2>
+<ul>
+   <li>User interface <i>events</i> include key presses, mouse moves, button clicks, and so on</li>
+   <li>Most programs don't want to be flooded by boring events</li>
+   <li>A program can indicate that it only cares about certain specific events</li>
+   <li>Event listener:
+      <ul><li>Notified when event happens</li>
+      <li>Belongs to a class that is provided by the application programmer</li>
+      <li>Its methods describe the actions to be taken when an event occurs</li>
+      <li>A program indicates which events it needs to receive by installing event listener objects</li>
+      </ul></li>
+   <li>Event source:
+       <ul><li>Event sources report on events</li>
+       <li>When an event occurs, the event source notifies all event listeners</li>
+       </ul></li>
+</ul>
+
+
+<h2>Events, Event Sources, and Event Listeners</h2>
+<ul>
+  <li>Example: Use <tt>JButton</tt> components for buttons; attach an <tt>ActionListener</tt> to each button</li>
+  <li><tt>ActionListener</tt> interface:
+     <pre>public interface ActionListener
+{
+   void actionPerformed(ActionEvent event);
+}</pre></li>
+  <li>Need to supply a class whose <tt>actionPerformed</tt> method contains instructions to be executed when button is clicked</li>
+  <li><tt>event</tt> parameter contains details about the event, such as the time at which it occurred</li>
+  <li>Construct an object of the listener and add it to the button:
+     <pre>ActionListener listener = new ClickListener();
+button.addActionListener(listener);</pre></li>
+</ul>
+
+       
+   
+<h2>File ClickListener.java</h2>
+<iframe src="code/button1/ClickListener.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File ButtonTester.java</h2>
+<iframe src="code/button1/ButtonTester.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+   
+<h2>Output</h2>
+ <img src="images/clickme.png" alt="">
+ <br>
+
+
+<h2>Self Check</h2>
+<ol>
+<li>Which objects are the event source and the event listener in the <tt>ButtonTester</tt> program?</li>
+<li>Why is it legal to assign a <tt>ClickListener</tt> object to a variable of type <tt>ActionListener</tt>?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li>The <tt>button</tt> object is the event source. The <tt>listener</tt> object is the event listener.</li>
+<li>The <tt>ClickListener</tt> class implements the <tt>ActionListener</tt> interface.</li>
+</ol>
+<br>
+
+
+<h2>Building Applications with Buttons</h2>
+<ul>
+  <li>Example: investment viewer program; whenever button is clicked, interest is added, and new balance is displayed
+      <br><img src="images/addinterest.png" alt=""></li>
+  <li>Construct an object of the <tt>JButton</tt> class:
+      <br><tt>JButton button = new JButton("Add Interest");</tt></li>
+  <li>We need a user interface component that displays a message:
+      <br><tt>JLabel label = new JLabel("balance=" + account.getBalance());</tt></li>
+  <li>Use a <tt>JPanel</tt> container to group multiple user interface components together:
+      <br><tt>JPanel panel = new JPanel();<br>
+      panel.add(button);<br>
+      panel.add(label);<br>
+      frame.add(panel);</tt></li>
+</ul>
+
+
+<h2>Building Applications with Buttons</h2>
+<ul>
+  <li>Listener class adds interest and displays the new balance:
+<pre>class AddInterestListener implements ActionListener
+{
+   public void actionPerformed(ActionEvent event)
+   {
+      double interest = account.getBalance() * INTEREST_RATE / 100;
+      account.deposit(interest);
+      label.setText("balance=" + account.getBalance());
+   }
+}</pre></li>
+  <li>Add <tt>AddInterestListener</tt> as inner class so it can have access to surrounding <tt>final</tt> variables (<tt>account</tt> and <tt>label</tt>)</li>
+</ul>
+
+
+<h2>File InvestmentViewer1.java</h2>
+<iframe src="code/button2/InvestmentViewer1.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="3">How do you place the "<tt>balance = . . .</tt>" message to the left of the "<tt>Add Interest</tt>" button?</li>
+<li>Why was it not necessary to declare the <tt>button</tt> variable as <tt>final</tt>?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="3">First add <tt>label</tt> to the panel, then add button.</li>
+<li>The <tt>actionPerformed</tt> method does not access that variable.</li>
+</ol>
+<br>
+
+
+<h2>Processing Text Input</h2>
+<ul>
+  <li>Use <tt>JTextField</tt> components to provide space for user input
+      <br><tt>final int FIELD_WIDTH = 10; // In characters<br>
+       final JTextField rateField = new JTextField(FIELD_WIDTH);</tt></li>
+  <li>Place a <tt>JLabel</tt> next to each text field
+      <br><tt>JLabel rateLabel = new JLabel("Interest Rate: ");</tt></li>
+  <li>Supply a button that the user can press to indicate that the input is ready for processing
+      <br><img src="images/textfield.png" alt=""></li>
+  <li>The button's <tt>actionPerformed</tt> method reads the user input from the text fields (use <tt>getText</tt>)
+<pre>class AddInterestListener implements ActionListener
+{
+   public void actionPerformed(ActionEvent event)
+   {
+      double rate = Double.parseDouble(rateField.getText());
+      . . .
+   }
+}</pre></li>
+</ul>
+
+
+<h2>File InvestmentViewer2.java</h2>
+<iframe src="code/textfield/InvestmentViewer2.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="5">What happens if you omit the first <tt>JLabel</tt> object?</li>
+<li>If a text field holds an integer, what expression do you use to read its contents?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="5">Then the text field is not labeled, and the user will not know its purpose.</li>
+<li><tt>Integer.parseInt(textField.getText())</tt></li>
+</ol>
+<br>
+
+
+<h2>Mouse Events</h2>
+<ul>
+  <li>Use a mouse listener to capture mouse events</li>
+  <li>Implement the <tt>MouseListener</tt> interface:
+<pre>public interface MouseListener
+{
+   void mousePressed(MouseEvent event);
+   // Called when a mouse button has been pressed on a component
+   void mouseReleased(MouseEvent event);
+   // Called when a mouse button has been released on a component
+   void mouseClicked(MouseEvent event);
+   // Called when the mouse has been clicked on a component
+   void mouseEntered(MouseEvent event);
+   // Called when the mouse enters a component
+   void mouseExited(MouseEvent event);
+   // Called when the mouse exits a component
+}</pre></li>
+  <li><tt>mousePressed</tt>, <tt>mouseReleased</tt>: called when a mouse button is pressed or released</li>
+  <li><tt>mouseClicked</tt>: if button is pressed and released in quick succession, and mouse hasn't moved</li>
+  <li><tt>mouseEntered</tt>, <tt>mouseExited</tt>: mouse has entered or exited the component's area</li>
+</ul>
+
+
+<h2>Mouse Events</h2>
+<ul>
+  <li>Add a mouse listener to a component by calling the <tt>addMouseListener</tt> method:
+<pre>public class MyMouseListener implements MouseListener
+{
+   // Implements five methods
+}
+MouseListener listener = new MyMouseListener();
+component.addMouseListener(listener);</pre></li>
+  <li>Sample program: enhance <tt>RectangleComponentViewer</tt> program of Chapter 5; when user clicks on rectangle component,
+move the rectangle</li>
+</ul>
+
+
+<h2>File RectangleComponent.java</h2>
+<iframe src="code/mouse/RectangleComponent.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Mouse Events</h2>
+<ul>
+<li>Call <tt>repaint</tt> when you modify the shapes that <tt>paintComponent</tt> draws
+<pre>
+box.setLocation(x, y);
+repaint();</pre></li>
+<li>Mouse listener: if the mouse is pressed, listener moves the rectangle to the mouse location
+<pre>class MousePressListener implements MouseListener
+{
+   public void mousePressed(MouseEvent event)
+   {
+      int x = event.getX();
+      int y = event.getY();
+      component.moveTo(x, y);
+   }
+   // Do-nothing methods
+   public void mouseReleased(MouseEvent event) {}
+   public void mouseClicked(MouseEvent event) {}
+   public void mouseEntered(MouseEvent event) {}
+   public void mouseExited(MouseEvent event) {}
+}</pre></li>
+<li>All five methods of the interface must be implemented; unused methods can be empty</li>
+</ul>
+
+
+<h2><tt>RectangleComponentViewer</tt> Program Output</h2>
+<img src="images/rectangle.png" alt="">
+
+
+<h2>File RectangleComponentViewer.java</h2>
+<iframe src="code/mouse/RectangleComponentViewer.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="7">What would happen if you omitted the call to <tt>repaint</tt> in the <tt>moveTo</tt> method?</li>
+<li>Why must the <tt>MousePressListener</tt> class supply five methods?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="7">The rectangle would only be painted at the new location when the component
+is repainted for some other reason, for example, when the frame is resized.</li>
+<li>It implements the <tt>MouseListener</tt> interface, which has five methods.</li>
+</ol>
+<br>
+
+</body>
+</html>

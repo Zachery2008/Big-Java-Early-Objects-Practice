@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 18</title>
+</head>
+
+<body>
+<div onclick="document.location='slide059.html'">
+<center><small><a href="slide057.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide059.html">next</a></small></center>
+<hr></div>
+<h2>The <tt>getExpressionValue</tt> Method</h2>
+<pre>public int getExpressionValue()<br>{<br>   int value = getTermValue();<br>   boolean done = false;<br>   while (!done)<br>   {<br>      String next = tokenizer.peekToken();<br>      if ("+".equals(next) || "-".equals(next))<br>      {<br>         tokenizer.nextToken(); // Discard "+" or "-"<br>         int value2 = getTermValue();<br>         if ("+".equals(next)) value = value + value2;<br>         else value = value - value2;<br>      }<br>      else done = true;<br>   }<br>   return value;<br>}</pre>
+
+<div onclick="document.location='slide059.html'"><hr>
+<center><small><a href="slide057.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide059.html">next</a></small></center>
+</div>
+</body>
+</html>

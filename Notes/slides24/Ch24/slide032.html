@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 24</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide033.html'">
+<center><small><a href="slide031.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide033.html">next</a></small></center>
+<hr></div>
+<h2>A Client Program &#150; Input and Output Streams</h2>
+<ul>
+  <li>Use the input and output streams attached to the socket to communicate with the other endpoint</li>
+  <li>Code to obtain the input and output streams
+    <pre>InputStream instream = s.getInputStream();
+OutputStream outstream = s.getOutputStream();</pre>
+  </li>
+  <li>When you send data to <tt>outstream</tt>, the socket forwards
+    them to the server</li>
+  <li>The socket catches the server's response and you can read it through <tt>instream</tt></li>
+  <li>When you are done communicating with the server, close the socket
+    <pre>
+s.close();
+</pre>
+  </li>
+</ul>
+
+
+
+<div onclick="document.location='slide033.html'"><hr>
+<center><small><a href="slide031.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide033.html">next</a></small></center>
+</div>
+</body>
+</html>

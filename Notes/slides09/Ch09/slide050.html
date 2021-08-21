@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 9</title>
+  <style type="text/css">
+OL.withloweralpha { list-style-type: lower-alpha }
+  </style>
+</head>
+
+<body>
+<div onclick="document.location='slide051.html'">
+<center><small><a href="slide049.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide051.html">next</a></small></center>
+<hr></div>
+<h2>Package Names and Locating Classes</h2>
+<ul>
+  <li>Use packages to avoid name clashes<br>
+    <tt>java.util.Timer</tt> vs. <tt>javax.swing.Timer</tt></li>
+  <li>Package names should be unambiguous</li>
+  <li>Recommendation: start with reversed domain name<br>
+    <tt><b>com.horstmann</b>.bigjava<br>
+    <b>edu.sjsu.cs</b>.walters</tt>: for Bertha Walters' classes
+(walters@cs.sjsu.edu)</li>
+  <li>Path name should match package name<br>
+    <tt>com/horstmann/bigjava/Financial.java</tt></li>
+  <li>Path name starts with class path<br>
+    <tt>export CLASSPATH=/home/walters/lib:.<br>
+set CLASSPATH=c:\home\walters\lib;.</tt></li>
+  <li>Class path contains the base directories that may contain package
+directories</li>
+</ul>
+
+<div onclick="document.location='slide051.html'"><hr>
+<center><small><a href="slide049.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide051.html">next</a></small></center>
+</div>
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Horstmann Chapter 1</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+<body>
+<h2>Chapter 1</h2>
+<h1>Introduction</h1>
+<h2>Chapter Goals<br>
+</h2>
+<ul>
+  <li>To understand the activity of programming</li>
+  <li>To learn about the architecture of computers</li>
+  <li>To learn about machine code and high level programming languages</li>
+  <li>To become familiar with your computing environment and your
+compiler</li>
+  <li>To compile and run your first Java program</li>
+  <li>To recognize syntax and logic errors</li>
+</ul>
+<h2>Prerequisites</h2>
+<ul>
+  <li>Computer savvy (file management, text editing)</li>
+  <li>Problem solving skills</li>
+  <li>Time management</li>
+  <li>High school math (algebra, trigonometry)</li>
+  <li>No prior programming background required</li>
+</ul>
+<h2>What Is Programming?</h2>
+<ul>
+  <li>Computers are programmed to perform tasks</li>
+  <li>Different tasks = different programs</li>
+  <li>Program
+    <ul>
+      <li>Sequence of basic operations executed in succession</li>
+      <li>Contains instruction sequences for all tasks it can execute</li>
+    </ul>
+  </li>
+  <li>Sophisticated programs require teams of highly skilled
+programmers and other professionals</li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li>What is required to play a music CD on a computer?</li>
+  <li>Why is a CD player less flexible than a computer?</li>
+  <li>Can a computer program develop the initiative to execute tasks in
+a better way
+than its programmers envisioned?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li>A program that reads the data on the CD and sends output to the
+speakers and
+the screen.</li>
+  <li>A CD player can do one thing&#8211;play music CDs. It cannot execute
+programs.</li>
+  <li>No&#8211;the program simply executes the instruction sequences that the
+programmers
+have prepared in advance.</li>
+</ol>
+<br>
+<h2>The Anatomy of a Computer</h2>
+<ul>
+  <li>Central processing unit
+    <ul>
+      <li>Chip</li>
+      <li>Transistors</li>
+    </ul>
+  </li>
+  <li>Storage
+    <ul>
+      <li>Primary storage: Random-access memory (RAM)</li>
+      <li>Secondary storage: e.g. hard disk</li>
+      <li>Removable storage devices: e.g.: floppy disks, tapes, CDs</li>
+    </ul>
+  </li>
+  <li>Peripherals</li>
+  <li>Executes very simple instructions</li>
+  <li>Executes instructions very rapidly</li>
+  <li>General purpose device</li>
+</ul>
+<h2>Central Processing Unit</h2>
+<img src="images/P0001-Y.png" alt="">
+<h2>A Memory Module with Memory Chips</h2>
+<img src="images/chips.png" alt="">
+<h2>A Hard Disk</h2>
+<img src="images/harddisk.png" alt="">
+<h2>A Motherboard</h2>
+<img src="images/motherboard.png" alt="">
+<h2>Schematic Diagram of a Computer</h2>
+<img src="images/schematic_computer.png" alt="">
+<h2>The ENIAC</h2>
+<img src="images/eniac.png" alt="">
+<h2>Self Check</h2>
+<ol>
+  <li value="4">Where is a program stored when it is not currently
+running?</li>
+  <li>Which part of the computer carries out arithmetic operations,
+such as addition
+and multiplication?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="4">In secondary storage, typically a hard disk.</li>
+  <li>The central processing unit.</li>
+</ol>
+<br>
+<h2>Machine Code</h2>
+<ul>
+  <li>Java Virtual Machine (JVM) &#8211; a typical sequence of machine
+instructions is:<br>
+    <ol>
+      <li>Load the contents of memory location 40.</li>
+      <li>Load the value 100.</li>
+      <li>If the first value is greater than the second value, continue
+with the instruction
+that is stored in memory location 240.</li>
+    </ol>
+Machine instructions are encoded as numbers: <br>
+    <tt>21 40 <br>
+16 100 <br>
+163 240</tt> </li>
+  <li>Compiler translates high-level language to machine code
+    <ul>
+    </ul>
+  </li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="6">What is the code for the Java virtual machine
+instruction "Load the contents of
+memory location 100"?</li>
+  <li>Does a person who uses a computer for office work ever run a
+compiler?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="6">21 100</li>
+  <li>No&#8211;a compiler is intended for programmers, to translate
+high-level programming
+instructions into machine code.</li>
+</ol>
+<br>
+<h2>The Java Programming Language</h2>
+<ul>
+  <li>Simple</li>
+  <li>Safe</li>
+  <li>Platform-independent ("write once, run anywhere")</li>
+  <li>Rich library (packages)</li>
+  <li>Designed for the internet</li>
+</ul>
+<h2>Applets on a Web Page</h2>
+<br>
+<img src="images/applet.png" alt=""> <br>
+<h2>Self Check</h2>
+<ol>
+  <li value="8">What are the two most important benefits of the Java
+language?</li>
+  <li>How long does it take to learn the entire Java library?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="8">Safety and portability.</li>
+  <li>No one person can learn the entire library&#8211;it is too large.</li>
+</ol>
+<br>
+<h2> Becoming Familiar with your Computer</h2>
+<ul>
+  <li>Log in</li>
+  <li>Locate the Java compiler</li>
+  <li>Understand files and folders
+    <ul>
+      <li>Programs are kept in files</li>
+      <li>File: a collection of items of information that are kept
+together</li>
+      <li>Files have names, and the rules for legal names differ from
+one system
+to another</li>
+      <li>Files are stored in folders or directories; these file
+containers can be nested</li>
+    </ul>
+  </li>
+  <li>Write a simple program (later)</li>
+  <li>Save your work
+    <ul>
+      <li>Develop a strategy for keeping backup copies of your work</li>
+    </ul>
+  </li>
+</ul>
+<h2>A Shell Window</h2>
+<img src="images/shell.png" alt=""> <br>
+<h2>An Integrated Development Environment</h2>
+<img src="images/ide.png" alt=""><br>
+<h2>Nested Folders</h2>
+<img src="images/folders.png" alt=""><br>
+<h2>Self Check</h2>
+<ol>
+  <li value="10">How are programming projects stored on a computer?</li>
+  <li>What do you do to protect yourself from data loss when you work
+on programming
+projects?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="10">Programs are stored in files, and files are stored in
+folders or directories.</li>
+  <li>You back up your files and folders.</li>
+</ol>
+<br>
+<h2>File HelloTester.java</h2>
+<iframe src="code/hello/HelloTester.java.html" class="code">
+Your browser does not support the
+&amp;amp;amp;lt;iframe&amp;amp;amp;gt; tag.
+</iframe>
+<h3>Output</h3>
+<p><tt>&nbsp;&nbsp;&nbsp;Hello, World!</tt></p>
+<br>
+<h2>HelloTester in a Console Window</h2>
+<img src="images/hellotester.png" alt=""><br>
+<h2>HelloTester in an IDE</h2>
+<img src="images/helloide.png" alt=""><br>
+<h2>A Simple Program</h2>
+<ul>
+  <li><tt>public class <i>ClassName</i></tt></li>
+  <li><tt>public static void main(String[] args)</tt></li>
+  <li><tt>//</tt> comment<br>
+  </li>
+  <li>Method call <br>
+    <img src="images/calling.png" alt=""></li>
+  <li><tt>System</tt> class</li>
+  <li><tt>System.out</tt> object</li>
+  <li><tt>println</tt> method</li>
+</ul>
+<h2>Syntax 1.1: Method Call</h2>
+<table bgcolor="#ffffff" border="1" cellpadding="10" width="80%">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td>
+            <pre><i>object</i>.<i>methodName</i>(<i>parameters</i>)</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td>
+            <pre>System.out.println("Hello, Dave!");</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+To invoke a method of an object and supply any additional parameters </td>
+    </tr>
+  </tbody>
+</table>
+<h2>Self Check</h2>
+<ol>
+  <li value="12">How would you modify the HelloTester program to print
+the words <tt>"Hello,"</tt>
+and <tt>"World!"</tt> on two lines?</li>
+  <li>Would the program continue to work if you omitted the line
+starting with <tt>//</tt>?</li>
+  <li>What does the following set of statements print?
+    <pre>System.out.print("My lucky number is");<br>System.out.println(3 + 4 + 5);</pre>
+  </li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="12"><tt>System.out.println("Hello,");<br>
+System.out.println("World");</tt></li>
+  <li>Yes&#8211;the line starting with // is a comment, intended for human
+readers. The
+compiler ignores comments.</li>
+  <li>The printout is <tt>My lucky number is12</tt>. It would be a
+good idea to add a space
+after the is.</li>
+</ol>
+<br>
+<h2>Errors</h2>
+<ul>
+  <li>Syntax errors<br>
+    <tt>System.ouch.print(". . .");<br>
+System.out.print("Hello);</tt></li>
+  <li>Detected by the compiler</li>
+  <li>Logic errors<br>
+    <tt>System.out.print("Hell");</tt></li>
+  <li>Detected (hopefully) through testing</li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="15">Suppose you omit the <tt>//</tt> characters from the
+HelloTester.java program but not
+the remainder of the comment. Will you get a compile-time error or a
+run-time
+error?</li>
+  <li>How can you find logic errors in a program?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="15">A compile-time error. The compiler will not know what
+to do with the word
+display.</li>
+  <li>You need to run the program and observe its behavior.</li>
+</ol>
+<br>
+<h2>The Compilation Process</h2>
+<img src="images/compiler.png" alt=""> <br>
+<h2>The Edit-Compile-Test Loop</h2>
+<img src="images/loop.png" alt="">
+<h2>Self Check</h2>
+<ol>
+  <li value="17">What do you expect to see when you load a class file
+into your text editor?</li>
+  <li>Why can't you test a program for run-time errors when it has
+compiler errors?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="17">A sequence of random characters, some funny-looking.
+Class files contain virtual
+machine instructions that are encoded as binary numbers.</li>
+  <li>When a program has compiler errors, no class file is produced,
+and there is
+nothing to run.</li>
+</ol>
+<br>
+</body>
+</html>

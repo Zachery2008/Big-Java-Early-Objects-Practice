@@ -1,0 +1,39 @@
+public class LinkedListQueue
+{
+   /**
+      Constructs an empty queue that uses a linked list.
+   */
+   public LinkedListQueue()
+   {
+      list = new LinkedList();
+   }
+
+   /**
+      Adds an item to the tail of the queue.
+      @param x the item to add
+   */
+   public void add(Object x)
+   {
+      list.addLast(x);
+   }
+
+   /**
+      Removes an item from the head of the queue.
+      @return the removed item
+   */
+   public Object remove()
+   {
+      return list.removeFirst();
+   }
+
+   /**
+      Gets the number of items in the queue.
+      @return the size
+   */
+   int size()
+   {
+      return list.size();
+   }
+
+   private LinkedList list;
+}

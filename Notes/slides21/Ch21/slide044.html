@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 21</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide045.html'">
+<center><small><a href="slide043.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide045.html">next</a></small></center>
+<hr></div>
+<h2>Creating Hash Codes for your Classes</h2>
+<ul>
+  <li>Your <tt>hashCode</tt> method must be compatible with the <tt>equals</tt>
+    method
+    <ul><li>if <tt>x.equals(y)</tt> then <tt>x.hashCode() == y.hashCode()</tt></li></ul></li>
+  <li>You get into trouble if your class defines an <tt>equals</tt> method but not a <tt>hashCode</tt> method
+    <ul><li>If we forget to define <tt>hashCode</tt> method for <tt>Coin</tt> it inherits the method from <tt>Object</tt> superclass</li>
+    <li>That method computes a hash code from the memory location of the object</li>
+    <li>Effect: any two objects are very likely to have a different hash code
+<pre>Coin coin1 = new Coin(0.25, "quarter");
+Coin coin2 = new Coin(0.25, "quarter");</pre></li></ul></li>
+  <li>In general, define either both <tt>hashCode</tt> and <tt>equals</tt> methods
+    or neither</li>
+</ul>
+ 
+
+
+<div onclick="document.location='slide045.html'"><hr>
+<center><small><a href="slide043.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide045.html">next</a></small></center>
+</div>
+</body>
+</html>

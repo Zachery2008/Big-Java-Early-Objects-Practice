@@ -1,0 +1,1210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 21</title>
+
+</head>
+  <body>
+<div>
+<h2>Chapter 21</h2>
+
+
+  <h1>Advanced Data Structures</h1>
+  <br>
+ </div>
+
+
+<h2>Chapter Goals</h2>
+<ul>
+  <li>To learn about the set and map data types</li>
+  <li>To understand the implementation of hash tables</li>
+  <li>To be able to program hash functions</li>
+  <li>To learn about binary trees</li>
+  <li>To be able to use tree sets and tree maps</li>
+  <li>To become familiar with the heap data structure</li>
+  <li>To learn how to implement the priority queue data type</li>
+  <li>To understand how to use heaps for sorting</li>
+</ul>
+
+ 
+<h2>Sets</h2>
+<ul>
+  <li>Set: unordered collection of distinct elements</li>
+  <li>Elements can be added, located, and removed</li>
+  <li>Sets don't have duplicates</li>
+</ul>
+
+
+<h2>A Set of Printers</h2>
+<img src="images/set.png" alt="">
+<br>
+
+
+<h2>Fundamental Operations on a Set </h2>
+<ul>
+  <li>Adding an element
+    <ul><li>Adding an element has no effect if the element is already in the set</li></ul></li>
+  <li>Removing an element
+    <ul><li>Attempting to remove an element that isn't in the set is silently ignored</li></ul></li>
+  <li>Containment testing (does the set contain a given object?)</li>
+  <li>Listing all elements (in arbitrary order)</li>
+</ul>
+
+
+<h2>Sets</h2>
+<ul>
+  <li>We could use a linked list to implement a set
+    <ul><li>Adding, removing, and containment testing would be relatively slow</li></ul></li>
+  <li>There are data structures that can handle these operations much more quickly
+    <ul><li>Hash tables</li>
+    <li>Trees</li></ul></li>
+  <li>Standard Java library provides set implementations based on both data structures
+    <ul><li><tt>HashSet</tt></li>
+    <li><tt>TreeSet</tt></li></ul></li>
+  <li>Both of these data structures implement the <tt>Set</tt> interface</li>
+</ul>
+
+
+<h2>Set Classes and Interface in the Standard Library</h2>
+<img src="images/set_classes.png" alt="">
+
+
+<h2>Iterator</h2>
+<ul>
+  <li>Use an iterator to visit all elements in a set</li>
+  <li>A set iterator does not visit the elements in the order in which they were
+    inserted</li>
+  <li>An element can not be added to a set at an iterator position</li>
+  <li>A set element can be removed at an iterator position</li>
+</ul>
+
+
+<h2>Code for Creating and Using a Hash Set</h2>
+<ul>
+  <li>
+    <pre>//Creating a hash set
+Set&lt;String&gt; names = new HashSet&lt;String&gt;();</pre>
+  </li>
+  <li>
+    <pre>//Adding an element
+names.add(&quot;Romeo&quot;);     </pre>
+  </li>
+  <li>
+    <pre>//Removing an element
+names.remove(&quot;Juliet&quot;);     </pre>
+  </li>
+  <li>
+    <pre>//Is element in set
+if (names.contains(&quot;Juliet&quot;) { . . .}     </pre>
+  </li>
+</ul>
+
+
+<h2>Listing All Elements with an Iterator </h2>
+
+<pre>Iterator&lt;String&gt; iter = names.iterator();
+while (iter.hasNext())
+{
+   String name = iter.next();
+   <i>Do something with</i> name
+}</pre>
+<pre>// Or, using the "for each" loop
+for (String name : names)
+{
+   <i>Do something with</i> name
+}</pre>
+ 
+
+<h2>File SetTester.java</h2>
+<iframe src="code/set/SetTester.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Output</h2>
+<pre>Add name, Q when done: <code class="blue">Dick</code>
+{ Dick }
+Add name, Q when done: <code class="blue">Tom</code>
+{ Tom Dick }
+Add name, Q when done: <code class="blue">Harry</code>
+{ Harry Tom Dick }
+Add name, Q when done: <code class="blue">Tom</code>
+{ Harry Tom Dick }
+Add name, Q when done: <code class="blue">Q</code>
+Remove name, Q when done: <code class="blue">Tom</code>
+{ Harry Dick }
+Remove name, Q when done: <code class="blue">Jerry</code>
+{ Harry Dick }
+Remove name, Q when done: <code class="blue">Q</code></pre>
+
+
+<h2>Self Check</h2>
+<ol>
+<li>Arrays and lists remember the order in which you added elements; sets do not.
+Why would you want to use a set instead of an array or list?</li>
+<li>Why are set iterators different from list iterators?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li>Efficient set implementations can quickly test whether a given element is a
+member of the set.</li>
+<li>Sets do not have an ordering, so it doesn't make sense to add an element at a
+particular iterator position, or to traverse a set backwards.</li>
+</ol>
+<br>
+
+
+<h2>Maps</h2>
+<ul>
+  <li>A map keeps associations between key and value objects</li>
+  <li>Mathematically speaking, a map is a function from one set, the <i>key set</i>, to another set, the <i>value set</i></li>
+  <li>Every key in a map has a unique value</li>
+  <li>A value may be associated with several keys </li>
+  <li>Classes that implement the <tt>Map</tt> interface
+    <ul><li><tt>HashMap</tt></li>
+    <li><tt>TreeMap</tt></li></ul></li>
+</ul>
+
+
+<h2>An Example of a Map</h2>
+<img src="images/map.png" alt="">
+
+
+<h2>Map Classes and Interfaces</h2>
+<img src="images/map_classes.png" alt="">
+
+
+<h2>Code for Creating and Using a <tt>HashMap</tt></h2>
+<ul>
+  <li>
+    <pre>//Creating a HashMap
+<code class="blue">Map&lt;String, Color&gt;</code> favoriteColors = new <code class="blue">HashMap&lt;String, Color&gt;</code>();</pre></li>
+  <li>
+    <pre>//Adding an association
+favoriteColors.put(&quot;Juliet&quot;, Color.PINK);</pre>
+  </li>
+  <li>
+    <pre>//Changing an existing association
+favoriteColor.put(&quot;Juliet&quot;,Color.RED);</pre>
+  </li>
+  <li>
+    <pre>//Getting the value associated with a key
+Color julietsFavoriteColor = favoriteColors.get(&quot;Juliet&quot;);</pre>
+  </li>
+  <li>
+    <pre>//Removing a key and its associated value
+favoriteColors.remove("Juliet");</pre>
+  </li>
+</ul>
+
+
+<h2>Printing Key/Value Pairs </h2>
+<pre>Set&lt;String&gt; keySet = m.keySet();
+for (String key : keySet)
+{
+   Color value = m.get(key);
+   System.out.println(key + "->" + value);
+}</pre>
+
+
+<h2>File MapTester.java</h2>
+<iframe src="code/map/MapTester.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Output</h2>
+<pre>Romeo->java.awt.Color[r=0,g=255,b=0]
+Eve->java.awt.Color[r=255,g=175,b=175]
+Adam->java.awt.Color[r=0,g=0,b=255]
+Juliet->java.awt.Color[r=255,g=175,b=175]</pre>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="3">What is the difference between a set and a map?</li>
+<li>Why is the collection of the keys of a map a set?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="3">A set stores elements. A map stores associations between keys and values.</li>
+<li>The ordering does not matter, and you cannot have duplicates.</li>
+</ol>
+<br>
+
+
+<h2>Hash Tables</h2>
+<ul>
+  <li> Hashing can be used to find elements in a data structure quickly without
+    making a linear search</li>
+  <li>A <i>hash table</i> can be used to implement sets and maps</li>
+  <li>A <i>hash function</i> computes an integer value (called the <i>hash code</i>) from an
+    object</li>
+  <li>A good hash function minimizes <i>collisions</i>&#150;identical hash codes for
+    different objects</li>
+  <li>To compute the hash code of object <tt>x</tt>:
+    <pre>int h = x.hashCode();</pre></li>
+</ul>
+
+
+<h2>Sample Strings and Their Hash Codes</h2>
+<table border="1" cellspacing="0" cellpadding="0">
+<tr><td align="center"><b>String</b></td> <td align="center"><b>Hash Code</b></td></tr>
+<tr><td align="center">"Adam"</td> <td align="center">2035631</td></tr>
+<tr><td align="center">"Eve"</td> <td align="center">70068</td></tr>
+<tr><td align="center">"Harry"</td> <td align="center">69496448</td></tr>
+<tr><td align="center">"Jim"</td> <td align="center">74478</td></tr>
+<tr><td align="center">"Joe"</td> <td align="center">74656</td></tr>
+<tr><td align="center">"Juliet"</td> <td align="center">-2065036585</td></tr>
+<tr><td align="center">"Katherine"</td> <td align="center">2079199209</td></tr>
+<tr><td align="center">"Sue"</td> <td align="center">83491</td></tr>
+</table>
+ 
+
+<h2>Simplistic Implementation of a Hash Table</h2>
+<ul>
+  <li>To implement
+    <ul>
+      <li>Generate hash codes for objects</li>
+      <li>Make an array </li>
+      <li>Insert each object at the location of its hash code</li>
+    </ul>
+  </li>
+  <li>To test if an object is contained in the set
+    <ul>
+      <li>Compute its hash code </li>
+      <li>Check if the array position with that hash code is already occupied</li>
+    </ul>
+  </li>
+</ul>
+
+
+<h2>Simplistic Implementation of a Hash Table</h2>
+<img src="images/simplistic.png" alt="">
+
+
+<h2> Problems with Simplistic Implementation</h2>
+<ul>
+  <li>It is not possible to allocate an array that is large enough to hold all
+    possible integer index positions </li>
+  <li>It is possible for two different objects to have the same hash code</li>
+</ul>
+
+
+<h2>Solutions</h2>
+<ul>
+  <li>Pick a reasonable array size and reduce the hash codes to fall inside the
+    array
+    <pre>int h = x.hashCode();
+if (h < 0) h = -h;
+<code class="blue">h = h % size;</code></pre>
+  </li>
+  <li> When elements have the same hash code:
+    <ul>
+      <li>Use a node sequence to store multiple objects in the same array position</li>
+      <li>These node sequences are called <i>buckets</i></li>
+    </ul>
+  </li>
+</ul>
+ 
+<h2>Hash Table with Buckets to Store Elements with Same Hash Code</h2>
+<img src="images/buckets.png" alt="">
+
+
+<h2>Algorithm for Finding an Object <tt>x</tt> in a Hash Table</h2>
+<ol>
+  <li> Get the index <tt>h</tt> into the hash table
+    <ul>
+      <li>Compute the hash code</li>
+      <li>Reduce it modulo the table size</li>
+    </ul>
+  </li>
+  <li>Iterate through the elements of the bucket at position <tt>h</tt>
+    <ul><li>For each element of the bucket, check whether it is equal to <tt>x</tt></li></ul></li>
+  <li>If a match is found among the elements of that bucket, then <tt>x</tt> is in the set
+    <ul><li>Otherwise, <tt>x</tt> is not in the set</li></ul></li>
+</ol>
+ 
+
+<h2>Hash Tables</h2>
+<ul>
+  <li>A hash table can be implemented as an array of buckets</li>
+  <li>Buckets are sequences of nodes that hold elements with the same hash code</li>
+  <li>If there are few collisions, then adding, locating, and removing hash table
+    elements takes constant time 
+    <ul><li>Big-Oh notation:&nbsp;&nbsp;&nbsp;&nbsp;<i>O</i>(1)</li></ul></li>
+  <li>For this algorithm to be effective, the bucket sizes must be small</li>
+  <li>The table size should be a prime number larger than the expected number
+    of elements
+    <ul><li>An excess capacity of 30% is typically recommended</li></ul></li>
+</ul>
+
+<h2>Hash Tables</h2>
+<ul>
+  <li>Adding an element: simple extension of the algorithm for finding an object
+    <ul><li>Compute the hash code to locate the bucket in which the element should be inserted</li>
+    <li>Try finding the object in that bucket</li>
+    <li>If it is already present, do nothing; otherwise, insert it</li></ul></li>
+  <li>Removing an element is equally simple
+    <ul><li>Compute the hash code to locate the bucket in which the element should be inserted</li>
+    <li>Try finding the object in that bucket</li>
+    <li>If it is present, remove it; otherwise, do nothing</li></ul></li>
+  <li>If there are few collisions, adding or removing takes <i>O</i>(1) time</li>
+</ul>
+
+ 
+<h2>File HashSet.java</h2>
+<iframe src="code/hashtable/HashSet.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File SetTester.java</h2>
+<iframe src="code/hashtable/SetTester.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+ 
+<h2>Output</h2>
+<pre>Harry
+Sue
+Nina
+Susannah
+Larry
+Eve
+Sarah
+Adam
+Juliet
+Katherine
+Tony</pre>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="5">If a hash function returns 0 for all values, will the <tt>HashSet</tt> work correctly?</li>
+<li>What does the <tt>hasNext</tt> method of the <tt>HashSetIterator</tt> do when it has reached the end of a bucket?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="5">Yes, the hash set will work correctly. All elements will be inserted into a single bucket.</li>
+<li>It locates the next bucket in the bucket array and points to its first element.</li>
+</ol>
+<br>
+
+
+<h2>Computing Hash Codes</h2>
+<ul>
+  <li> A hash function computes an integer hash code from an object</li>
+  <li>Choose a hash function so that different objects are likely to have different
+    hash codes.</li>
+  <li>Bad choice for hash function for a string
+    <ul>
+      <li>Adding the unicode values of the characters in the string
+<pre>int h = 0;
+for (int i = 0; i < s.length(); i++)
+   h = h + s.charAt(i);</pre></li>
+      <li>Because permutations ("eat" and "tea") would have the same hash code
+      </li>
+    </ul>
+</ul>
+
+
+<h2>Computing Hash Codes</h2>
+<ul>
+  <li>Hash function for a string <tt>s</tt> from standard library
+    <pre>final int HASH_MULTIPLIER = 31;
+int h = 0;
+for (int i = 0; i < s.length(); i++)
+   h = HASH_MULTIPLIER * h + s.charAt(i)</pre>
+  </li>
+  <li>For example, the hash code of "eat" is
+    <pre>31 * (31 * 'e' + 'a') + 't' = 100184</pre></li>
+  <li>The hash code of "tea" is quite different, namely
+    <pre>31 * (31 * 't' + 'e') + 'a' = 114704</pre></li>
+</ul>
+ 
+
+<h2> A <tt>hashCode</tt> Method for the Coin Class</h2>
+<ul>
+  <li> There are two instance fields: <tt>String</tt> coin name and double coin value</li>
+  <li>Use <tt>String's hashCode</tt> method to get a hash code for the name</li>
+  <li>To compute a hash code for a floating-point number:
+    <ul>
+      <li> Wrap the number into a <tt>Double</tt> object </li>
+      <li>Then use <tt>Double</tt>'s <tt>hashCode</tt> method</li>
+    </ul>
+  </li>
+  <li>Combine the two hash codes using a prime number as the <tt>HASH_MULTIPLIER</tt></li>
+</ul>
+
+
+<h2>A <tt>hashCode</tt> Method for the Coin Class</h2>
+<pre>class Coin
+{
+   public int hashCode()
+   {
+      int h1 = name.hashCode();
+      int h2 = new Double(value).hashCode();
+      final int HASH_MULTIPLIER = 29;
+      int h = HASH_MULTIPLIER * h1 + h2:
+      return h
+   }
+   . . .
+}
+</pre>
+
+
+ 
+<h2>Creating Hash Codes for your Classes</h2>
+<ul>
+  <li> Use a prime number as the <tt>HASH_MULTIPLIER</tt></li>
+  <li>Compute the hash codes of each instance field </li>
+  <li>For an integer instance field just use the field value</li>
+  <li>Combine the hash codes
+    <pre>int h = HASH_MULTIPLIER * h1 +h2;
+h = HASH_MULTIPLIER * h + h3;
+h = HASH_MULTIPLIER *h + h4;
+. . .
+return h;</pre>
+  </li>
+</ul>
+
+
+<h2>Creating Hash Codes for your Classes</h2>
+<ul>
+  <li>Your <tt>hashCode</tt> method must be compatible with the <tt>equals</tt>
+    method
+    <ul><li>if <tt>x.equals(y)</tt> then <tt>x.hashCode() == y.hashCode()</tt></li></ul></li>
+  <li>You get into trouble if your class defines an <tt>equals</tt> method but not a <tt>hashCode</tt> method
+    <ul><li>If we forget to define <tt>hashCode</tt> method for <tt>Coin</tt> it inherits the method from <tt>Object</tt> superclass</li>
+    <li>That method computes a hash code from the memory location of the object</li>
+    <li>Effect: any two objects are very likely to have a different hash code
+<pre>Coin coin1 = new Coin(0.25, "quarter");
+Coin coin2 = new Coin(0.25, "quarter");</pre></li></ul></li>
+  <li>In general, define either both <tt>hashCode</tt> and <tt>equals</tt> methods
+    or neither</li>
+</ul>
+ 
+
+<h2>Hash Maps</h2>
+<ul>
+  <li>
+    In a hash map, only the keys are hashed</li>
+  <li>The keys need compatible <tt>hashCode</tt>
+    and <tt>equals</tt> method</li>
+</ul>
+
+
+<h2>File Coin.java</h2>
+<iframe src="code/hashcode/Coin.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File HashCodeTester.java</h2>
+<iframe src="code/hashcode/HashCodeTester.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Output</h2>
+<pre>hash code of coin1=-1513525892
+hash code of coin2=-1513525892
+hash code of coin3=-1768365211
+Coin[value=0.25,name=quarter]
+Coin[value=0.05,name=nickel]</pre>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="7">What is the hash code of the string "to"?</li>
+<li>What is the hash code of new <tt>Integer(13)</tt>?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="7">31 &times; 116 + 111 = 3707</li>
+<li>13.</li>
+</ol>
+<br>
+
+
+<h2>Binary Search Trees</h2>
+<ul>
+  <li>Binary search trees allow for fast insertion and removal of elements</li>
+  <li>They are specially designed for fast searching</li>
+  <li>A binary tree consists of two nodes, each of which has two child nodes</li>
+  <li>All nodes in a binary search tree fulfill the property that:
+    <ul>
+      <li> Descendants to the left have smaller data values than the node data
+        value</li>
+      <li>Descendants to the right have larger data values than the node data
+        value</li>
+    </ul>
+  </li>
+</ul>
+
+
+<h2>A Binary Search Tree</h2>
+<img src="images/bst.png" alt="">
+
+
+<h2>A Binary Tree That Is Not a Binary Search Tree</h2>
+<img src="images/not_a_bst.png" alt="">
+
+
+<h2>Implementing a Binary Search Tree</h2>
+<ul>
+  <li>Implement a class for the tree containing a reference to the root node</li>
+  <li>Implement a class for the nodes
+    <ul>
+      <li>A node contains two references (to left and right child nodes)</li>
+      <li>A node contains a data field</li>
+      <li>The data field has type <tt>Comparable</tt>, so that you can compare the values
+        in order to place them in the correct position in the binary search tree</li>
+    </ul>
+  </li>
+</ul>
+
+
+<h2>Implementing a Binary Search Tree</h2>
+<pre>public class BinarySearchTree
+{
+   public BinarySearchTree() { . . . }
+   public void add(Comparable obj) { . . . }
+   . . .
+   private Node root;
+   private class Node
+   {
+      public void addNode(Node newNode) { . . . }
+      . . .
+      public Comparable data;
+      public Node left;
+      public Node right;
+   }
+}</pre>
+
+ 
+<h2>Insertion Algorithm</h2>
+<ul>
+  <li> If you encounter a non-<tt>null</tt> node reference, look at its <tt>data</tt> value
+    <ul>
+      <li>If the <tt>data</tt> value of that node is larger than the one you want to insert,<br>
+        continue the process with the left subtree</li>
+      <li>If the existing <tt>data</tt> value is smaller,<br>continue the process with the right subtree</li>
+    </ul>
+  </li>
+  <li>If you encounter a null node pointer, replace it with the new node</li>
+</ul>
+
+
+<h2>Example</h2>
+<pre>BinarySearchTree tree = new BinarySearchTree();
+tree.add("Juliet"); <img src="images/one.png" alt="">
+tree.add("Tom"); <img src="images/two.png" alt="">
+tree.add("Dick"); <img src="images/three.png" alt="">
+tree.add("Harry"); <img src="images/four.png" alt=""></pre>
+
+
+<h2>Example</h2>
+<img src="images/bst_after_insertions.png" alt="">
+<br>
+
+
+<h2>Example Continued</h2>
+<pre>tree.add("Romeo"); <img src="images/five.png" alt=""></pre>
+<img src="images/bst_after_five_insertions.png" alt="">
+<br>
+
+
+<h2>Insertion Algorithm: <tt>BinarySearchTree</tt> Class</h2>
+<pre>public class BinarySearchTree
+{
+   . . .
+   public void add(Comparable obj)
+   {
+      Node newNode = new Node();
+      newNode.data = obj;
+      newNode.left = null;
+      newNode.right = null;
+      if (root == null) root = newNode;
+      else root.addNode(newNode);
+   }
+   . . .
+}</pre>
+
+
+<h2>Insertion Algorithm: <tt>Node</tt> Class</h2>
+<pre>private class Node
+{
+   . . .
+   public void addNode(Node newNode)
+   {
+      int comp = newNode.data.compareTo(data);
+      if (comp < 0)
+      {
+         if (left == null) left = newNode;
+         else left.addNode(newNode);
+      }
+      else if (comp > 0)
+      {
+         if (right == null) right = newNode;
+         else right.addNode(newNode);
+      }
+   }
+   . . .
+}</pre>
+ 
+
+<h2>Binary Search Trees</h2>
+<ul>
+  <li>When removing a node with only one child, the child replaces the node to be removed</li>
+  <li>When removing a node with two children, replace it with the smallest node of the right subtree</li>
+</ul>
+
+
+<h2>Removing a Node with One Child</h2>
+<img src="images/removing_with_one_child.png" alt="">
+<br>
+
+
+<h2>Removing a Node with Two Children</h2>
+<img src="images/removing_with_two_children.png" alt="">
+<br>
+
+
+<h2>Binary Search Trees</h2>
+<ul>
+  <li>Balanced tree: each node has approximately as many descendants on the left as on the right</li>
+  <li>If a binary search tree is balanced, then adding an element takes <i>O</i>(log(<i>n</i>)) time</li>
+  <li>If the tree is unbalanced, insertion can be slow
+    <ul><li>Perhaps as slow as insertion into a linked list</li></ul></li>
+</ul>
+
+
+<h2>An Unbalanced Binary Search Tree</h2>
+<img src="images/unbalanced.png" alt="">
+<br>
+
+
+<h2>File BinarySearchTree.java</h2>
+<iframe src="code/tree/BinarySearchTree.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="9">What is the difference between a tree, a binary tree, and a balanced binary tree?</li>
+<li>Give an example of a string that, when inserted into the tree of Figure 10,
+becomes a right child of <tt>Romeo</tt>.</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="9">In a tree, each node can have any number of children. In a binary tree, a node
+has at most two children. In a balanced binary tree, all nodes have approximately
+as many descendants to the left as to the right.</li>
+<li>For example, <tt>Sarah</tt>. Any string between <tt>Romeo</tt> and <tt>Tom</tt> will do.</li>
+</ol>
+<br>
+
+
+<h2>Tree Traversal</h2>
+<ul>
+  <li>Print the tree elements in sorted order:
+    <ol><li>Print the left subtree</li>
+    <li>Print the data</li>
+    <li>Print the right subtree</li></ol></li>
+</ul>
+
+
+<h2>Example</h2>
+<ul>
+  <li>Let's try this out with the tree in Figure 10. The algorithm tells us to
+<ol>
+  <li>Print the left subtree of <tt>Juliet</tt>; that is, <tt>Dick</tt> and descendants</li>
+  <li>Print <tt>Juliet</tt></li>
+  <li>Print the right subtree of <tt>Juliet</tt>; that is, <tt>Tom</tt> and descendants</li>
+</ol></li>
+<li>How do you print the subtree starting at <tt>Dick</tt>?
+<ol>
+  <li>Print the left subtree of <tt>Dick</tt>. There is nothing to print</li>
+  <li>Print <tt>Dick</tt></li>
+  <li>Print the right subtree of <tt>Dick</tt>, that is, <tt>Harry</tt></li>
+</ol></li>
+</ul>
+
+
+<h2>Example</h2>
+<ul>
+  <li>Algorithm goes on as above</li>
+  <li>Output:
+<pre>Dick
+Harry
+Juliet
+Romeo
+Tom</pre>
+  <li>The tree is printed in sorted order</li>
+</ul>
+
+
+<h2><tt>BinarySearchTree</tt> Class <tt>print</tt> Method</h2>
+<pre>public class BinarySearchTree
+{
+   . . .
+   public void print()
+   {
+      if (root != null)
+         root.printNodes();
+   }
+   . . .
+}</pre>
+
+
+<h2><tt>Node</tt> Class <tt>printNodes</tt> Method</h2>
+<pre>private class Node
+{
+   . . .
+   public void printNodes()
+   {
+      if (left != null)
+         left.printNodes();
+      System.out.println(data);
+      if (right != null)
+         right.printNodes();
+   }
+   . . .
+}</pre>
+  
+
+<h2>Tree Traversal</h2>
+<ul>
+  <li>Tree traversal schemes include
+    <ul><li>Preorder traversal</li>
+    <li>Inorder traversal</li>
+    <li>Postorder traversal</li></ul></li>
+</ul>
+
+
+<h2>Preorder Traversal</h2>
+<ul>
+  <li>Visit the root</li>
+  <li>Visit the left subtree</li>
+  <li>Visit the right subtree</li>
+</ul>
+
+
+<h2>Inorder Traversal</h2>
+<ul>
+  <li>Visit the left subtree</li>
+  <li>Visit the root</li>
+  <li>Visit the right subtree</li>
+</ul>
+
+
+<h2>Postorder Traversal</h2>
+<ul>
+  <li>Visit the left subtree</li>
+  <li>Visit the right subtree</li>
+  <li>Visit the root</li>
+</ul>
+
+
+<h2>Tree Traversal</h2>
+<ul>
+  <li>Postorder traversal of an expression tree yields the instructions for evaluating the expression on a stack-based calculator
+    <br><img src="images/expression_trees.png" alt=""></li>
+  <li>The first tree (<tt>(3 + 4) * 5</tt>) yields
+    <pre>3 4 + 5 *</pre></li>
+  <li>Whereas the second tree (<tt>3 + 4 * 5</tt>) yields
+    <pre>3 4 5 * +</pre></li>
+</ul>
+
+
+<h2>A Stack-Based Calculator</h2>
+<ul>
+  <li>A number means:
+    <ul><li>Push the number on the stack</li></ul></li>
+  <li>An operator means:
+    <ul><li>Pop the top two numbers off the stack</li>
+    <li>Apply the operator to these two numbers</li>
+    <li>Push the result back on the stack</li></ul></li>
+</ul>
+
+
+<h2>A Stack-Based Calculator</h2>
+<ul>
+<li>For evaluating arithmetic expressions
+<ol>
+  <li>Turn the expression into a tree</li>
+  <li>Carry out a postorder traversal of the expression tree</li>
+  <li>Apply the operations in the given order</li>
+</ol></li>
+<li>The result is the value of the expression</li>
+</ul>
+
+
+<h2>A Stack-Based Calculator</h2>
+<img src="images/calculator.png" alt="">
+<br>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="11">What are the inorder traversals of the two trees in Figure 14?</li>
+<li>Are the trees in Figure 14 binary search trees?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="11">For both trees, the inorder traversal is <tt>3 + 4 * 5</tt>.</li>
+<li>No&#150;for example, consider the children of <tt>+</tt>. Even without looking up the Unicode codes for <tt>3</tt>, <tt>4</tt>,
+and <tt>+</tt>, it is obvious that <tt>+</tt> isn't between <tt>3</tt> and <tt>4</tt>.</li>
+</ol>
+<br>
+
+
+<h2>Reverse Polish Notation</h2>
+<img src="images/hp.png" alt="">
+<br>
+
+<h2>Using Tree Sets and Tree Maps</h2>
+<ul>
+  <li><tt>HashSet</tt> and <tt>TreeSet</tt> both implement the <tt>Set</tt> interface</li>
+  <li>With a good hash function, hashing is generally faster than tree-based algorithms</li>
+  <li><tt>TreeSet</tt>'s balanced tree guarantees reasonable performance</li>
+  <li><tt>TreeSet</tt>'s iterator visits the elements in sorted order rather than the <tt>HashSet</tt>'s
+    random order</li>
+</ul>
+ 
+
+<h2>To Use a <tt>TreeSet</tt> </h2>
+<ul>
+  <li>Either your objects must implement <tt>Comparable</tt> interface</li>
+  <li>Or you must provide a <tt>Comparator</tt> object</li>
+</ul>
+
+
+<h2>To Use a <tt>TreeMap</tt></h2>
+<ul>
+  <li>Either the keys must implement the <tt>Comparable</tt> interface</li>
+  <li>Or you must provide a <tt>Comparator</tt> object for the keys</li>
+  <li>There is no requirement for the values</li>
+</ul>
+ 
+<h2>File TreeSetTester.java</h2>
+<iframe src="code/treeset/TreeSetTester.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+<br>Output
+<pre>   Coin[value=0.01,name=penny]
+   Coin[value=0.05,name=nickel]
+   Coin[value=0.25,name=quarter]</pre>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="13">When would you choose a tree set over a hash set?</li>
+<li>Suppose we define a coin comparator whose <tt>compare</tt> method always returns 0.
+Would the <tt>TreeSet</tt> function correctly?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="13">When it is desirable to visit the set elements in sorted order.</li>
+<li>No&#150;it would never be able to tell two coins apart. Thus, it would think that all
+coins are duplicates of the first.</li>
+</ol>
+<br>
+
+
+<h2>Priority Queues</h2>
+<ul>
+  <li>A priority queue collects elements, each of which has a priority</li>
+  <li>Example: collection of work requests, some of which may be more urgent than others</li>
+  <li>When removing an element, element with highest priority is retrieved
+    <ul><li>Customary to give low values to high priorities, with priority 1 denoting the highest priority</li></ul></li>
+  <li>Standard Java library supplies a <tt>PriorityQueue</tt> class</li>
+  <li>A data structure called <i>heap</i> is very suitable for implementing priority queues</li>
+</ul>
+
+
+<h2>Example</h2>
+<ul>
+  <li>Consider this sample code:
+<pre>PriorityQueue&lt;WorkOrder&gt; q = new PriorityQueue&lt;WorkOrder&gt;;
+q.add(new WorkOrder(3, "Shampoo carpets"));
+q.add(new WorkOrder(1, "Fix overflowing sink"));
+q.add(new WorkOrder(2, "Order cleaning supplies"));</pre></li>
+  <li>When calling <tt>q.remove()</tt> for the first time, the work order with priority 1 is removed</li>
+  <li>Next call to <tt>q.remove()</tt> removes the order with priority 2</li>
+</ul>
+
+
+<h2>Heaps</h2>
+<ul>
+  <li>A <i>heap</i> (or, a <i>min-heap</i>) is a binary tree with two special properties
+  <ol><li>It is almost complete
+    <ul><li>All nodes are filled in, except the last level may have some nodes missing toward the right</li></ul></li>
+  <li>The tree fulfills the heap property
+    <ul><li>All nodes store values that are at most as large as the values stored in their descendants</li></ul></li></ol></li>
+  <li>Heap property ensures that the smallest element is stored in the root</li>
+</ul>
+
+
+<h2>An Almost Complete Tree</h2>
+<img src="images/almost_complete.png" alt="">
+<br>
+
+
+<h2>A Heap</h2>
+<img src="images/heap.png" alt="">
+<br>
+
+
+<h2>Differences of a Heap with a Binary Search Tree</h2>
+<ol>
+  <li>The shape of a heap is very regular
+    <ul><li>Binary search trees can have arbitrary shapes</li></ul></li>
+  <li>In a heap, the left and right subtrees both store elements that are larger than
+the root element
+  <ul><li>In a binary search tree, smaller elements are stored in the left subtree and larger elements are stored in the right subtree</li></ul>
+</li>
+</ol>
+
+
+<h2>Inserting a New Element in a Heap</h2>
+<ol>
+  <li value="1">Add a vacant slot to the end of the tree
+    <br><img src="images/insert_1.png" alt=""></li>
+</ol>
+
+
+<h2>Inserting a New Element in a Heap</h2>
+<ol>
+  <li value="2">Demote the parent of the empty slot if it is larger than the element to be inserted
+  <ul><li>Move the parent value into the vacant slot, and move the vacant slot up</li>
+  <li>Repeat this demotion as long as the parent of the vacant slot is larger than the element to be inserted</li></ul>
+    <br><img src="images/insert_2.png" alt="">
+    <br><img src="images/fig18.png" alt=""></li>
+</ol>
+
+
+<h2>Inserting a New Element in a Heap</h2>
+<ol>
+  <li value="2">Demote the parent of the empty slot if it is larger than the element to be inserted
+  <ul><li>Move the parent value into the vacant slot, and move the vacant slot up</li>
+  <li>Repeat this demotion as long as the parent of the vacant slot is larger than the element to be inserted</li></ul>
+    <br><img src="images/insert_2b.png" alt="">
+    <br><img src="images/fig18.png" alt=""></li>
+</ol>
+
+
+<h2>Inserting a New Element in a Heap</h2>
+<ol>
+  <li value="3">At this point, either the vacant slot is at the root, or the parent of the vacant slot is smaller than the element to be inserted.
+Insert the element into the vacant slot
+    <br><img src="images/insert_3.png" alt=""></li>
+</ol>
+
+
+<h2>Removing an Arbitrary Node from a Heap</h2>
+<ol>
+  <li value="1">Extract the root node value
+    <br><img src="images/remove_1.png" alt="">
+    <br><img src="images/fig19a.png" alt=""></li>
+</ol>
+
+
+<h2>Removing an Arbitrary Node from a Heap</h2>
+<ol>
+  <li value="2">Move the value of the last node of the heap into the root node, and remove the last node.
+     <br>Heap property may be violated for root node (one or both of its children may be smaller).
+    <br><img src="images/remove_2.png" alt="">
+    <br><img src="images/fig19a.png" alt=""></li>
+</ol>
+
+
+<h2>Removing an Arbitrary Node from a Heap</h2>
+<ol>
+  <li value="3">Promote the smaller child of the root node.
+    <br>Root node again fulfills the heap property. Repeat process with demoted child.
+    <br>Continue until demoted child has no smaller children. Heap property is now fulfilled again.
+    <br>This process is called "fixing the heap".
+    <br><img src="images/remove_3a.png" alt="">
+    <br><img src="images/fig19b.png" alt=""></li>
+</ol>
+
+
+<h2>Removing an Arbitrary Node from a Heap</h2>
+<ol>
+  <li value="3">Promote the smaller child of the root node.
+    <br>Root node again fulfills the heap property. Repeat process with demoted child.
+    <br>Continue until demoted child has no smaller children. Heap property is now fulfilled again.
+    <br>This process is called "fixing the heap".
+    <br><img src="images/remove_3b.png" alt="">
+    <br><img src="images/fig19b.png" alt=""></li>
+</ol>
+
+
+<h2>Heap Efficiency</h2>
+<ul>
+  <li>Insertion and removal operations visit at most <i>h</i> nodes</li>
+  <li><i>h</i>: Height of the tree</li>
+  <li>If <i>n</i> is the number of elements, then
+    <br><img src="images/n.png" alt=""></li>
+  <li>Thus, insertion and removal operations take <i>O</i>(log(<i>n</i>)) steps</li>
+  <li>Heap's regular layout makes it possible to store heap nodes efficiently in an array</li>
+</ul>
+
+
+<h2>Storing a Heap in an Array</h2>
+<img src="images/storing_heap.png" alt="">
+<br>
+
+
+<h2>File MinHeap.java</h2>
+<iframe src="code/pqueue/MinHeap.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File HeapTester.java</h2>
+<iframe src="code/pqueue/HeapTester.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File WorkOrder.java</h2>
+<iframe src="code/pqueue/WorkOrder.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Output</h2>
+<pre>priority=1, description=Fix broken sink
+priority=2, description=Order cleaning supplies
+priority=3, description=Shampoo carpets
+priority=6, description=Replace light bulb
+priority=7, description=Empty trash
+priority=8, description=Water plants
+priority=9, description=Clean coffee maker
+priority=10, description=Remove pencil sharpener shavings</pre>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="15">The software that controls the events in a user interface keeps the events in a
+data structure. Whenever an event such as a mouse move or repaint request
+occurs, the event is added. Events are retrieved according to their importance.
+What abstract data type is appropriate for this application?</li>
+<li>Could we store a binary search tree in an array so that we can quickly locate the
+children by looking at array locations <tt>2 * index</tt> and <tt>2 * index + 1</tt>?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="15">A priority queue is appropriate because we want to get the important events
+first, even if they have been inserted later.</li>
+<li>Yes, but a binary search tree isn't almost filled, so there may be holes in the
+array. We could indicate the missing nodes with <tt>null</tt> elements.</li>
+</ol>
+<br>
+
+
+<h2>The Heapsort Algorithm</h2>
+<ul>
+  <li>Based on inserting elements into a heap and removing them in sorted order</li>
+  <li>This algorithm is an <i>O</i>(<i>n</i> log(<i>n</i>)) algorithm:
+    <ul><li>Each insertion and removal is <i>O</i>(log(<i>n</i>))</li>
+    <li>These steps are repeated <i>n</i> times, once for each element in the sequence that is to be sorted</li></ul></li>
+</ul>
+
+
+<h2>The Heapsort Algorithm</h2>
+<ul>
+  <li>Can be made more efficient
+    <ul><li>Start with a sequence of values in an array and "fixing the heap" iteratively</li></ul></li>
+  <li>First fix small subtrees into heaps, then fix larger trees</li>
+  <li>Trees of size 1 are automatically heaps</li>
+  <li>Begin the fixing procedure with the subtrees whose roots are located in the next-to-lowest level of the tree</li>
+  <li>Generalized <tt>fixHeap</tt> method fixes a subtree with a given root index:
+    <br><tt>void fixHeap(int rootIndex, int lastIndex)</tt></li>
+</ul>
+
+
+<h2>Turning a Tree into a Heap</h2>
+<img src="images/heapsort_1.png" alt="">
+<br><img src="images/fig21.png" alt="">
+<br>
+
+
+<h2>Turning a Tree into a Heap</h2>
+<img src="images/heapsort_2.png" alt="">
+<br><img src="images/fig21.png" alt="">
+<br>
+
+
+<h2>Turning a Tree into a Heap</h2>
+<img src="images/heapsort_3.png" alt="">
+<br><img src="images/fig21.png" alt="">
+<br>
+
+
+<h2>The Heapsort Algorithm</h2>
+<ul>
+  <li>After array has been turned into a heap, repeatedly remove the root element
+    <ul><li>Swap root element with last element of the tree and then reduce the tree length</li></ul></li>
+  <li>Removed root ends up in the last position of the array, which is no longer needed by the heap</li>
+  <li>We can use the same array both to hold the heap (which gets shorter with each step)
+    <br>and the sorted sequence (which gets longer with each step)</li>
+  <li>Use a max-heap rather than a min-heap so that sorted sequence is accumulated in the correct order</li>
+</ul>
+
+
+<h2>Using Heapsort to Sort an Array</h2>
+<img src="images/heapsort.png" alt="">
+<br>
+
+
+<h2>File Heapsorter.java</h2>
+<iframe src="code/heapsort/HeapSorter.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="17">Which algorithm requires less storage, heapsort or mergesort?</li>
+<li>Why are the computations of the left child index and the right child index in the
+<tt>HeapSorter</tt> different than in <tt>MinHeap</tt>?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="17">Heapsort requires less storage because it doesn't need an auxiliary array.</li>
+<li>The <tt>MinHeap</tt> wastes the 0 entry to make the formulas more intuitive. When sorting
+an array, we don't want to waste the 0 entry, so we adjust the formulas
+instead.</li>
+</ol>
+<br>
+
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 23</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide027.html'">
+<center><small><a href="slide025.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide027.html">next</a></small></center>
+<hr></div>
+<h2>Race Conditions</h2>
+<ul>
+  <li>When threads share a common object, they can conflict with each other</li>
+  <li>Sample program: multiple threads manipulate a bank account
+      <br>Here is the <tt>run</tt> method of <tt>DepositRunnable</tt>:
+    <pre>public void run()
+{
+   try
+   {
+      for (int i = 1; i <= count; i++)
+      {
+         account.deposit(amount);
+         Thread.sleep(DELAY);
+      }
+   }
+   catch (InterruptedException exception)
+   {
+   }
+}</pre></li>
+  <li>The <tt>WithdrawRunnable</tt> class is similar</li>
+</ul>
+
+
+
+<div onclick="document.location='slide027.html'"><hr>
+<center><small><a href="slide025.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide027.html">next</a></small></center>
+</div>
+</body>
+</html>

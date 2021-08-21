@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 23</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide051.html'">
+<center><small><a href="slide049.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide051.html">next</a></small></center>
+<hr></div>
+<h2>Condition Objects</h2>
+<ul>
+  <li>It is customary to give the condition object a name that describes condition to test</li>
+  <li>You need to implement an appropriate test</li>
+  <li>As long as test is not fulfilled, call <tt>await</tt> on the condition object:
+<pre>public void withdraw(double amount)
+{
+   balanceChangeLock.lock();
+   try
+   {
+      while (balance < amount)
+      sufficientFundsCondition.await();
+      . . .
+   }
+   finally
+   {
+      balanceChangeLock.unlock();
+   }
+}</pre></li>
+</ul>
+
+
+
+<div onclick="document.location='slide051.html'"><hr>
+<center><small><a href="slide049.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide051.html">next</a></small></center>
+</div>
+</body>
+</html>

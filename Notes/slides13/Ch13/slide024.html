@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 13</title>
+</head>
+
+<body>
+<div onclick="document.location='slide025.html'">
+<center><small><a href="slide023.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide025.html">next</a></small></center>
+<hr></div>
+<h2>Common Error: Shadowing Instance Fields</h2>
+<ul>
+  <li>A subclass has no access to the private instance fields of the superclass</li>
+  <li>Beginner's error: "solve" this problem by adding another instance field with same name:
+<pre>public class CheckingAccount extends BankAccount
+{
+   public void deposit(double amount)
+   {
+      transactionCount++;
+      balance = balance + amount;
+   }
+   . . .
+   private double balance; // Don't
+}</pre></li>
+  <li>Now the deposit method compiles, but it doesn't update the correct balance!
+      <br><img src="images/shadowing.png" alt=""></li>
+</ul>
+
+
+
+<div onclick="document.location='slide025.html'"><hr>
+<center><small><a href="slide023.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide025.html">next</a></small></center>
+</div>
+</body>
+</html>

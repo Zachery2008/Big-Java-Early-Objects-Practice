@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 4</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+
+<body>
+<div onclick="document.location='slide006.html'">
+<center><small><a href="slide004.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide006.html">next</a></small></center>
+</div><hr>
+<h2>Number Types: Floating-point Types</h2>
+<ul>
+  <li>Rounding errors occur when an exact conversion between numbers is
+not possible<br>
+    <tt>double f = 4.35;<br>
+System.out.println(100 * f); // prints 434.99999999999994</tt></li>
+  <li>Java: Illegal to assign a floating-point expression to an integer
+variable<br>
+    <tt>double balance = 13.75; <br>
+int dollars = balance; // Error</tt></li>
+  <li>Casts: used to convert a value to a different type<br>
+    <tt>int dollars = (int) balance; // OK</tt><br>
+Cast discards fractional part.</li>
+  <li><tt>Math.round</tt> converts a floating-point number to nearest
+integer<br>
+    <tt>long rounded = Math.round(balance); // if balance is 13.75, then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//
+rounded is set to 14</tt></li>
+</ul>
+
+<hr>
+<div onclick="document.location='slide006.html'">
+<center><small><a href="slide004.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide006.html">next</a></small></center>
+</div>
+</body>
+</html>

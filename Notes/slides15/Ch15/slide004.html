@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 15</title>
+</head>
+
+<body>
+<div onclick="document.location='slide005.html'">
+<center><small><a href="slide003.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide005.html">next</a></small></center>
+<hr></div>
+<h2>Throwing Exceptions</h2> 
+<ul>
+   <li>Exceptions:
+       <ul><li>Can't be overlooked</li>
+       <li>Sent directly to an exception handler&#150;not just caller of failed method</li></ul></li>
+   <li>Throw an exception object to signal an exceptional condition</li>
+   <li>Example: <tt>IllegalArgumentException</tt>: illegal parameter value
+      <pre>IllegalArgumentException exception
+      = new IllegalArgumentException("Amount exceeds balance");
+throw exception;</pre></li>
+   <li>No need to store exception object in a variable:
+      <pre>throw new IllegalArgumentException("Amount exceeds balance");</pre></li>
+   <li>When an exception is thrown, method terminates immediately
+      <ul><li>Execution continues with an exception handler</li></ul></li>
+</ul>
+ 
+
+<div onclick="document.location='slide005.html'"><hr>
+<center><small><a href="slide003.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide005.html">next</a></small></center>
+</div>
+</body>
+</html>

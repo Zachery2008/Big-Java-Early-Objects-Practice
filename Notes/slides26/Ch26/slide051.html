@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 26</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide052.html'">
+<center><small><a href="slide050.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide052.html">next</a></small></center>
+<hr></div>
+<h2>Document Type Definitions</h2>
+<ul>
+  <li> A DTD is a set of rules for correctly formed documents of a particular
+    type
+    <ul>
+      <li>Describes the valid attributes for each element type</li>
+      <li>Describes the valid child elements for each element type</li>
+    </ul>
+  </li>
+  <li>Valid child elements are described by an <tt>ELEMENT</tt> rule
+    <pre>&lt;!ELEMENT items (item*)&gt;
+</pre>
+  </li>
+  <li>The <tt>items</tt> element can have 0 or more item elements</li>
+  <li>Definition of an <tt>item</tt> node
+    <pre>&lt;! ELEMENT item (product, quantity)&gt;</pre>
+  </li>
+  <li>Children of the <tt>item</tt> node must be a <tt>product</tt> node followed by a <tt>quantity</tt> node</li>
+</ul>
+
+ 
+
+<div onclick="document.location='slide052.html'"><hr>
+<center><small><a href="slide050.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide052.html">next</a></small></center>
+</div>
+</body>
+</html>

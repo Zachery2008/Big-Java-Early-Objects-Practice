@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 25</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide066.html'">
+<center><small><a href="slide064.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide066.html">next</a></small></center>
+<hr></div>
+<h2>Analyzing Query Results</h2>
+<ul>
+  <li>Use the<tt> next</tt> method of the <tt>ResultSet</tt> to iterate through
+    the query results a row at a time</li>
+  <li>When a result set is first returned from an <tt>executeQuery</tt>, no row
+    data are available</li>
+  <li>Use the <tt>next</tt> method to move to the first row</li>
+  <li>The <tt>next</tt> method returns a boolean value indicating whether more
+    rows of data are available
+    <pre>while (result.next())
+{
+   <i>Inspect column data from the current row</i>
+}</pre></li>
+</ul>
+
+
+
+<div onclick="document.location='slide066.html'"><hr>
+<center><small><a href="slide064.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide066.html">next</a></small></center>
+</div>
+</body>
+</html>

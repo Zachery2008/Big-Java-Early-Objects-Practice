@@ -1,0 +1,86 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">sql</font><font color="#000000">.</font><font color="#000000">Connection</font><font color="#000000">;</font>
+<b><font color="#006cb8">02: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">sql</font><font color="#000000">.</font><font color="#000000">ResultSet</font><font color="#000000">;</font>
+<b><font color="#006cb8">03: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">sql</font><font color="#000000">.</font><font color="#000000">ResultSetMetaData</font><font color="#000000">;</font>
+<b><font color="#006cb8">04: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">sql</font><font color="#000000">.</font><font color="#000000">Statement</font><font color="#000000">;</font>
+<b><font color="#006cb8">05: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">sql</font><font color="#000000">.</font><font color="#000000">SQLException</font><font color="#000000">;</font>
+<b><font color="#006cb8">06: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">io</font><font color="#000000">.</font><font color="#000000">FileReader</font><font color="#000000">;</font>
+<b><font color="#006cb8">07: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">io</font><font color="#000000">.</font><font color="#000000">IOException</font><font color="#000000">;</font>
+<b><font color="#006cb8">08: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">util</font><font color="#000000">.</font><font color="#000000">Scanner</font><font color="#000000">;</font>
+<b><font color="#006cb8">09: </font></b>
+<b><font color="#006cb8">10: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">11: </font></b><font color="#7a9ecd">   Executes all SQL statements in a file.</font>
+<b><font color="#006cb8">12: </font></b><font color="#7a9ecd">   Call this program as</font>
+<b><font color="#006cb8">13: </font></b><font color="#7a9ecd">   java -classpath driver_class_path;. ExecSQL</font>
+<b><font color="#006cb8">14: </font></b><font color="#7a9ecd">      database.properties commands.sql</font>
+<b><font color="#006cb8">15: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">16: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> <font color="#000000">ExecSQL</font>
+<b><font color="#006cb8">17: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">18: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">void</font> <font color="#000000">main</font> <font color="#000000">(</font><font color="#000000">String</font> <font color="#000000">args</font><font color="#000000">[</font><font color="#000000">]</font><font color="#000000">)</font> 
+<b><font color="#006cb8">19: </font></b>         <font color="#d05b76">throws</font> <font color="#000000">SQLException</font><font color="#000000">,</font> <font color="#000000">IOException</font><font color="#000000">,</font> <font color="#000000">ClassNotFoundException</font>
+<b><font color="#006cb8">20: </font></b>   <font color="#000000">{</font>   
+<b><font color="#006cb8">21: </font></b>      <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">args</font><font color="#000000">.</font><font color="#000000">length</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#89c976">0</font><font color="#000000">)</font>
+<b><font color="#006cb8">22: </font></b>      <font color="#000000">{</font>   
+<b><font color="#006cb8">23: </font></b>         <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font>
+<b><font color="#006cb8">24: </font></b>               <font color="#00a99d">"Usage: java ExecSQL propertiesFile [statementFile]"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">25: </font></b>         <font color="#d05b76">return</font><font color="#000000">;</font>
+<b><font color="#006cb8">26: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">27: </font></b>
+<b><font color="#006cb8">28: </font></b>      <font color="#000000">SimpleDataSource</font><font color="#000000">.</font><font color="#000000">init</font><font color="#000000">(</font><font color="#000000">args</font><font color="#000000">[</font><font color="#89c976">0</font><font color="#000000">]</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">29: </font></b>      
+<b><font color="#006cb8">30: </font></b>      <font color="#000000">Scanner</font> <font color="#000000">in</font><font color="#000000">;</font> 
+<b><font color="#006cb8">31: </font></b>      <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">args</font><font color="#000000">.</font><font color="#000000">length</font> <font color="#000000">&gt;</font> <font color="#89c976">1</font><font color="#000000">)</font> 
+<b><font color="#006cb8">32: </font></b>         <font color="#000000">in</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Scanner</font><font color="#000000">(</font><font color="#d05b76">new</font> <font color="#000000">FileReader</font><font color="#000000">(</font><font color="#000000">args</font><font color="#000000">[</font><font color="#89c976">1</font><font color="#000000">]</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">33: </font></b>      <font color="#d05b76">else</font>
+<b><font color="#006cb8">34: </font></b>         <font color="#000000">in</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Scanner</font><font color="#000000">(</font><font color="#000000">System</font><font color="#000000">.</font><font color="#000000">in</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">35: </font></b>      
+<b><font color="#006cb8">36: </font></b>      <font color="#000000">Connection</font> <font color="#000000">conn</font> <font color="#000000">=</font> <font color="#000000">SimpleDataSource</font><font color="#000000">.</font><font color="#000000">getConnection</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">37: </font></b>      <font color="#d05b76">try</font>
+<b><font color="#006cb8">38: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">39: </font></b>         <font color="#000000">Statement</font> <font color="#000000">stat</font> <font color="#000000">=</font> <font color="#000000">conn</font><font color="#000000">.</font><font color="#000000">createStatement</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>      
+<b><font color="#006cb8">40: </font></b>         <font color="#d05b76">while</font> <font color="#000000">(</font><font color="#000000">in</font><font color="#000000">.</font><font color="#000000">hasNextLine</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font>
+<b><font color="#006cb8">41: </font></b>         <font color="#000000">{</font>
+<b><font color="#006cb8">42: </font></b>            <font color="#000000">String</font> <font color="#000000">line</font> <font color="#000000">=</font> <font color="#000000">in</font><font color="#000000">.</font><font color="#000000">nextLine</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">43: </font></b>            <font color="#d05b76">boolean</font> <font color="#000000">hasResultSet</font> <font color="#000000">=</font> <font color="#000000">stat</font><font color="#000000">.</font><font color="#000000">execute</font><font color="#000000">(</font><font color="#000000">line</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">44: </font></b>            <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">hasResultSet</font><font color="#000000">)</font>
+<b><font color="#006cb8">45: </font></b>            <font color="#000000">{</font>
+<b><font color="#006cb8">46: </font></b>               <font color="#000000">ResultSet</font> <font color="#000000">result</font> <font color="#000000">=</font> <font color="#000000">stat</font><font color="#000000">.</font><font color="#000000">getResultSet</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">47: </font></b>               <font color="#000000">showResultSet</font><font color="#000000">(</font><font color="#000000">result</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">48: </font></b>               <font color="#000000">result</font><font color="#000000">.</font><font color="#000000">close</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">49: </font></b>            <font color="#000000">}</font>
+<b><font color="#006cb8">50: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">51: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">52: </font></b>      <font color="#d05b76">finally</font>
+<b><font color="#006cb8">53: </font></b>      <font color="#000000">{</font>      
+<b><font color="#006cb8">54: </font></b>         <font color="#000000">conn</font><font color="#000000">.</font><font color="#000000">close</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">55: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">56: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">57: </font></b>
+<b><font color="#006cb8">58: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">59: </font></b><font color="#7a9ecd">      Prints a result set.</font>
+<b><font color="#006cb8">60: </font></b><font color="#7a9ecd">      @param result the result set</font>
+<b><font color="#006cb8">61: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">62: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">void</font> <font color="#000000">showResultSet</font><font color="#000000">(</font><font color="#000000">ResultSet</font> <font color="#000000">result</font><font color="#000000">)</font> 
+<b><font color="#006cb8">63: </font></b>         <font color="#d05b76">throws</font> <font color="#000000">SQLException</font>
+<b><font color="#006cb8">64: </font></b>   <font color="#000000">{</font> 
+<b><font color="#006cb8">65: </font></b>      <font color="#000000">ResultSetMetaData</font> <font color="#000000">metaData</font> <font color="#000000">=</font> <font color="#000000">result</font><font color="#000000">.</font><font color="#000000">getMetaData</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">66: </font></b>      <font color="#d05b76">int</font> <font color="#000000">columnCount</font> <font color="#000000">=</font> <font color="#000000">metaData</font><font color="#000000">.</font><font color="#000000">getColumnCount</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">67: </font></b>
+<b><font color="#006cb8">68: </font></b>      <font color="#d05b76">for</font> <font color="#000000">(</font><font color="#d05b76">int</font> <font color="#000000">i</font> <font color="#000000">=</font> <font color="#89c976">1</font><font color="#000000">;</font> <font color="#000000">i</font> <font color="#000000">&lt;</font><font color="#000000">=</font> <font color="#000000">columnCount</font><font color="#000000">;</font> <font color="#000000">i</font><font color="#000000">+</font><font color="#000000">+</font><font color="#000000">)</font>
+<b><font color="#006cb8">69: </font></b>      <font color="#000000">{</font>  
+<b><font color="#006cb8">70: </font></b>         <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">i</font> <font color="#000000">&gt;</font> <font color="#89c976">1</font><font color="#000000">)</font> <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">print</font><font color="#000000">(</font><font color="#00a99d">", "</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">71: </font></b>         <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">print</font><font color="#000000">(</font><font color="#000000">metaData</font><font color="#000000">.</font><font color="#000000">getColumnLabel</font><font color="#000000">(</font><font color="#000000">i</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">72: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">73: </font></b>      <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">74: </font></b>
+<b><font color="#006cb8">75: </font></b>      <font color="#d05b76">while</font> <font color="#000000">(</font><font color="#000000">result</font><font color="#000000">.</font><font color="#000000">next</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font>
+<b><font color="#006cb8">76: </font></b>      <font color="#000000">{</font>  
+<b><font color="#006cb8">77: </font></b>         <font color="#d05b76">for</font> <font color="#000000">(</font><font color="#d05b76">int</font> <font color="#000000">i</font> <font color="#000000">=</font> <font color="#89c976">1</font><font color="#000000">;</font> <font color="#000000">i</font> <font color="#000000">&lt;</font><font color="#000000">=</font> <font color="#000000">columnCount</font><font color="#000000">;</font> <font color="#000000">i</font><font color="#000000">+</font><font color="#000000">+</font><font color="#000000">)</font>
+<b><font color="#006cb8">78: </font></b>         <font color="#000000">{</font>  
+<b><font color="#006cb8">79: </font></b>            <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">i</font> <font color="#000000">&gt;</font> <font color="#89c976">1</font><font color="#000000">)</font> <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">print</font><font color="#000000">(</font><font color="#00a99d">", "</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">80: </font></b>            <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">print</font><font color="#000000">(</font><font color="#000000">result</font><font color="#000000">.</font><font color="#000000">getString</font><font color="#000000">(</font><font color="#000000">i</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">81: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">82: </font></b>         <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">83: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">84: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">85: </font></b><font color="#000000">}</font>
+</tt></pre>

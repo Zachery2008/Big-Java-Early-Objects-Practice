@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 10</title>
+</head>
+
+<body>
+<div onclick="document.location='slide056.html'">
+<center><small><a href="slide054.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide056.html">next</a></small></center>
+<hr></div>
+<h2>Debugging <tt>countSyllables</tt> (again)</h2>
+<ul>
+  <li>Break in the beginning of <tt>countSyllables</tt>. Then,
+single-step through loop
+    <pre>boolean insideVowelGroup = false;<br>for (int i = 0; i &lt;= end; i++)<br>{<br>   ch = Character.toLowerCase(text.charAt(i));<br>   if ("aeiouy".indexOf(ch) &gt;= 0)<br>   {<br>      // ch is a vowel<br>      if (!insideVowelGroup)<br>      {<br>         // Start of new vowel group<br>         count++;<br>         insideVowelGroup = true;<br>      }<br>   }<br>}</pre>
+  </li>
+  <li>First iteration (<tt>'h'</tt>): skips test for vowel</li>
+  <li>Second iteration (<tt>'e'</tt>): passes test, increments <tt>count</tt></li>
+  <li>Third iteration (<tt>'l'</tt>): skips test</li>
+  <li>Fifth iteration (<tt>'o'</tt>): passes test, but second <tt>if</tt>
+is skipped, and <tt>count</tt> is not incremented</li>
+</ul>
+
+<div onclick="document.location='slide056.html'"><hr>
+<center><small><a href="slide054.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide056.html">next</a></small></center>
+</div>
+</body>
+</html>

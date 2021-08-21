@@ -1,0 +1,31 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">02: </font></b><font color="#7a9ecd">   This program tests the Bank class.</font>
+<b><font color="#006cb8">03: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">04: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> BankTester
+<b><font color="#006cb8">05: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">06: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">void</font> <font color="#000000">main</font><font color="#000000">(</font>String<font color="#000000">[</font><font color="#000000">]</font> args<font color="#000000">)</font>
+<b><font color="#006cb8">07: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">08: </font></b>      Bank firstBankOfJava <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Bank</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">09: </font></b>      firstBankOfJava<font color="#000000">.</font><font color="#000000">addAccount</font><font color="#000000">(</font><font color="#d05b76">new</font> <font color="#000000">BankAccount</font><font color="#000000">(</font><font color="#89c976">1001</font><font color="#000000">,</font> <font color="#89c976">20000</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">10: </font></b>      firstBankOfJava<font color="#000000">.</font><font color="#000000">addAccount</font><font color="#000000">(</font><font color="#d05b76">new</font> <font color="#000000">BankAccount</font><font color="#000000">(</font><font color="#89c976">1015</font><font color="#000000">,</font> <font color="#89c976">10000</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">11: </font></b>      firstBankOfJava<font color="#000000">.</font><font color="#000000">addAccount</font><font color="#000000">(</font><font color="#d05b76">new</font> <font color="#000000">BankAccount</font><font color="#000000">(</font><font color="#89c976">1729</font><font color="#000000">,</font> <font color="#89c976">15000</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">12: </font></b>
+<b><font color="#006cb8">13: </font></b>      <font color="#d05b76">double</font> threshold <font color="#000000">=</font> <font color="#89c976">15000</font><font color="#000000">;</font>
+<b><font color="#006cb8">14: </font></b>      <font color="#d05b76">int</font> c <font color="#000000">=</font> firstBankOfJava<font color="#000000">.</font><font color="#000000">count</font><font color="#000000">(</font>threshold<font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">15: </font></b>      System<font color="#000000">.</font>out<font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font>c <font color="#000000">+</font> <font color="#00a99d">" accounts with balance &gt;= "</font> <font color="#000000">+</font> threshold<font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">16: </font></b>      
+<b><font color="#006cb8">17: </font></b>      <font color="#d05b76">int</font> accountNumber <font color="#000000">=</font> <font color="#89c976">1015</font><font color="#000000">;</font>
+<b><font color="#006cb8">18: </font></b>      BankAccount a <font color="#000000">=</font> firstBankOfJava<font color="#000000">.</font><font color="#000000">find</font><font color="#000000">(</font>accountNumber<font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">19: </font></b>      <font color="#d05b76">if</font> <font color="#000000">(</font>a <font color="#000000">=</font><font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">)</font> 
+<b><font color="#006cb8">20: </font></b>         System<font color="#000000">.</font>out<font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font><font color="#00a99d">"No account with number "</font> <font color="#000000">+</font> accountNumber<font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">21: </font></b>      <font color="#d05b76">else</font>
+<b><font color="#006cb8">22: </font></b>         System<font color="#000000">.</font>out<font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font><font color="#00a99d">"Account with number "</font> <font color="#000000">+</font> accountNumber
+<b><font color="#006cb8">23: </font></b>               <font color="#000000">+</font> <font color="#00a99d">" has balance "</font> <font color="#000000">+</font> a<font color="#000000">.</font><font color="#000000">getBalance</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">24: </font></b>
+<b><font color="#006cb8">25: </font></b>      BankAccount max <font color="#000000">=</font> firstBankOfJava<font color="#000000">.</font><font color="#000000">getMaximum</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">26: </font></b>      System<font color="#000000">.</font>out<font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font><font color="#00a99d">"Account with number "</font> 
+<b><font color="#006cb8">27: </font></b>            <font color="#000000">+</font> max<font color="#000000">.</font><font color="#000000">getAccountNumber</font><font color="#000000">(</font><font color="#000000">)</font> 
+<b><font color="#006cb8">28: </font></b>            <font color="#000000">+</font> <font color="#00a99d">" has the largest balance."</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">29: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">30: </font></b><font color="#000000">}</font>
+</tt></pre>

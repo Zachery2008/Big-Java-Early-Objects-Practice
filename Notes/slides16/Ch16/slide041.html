@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>Horstmann Chapter 16</title>
+</head>
+
+
+<body>
+<div onclick="document.location='slide042.html'">
+<center><small><a href="slide040.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide042.html">next</a></small></center>
+<hr></div>
+<h2>Serializable</h2>
+<ul>
+  <li>Objects that are written to an object stream must belong to a class <br>
+    that implements the <tt>Serializable</tt> interface.
+    <pre>class BankAccount implements Serializable
+{
+   . . .
+}</pre>
+  </li>
+  <li><tt>Serializable</tt> interface has no methods.</li>
+  <li>Serialization: process of saving objects to a stream
+  <ul><li>Each object is assigned a serial number on the stream</li>
+  <li>If the same object is saved twice, only serial number is written out the second time</li>
+  <li>When reading, duplicate serial numbers are restored as references to the same object</li></ul></li>
+</ul>
+
+
+
+<div onclick="document.location='slide042.html'"><hr>
+<center><small><a href="slide040.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide042.html">next</a></small></center>
+</div>
+</body>
+</html>

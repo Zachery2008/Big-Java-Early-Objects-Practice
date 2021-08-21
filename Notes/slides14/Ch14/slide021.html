@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 14</title>
+</head>
+
+<body>
+<div onclick="document.location='slide022.html'">
+<center><small><a href="slide020.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide022.html">next</a></small></center>
+<hr></div>
+<h2>Combo Boxes</h2>
+<ul>
+  <li>If combo box is editable, user can type own selection
+     <ul><li>Use <tt>setEditable</tt> method</li></ul></li>
+  <li>Add strings with <tt>addItem</tt> method:
+     <pre>JComboBox facenameCombo = new JComboBox();
+facenameCombo.addItem("Serif");
+facenameCombo.addItem("SansSerif");
+. . .</pre></li>
+  <li>Get user selection with <tt>getSelectedItem</tt> (return type is <tt>Object</tt>)<br>
+     <pre>String selectedString
+      = (String) facenameCombo.getSelectedItem();</pre></li>
+  <li>Select an item with <tt>setSelectedItem</tt></li>
+</ul>
+
+
+
+<div onclick="document.location='slide022.html'"><hr>
+<center><small><a href="slide020.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide022.html">next</a></small></center>
+</div>
+</body>
+</html>

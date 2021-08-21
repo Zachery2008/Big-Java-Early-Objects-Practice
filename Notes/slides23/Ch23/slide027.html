@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 23</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide028.html'">
+<center><small><a href="slide026.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide028.html">next</a></small></center>
+<hr></div>
+<h2>Sample Application </h2>
+<ul>
+  <li>Create a BankAccount object</li>
+  <li>Create two threads:
+     <ul><li>t1 deposits $100 into the bank account for 10 iterations</li>
+     <li>t2 withdraws $100 from the bank account for 10 iterations</li></ul></li>
+  <li><tt>deposit</tt> and <tt>withdraw</tt> have been modified to print messages:
+<pre>public void deposit(double amount)
+{
+   System.out.print("Depositing " + amount);
+   double newBalance = balance + amount;
+   System.out.println(", new balance is " + newBalance);
+   balance = newBalance;
+}</pre></li>
+</ul>
+
+
+
+<div onclick="document.location='slide028.html'"><hr>
+<center><small><a href="slide026.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide028.html">next</a></small></center>
+</div>
+</body>
+</html>

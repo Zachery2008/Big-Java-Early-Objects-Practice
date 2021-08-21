@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 27</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide064.html'">
+<center><small><a href="slide062.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide064.html">next</a></small></center>
+<hr></div>
+<h2>A Three-Tier Application</h2>
+<pre>&lt;DefaultContext>
+   &lt;Resource name="jdbc/mydb" auth="Container" type="javax.sql.DataSource"/&gt;
+   &lt;ResourceParams name="jdbc/mydb"&gt;
+      &lt;parameter&gt;
+         &lt;name&gt;factory&lt;/name&gt;
+         &lt;value&gt;org.apache.commons.dbcp.BasicDataSourceFactory&lt;/value&gt;
+      &lt;/parameter&gt;
+      &lt;parameter&gt;
+         &lt;name&gt;driverClassName&lt;/name&gt;
+         &lt;value&gt;<em><code class="blue">driver class</code></em>&lt;/value&gt;
+      &lt;/parameter&gt;
+      &lt;parameter&gt;
+         &lt;name&gt;url&lt;/name&gt;
+         &lt;value&gt;<em><code class="blue">database URL</code></em>&lt;/value&gt;
+      &lt;/parameter&gt;
+      &lt;parameter&gt;
+         &lt;name&gt;username&lt;/name&gt;
+         &lt;value&gt;<em><code class="blue">database user name</code></em>&lt;/value&gt;
+      &lt;/parameter&gt;
+      &lt;parameter&gt;
+         &lt;name&gt;password&lt;/name&gt;
+         &lt;value&gt;<em><code class="blue">database user password</code></em>&lt;/value&gt;
+      &lt;/parameter&gt;
+   &lt;/ResourceParams&gt;
+&lt;/DefaultContext&gt;</pre>
+
+
+
+<div onclick="document.location='slide064.html'"><hr>
+<center><small><a href="slide062.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide064.html">next</a></small></center>
+</div>
+</body>
+</html>

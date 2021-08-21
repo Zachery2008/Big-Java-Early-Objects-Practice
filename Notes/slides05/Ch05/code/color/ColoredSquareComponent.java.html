@@ -1,0 +1,45 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#000000">import</font> java<font color="#000000">.</font>awt<font color="#000000">.</font>Color<font color="#000000">;</font>
+<b><font color="#006cb8">02: </font></b><font color="#000000">import</font> java<font color="#000000">.</font>awt<font color="#000000">.</font>Graphics<font color="#000000">;</font>
+<b><font color="#006cb8">03: </font></b><font color="#000000">import</font> java<font color="#000000">.</font>awt<font color="#000000">.</font>Graphics2D<font color="#000000">;</font>
+<b><font color="#006cb8">04: </font></b><font color="#000000">import</font> java<font color="#000000">.</font>awt<font color="#000000">.</font>Rectangle<font color="#000000">;</font>
+<b><font color="#006cb8">05: </font></b><font color="#000000">import</font> javax<font color="#000000">.</font>swing<font color="#000000">.</font>JComponent<font color="#000000">;</font>
+<b><font color="#006cb8">06: </font></b>
+<b><font color="#006cb8">07: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">08: </font></b><font color="#7a9ecd">   A component that shows a colored square.</font>
+<b><font color="#006cb8">09: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">10: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> ColoredSquareComponent <font color="#d05b76">extends</font> JComponent
+<b><font color="#006cb8">11: </font></b><font color="#000000">{</font>  
+<b><font color="#006cb8">12: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">13: </font></b><font color="#7a9ecd">      Constructs a component that shows a colored square.</font>
+<b><font color="#006cb8">14: </font></b><font color="#7a9ecd">      @param aColor the fill color for the square</font>
+<b><font color="#006cb8">15: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">16: </font></b>   <font color="#d05b76">public</font> <font color="#000000">ColoredSquareComponent</font><font color="#000000">(</font>Color aColor<font color="#000000">)</font>
+<b><font color="#006cb8">17: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">18: </font></b>      fillColor <font color="#000000">=</font> aColor<font color="#000000">;</font>
+<b><font color="#006cb8">19: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">20: </font></b>   
+<b><font color="#006cb8">21: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">paintComponent</font><font color="#000000">(</font>Graphics g<font color="#000000">)</font>
+<b><font color="#006cb8">22: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">23: </font></b>      Graphics2D g2 <font color="#000000">=</font> <font color="#000000">(</font>Graphics2D<font color="#000000">)</font> g<font color="#000000">;</font>
+<b><font color="#006cb8">24: </font></b>
+<b><font color="#006cb8">25: </font></b>      <font color="#7a9ecd">// Select color into graphics context</font>
+<b><font color="#006cb8">26: </font></b>   
+<b><font color="#006cb8">27: </font></b>      g2<font color="#000000">.</font><font color="#000000">setColor</font><font color="#000000">(</font>fillColor<font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">28: </font></b>      
+<b><font color="#006cb8">29: </font></b>      <font color="#7a9ecd">// Construct and fill a square whose center is</font>
+<b><font color="#006cb8">30: </font></b>      <font color="#7a9ecd">// the center of the window</font>
+<b><font color="#006cb8">31: </font></b>
+<b><font color="#006cb8">32: </font></b>      <font color="#d05b76">final</font> <font color="#d05b76">int</font> SQUARE_LENGTH <font color="#000000">=</font> <font color="#89c976">100</font><font color="#000000">;</font>
+<b><font color="#006cb8">33: </font></b>      
+<b><font color="#006cb8">34: </font></b>      Rectangle square <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Rectangle</font><font color="#000000">(</font>
+<b><font color="#006cb8">35: </font></b>            <font color="#000000">(</font><font color="#000000">getWidth</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">-</font> SQUARE_LENGTH<font color="#000000">)</font> <font color="#000000">/</font> <font color="#89c976">2</font><font color="#000000">,</font>
+<b><font color="#006cb8">36: </font></b>            <font color="#000000">(</font><font color="#000000">getHeight</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">-</font> SQUARE_LENGTH<font color="#000000">)</font> <font color="#000000">/</font> <font color="#89c976">2</font><font color="#000000">,</font>
+<b><font color="#006cb8">37: </font></b>            SQUARE_LENGTH<font color="#000000">,</font>
+<b><font color="#006cb8">38: </font></b>            SQUARE_LENGTH<font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">39: </font></b>         
+<b><font color="#006cb8">40: </font></b>      g2<font color="#000000">.</font><font color="#000000">fill</font><font color="#000000">(</font>square<font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">41: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">42: </font></b>   
+<b><font color="#006cb8">43: </font></b>   <font color="#d05b76">private</font> Color fillColor<font color="#000000">;</font>
+<b><font color="#006cb8">44: </font></b><font color="#000000">}</font>
+</tt></pre>

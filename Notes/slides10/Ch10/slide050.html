@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 10</title>
+</head>
+
+<body>
+<div onclick="document.location='slide051.html'">
+<center><small><a href="slide049.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide051.html">next</a></small></center>
+<hr></div>
+<h2>Debug the Program</h2>
+<ul>
+  <li>Buggy output (for input "<tt>hello yellow peach</tt>"):
+    <pre>Syllables in hello: 1<br>Syllables in yellow: 1<br>Syllables in peach: 1</pre>
+  </li>
+  <li>Set breakpoint in first line of <tt>countSyllables</tt> of <tt>Word</tt>
+class</li>
+  <li>Start program, supply input. Program stops at breakpoint</li>
+  <li>Method checks if final letter is <tt>'e'</tt><br>
+    <img src="images/countSyllables.png" alt=""> </li>
+  <li>Check if this works: step to line where check is made and inspect
+variable <tt>ch</tt></li>
+  <li>Should contain final letter but contains <tt>'l'</tt><br>
+  </li>
+</ul>
+
+<div onclick="document.location='slide051.html'"><hr>
+<center><small><a href="slide049.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide051.html">next</a></small></center>
+</div>
+</body>
+</html>

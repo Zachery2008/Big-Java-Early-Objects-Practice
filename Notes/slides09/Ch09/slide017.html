@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 9</title>
+  <style type="text/css">
+OL.withloweralpha { list-style-type: lower-alpha }
+  </style>
+</head>
+
+<body>
+<div onclick="document.location='slide018.html'">
+<center><small><a href="slide016.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide018.html">next</a></small></center>
+<hr></div>
+<h2>Side Effects</h2>
+<ul>
+  <li>Side effect of a method: any externally observable data
+modification
+    <pre>public void transfer(double amount, BankAccount other)<br>{<br>   balance = balance - amount;<br>   other.balance = other.balance + amount; // Modifies explicit parameter<br>}</pre>
+  </li>
+  <li>Updating explicit parameter can be surprising to programmers; it
+is best to avoid it if possible</li>
+</ul>
+
+<div onclick="document.location='slide018.html'"><hr>
+<center><small><a href="slide016.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide018.html">next</a></small></center>
+</div>
+</body>
+</html>

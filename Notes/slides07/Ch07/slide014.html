@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 7</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+
+<body>
+<div onclick="document.location='slide015.html'">
+<center><small><a href="slide013.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide015.html">next</a></small></center>
+</div><hr>
+<h2>Avoiding Off-by-One Error</h2>
+<ul>
+  <li>Look at a scenario with simple values:<br>
+initial <tt>balance</tt>: $100<br>
+interest <tt>rate</tt>: 50%<br>
+after year 1, the <tt>balance</tt> is $150<br>
+after year 2 it is $225, or over $200<br>
+so the investment doubled after 2 years<br>
+the loop executed two times, incrementing <tt>years</tt> each time<br>
+    <i>Therefore</i>: <tt>years</tt> must start at 0, not at 1.</li>
+  <li>interest rate: 100%<br>
+after one year: <tt>balance</tt> is <tt>2 * initialBalance</tt><br>
+loop should stop<i><br>
+Therefore: </i>must use &lt;</li>
+  <li>Think, don't compile and try at random<br>
+  </li>
+</ul>
+<br>
+
+<hr>
+<div onclick="document.location='slide015.html'">
+<center><small><a href="slide013.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide015.html">next</a></small></center>
+</div>
+</body>
+</html>

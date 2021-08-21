@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 19</title>
+</head>
+
+<body>
+<div onclick="document.location='slide022.html'">
+<center><small><a href="slide020.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide022.html">next</a></small></center>
+<hr></div>
+<h2>Implementing Linked Lists</h2>
+<ul>
+  <li><tt>Node</tt>: stores an object and a reference to the next node</li>
+  <li>Methods of linked list class and iterator class have frequent
+access to the <tt>Node</tt> instance variables</li>
+  <li>To make it easier to use:
+    <ul>
+      <li>We do not make the instance variables private</li>
+      <li>We make <tt>Node</tt> a private inner class of <tt>LinkedList</tt></li>
+      <li>It is safe to leave the instance variables public
+        <ul>
+          <li>None of the list methods returns a <tt>Node</tt> object</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<div onclick="document.location='slide022.html'"><hr>
+<center><small><a href="slide020.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide022.html">next</a></small></center>
+</div>
+</body>
+</html>

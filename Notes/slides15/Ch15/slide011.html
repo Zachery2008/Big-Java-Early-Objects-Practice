@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 15</title>
+</head>
+
+<body>
+<div onclick="document.location='slide012.html'">
+<center><small><a href="slide010.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide012.html">next</a></small></center>
+<hr></div>
+<h2>Checked and Unchecked Exceptions</h2>
+<ul>
+  <li>Categories aren't perfect:
+     <ul><li><tt>Scanner.nextInt</tt> throws unchecked <tt>InputMismatchException</tt></li>
+     <li>Programmer cannot prevent users from entering incorrect input</li>
+     <li>This choice makes the class easy to use for beginning programmers</li></ul></li>
+  <li>Deal with checked exceptions principally when programming with files and streams</li>
+  <li>For example, use a <tt>Scanner</tt> to read a file
+     <pre>String filename = . . .;
+FileReader reader = new FileReader(filename);
+Scanner in = new Scanner(reader);</pre></li>
+  <li>But, <tt>FileReader</tt> constructor can throw a <tt>FileNotFoundException</tt></li>
+</ul>
+
+
+
+<div onclick="document.location='slide012.html'"><hr>
+<center><small><a href="slide010.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide012.html">next</a></small></center>
+</div>
+</body>
+</html>

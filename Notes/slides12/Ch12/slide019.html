@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 12</title>
+</head>
+
+<body>
+<div onclick="document.location='slide020.html'">
+<center><small><a href="slide018.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide020.html">next</a></small></center>
+<hr></div>
+<h2>Mouse Events</h2>
+<ul>
+  <li>Use a mouse listener to capture mouse events</li>
+  <li>Implement the <tt>MouseListener</tt> interface:
+<pre>public interface MouseListener
+{
+   void mousePressed(MouseEvent event);
+   // Called when a mouse button has been pressed on a component
+   void mouseReleased(MouseEvent event);
+   // Called when a mouse button has been released on a component
+   void mouseClicked(MouseEvent event);
+   // Called when the mouse has been clicked on a component
+   void mouseEntered(MouseEvent event);
+   // Called when the mouse enters a component
+   void mouseExited(MouseEvent event);
+   // Called when the mouse exits a component
+}</pre></li>
+  <li><tt>mousePressed</tt>, <tt>mouseReleased</tt>: called when a mouse button is pressed or released</li>
+  <li><tt>mouseClicked</tt>: if button is pressed and released in quick succession, and mouse hasn't moved</li>
+  <li><tt>mouseEntered</tt>, <tt>mouseExited</tt>: mouse has entered or exited the component's area</li>
+</ul>
+
+
+
+<div onclick="document.location='slide020.html'"><hr>
+<center><small><a href="slide018.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide020.html">next</a></small></center>
+</div>
+</body>
+</html>

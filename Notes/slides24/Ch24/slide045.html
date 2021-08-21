@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 24</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide046.html'">
+<center><small><a href="slide044.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide046.html">next</a></small></center>
+<hr></div>
+<h2>A Server Program</h2>
+<ul>
+  <li><tt>doService</tt> returns to the <tt>run</tt> method if the client closed the connection <br>or the command equals <tt>QUIT</tt></li>
+  <li>Then <tt>run</tt> closes the socket and exits</li>
+  <li>How can we support multiple simultaneous clients?
+    <ul><li>Spawn a new thread whenever a client connects</li>
+    <li>Each thread is responsible for serving one client</li></ul></li>
+</ul>
+
+
+
+<div onclick="document.location='slide046.html'"><hr>
+<center><small><a href="slide044.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide046.html">next</a></small></center>
+</div>
+</body>
+</html>

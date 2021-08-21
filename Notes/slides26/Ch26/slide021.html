@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 26</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide022.html'">
+<center><small><a href="slide020.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide022.html">next</a></small></center>
+<hr></div>
+<h2>Parsing XML Documents </h2>
+<ul>
+  <li> <tt>Document</tt> interface describes the tree structure of an XML document</li>
+  <li>A <tt>DocumentBuilder</tt> can generate an object of a class that implements
+    <tt>Document</tt> interface</li>
+  <li>Get a <tt>DocumentBuilder</tt> by calling the static <tt>newInstance</tt>
+    method of <tt>DocumentBuilderFactory</tt></li>
+  <li>Call <tt>newDocumentBuilder</tt> method of the factory to get a <tt>DocumentBuilder</tt>
+<pre>DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+DocumentBuilder builder = factory.newDocumentBuilder();
+</pre></li>
+</ul>
+ 
+
+<div onclick="document.location='slide022.html'"><hr>
+<center><small><a href="slide020.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide022.html">next</a></small></center>
+</div>
+</body>
+</html>

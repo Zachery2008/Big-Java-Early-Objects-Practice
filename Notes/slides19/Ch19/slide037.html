@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 19</title>
+</head>
+
+<body>
+<div onclick="document.location='slide038.html'">
+<center><small><a href="slide036.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide038.html">next</a></small></center>
+<hr></div>
+<h2>Analyzing the Merge Sort Algorithm</h2>
+<ul>
+  <li>Let T(<i>n</i>) denote the number of visits to sort an array of <i>n</i>
+elements then
+    <ul>
+      <li>T(<i>n</i>) = T(<i>n</i>/2) + T(<i>n</i>/2) + 5<i>n</i> or</li>
+      <li>T(<i>n</i>) = 2T(<i>n</i>/2) + 5<i>n</i></li>
+    </ul>
+  </li>
+  <li>The visits for an array of size <i>n</i>/2 is:
+&nbsp;&nbsp;&nbsp;T(<i>n</i>/2) = 2T(<i>n</i>/4) + 5<i>n</i>/2
+    <ul>
+      <li>So T(<i>n</i>) = 2 &times; 2T(<i>n</i>/4) +5<i>n</i> + 5<i>n</i></li>
+    </ul>
+  </li>
+  <li>The visits for an array of size <i>n</i>/4 is:
+&nbsp;&nbsp;&nbsp;&nbsp;T(<i>n</i>/4) = 2T(<i>n</i>/8) + 5<i>n</i>/4
+    <ul>
+      <li>So T(<i>n</i>) = 2 &times; 2 &times; 2T(<i>n</i>/8) + 5<i>n</i>
++ 5<i>n</i> + 5<i>n</i></li>
+    </ul>
+  </li>
+</ul>
+
+<div onclick="document.location='slide038.html'"><hr>
+<center><small><a href="slide036.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide038.html">next</a></small></center>
+</div>
+</body>
+</html>

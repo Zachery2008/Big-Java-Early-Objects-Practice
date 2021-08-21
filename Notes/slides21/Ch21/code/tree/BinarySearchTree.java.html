@@ -1,0 +1,171 @@
+<pre><tt><b><font color="#006cb8">001: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">002: </font></b><font color="#7a9ecd">   This class implements a binary search tree whose</font>
+<b><font color="#006cb8">003: </font></b><font color="#7a9ecd">   nodes hold objects that implement the Comparable</font>
+<b><font color="#006cb8">004: </font></b><font color="#7a9ecd">   interface.</font>
+<b><font color="#006cb8">005: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">006: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> <font color="#000000">BinarySearchTree</font>
+<b><font color="#006cb8">007: </font></b><font color="#000000">{</font>  
+<b><font color="#006cb8">008: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">009: </font></b><font color="#7a9ecd">      Constructs an empty tree.</font>
+<b><font color="#006cb8">010: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">011: </font></b>   <font color="#d05b76">public</font> <font color="#000000">BinarySearchTree</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">012: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">013: </font></b>      <font color="#000000">root</font> <font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">;</font>
+<b><font color="#006cb8">014: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">015: </font></b>   
+<b><font color="#006cb8">016: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">017: </font></b><font color="#7a9ecd">      Inserts a new node into the tree.</font>
+<b><font color="#006cb8">018: </font></b><font color="#7a9ecd">      @param obj the object to insert</font>
+<b><font color="#006cb8">019: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">020: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">add</font><font color="#000000">(</font><font color="#000000">Comparable</font> <font color="#000000">obj</font><font color="#000000">)</font> 
+<b><font color="#006cb8">021: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">022: </font></b>      <font color="#000000">Node</font> <font color="#000000">newNode</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Node</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">023: </font></b>      <font color="#000000">newNode</font><font color="#000000">.</font><font color="#000000">data</font> <font color="#000000">=</font> <font color="#000000">obj</font><font color="#000000">;</font>
+<b><font color="#006cb8">024: </font></b>      <font color="#000000">newNode</font><font color="#000000">.</font><font color="#000000">left</font> <font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">;</font>
+<b><font color="#006cb8">025: </font></b>      <font color="#000000">newNode</font><font color="#000000">.</font><font color="#000000">right</font> <font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">;</font>
+<b><font color="#006cb8">026: </font></b>      <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">root</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">)</font> <font color="#000000">root</font> <font color="#000000">=</font> <font color="#000000">newNode</font><font color="#000000">;</font>
+<b><font color="#006cb8">027: </font></b>      <font color="#d05b76">else</font> <font color="#000000">root</font><font color="#000000">.</font><font color="#000000">addNode</font><font color="#000000">(</font><font color="#000000">newNode</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">028: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">029: </font></b>
+<b><font color="#006cb8">030: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">031: </font></b><font color="#7a9ecd">      Tries to find an object in the tree.</font>
+<b><font color="#006cb8">032: </font></b><font color="#7a9ecd">      @param obj the object to find</font>
+<b><font color="#006cb8">033: </font></b><font color="#7a9ecd">      @return true if the object is contained in the tree</font>
+<b><font color="#006cb8">034: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">035: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">boolean</font> <font color="#000000">find</font><font color="#000000">(</font><font color="#000000">Comparable</font> <font color="#000000">obj</font><font color="#000000">)</font>
+<b><font color="#006cb8">036: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">037: </font></b>      <font color="#000000">Node</font> <font color="#000000">current</font> <font color="#000000">=</font> <font color="#000000">root</font><font color="#000000">;</font>
+<b><font color="#006cb8">038: </font></b>      <font color="#d05b76">while</font> <font color="#000000">(</font><font color="#000000">current</font> <font color="#000000">!</font><font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">)</font>
+<b><font color="#006cb8">039: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">040: </font></b>         <font color="#d05b76">int</font> <font color="#000000">d</font> <font color="#000000">=</font> <font color="#000000">current</font><font color="#000000">.</font><font color="#000000">data</font><font color="#000000">.</font><font color="#000000">compareTo</font><font color="#000000">(</font><font color="#000000">obj</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">041: </font></b>         <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">d</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#89c976">0</font><font color="#000000">)</font> <font color="#d05b76">return</font> <font color="#d05b76">true</font><font color="#000000">;</font>
+<b><font color="#006cb8">042: </font></b>         <font color="#d05b76">else</font> <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">d</font> <font color="#000000">&gt;</font> <font color="#89c976">0</font><font color="#000000">)</font> <font color="#000000">current</font> <font color="#000000">=</font> <font color="#000000">current</font><font color="#000000">.</font><font color="#000000">left</font><font color="#000000">;</font>
+<b><font color="#006cb8">043: </font></b>         <font color="#d05b76">else</font> <font color="#000000">current</font> <font color="#000000">=</font> <font color="#000000">current</font><font color="#000000">.</font><font color="#000000">right</font><font color="#000000">;</font>
+<b><font color="#006cb8">044: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">045: </font></b>      <font color="#d05b76">return</font> <font color="#d05b76">false</font><font color="#000000">;</font>
+<b><font color="#006cb8">046: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">047: </font></b>   
+<b><font color="#006cb8">048: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">049: </font></b><font color="#7a9ecd">      Tries to remove an object from the tree. Does nothing</font>
+<b><font color="#006cb8">050: </font></b><font color="#7a9ecd">      if the object is not contained in the tree.</font>
+<b><font color="#006cb8">051: </font></b><font color="#7a9ecd">      @param obj the object to remove</font>
+<b><font color="#006cb8">052: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">053: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">remove</font><font color="#000000">(</font><font color="#000000">Comparable</font> <font color="#000000">obj</font><font color="#000000">)</font>
+<b><font color="#006cb8">054: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">055: </font></b>      <font color="#7a9ecd">// Find node to be removed</font>
+<b><font color="#006cb8">056: </font></b>
+<b><font color="#006cb8">057: </font></b>      <font color="#000000">Node</font> <font color="#000000">toBeRemoved</font> <font color="#000000">=</font> <font color="#000000">root</font><font color="#000000">;</font>
+<b><font color="#006cb8">058: </font></b>      <font color="#000000">Node</font> <font color="#000000">parent</font> <font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">;</font>
+<b><font color="#006cb8">059: </font></b>      <font color="#d05b76">boolean</font> <font color="#000000">found</font> <font color="#000000">=</font> <font color="#d05b76">false</font><font color="#000000">;</font>
+<b><font color="#006cb8">060: </font></b>      <font color="#d05b76">while</font> <font color="#000000">(</font><font color="#000000">!</font><font color="#000000">found</font> <font color="#000000">&amp;</font><font color="#000000">&amp;</font> <font color="#000000">toBeRemoved</font> <font color="#000000">!</font><font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">)</font>
+<b><font color="#006cb8">061: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">062: </font></b>         <font color="#d05b76">int</font> <font color="#000000">d</font> <font color="#000000">=</font> <font color="#000000">toBeRemoved</font><font color="#000000">.</font><font color="#000000">data</font><font color="#000000">.</font><font color="#000000">compareTo</font><font color="#000000">(</font><font color="#000000">obj</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">063: </font></b>         <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">d</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#89c976">0</font><font color="#000000">)</font> <font color="#000000">found</font> <font color="#000000">=</font> <font color="#d05b76">true</font><font color="#000000">;</font>
+<b><font color="#006cb8">064: </font></b>         <font color="#d05b76">else</font> 
+<b><font color="#006cb8">065: </font></b>         <font color="#000000">{</font>
+<b><font color="#006cb8">066: </font></b>            <font color="#000000">parent</font> <font color="#000000">=</font> <font color="#000000">toBeRemoved</font><font color="#000000">;</font>
+<b><font color="#006cb8">067: </font></b>            <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">d</font> <font color="#000000">&gt;</font> <font color="#89c976">0</font><font color="#000000">)</font> <font color="#000000">toBeRemoved</font> <font color="#000000">=</font> <font color="#000000">toBeRemoved</font><font color="#000000">.</font><font color="#000000">left</font><font color="#000000">;</font>
+<b><font color="#006cb8">068: </font></b>            <font color="#d05b76">else</font> <font color="#000000">toBeRemoved</font> <font color="#000000">=</font> <font color="#000000">toBeRemoved</font><font color="#000000">.</font><font color="#000000">right</font><font color="#000000">;</font>
+<b><font color="#006cb8">069: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">070: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">071: </font></b>
+<b><font color="#006cb8">072: </font></b>      <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">!</font><font color="#000000">found</font><font color="#000000">)</font> <font color="#d05b76">return</font><font color="#000000">;</font>
+<b><font color="#006cb8">073: </font></b>
+<b><font color="#006cb8">074: </font></b>      <font color="#7a9ecd">// toBeRemoved contains obj</font>
+<b><font color="#006cb8">075: </font></b>
+<b><font color="#006cb8">076: </font></b>      <font color="#7a9ecd">// If one of the children is empty, use the other</font>
+<b><font color="#006cb8">077: </font></b>
+<b><font color="#006cb8">078: </font></b>      <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">toBeRemoved</font><font color="#000000">.</font><font color="#000000">left</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#d05b76">null</font> <font color="#000000">|</font><font color="#000000">|</font> <font color="#000000">toBeRemoved</font><font color="#000000">.</font><font color="#000000">right</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">)</font>
+<b><font color="#006cb8">079: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">080: </font></b>         <font color="#000000">Node</font> <font color="#000000">newChild</font><font color="#000000">;</font>
+<b><font color="#006cb8">081: </font></b>         <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">toBeRemoved</font><font color="#000000">.</font><font color="#000000">left</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">)</font> 
+<b><font color="#006cb8">082: </font></b>            <font color="#000000">newChild</font> <font color="#000000">=</font> <font color="#000000">toBeRemoved</font><font color="#000000">.</font><font color="#000000">right</font><font color="#000000">;</font>
+<b><font color="#006cb8">083: </font></b>         <font color="#d05b76">else</font> 
+<b><font color="#006cb8">084: </font></b>            <font color="#000000">newChild</font> <font color="#000000">=</font> <font color="#000000">toBeRemoved</font><font color="#000000">.</font><font color="#000000">left</font><font color="#000000">;</font>
+<b><font color="#006cb8">085: </font></b>
+<b><font color="#006cb8">086: </font></b>         <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">parent</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">)</font> <font color="#7a9ecd">// Found in root</font>
+<b><font color="#006cb8">087: </font></b>            <font color="#000000">root</font> <font color="#000000">=</font> <font color="#000000">newChild</font><font color="#000000">;</font>
+<b><font color="#006cb8">088: </font></b>         <font color="#d05b76">else</font> <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">parent</font><font color="#000000">.</font><font color="#000000">left</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#000000">toBeRemoved</font><font color="#000000">)</font>
+<b><font color="#006cb8">089: </font></b>            <font color="#000000">parent</font><font color="#000000">.</font><font color="#000000">left</font> <font color="#000000">=</font> <font color="#000000">newChild</font><font color="#000000">;</font>
+<b><font color="#006cb8">090: </font></b>         <font color="#d05b76">else</font> 
+<b><font color="#006cb8">091: </font></b>            <font color="#000000">parent</font><font color="#000000">.</font><font color="#000000">right</font> <font color="#000000">=</font> <font color="#000000">newChild</font><font color="#000000">;</font>
+<b><font color="#006cb8">092: </font></b>         <font color="#d05b76">return</font><font color="#000000">;</font>
+<b><font color="#006cb8">093: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">094: </font></b>      
+<b><font color="#006cb8">095: </font></b>      <font color="#7a9ecd">// Neither subtree is empty</font>
+<b><font color="#006cb8">096: </font></b>
+<b><font color="#006cb8">097: </font></b>      <font color="#7a9ecd">// Find smallest element of the right subtree</font>
+<b><font color="#006cb8">098: </font></b>
+<b><font color="#006cb8">099: </font></b>      <font color="#000000">Node</font> <font color="#000000">smallestParent</font> <font color="#000000">=</font> <font color="#000000">toBeRemoved</font><font color="#000000">;</font>
+<b><font color="#006cb8">100: </font></b>      <font color="#000000">Node</font> <font color="#000000">smallest</font> <font color="#000000">=</font> <font color="#000000">toBeRemoved</font><font color="#000000">.</font><font color="#000000">right</font><font color="#000000">;</font>
+<b><font color="#006cb8">101: </font></b>      <font color="#d05b76">while</font> <font color="#000000">(</font><font color="#000000">smallest</font><font color="#000000">.</font><font color="#000000">left</font> <font color="#000000">!</font><font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">)</font>
+<b><font color="#006cb8">102: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">103: </font></b>         <font color="#000000">smallestParent</font> <font color="#000000">=</font> <font color="#000000">smallest</font><font color="#000000">;</font>
+<b><font color="#006cb8">104: </font></b>         <font color="#000000">smallest</font> <font color="#000000">=</font> <font color="#000000">smallest</font><font color="#000000">.</font><font color="#000000">left</font><font color="#000000">;</font>
+<b><font color="#006cb8">105: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">106: </font></b>
+<b><font color="#006cb8">107: </font></b>      <font color="#7a9ecd">// smallest contains smallest child in right subtree</font>
+<b><font color="#006cb8">108: </font></b>         
+<b><font color="#006cb8">109: </font></b>      <font color="#7a9ecd">// Move contents, unlink child</font>
+<b><font color="#006cb8">110: </font></b>
+<b><font color="#006cb8">111: </font></b>      <font color="#000000">toBeRemoved</font><font color="#000000">.</font><font color="#000000">data</font> <font color="#000000">=</font> <font color="#000000">smallest</font><font color="#000000">.</font><font color="#000000">data</font><font color="#000000">;</font>
+<b><font color="#006cb8">112: </font></b>      <font color="#000000">smallestParent</font><font color="#000000">.</font><font color="#000000">left</font> <font color="#000000">=</font> <font color="#000000">smallest</font><font color="#000000">.</font><font color="#000000">right</font><font color="#000000">;</font>
+<b><font color="#006cb8">113: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">114: </font></b>   
+<b><font color="#006cb8">115: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">116: </font></b><font color="#7a9ecd">      Prints the contents of the tree in sorted order.</font>
+<b><font color="#006cb8">117: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">118: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">print</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">119: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">120: </font></b>      <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">root</font> <font color="#000000">!</font><font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">)</font>
+<b><font color="#006cb8">121: </font></b>         <font color="#000000">root</font><font color="#000000">.</font><font color="#000000">printNodes</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">122: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">123: </font></b>  
+<b><font color="#006cb8">124: </font></b>   <font color="#d05b76">private</font> <font color="#000000">Node</font> <font color="#000000">root</font><font color="#000000">;</font>
+<b><font color="#006cb8">125: </font></b>
+<b><font color="#006cb8">126: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">127: </font></b><font color="#7a9ecd">      A node of a tree stores a data item and references</font>
+<b><font color="#006cb8">128: </font></b><font color="#7a9ecd">      of the child nodes to the left and to the right.</font>
+<b><font color="#006cb8">129: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">130: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">class</font> <font color="#000000">Node</font>
+<b><font color="#006cb8">131: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">132: </font></b>      <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">133: </font></b><font color="#7a9ecd">         Inserts a new node as a descendant of this node.</font>
+<b><font color="#006cb8">134: </font></b><font color="#7a9ecd">         @param newNode the node to insert</font>
+<b><font color="#006cb8">135: </font></b><font color="#7a9ecd">      */</font>
+<b><font color="#006cb8">136: </font></b>      <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">addNode</font><font color="#000000">(</font><font color="#000000">Node</font> <font color="#000000">newNode</font><font color="#000000">)</font>
+<b><font color="#006cb8">137: </font></b>      <font color="#000000">{</font>  
+<b><font color="#006cb8">138: </font></b>         <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">newNode</font><font color="#000000">.</font><font color="#000000">data</font><font color="#000000">.</font><font color="#000000">compareTo</font><font color="#000000">(</font><font color="#000000">data</font><font color="#000000">)</font> <font color="#000000">&lt;</font> <font color="#89c976">0</font><font color="#000000">)</font>
+<b><font color="#006cb8">139: </font></b>         <font color="#000000">{</font>  
+<b><font color="#006cb8">140: </font></b>            <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">left</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">)</font> <font color="#000000">left</font> <font color="#000000">=</font> <font color="#000000">newNode</font><font color="#000000">;</font>
+<b><font color="#006cb8">141: </font></b>            <font color="#d05b76">else</font> <font color="#000000">left</font><font color="#000000">.</font><font color="#000000">addNode</font><font color="#000000">(</font><font color="#000000">newNode</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">142: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">143: </font></b>         <font color="#d05b76">else</font>
+<b><font color="#006cb8">144: </font></b>         <font color="#000000">{</font>  
+<b><font color="#006cb8">145: </font></b>            <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">right</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">)</font> <font color="#000000">right</font> <font color="#000000">=</font> <font color="#000000">newNode</font><font color="#000000">;</font>
+<b><font color="#006cb8">146: </font></b>            <font color="#d05b76">else</font> <font color="#000000">right</font><font color="#000000">.</font><font color="#000000">addNode</font><font color="#000000">(</font><font color="#000000">newNode</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">147: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">148: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">149: </font></b>
+<b><font color="#006cb8">150: </font></b>      <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">151: </font></b><font color="#7a9ecd">         Prints this node and all of its descendants</font>
+<b><font color="#006cb8">152: </font></b><font color="#7a9ecd">         in sorted order.</font>
+<b><font color="#006cb8">153: </font></b><font color="#7a9ecd">      */</font>
+<b><font color="#006cb8">154: </font></b>      <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">printNodes</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">155: </font></b>      <font color="#000000">{</font>  
+<b><font color="#006cb8">156: </font></b>         <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">left</font> <font color="#000000">!</font><font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">)</font>
+<b><font color="#006cb8">157: </font></b>            <font color="#000000">left</font><font color="#000000">.</font><font color="#000000">printNodes</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">158: </font></b>         <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font><font color="#000000">data</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">159: </font></b>         <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">right</font> <font color="#000000">!</font><font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">)</font>
+<b><font color="#006cb8">160: </font></b>            <font color="#000000">right</font><font color="#000000">.</font><font color="#000000">printNodes</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">161: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">162: </font></b>   
+<b><font color="#006cb8">163: </font></b>      <font color="#d05b76">public</font> <font color="#000000">Comparable</font> <font color="#000000">data</font><font color="#000000">;</font>
+<b><font color="#006cb8">164: </font></b>      <font color="#d05b76">public</font> <font color="#000000">Node</font> <font color="#000000">left</font><font color="#000000">;</font>
+<b><font color="#006cb8">165: </font></b>      <font color="#d05b76">public</font> <font color="#000000">Node</font> <font color="#000000">right</font><font color="#000000">;</font>
+<b><font color="#006cb8">166: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">167: </font></b><font color="#000000">}</font>
+<b><font color="#006cb8">168: </font></b>
+<b><font color="#006cb8">169: </font></b>
+<b><font color="#006cb8">170: </font></b>
+</tt></pre>

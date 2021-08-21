@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 6</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+
+<body>
+<div onclick="document.location='slide032.html'">
+<center><small><a href="slide030.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide032.html">next</a></small></center>
+</div><hr>
+<h2>Using Boolean Expressions: Predicate Method</h2>
+<ul>
+  <li>A predicate method returns a <tt>boolean</tt> value<br>
+    <tt>public boolean isOverdrawn()<br>
+{<br>
+&nbsp; &nbsp;return balance &lt; 0; <br>
+}</tt></li>
+  <li>Use in conditions<br>
+    <tt>if (harrysChecking.isOverdrawn())</tt> <tt>. . .</tt> <br>
+  </li>
+  <li>Useful predicate methods in <tt>Character</tt> class:<br>
+    <tt>isDigit<br>
+isLetter<br>
+isUpperCase<br>
+isLowerCase</tt><br>
+  </li>
+  <li><tt>if (Character.isUpperCase(ch)) . . .</tt></li>
+  <li>Useful predicate methods in <tt>Scanner</tt> class: <tt>hasNextInt()</tt>
+and <tt>hasNextDouble()</tt><br>
+    <tt>if (in.hasNextInt()) n = in.nextInt();</tt></li>
+</ul>
+
+<hr>
+<div onclick="document.location='slide032.html'">
+<center><small><a href="slide030.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide032.html">next</a></small></center>
+</div>
+</body>
+</html>

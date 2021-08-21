@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 14</title>
+</head>
+
+<body>
+<div onclick="document.location='slide017.html'">
+<center><small><a href="slide015.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide017.html">next</a></small></center>
+<hr></div>
+<h2>Radio Buttons</h2>
+<ul>
+     <li>For a small set of mutually exclusive choices, use radio buttons or a combo box</li>
+     <li>In a radio button set, only one button can be selected at a time</li>
+     <li>When a button is selected, previously selected button in set is automatically turned off</li>
+     <li>In previous figure, font sizes are mutually exclusive:
+        <pre>JRadioButton smallButton = new JRadioButton("Small");
+JRadioButton mediumButton = new JRadioButton("Medium");
+JRadioButton largeButton = new JRadioButton("Large");
+
+// Add radio buttons into a ButtonGroup so that 
+// only one button in group is on at any time
+ButtonGroup group = new ButtonGroup();
+group.add(smallButton);
+group.add(mediumButton);
+group.add(largeButton);</pre></li>
+</ul>
+
+   
+
+<div onclick="document.location='slide017.html'"><hr>
+<center><small><a href="slide015.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide017.html">next</a></small></center>
+</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 25</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide061.html'">
+<center><small><a href="slide059.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide061.html">next</a></small></center>
+<hr></div>
+<h2>Executing SQL Statements</h2>
+<ul>
+  <li> A <tt>Connection</tt> object can create <tt>Statement</tt> objects
+    <pre>Statement stat = conn.createStatement();
+</pre>
+  </li>
+  <li>The <tt>execute</tt> method of the <tt>Statement</tt> class executes a SQL
+    statement
+<pre>stat.execute("CREATE TABLE Test (Name CHAR(20))");
+stat.execute("INSERT INTO Test VALUES ('Romeo')");</pre></li>
+<li>Use <tt>executeQuery</tt> method of the <tt>Statement</tt> class to issue a query
+    <pre>String query = "SELECT * FROM Test";
+ResultSet result = stat.executeQuery(query);</pre>
+  </li>
+  <li >The result of a SQL query is returned in a <tt>ResultSet</tt> object</li>
+</ul>
+
+
+
+<div onclick="document.location='slide061.html'"><hr>
+<center><small><a href="slide059.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide061.html">next</a></small></center>
+</div>
+</body>
+</html>

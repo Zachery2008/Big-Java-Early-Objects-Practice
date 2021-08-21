@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 15</title>
+</head>
+
+<body>
+<div onclick="document.location='slide025.html'">
+<center><small><a href="slide023.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide025.html">next</a></small></center>
+<hr></div>
+<h2>Syntax 15.4: The <tt>finally</tt> Clause</h2>
+<table cellpadding="10" width="80%" border="1" bgcolor="#ffffff">
+      <tbody>
+        <tr>
+          <td>                            
+      <table border="0">
+            <tbody>
+              <tr>
+                <td width="5%">&nbsp;</td>
+                <td><pre>try
+{
+   statement
+   statement
+   . . .
+}
+finally
+{
+   statement
+   statement
+   . . .
+}</pre></td>
+              </tr>
+                                       
+        </tbody>                            
+      </table>
+                               
+      <h3>Example:</h3>
+                               
+      <table border="0">
+            <tbody>
+              <tr>
+                <td width="5%">&nbsp;</td>
+                <td>             
+            <pre>FileReader reader = new FileReader(filename);
+try
+{
+   readData(reader);
+}
+finally
+{
+   reader.close();
+}</pre></td>
+              </tr>
+                                       
+        </tbody>                            
+      </table>
+                               
+      <h3>Purpose:</h3>
+To ensure that the statements in the <tt>finally</tt> clause are executed whether or not the
+statements in the <tt>try</tt> block throw an exception.</td>
+        </tr>
+  </tbody>    
+</table>
+
+
+
+<div onclick="document.location='slide025.html'"><hr>
+<center><small><a href="slide023.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide025.html">next</a></small></center>
+</div>
+</body>
+</html>

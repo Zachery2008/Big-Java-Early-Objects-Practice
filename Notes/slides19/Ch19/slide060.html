@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 19</title>
+</head>
+
+<body>
+<div onclick="document.location='slide061.html'">
+<center><small><a href="slide059.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide061.html">next</a></small></center>
+<hr></div>
+<h2>Searching a Sorted Array in a Program</h2>
+<ul>
+  <li>The <tt>Arrays</tt> class contains a static <tt>binarySearch</tt>
+method</li>
+  <li>The method returns either
+    <ul>
+      <li>The index of the element, if element is found</li>
+      <li>Or -<i>k</i> - 1 where<i> k</i> is the position before which <br>
+the element should be inserted
+        <pre>int[] a = { 1, 4, 9 };<br>int v = 7;<br>int pos = Arrays.binarySearch(a, v);<br>   // Returns -3; v should be inserted before position 2</pre>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<div onclick="document.location='slide061.html'"><hr>
+<center><small><a href="slide059.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide061.html">next</a></small></center>
+</div>
+</body>
+</html>

@@ -1,0 +1,703 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 3</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+<body>
+<h2>Chapter 3</h2>
+<h1>Implementing Classes</h1>
+<br>
+<h2>Chapter Goals</h2>
+<ul>
+  <li>To become familiar with the process of implementing classes</li>
+  <li>To be able to implement simple methods</li>
+  <li>To understand the purpose and use of constructors</li>
+  <li>To understand how to access instance fields and local variables</li>
+  <li>To appreciate the importance of documentation comments</li>
+</ul>
+<h2>Black Boxes</h2>
+<ul>
+  <li>A black box magically does its thing</li>
+  <li>Hides its inner workings</li>
+  <li>Encapsulation: the hiding of unimportant details</li>
+  <li>What is the right <i>concept</i> for each particular black box?</li>
+  <li>Concepts are discovered through abstraction</li>
+  <li>Abstraction: taking away inessential features, until only the
+essence of the concept remains</li>
+  <li>In <i>object-oriented programming</i> the black boxes from which
+a program is manufactured are called objects</li>
+</ul>
+<h2>Levels of abstraction: A Real Life Example</h2>
+<ul>
+  <li>Black boxes in a car: transmission, electronic control module,
+etc.</li>
+</ul>
+<img src="images/car_abstraction.png" alt=""
+ style="width: 378px; height: 399px;" align="middle"><br>
+<h2>Levels of abstraction: A Real Life Example</h2>
+<ul>
+  <li>Users of a car do not need to understand how black boxes work<br>
+  </li>
+  <li>Interaction of a black box with outside world is well-defined
+    <ul>
+      <li>Drivers interact with car using pedals, buttons, etc.</li>
+      <li>Mechanic can test that engine control module sends the right
+firing signals to the spark plugs</li>
+      <li>For engine control module manufacturers, transistors and
+capacitors are black boxes magically produced by an electronics
+component manufacturer</li>
+    </ul>
+  </li>
+  <li>Encapsulation leads to efficiency:
+    <ul>
+      <li>Mechanic deals only with car components (e.g. electronic
+control module), not with sensors and transistors</li>
+      <li>Driver worries only about interaction with car (e.g. putting
+gas in the tank), not about motor or electronic control module</li>
+    </ul>
+  </li>
+</ul>
+<h2>Levels of abstraction: Software Design</h2>
+<img src="images/abstraction.png" alt=""
+ style="width: 351px; height: 446px;" align="middle"><br>
+<h2>Levels of abstraction: Software Design</h2>
+<ul>
+  <li>Old times: computer programs manipulated primitive types such as
+numbers and characters</li>
+  <li>Manipulating too many of these primitive quantities is too much
+for programmers and leads to errors</li>
+  <li>Solution: Encapsulate routine computations to software black boxes</li>
+  <li>Abstraction used to invent higher-level data types</li>
+  <li>In object-oriented programming, objects are black boxes</li>
+  <li>Encapsulation: Programmer using an object knows about its
+behavior, but not about its internal structure</li>
+  <li>In software design, you can design good and bad abstractions with
+equal facility; understanding what makes good design is an important
+part of the education of a software engineer</li>
+  <li>First, define behavior of a class; then, implement it</li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li>In Chapters 1 and 2, you used <tt>System.out</tt> as a black box
+to cause output to appear on the screen. Who designed and implemented <tt>System.out</tt>?</li>
+  <li>Suppose you are working in a company that produces personal
+finance software. You are asked to design and implement a class for
+representing bank accounts. Who will be the users of your class?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li>The programmers who designed and implemented the Java library</li>
+  <li>Other programmers who work on the personal finance application</li>
+</ol>
+<br>
+<h2>Designing the Public Interface of a Class</h2>
+Behavior of bank account (abstraction):<br>
+<ul>
+  <li>deposit money</li>
+  <li>withdraw money</li>
+  <li>get balance</li>
+</ul>
+<h2>Designing the Public Interface of a Class: Methods<br>
+</h2>
+Methods of <tt>BankAccount</tt> class:<br>
+<ul>
+  <li><tt>deposit</tt></li>
+  <li><tt>withdraw</tt></li>
+  <li><tt>getBalance</tt></li>
+</ul>
+We want to support method calls such as the following:<br>
+<pre>   harrysChecking.deposit(2000);<br>   harrysChecking.withdraw(500);<br>   System.out.println(harrysChecking.getBalance());<br></pre>
+<h2>Designing the Public Interface of a Class: Method Definition</h2>
+<ul>
+  <li>access specifier (such as <tt>public</tt>)</li>
+  <li>return type (such as <tt>String</tt> or <tt>void</tt>)</li>
+  <li>method name (such as <tt>deposit</tt>)</li>
+  <li>list of parameters (<tt>double amount</tt> for <tt>deposit</tt>)
+  </li>
+  <li>method body in <tt>{ }</tt></li>
+</ul>
+Examples:
+<ul>
+  <li><tt>public void deposit(double amount) { . . . }</tt></li>
+  <li><tt>public void withdraw(double amount) { . . . }</tt></li>
+  <li><tt>public double getBalance() { . . . }</tt></li>
+</ul>
+<h2>Syntax 3.1: Method Definition</h2>
+<table bgcolor="#ffffff" border="1" cellpadding="10" width="50%">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">
+            <pre><i>accessSpecifier returnType methodName</i>(<i>parameterType parameterName</i>, . . .)<br>{<br>   <i>method body</i>
+}</pre>
+            </td>
+            <td><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td>
+            <pre>public void deposit(double amount)<br>{<br>   . . .<br>}</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+To define the behavior of a method<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2>Designing the Public Interface of a Class: Constructor Definition</h2>
+<ul>
+  <li>A constructor initializes the instance variables</li>
+  <li>Constructor name = class name<br>
+    <pre>public BankAccount()<br>{<br>   <i>// body--filled in later</i>
+}</pre>
+  </li>
+  <li>Constructor body is executed when new object is created</li>
+  <li>Statements in constructor body will set the internal data of the
+object that is being constructed</li>
+  <li>All constructors of a class have the same name</li>
+  <li>Compiler can tell constructors apart because they take different
+parameters</li>
+</ul>
+<h2>Syntax 3.2 : Constructor Definition</h2>
+<table bgcolor="#ffffff" border="1" cellpadding="10" width="50%">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td>
+            <pre><i>accessSpecifier ClassName</i>(<i>parameterType parameterName</i>, . . .)<br>{<br>   <i>constructor body</i> <br>}</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td>
+            <pre>public BankAccount(double initialBalance)<br>{ <br>   . . . <br>}</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+To define the behavior of a constructor<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2><tt>BankAccount</tt> Public Interface</h2>
+The public constructors and methods of a class form the <i>public
+interface</i> of the class.
+<pre>public class BankAccount<br>{<br>   // Constructors<br>   public BankAccount()<br>   {<br>      <i>// body--filled in later</i>
+   }
+   public BankAccount(double initialBalance)
+   {
+      <i>// body--filled in later</i>
+   }
+
+   // Methods
+   public void deposit(double amount)
+   {
+      <i>// body--filled in later</i>
+   }
+   public void withdraw(double amount)
+   {
+      <i>// body--filled in later</i>
+   }
+   public double getBalance()
+   {
+      <i>// body--filled in later</i>
+   }
+   <i>// private fields--filled in later</i>
+}
+</pre>
+<h2>Syntax 3.3 : Class Definition</h2>
+<table bgcolor="#ffffff" border="1" cellpadding="10" width="50%">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td>
+            <pre><i>accessSpecifier</i> class <i>ClassName</i>
+{
+   <i>constructors</i>
+   <i>methods</i>
+   <i>fields</i>
+}</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td>
+            <pre>public class BankAccount<br>{<br>   public BankAccount(double initialBalance) { . . . }<br>   public void deposit(double amount) { . . . }<br>   . . . <br>}</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+To define a class, its public interface, and its implementation details<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li value="3">How can you use the methods of the public interface to <i>empty</i>
+the <tt>harrysChecking</tt> bank account?</li>
+  <li>Suppose you want a more powerful bank account abstraction that
+keeps track of an <i>account number</i> in addition to the balance.
+How would you change the public interface to accommodate this
+enhancement?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="3"><tt>harrysChecking.withdraw(harrysChecking.getBalance())</tt></li>
+  <li>Add an <tt>accountNumber</tt> parameter to the constructors, and
+add a <tt>getAccountNumber</tt> method. There is no need for a <tt>setAccountNumber</tt>
+method&#8211;the account number never changes after construction.</li>
+</ol>
+<br>
+<h2>Commenting the Public Interface</h2>
+<pre>/**<br>   Withdraws money from the bank account.<br>   @param the amount to withdraw<br>*/<br>public void withdraw(double amount)<br>{<br>   <i>// implementation filled in later </i>
+}
+</pre>
+&nbsp;<br>
+<pre>/**<br>   Gets the current balance of the bank account.<br>   @return the current balance<br>*/<br>public double getBalance()<br>{<br>   <i>// implementation filled in later</i>
+}
+</pre>
+<h2>Class Comment</h2>
+<pre>/**<br>   A bank account has a balance that can<br>   be changed by deposits and withdrawals.<br>*/<br>public class BankAccount<br>{<br>   . . .<br>}<br></pre>
+<b></b>
+<ul>
+  <li>Provide documentation comments for <br>
+  </li>
+  <ul>
+    <li>every class</li>
+    <li>every method</li>
+    <li>&nbsp;every parameter</li>
+    <li>every return value. </li>
+  </ul>
+</ul>
+<h2>Javadoc Method Summary</h2>
+<img src="images/javadoc_summary.png" alt="">
+<br>
+<h2>Javadoc Method Detail</h2>
+<img src="images/javadoc_detail.png" alt="">
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li value="5">Suppose we enhance the <tt>BankAccount</tt> class so
+that each account has an account number. Supply a documentation comment
+for the constructor <tt>BankAccount(int accountNumber, double
+initialBalance)</tt></li>
+  <li>Why is the following documentation comment questionable?
+    <pre>/**<br>   Each account has an account number.<br>   @return the account number of this account.<br>*/<br>int getAccountNumber()</pre>
+  </li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="5">
+    <pre>/**<br>   Constructs a new bank account with a given initial balance.<br>   @param accountNumber the account number for this account<br>   @param initialBalance the initial balance for this account<br>*/</pre>
+  </li>
+  <li>The first sentence of the method description should describe the
+method&#8211;it is
+displayed in isolation in the summary table</li>
+</ol>
+<br>
+<h2>Instance Fields</h2>
+<ul>
+  <li>An object stores its data in instance fields</li>
+  <li>Field: a technical term for a storage location inside a block of
+memory</li>
+  <li>Instance of a class: an object of the class</li>
+  <li>The class declaration specifies the instance fields:<br>
+    <tt>public class BankAccount<br>
+{&nbsp; <br>
+&nbsp; &nbsp;. . .<br>
+&nbsp;&nbsp; private double balance;<br>
+}</tt></li>
+</ul>
+<h2>Instance Fields</h2>
+<ul>
+  <li>An instance field declaration consists of the following parts:
+    <ul>
+      <li>access specifier (such as <tt>private</tt>)</li>
+      <li>type of variable (such as <tt>double</tt>)</li>
+      <li>name of variable (such as <tt>balance</tt>)</li>
+    </ul>
+  </li>
+  <li>Each object of a class has its own set of instance fields</li>
+  <li>You should declare all instance fields as private</li>
+</ul>
+<br>
+<h2>Instance Fields</h2>
+<img src="images/instance_fields.png" alt=""> <br>
+<h2>&nbsp;Syntax 3.4 : Instance Field Declaration</h2>
+<table bgcolor="#ffffff" border="1" cellpadding="10">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td>
+            <pre><i>accessSpecifier</i> class <i>ClassName</i>
+{
+   . . . 
+   <i>accessSpecifier fieldType fieldName</i>;<br>   . . . <br>}</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td>
+            <pre>public class BankAccount<br>{<br>   . . .<br>   private double balance;<br>   . . .<br>}</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+To define a field that is present in every object of a class<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2>Accessing Instance Fields</h2>
+<ul>
+  <li>The <tt>deposit</tt> method of the <tt>BankAccount</tt> class
+can access
+the private instance field:<br>
+    <tt>public void deposit(double amount)<br>
+{<br>
+&nbsp; &nbsp;double newBalance = <b>balance</b> + amount;<br>
+&nbsp; &nbsp;<b>balance</b> = newBalance;<br>
+}</tt></li>
+  <li>Other methods cannot:<br>
+    <tt>public class BankRobber<br>
+{<br>
+&nbsp; &nbsp;public static void main(String[] args)<br>
+&nbsp; &nbsp;{<br>
+&nbsp; &nbsp; &nbsp;BankAccount momsSavings = new BankAccount(1000);<br>
+&nbsp; &nbsp; &nbsp;. . .<br>
+&nbsp; &nbsp; &nbsp;momsSavings.balance = -1000; // ERROR<br>
+&nbsp; &nbsp;}<br>
+}</tt></li>
+  <li>Encapsulation = Hiding data and providing access through methods</li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="7">Suppose we modify the <tt>BankAccount</tt> class so
+that each bank account has an account number. How does this change
+affect the instance fields?</li>
+  <li>What are the instance fields of the <tt>Rectangle</tt> class?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="7">An instance field<br>
+    <tt>private int accountNumber;</tt><br>
+needs to be added to the class</li>
+  <li>
+    <pre>private int x;<br>private int y;<br>private int width;<br>private int height;</pre>
+  </li>
+</ol>
+<br>
+<h2>Implementing Constructors</h2>
+<ul>
+  <li>Constructors contain instructions to initialize the instance
+fields of an object
+    <pre>public BankAccount()<br>{<br>   balance = 0;<br>}<br><br>public BankAccount(double initialBalance)<br>{<br>   balance = initialBalance;<br>}</pre>
+  </li>
+</ul>
+<h2>Constructor Call Example<br>
+</h2>
+<ul>
+  <li><tt>BankAccount harrysChecking = new BankAccount(1000);</tt>
+    <ul>
+      <li>Create a new object of type <tt>BankAccount</tt></li>
+      <li>Call the second constructor (since a construction parameter
+is supplied)</li>
+      <li>Set the parameter variable <tt>initialBalance</tt> to 1000</li>
+      <li>Set the <tt>balance</tt> instance field of the newly created
+object to <tt>initialBalance</tt></li>
+      <li>Return an object reference, that is, the memory location of
+the object, as the value of the <tt>new</tt> expression</li>
+      <li>Store that object reference in the <tt>harrysChecking</tt>
+variable</li>
+    </ul>
+  </li>
+</ul>
+<h2>Implementing Methods</h2>
+<ul>
+  <li>Some methods do not return a value
+    <pre>public void withdraw(double amount)<br>{<br>   double newBalance = balance - amount;<br>   balance = newBalance;<br>}<br></pre>
+  </li>
+  <li>Some methods return an output value
+    <pre>public double getBalance()<br>{<br>   return balance;<br>}</pre>
+  </li>
+</ul>
+<h2>Method Call Example<br>
+</h2>
+<ul>
+  <li><tt>harrysChecking.deposit(500);</tt>
+    <ul>
+      <li>Set the parameter variable <tt>amount</tt> to 500</li>
+      <li>Fetch the <tt>balance</tt> field of the object whose
+location is stored in <tt>harrysChecking</tt></li>
+      <li>Add the value of amount to <tt>balance</tt> and store the
+result in the variable <tt>newBalance</tt></li>
+      <li>Store the value of <tt>newBalance</tt> in the <tt>balance</tt>
+instance field, overwriting the old value</li>
+    </ul>
+  </li>
+</ul>
+<h2>Syntax 3.5: The return Statement </h2>
+<table bgcolor="#ffffff" border="1" cellpadding="5" width="85%">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><tt>return</tt> <i>expression</i><tt>;</tt><br>
+&nbsp;or <br>
+            <tt>return;</tt></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><tt>return balance;</tt></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+To specify the value that a method returns, and exit the method
+immediately. The return value becomes the value of the method call
+expression.<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h2>File BankAccount.java</h2>
+<iframe src="code/account/BankAccount.java.html" class="code">
+Your browser does not support the &amp;amp;lt;iframe&amp;amp;gt; tag.
+</iframe>
+<h2>Self Check</h2>
+<ol>
+  <li value="9">How is the <tt>getWidth</tt> method of the <tt>Rectangle</tt>
+class implemented?</li>
+  <li>How is the <tt>translate</tt> method of the <tt>Rectangle</tt>
+class implemented?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="9">
+    <pre>public int getWidth()<br>{<br>   return width;<br>}</pre>
+  </li>
+  <li>There is more than one correct answer. One possible
+implementation is as
+follows:
+    <pre>public void translate(int dx, int dy)<br>{<br>   int newx = x + dx;<br>   x = newx;<br>   int newy = y + dy;<br>   y = newy;<br>}</pre>
+  </li>
+</ol>
+<br>
+<h2>Testing a Class</h2>
+<ul>
+  <li>Test class: a class with a main method that contains statements
+to
+test another class. </li>
+  <li>Typically carries out the following steps:
+    <ol>
+      <li>Construct one or more objects of the class that is being
+tested</li>
+      <li>Invoke one or more methods</li>
+      <li>Print out one or more results</li>
+    </ol>
+  </li>
+  <li>Details for building the program vary. In most environments, you
+need to carry out these steps:
+    <ol>
+      <li>Make a new subfolder for your program</li>
+      <li>Make two files, one for each class</li>
+      <li>Compile both files</li>
+      <li>Run the test program</li>
+    </ol>
+  </li>
+</ul>
+<h2>File BankAccountTester.java
+</h2>
+<iframe src="code/account/BankAccountTester.java.html" class="code">
+Your browser does not support the &amp;amp;lt;iframe&amp;amp;gt; tag.
+</iframe><br>
+<h3>Output:</h3>
+<tt>&nbsp;&nbsp;&nbsp;1500</tt>
+<br>
+<h2>Testing With BlueJ</h2>
+<img src="images/bluej.png" alt="">
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li value="11">When you run the <tt>BankAccountTester</tt> program,
+how many objects of class <tt>BankAccount</tt> are constructed? How
+many objects of type <tt>BankAccountTester</tt>?</li>
+  <li>Why is the <tt>BankAccountTester</tt> class unnecessary in
+development environments that allow interactive testing, such as BlueJ?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="11">One <tt>BankAccount</tt> object, no <tt>BankAccountTester</tt>
+object. The purpose of the <tt>BankAccountTester</tt> class is merely
+to hold the main method</li>
+  <li>In those environments, you can issue interactive commands to
+construct <tt>BankAccount</tt> objects, invoke methods, and display
+their return values</li>
+</ol>
+<br>
+<h2>Categories of Variables</h2>
+<ul>
+  <li>Categories of variables
+    <ol>
+      <li>Instance fields (<tt>balance</tt> in <tt>BankAccount</tt>)</li>
+      <li>Local variables (<tt>newBalance</tt> in <tt>deposit</tt>
+method)</li>
+      <li>Parameter variables (<tt>amount</tt> in <tt>deposit</tt>
+method)</li>
+    </ol>
+  </li>
+  <li>An instance field belongs to an object</li>
+  <li>The fields stay alive until no method uses the object any longer</li>
+  <li>In Java, the <i>garbage collector</i> periodically reclaims
+objects when they are no longer used</li>
+  <li>Local and parameter variables belong to a method</li>
+  <li>Instance fields are initialized to a default value, but you must
+initialize local variables</li>
+</ul>
+<h2>Lifetime of Variables</h2>
+<pre>harrysChecking.deposit(500);<br>double newBalance = balance + amount;<br>balance = newBalance;</pre>
+<img src="images/lifetime.png" alt="">
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li value="13">What do local variables and parameter variables have
+in common? In which essential aspect do they differ?</li>
+  <li>During execution of the <tt>BankAccountTester</tt> program in
+the preceding section, how many instance fields, local variables, and
+parameter variables were created, and what were their names?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="13">Variables of both categories belong to methods&#8211;they
+come alive when the method is called, and they die when the method
+exits. They differ in their initialization. Parameter variables are
+initialized with the call values; local variables must be explicitly
+initialized.</li>
+  <li>One instance field, named <tt>balance</tt>. Three local
+variables, one named <tt>harrysChecking</tt> and two named <tt>newBalance</tt>
+(in the <tt>deposit</tt> and <tt>withdraw</tt> methods); two
+parameter variables, both named <tt>amount</tt> (in the <tt>deposit</tt>
+and <tt>withdraw</tt> methods).</li>
+</ol>
+<h2>Implicit and Explicit Method Parameters</h2>
+<ul>
+  <li>The implicit parameter of a method is the object on which the
+method is invoked</li>
+  <li>The <tt>this</tt> reference denotes the implicit parameter</li>
+  <li>Use of an instance field name in a method denotes the instance
+field of the implicit parameter
+    <pre>public void withdraw(double amount)<br>{<br>   double newBalance = <b>balance</b> - amount;<br>   <b>balance</b> = newBalance;<br>}</pre>
+  </li>
+  <li><tt>balance</tt> is the balance of the object to the left of the
+dot:<br>
+    <pre><b>momsSavings</b>.withdraw(500)</pre>
+means <br>
+    <pre>   double newBalance = <b>momsSavings.balance</b> - amount;<br>   <b>momsSavings.balance</b> = newBalance;</pre>
+  </li>
+</ul>
+<h2>Implicit Parameters and <tt>this</tt></h2>
+<ul>
+  <li>Every method has one implicit parameter</li>
+  <li>The implicit parameter is always called <tt>this</tt></li>
+  <li>Exception: Static methods do not have an implicit parameter (more
+on Chapter 9)</li>
+  <li>
+    <pre>double newBalance = balance + amount;<br>// actually means<br>double newBalance = <font
+ color="BLUE">this</font>.balance + amount;</pre>
+  </li>
+  <li>When you refer to an instance field in a method, the compiler
+automatically applies it to the <tt>this</tt> parameter
+    <pre>momsSavings.deposit(500);</pre>
+  </li>
+</ul>
+<h2>Implicit Parameters and <tt>this</tt></h2>
+<img src="images/implicit.png" alt="">
+<h2>Self Check</h2>
+<ol>
+  <li value="15">How many implicit and explicit parameters does the <tt>withdraw</tt>
+method of the <tt>BankAccount</tt> class have, and what are their
+names and types?</li>
+  <li>In the <tt>deposit</tt> method, what is the meaning of <tt>this.amount</tt>?
+Or, if the expression has no meaning, why not?</li>
+  <li>How many implicit and explicit parameters does the <tt>main</tt>
+method of the <tt>BankAccountTester</tt> class have, and what are they
+called?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="15">One implicit parameter, called this, of type <tt>BankAccount</tt>,
+and one explicit parameter, called <tt>amount</tt>, of type <tt>double</tt>.</li>
+  <li>It is not a legal expression. <tt>this</tt> is of type <tt>BankAccount</tt>
+and the <tt>BankAccount</tt> class has no field named <tt>amount</tt>.</li>
+  <li>No implicit parameter&#8211;the method is static&#8211;and one explicit
+parameter, called <tt>args</tt>.</li>
+</ol>
+<br>
+<!-- 
+<h2>Electronic Voting Machines</h2>
+<img src="images/ballot.png" alt="">
+<br>
+<img src="images/touch_screen.png" alt="">
+<br>
+ -->
+</body>
+</html>

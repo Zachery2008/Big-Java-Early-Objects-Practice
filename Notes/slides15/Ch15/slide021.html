@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 15</title>
+</head>
+
+<body>
+<div onclick="document.location='slide022.html'">
+<center><small><a href="slide020.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide022.html">next</a></small></center>
+<hr></div>
+<h2>The <tt>finally</tt> Clause<br>
+ </h2>
+ 
+<ul>
+   <li>Exception terminates current method</li>
+   <li>Danger: Can skip over essential code</li>
+   <li>Example: <br>
+     <pre>reader = new FileReader(filename);
+Scanner in = new Scanner(reader);
+readData(in);
+reader.close(); // May never get here</pre></li>
+   <li>Must execute <tt>reader.close()</tt> even if exception happens</li>
+   <li>Use <tt>finally</tt> clause for code that must be executed "no matter 
+what"</li>
+ 
+</ul>
+ 
+
+<div onclick="document.location='slide022.html'"><hr>
+<center><small><a href="slide020.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide022.html">next</a></small></center>
+</div>
+</body>
+</html>

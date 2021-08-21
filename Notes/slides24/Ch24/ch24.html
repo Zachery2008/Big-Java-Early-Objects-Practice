@@ -1,0 +1,742 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 24</title>
+
+</head>
+  <body>
+<div>
+<h2>Chapter 24</h2>
+
+  <h1>Internet Networking</h1>
+  <br>
+ </div>
+
+
+<h2>Chapter Goals</h2>
+<ul>
+  <li>To understand the concept of sockets</li>
+  <li>To learn how to send and receive data through sockets</li>
+  <li>To implement network clients and servers</li>
+  <li>To communicate with web servers and server-side applications through Hypertext Transfer Protocol (HTTP)</li>
+</ul>
+
+ 
+<h2>The Internet Protocol</h2>
+<ul>
+  <li>Internet
+    <ul><li>A worldwide collection of networks, routing equipment, and computers</li>
+    <li>Uses a common set of protocols to define how the parties will interact with each other</li></ul></li>
+  <li>IP: Internet Protocol
+    <ul><li>Developed to enable different local area networks to communicate with each other
+    <li>Has become the basis for connecting computers around the world together over the Internet</li></ul></li>
+</ul>
+
+
+<h2>Data Transmission</h2>
+<ul>
+  <li>Consists of sending/receiving streams of zeros and
+    ones along the network connection</li>
+  <li>Two Types of Information
+    <ul><li>Application data
+    <ul>
+      <li>The information one computer wants to send to another</li>
+    </ul>
+  </li>
+  <li>Network protocol data
+    <ul>
+      <li>Describes how to reach the intended computer</li>
+      <li>Describes how to check for errors in the transmission</li>
+    </ul>
+  </li></ul></li>
+</ul>
+
+
+<h2> Sending Data from <i>A</i> to <i>B</i> across the Internet</h2>
+<ul>
+  <li> <i>A</i> is you home computer</li>
+  <li>It is connected by phone lines to an Internet Service Provider (ISP)</li>
+  <li>The ISP is connected to an Internet Access Point</li>
+  <li><i>B</i> is on an local area network at XYZ Computers</li>
+  <li>XYZ has its own Internet Access Point</li>
+  <li>The Internet Access Points are connected by a complex collection of pathways
+    (the Internet) </li>
+  <li>Over these pathways a message sent from one access point can eventually
+    reach any access point</li>
+</ul>
+
+
+<h2>Two Computers Communicating across the Internet</h2>
+<img src="images/communicating.png" alt="">
+
+
+<h2>Destination Address</h2>
+<ul>
+  <li> Data must be marked with a destination address </li>
+  <li>In IP, addresses are denoted by a sequence of four numbers
+    <ul>
+      <li>Each is one byte (a number between 0 and 255)</li>
+      <li>For example 130.65.86.66</li>
+      <li>To be able to accommodate more devices, IP addresses will be extended to sixteen bytes</li>
+    </ul>
+  </li>
+  <li>To send data to <i>B</i>, <i>A</i> needs to know <i>B</i>'s Internet address
+    <ul>
+      <li><i>A</i> includes that address in the protocol portion when sending
+        the data</li>
+    </ul>
+  </li>
+</ul>
+
+
+<h2>Domain Naming Service</h2>
+<ul>
+  <li>In addition to an IP address, computers can have an easy-to-remember <i>domain
+    name</i>
+    <ul>
+      <li>For example, java.sun.com </li>
+    </ul>
+  </li>
+  <li><i>Domain Naming Service</i> (DNS): translates from domain
+    name to IP address</li>
+  <li>When <i>A</i> wants to request data from a domain name:
+    <ul>
+      <li>It asks the DNS for the numeric Internet Address</li>
+      <li>It includes the numeric address with the request for data</li>
+    </ul>
+  </li>
+</ul>
+
+
+<h2>Packets</h2>
+<ul>
+  <li> IP breaks large chunks of data up into more manageable <i>packets</i></li>
+  <li>Each packet is delivered separately</li>
+  <li>Each packet in a larger transmission may be sent by a different route</li>
+  <li>Packets are numbered</li>
+  <li>The recipient reassembles the data</li>
+</ul>
+ 
+<h2>Transmission Control Protocol</h2>
+<ul>
+  <li> Internet Protocol (IP) does not notify the sender if data is lost or garbled</li>
+  <li>This is the job of a higher level protocol <i>Transmission Control Protocol</i>
+    (TCP)</li>
+  <li>The most commonly used Internet services use TCP with IP (TCP/IP)</li>
+</ul>
+
+
+  <h2>TCP's Job </h2>
+    <ul>
+      <li>Attempt to deliver the data</li>
+      <li>Try again if there are failures</li>
+
+  <li>Notify the sender whether or not the attempt was successful</li>
+</ul>
+
+ 
+<h2>Port Numbers</h2>
+<ul>
+  <li> One computer can offer multiple services over the Internet
+    <ul>
+      <li>For example, both a web server program and an email server program</li>
+    </ul>
+  </li>
+  <li>When data are sent to that computer, they need to indicate which program
+    is to receive the data</li>
+  <li>IP uses<i> port numbers</i> for this
+    <ul><li> A port number is an integer between 0 and 65,535</li>
+    <li>The sending program must know the port number of the receiving program</li>
+    <li>This number is included in the transmitted data</li></ul></li>
+</ul>
+
+ 
+<h2>Contents of TCP Packet</h2>
+<ul>
+  <li> The Internet address of the recipient</li>
+  <li>The port number of the recipient</li>
+  <li>Internet address of the sender</li>
+  <li>The port number of the sender</li>
+</ul>
+
+
+<h2>Self Check</h2>
+<ol>
+<li>What is the difference between an IP address and a domain name?</li>
+<li>Why do some streaming media services not use TCP?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li>An IP address is a numerical address, consisting of four or sixteen bytes. A
+domain name is an alphanumeric string that is associated with an IP address.</li>
+<li>TCP is reliable but somewhat slow. When sending sounds or images in real
+time, it is acceptable if a small amount of the data is lost. But there is no point in
+transmitting data that is late.</li>
+</ol>
+<br>
+
+
+<h2>The OSI Reference Model</h2>
+<img src="images/osi.png" alt="">
+
+
+<h2>Application Level Protocols</h2>
+<ul>
+  <li>TCP/IP mechanism establishes an Internet connection between two ports on
+    two computers</li>
+  <li>Each Internet application has its own <i>application protocol</i> </li>
+  <li>This application protocol describes how data for that application are transmitted</li>
+</ul>
+
+
+<h2>Hypertext Transfer Protocol (HTTP)</h2>
+<ul>
+  <li>Application protocol used by the World Wide Web</li>
+  <li>A web address is called a Uniform Resource Locator (URL)</li>
+  <li>You type a URL into the address window of your browser
+    <ul>
+      <li>For example, <tt>http://java.sun.com/index.html</tt></li>
+    </ul>
+  </li>
+</ul>
+
+
+<h2>Browser Steps</h2>
+<ol>
+  <li>Examines the part of the URL between the double slash and the
+    first single slash
+    <ul>
+      <li>In this case: <tt>java.sun.com</tt></li>
+      <li>This identifies the computer to which you want to connect</li>
+      <li>Because it contains letters, this part of the URL is a domain name, not an IP address</li>
+      <li>Browser sends request to a DNS server to obtain IP address for <tt>java.sun.com</tt></li>
+    </ul>
+  </li>
+</ol>
+
+<h2>Browser Steps</h2>
+<ol>
+  <li value="2">From the <tt>http:</tt> prefix, browser deduces that the protocol is HTTP
+    <ul>
+      <li>Uses port 80 by default</li>
+    </ul>
+  </li>
+  <li>It establishes a TCP/IP connection to port 80 at IP address obtained in step 1</li>
+  <li>It deduces from the <tt>/index.html</tt> that you want to see the file <tt>/index.html</tt>
+  <br>and sends this request formatted as an HTTP command through the established
+    connection
+
+      <br>&nbsp;<br><tt>GET /index.html HTTP/1.0</tt>
+      <br><i>a blank line</i> </li>
+</ol>
+
+
+<h2>Browser Steps</h2>
+<ol>
+  <li value="5">Web server running on computer whose IP Address was obtained
+    above receives the request
+      <ul>
+      <li>It decodes the request</li>
+      <li>It fetches the file <tt>/index.html</tt></li>
+      <li>It sends the file back to the browser on your computer</li></ul></li>
+  <li>The browser displays the contents of the file for you to see
+    <ul>  <li>Since this file is an HTML file, it translates the HTML codes into
+    fonts, bullets, etc.</li>
+  <li>If the file contains images, it makes more GET requests through
+    the same connection</li></ul></li>
+</ol>
+
+ 
+<h2>Telnet</h2>
+<ul>
+  <li>Telnet program allows you to
+    <ul>
+      <li> Type characters to send to a remote computer and </li>
+      <li>View the characters that the remote computer sends back</li>
+    </ul>
+  </li>
+  <li>It is a useful tool to establish test connections with servers</li>
+  <li>You can imitate the browser connection by using a dialog box or typing at
+    the command line
+    <pre> telnet java.sun.com 80</pre>
+  </li>
+</ul>
+
+
+<h2>Telnet</h2>
+<ul>
+  <li>After Telnet starts, type the following without using backspace
+    <pre>GET / HTTP/1.0</pre>
+then hit Enter twice
+  </li>
+  <li>The server responds to the request with the file</li>
+  <li>Telnet is not a browser </li>
+  <li>It does not understand HTML tags so it just displays everything it was sent</li>
+</ul>
+ 
+<h2>Web Server Response in Telnet</h2>
+<img src="images/telnet.png" alt="">
+
+
+<h2>HTTP</h2>
+<ul>
+  <li>Do not confuse HTTP with HTML</li>
+  <li>HTML is a <i>document format</i> that describes the structure of a document</li>
+  <li>HTTP is a protocol that describes the command set for web server requests</li>
+  <li>Web browsers
+    <ul><li>Know how to display HTML documents</li>
+    <li>And how to issue HTTP commands</li></ul></li>
+  <li>Web servers
+    <ul><li>Know nothing about HTML
+    <li>Merely understand HTTP and know how to fetch the requested items</li></ul></li>
+</ul>
+
+
+<h2>HTTP Commands</h2>
+<table align="center" border="1" cellspacing="0" cellpadding="0" width="80%">
+<tr align="center"><th align="center">Command</th><th align="center">Meaning</th></tr>
+<tr align="center"><td align="center"><tt>GET</tt></td><td align="center">Return the requested item</td></tr>
+<tr align="center"><td align="center"><tt>HEAD</tt></td><td align="center">Request only the header information of an item</td></tr>
+<tr align="center"><td align="center"><tt>OPTIONS</tt></td><td align="center">Request communications options of an item</td></tr>
+<tr align="center"><td align="center"><tt>POST</tt></td><td align="center">Supply input to a server-side command and return the result</td></tr>
+<tr align="center"><td align="center"><tt>PUT</tt></td><td align="center">Store an item on the server</td></tr>
+<tr align="center"><td align="center"><tt>DELETE</tt></td><td align="center">Delete an item on the server</td></tr>
+<tr align="center"><td align="center"><tt>TRACE</tt></td><td align="center">Trace server communication</td></tr>
+</table>
+
+
+<h2>Application Level Protocols</h2>
+<ul>
+  <li>HTTP is one of many application protocols in use on the Internet</li>
+  <li>Another commonly used protocol is the Post Office Protocol (POP)</li>
+  <li>POP is used to download received messages from e-mail servers</li>
+  <li>To send messages, you use another protocol: Simple Mail Transfer Protocol (SMTP)</li>
+</ul>
+ 
+
+<h2>A Sample POP Session</h2>
+<img src="images/pop.png" alt="">
+<br>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="3">Why don't you need to know about HTTP when you use a web browser?</li>
+<li>Why is it important that you don't make typing errors when you type HTTP
+commands in Telnet?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="3">The browser software translates your requests (typed URLs and mouse clicks
+on links) into HTTP commands that it sends to the appropriate web servers.</li>
+<li>All keystrokes that you type, including the backspace key, are sent to the server.
+The server does not recognize a character sequence such as G W Backspace E T
+as a valid command.</li>
+</ol>
+<br>
+
+
+<h2>A Client Program &#150; Sockets </h2>
+<ul>
+  <li>A socket is an object that encapsulates a TCP/IP connection</li>
+  <li>There is a <i>socket</i> on both ends of a connection</li>
+  <li>Syntax to create a socket in a Java program
+    <pre>Socket s = new Socket(<i>hostname, portnumber</i>);</pre>
+  </li>
+  <li>Code to connect to the HTTP port of server, java.sun.com
+    <pre>final int HTTP_PORT = 80;
+Socket s = new Socket("java.sun.com", HTTP_PORT);</pre>
+  </li>
+  <li>If it can't find the host, the <tt>Socket</tt> constructor throws an <tt>UnknownHostException</tt>
+  </li>
+</ul>
+ 
+
+<h2>A Client Program &#150; Input and Output Streams</h2>
+<ul>
+  <li>Use the input and output streams attached to the socket to communicate with the other endpoint</li>
+  <li>Code to obtain the input and output streams
+    <pre>InputStream instream = s.getInputStream();
+OutputStream outstream = s.getOutputStream();</pre>
+  </li>
+  <li>When you send data to <tt>outstream</tt>, the socket forwards
+    them to the server</li>
+  <li>The socket catches the server's response and you can read it through <tt>instream</tt></li>
+  <li>When you are done communicating with the server, close the socket
+    <pre>
+s.close();
+</pre>
+  </li>
+</ul>
+
+
+<h2>Client and Server Sockets</h2>
+<img src="images/sockets.png" alt="">
+
+
+<h2>A Client Program &#150; Scanners and Writers</h2>
+<ul>
+  <li> <tt>InputStream</tt> and <tt>OutputStream</tt> send and receive bytes</li>
+  <li>To send and receive text, use a scanner and a writer
+    <pre>Scanner in = new Scanner(instream);
+PrintWriter out = new PrintWriter(outstream);</pre>
+  </li>
+  <li>A <tt>PrintWriter</tt> <i>buffers</i> the characters and only sends when the buffer is full
+    <ul><li>Buffering increases performance</li></ul></li>
+  <li>When sending a command, you want the whole command to be sent now
+    <ul><li><i>Flush</i> the buffer manually:
+<pre>out.print(<i>command</i>);
+out.flush();</pre></li></ul>
+    </li>
+</ul>
+
+
+<h2>A Client Program &#150; <tt>WebGet</tt> </h2>
+<ul>
+  <li>This program lets you retrieve any item from a web server</li>
+  <li>You specify the host and item from the command line</li>
+  <li>For example:<pre>java WebGet java.sun.com /</pre>
+  The "/" denotes the root page of the web server that listens to port 80 of <tt>java.sun.com</tt></li>
+  <li><tt>WebGet</tt>:
+    <ol><li>Establishes a connection to the host</li>
+    <li>Sends a <tt>GET</tt> command to the host</li>
+    <li>Receives input from the server until the server closes its connection</li></ol></li>
+</ul>
+
+
+<h2>File WebGet.java</h2>
+<iframe src="code/webget/WebGet.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Output</h2>
+<pre>Getting / from java.sun.com
+HTTP/1.1 200 OK
+Server: Netscape-Enterprise/6.0
+Date: Wed, 21 Jul 2004 23:47:27 GMT
+Content-type: text/html;charset=ISO-8859-1
+Connection: close
+
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Java Technology&lt;/title&gt;
+. . .
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="5">What happens if you call <tt>WebGet</tt> with a nonexistent resource, such as
+<tt>wombat.html</tt> at <tt>java.sun.com</tt>?</li>
+<li>How do you open a socket to read e-mail from the POP server at
+<tt>e-mail.sjsu.edu</tt>?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="5">The program makes a connection to the server, sends the <tt>GET</tt> request, and prints
+the error message that the server returns.</li>
+<li><tt>Socket s = new Socket("e-mail.sjsu.edu", 110);</tt></li>
+</ol>
+<br>
+
+
+<h2>A Server Program</h2>
+<ul>
+  <li>Sample server program: enables clients to manage bank accounts in a bank</li>
+  <li>When you develop a server application, you need some application-level protocol </li>
+
+      <li>The client can use this protocol to interact with the server</li>
+      <li>A simple bank access protocol is described on the next slide</li>
+</ul>
+
+
+<h2>Simple Bank Access Protocol</h2>
+<table align="center" border="1" cellspacing="0" cellpadding="0" width="80%">
+<tr align="center"><th align="center">Client Request</th> <th align="center">Server Response</th> <th align="center">Meaning</th></tr>
+<tr align="center"><td align="center"><tt>BALANCE</tt> <i>n</i></td> <td align="center"><i>n</i> and the balance</td> <td align="center">Get the balance of account <i>n</i></td></tr>
+<tr align="center"><td align="center"><tt>DEPOSIT</tt> <i>n a</i></td> <td align="center"><i>n</i> and the new balance</td> <td align="center">Deposit amount <i>a</i> into account <i>n</i></td></tr>
+<tr align="center"><td align="center"><tt>WITHDRAW</tt> <i>n a</i></td> <td align="center"><i>n</i> and the new balance</td> <td align="center">Withdraw amount <i>a</i> from account <i>n</i></td></tr>
+<tr align="center"><td align="center"><tt>QUIT</tt></td> <td align="center">None</td> <td align="center">Quit the connection</td></tr>
+</table>
+
+
+
+<h2>A Server Program</h2>
+<ul>
+  <li>The server waits for clients to connect on a certain port
+     <ul><li>We choose 8888</li></ul></li>
+  <li>To listen for incoming connections, use a server socket</li>
+  <li>To construct a server socket, provide the port number
+<pre>ServerSocket server = new ServerSocket(8888); </pre></li>
+  <li>Use the <tt>accept</tt> method to wait for client connection and obtain
+    a socket
+    <pre>Socket s = server.accept();
+BankService service = new BankService(s, bank);</pre>
+  </li>
+</ul>
+  
+
+<h2>A Server Program &#150; <tt>BankService</tt></h2>
+<ul>
+  <li><tt>BankService</tt> carries out the service</li>
+  <li>Implements the <tt>Runnable</tt> interface</li>
+  <li>Its <tt>run</tt> method will be executed in each thread that serves a client connection</li>
+  <li><tt>run</tt> gets a scanner and writer from the socket, then executes:
+<pre>public void doService() throws IOException
+{
+   while (true)
+   {
+      if (!in.hasNext()) return;
+      String command = in.next();
+      if (command.equals("QUIT")) return;
+      executeCommand(command);
+   }
+}</pre></li>
+</ul>
+
+
+<h2>A Server Program &#150; <tt>executeCommand</tt></h2>
+<ul>
+  <li>Processes a single command</li>
+  <li>If the command is <tt>DEPOSIT</tt>, it carries out the deposit
+<pre>int account = in.nextInt();
+double amount = in.nextDouble();
+bank.deposit(account, amount);
+</pre></li>
+  <li><tt>WITHDRAW</tt> is handled in the same way</li>
+  <li>After each command, the account number and new balance are sent to the client:
+    <pre>out.println(account + " " + bank.getBalance(account));</pre></li>
+</ul>
+
+
+<h2>A Server Program</h2>
+<ul>
+  <li><tt>doService</tt> returns to the <tt>run</tt> method if the client closed the connection <br>or the command equals <tt>QUIT</tt></li>
+  <li>Then <tt>run</tt> closes the socket and exits</li>
+  <li>How can we support multiple simultaneous clients?
+    <ul><li>Spawn a new thread whenever a client connects</li>
+    <li>Each thread is responsible for serving one client</li></ul></li>
+</ul>
+
+
+<h2>A Server Program &#150; Threads</h2>
+<ul>
+  <li><tt>BankService</tt> implements <tt>Runnable</tt>; so, it can start a thread using <tt>start()</tt> (of class <tt>Thread</tt>)</li>
+  <li>The thread dies when the client quits or disconnects and the <tt>run</tt> method exits</li>
+  <li>In the meantime, <tt>BankServer</tt> loops back to accept the next connection
+<pre>while (true)
+{
+   Socket s = server.accept();
+   BankService service = new BankService(s, bank);
+   Thread t = new Thread(service);
+   t.start();
+}</pre>
+</li>
+  <li>The server program never stops</li>
+  <li>When you are done running the server, you need to kill it</li>
+</ul>
+
+
+<h2>Using the Telnet Program to Connect to the BankServer</h2>
+<img src="images/telnet_to_BankServer.png" alt="">
+ 
+
+<h2>File BankServer.java</h2>
+<iframe src="code/bank/BankServer.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File BankService.java</h2>
+<iframe src="code/bank/BankService.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File Bank.java</h2>
+<iframe src="code/bank/Bank.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+ 
+
+<h2>File BankClient.java</h2>
+<iframe src="code/bank/BankClient.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Output</h2>
+<pre>Sending: DEPOSIT 3 1000
+Receiving: 3 1000.0
+Sending: WITHDRAW 3 500
+Receiving: 3 500.0
+Sending: QUIT</pre>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="7">Why didn't we choose port 80 for the bank server?</li>
+<li>Can you read data from a server socket?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="7">Port 80 is the standard port for HTTP. If a web server is running on the same
+computer, then one can't open a server socket on an open port.</li>
+<li>No, a server socket just waits for a connection and yields a regular <tt>Socket</tt> object
+when a client has connected. You use that socket object to read the data that the
+client sends.</li>
+</ol>
+<br>
+
+
+<h2>URL Connections</h2>
+<ul>
+  <li><tt>URLConnection</tt> Class
+    <ul><li>Provides convenient support for HTTP</li>
+    <li>Can also handle FTP <i>(file transfer protocol</i>)</li>
+    <li>Takes care of socket connection for you</li>
+    <li>Makes it easy to communicate with a web server without giving HTTP commands</li></ul></li>
+</ul>
+ 
+
+<h2>URL Connections</h2>
+<ul>
+  <li> Construct a <tt>URL</tt> object from a URL starting with the http or ftp
+    prefix
+    <pre>URL u = new URL("http://java.sun.com/index.html");</pre>
+  </li>
+  <li>Use the <tt>URL</tt>'s <tt>openConnection()</tt> method to get the <tt>URLConnection</tt>
+    <pre>URLConnection connection = u.openConnection();</pre>
+  </li>
+  <li>Call the <tt>getInputStream</tt> method to obtain an input stream
+    <pre>InputStream instream = connection.getInputStream();</pre>
+  </li>
+  <li>You can turn the stream into a scanner in the usual way</li>
+</ul>
+
+
+<h2>HTTP Commands</h2>
+<pre><i>command</i>
+<i>request properties</i>
+<i>blank line</i></pre>
+<ul>
+  <li><i>HTTP command</i>
+    <ul>
+      <li> Such as <tt>GET <i>item</i> HTTP/1.0</tt></li>
+    </ul>
+  </li>
+  <li><i>request properties</i>
+    <ul>
+      <li>Such as <tt>If-Modified-Since: <i>date</i></tt></li>
+    </ul>
+  </li>
+  <li><i>blank line</i>
+    <ul>
+      <li>separates the command and its request properties from the input data</li>
+    </ul>
+  </li>
+</ul>
+
+
+<h2><tt>URLConnection</tt> Class</h2>
+<ul>
+  <li>Has methods to set request properties
+    <pre>connection.setIfModifiedSince(<i>date</i>);</pre>
+  <li>Set the request properties before calling <tt>getInputStream</tt></li>
+  <li>The <tt>URLConnection</tt> class sends all the request properties that are
+    set to the web server</li>
+</ul>
+
+
+<h2>Server Response</h2>
+<ul>
+<li>Server response:
+<pre><i>status line containing response code </i>
+<i>response parameters</i>
+<i>blank line</i></pre></li>
+<li>For example:
+<pre>HTTP/1.1 200 OK
+Date: Sun, 28 Aug 2005 00:15:48 GMT
+Server: Apache/1.3.3 (Unix)
+Last-Modified: Thu, 23 Jun 2005 20:53:38 GMT
+Content-Length: 4813
+Content-Type: text/html
+<i>blank line</i>
+<i>requested data</i></pre></li>
+<li>Normally, you don't see the response code, in this case: <tt>200 OK</tt></li>
+<li>You may have run across bad links and see a page that contains response code <tt>404 Not Found</tt></li>
+</ul>
+
+
+<h2>Retrieving Response Code and Message</h2>
+<ul>
+  <li>Cast the <tt>URLConnection</tt> object to the <tt>HttpURLConnection</tt> subclass</li>
+  <li>Get the response code with <tt>getResponseCode</tt></li>
+  <li>Get the response message with <tt>getResponseMessage</tt>
+<pre>HttpURLConnection httpConnection = (HttpURLConnection) connection;
+int code = httpConnection.getResponseCode(); // e.g., 404
+String message = httpConnection.getResponseMessage(); // e.g., "Not found"</pre></li>
+</ul>
+
+
+<h2>Retrieve Other Response Information from <tt>URLConnection</tt></h2>
+<ul>
+  <li> Content length
+<pre>int length = connection.getContentLength();</pre></li>
+  <li>Content type
+<pre>String type = connection.getContentType();</pre></li>
+</ul>
+
+
+<h2>File URLGet.java</h2>
+<iframe src="code/urlget/URLGet.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Output</h2>
+<pre>Using http://java.sun.com/
+200 OK
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Java Technology&lt;/title&gt;
+. . .
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="9">Why is it better to use an <tt>URLConnection</tt> instead of a socket when reading data from a web server?</li>
+<li>What happens if you use the <tt>URLGet</tt> program to request an image (such as <tt>http://java.sun.com/im/logo_java.gif</tt>)?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="9">The <tt>URLConnection</tt> class understands the HTTP protocol, freeing you from
+assembling requests and analyzing response headers.</li>
+<li>The bytes that encode the images are displayed on the console, but they will
+appear to be random gibberish.</li>
+</ol>
+<br>
+
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 13</title>
+</head>
+
+<body>
+<div onclick="document.location='slide019.html'">
+<center><small><a href="slide017.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide019.html">next</a></small></center>
+<hr></div>
+<h2>Inherited Fields are Private</h2>
+<ul>
+   <li>Consider <tt>deposit</tt> method of <tt>CheckingAccount</tt>
+<pre>public void deposit(double amount)
+{
+   transactionCount++;
+   // now add amount to balance
+   . . .
+}</pre></li>
+   <li>Can't just add <tt>amount</tt> to <tt>balance</tt></li>
+   <li><tt>balance</tt> is a <i>private</i> field of the superclass</li>
+   <li>A subclass has no access to private fields of its superclass</li>
+   <li>Subclass must use public interface</li>
+</ul>
+
+
+<div onclick="document.location='slide019.html'"><hr>
+<center><small><a href="slide017.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide019.html">next</a></small></center>
+</div>
+</body>
+</html>

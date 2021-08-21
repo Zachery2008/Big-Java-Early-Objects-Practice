@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 9</title>
+  <style type="text/css">
+OL.withloweralpha { list-style-type: lower-alpha }
+  </style>
+</head>
+
+<body>
+<div onclick="document.location='slide026.html'">
+<center><small><a href="slide024.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide026.html">next</a></small></center>
+<hr></div>
+<h2>Preconditions</h2>
+<ul>
+  <li>Precondition: Requirement that the caller of a method must meet</li>
+  <li>Publish preconditions so the caller won't call methods with bad
+parameters</li>
+  <li>
+    <pre>/**<br>   Deposits money into this account.<br>   @param amount the amount of money to deposit<br>   (Precondition: amount &gt;= 0)<br>*/</pre>
+  </li>
+  <li>Typical use:
+    <ul>
+      <li>To restrict the parameters of a method</li>
+      <li>To require that a method is only called when the object is in
+an
+appropriate state</li>
+    </ul>
+  </li>
+  <li>If precondition is violated, method is not responsible for
+computing the correct result. It is free to do <i>anything</i>.</li>
+</ul>
+
+<div onclick="document.location='slide026.html'"><hr>
+<center><small><a href="slide024.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide026.html">next</a></small></center>
+</div>
+</body>
+</html>

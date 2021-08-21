@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 21</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide033.html'">
+<center><small><a href="slide031.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide033.html">next</a></small></center>
+<hr></div>
+<h2>Hash Tables</h2>
+<ul>
+  <li>A hash table can be implemented as an array of buckets</li>
+  <li>Buckets are sequences of nodes that hold elements with the same hash code</li>
+  <li>If there are few collisions, then adding, locating, and removing hash table
+    elements takes constant time 
+    <ul><li>Big-Oh notation:&nbsp;&nbsp;&nbsp;&nbsp;<i>O</i>(1)</li></ul></li>
+  <li>For this algorithm to be effective, the bucket sizes must be small</li>
+  <li>The table size should be a prime number larger than the expected number
+    of elements
+    <ul><li>An excess capacity of 30% is typically recommended</li></ul></li>
+</ul>
+
+
+<div onclick="document.location='slide033.html'"><hr>
+<center><small><a href="slide031.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide033.html">next</a></small></center>
+</div>
+</body>
+</html>

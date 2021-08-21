@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 13</title>
+</head>
+
+<body>
+<div onclick="document.location='slide046.html'">
+<center><small><a href="slide044.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide046.html">next</a></small></center>
+<hr></div>
+<h2>Recommended Access Levels</h2>
+<ul>
+   <li>Instance and static fields: Always <tt>private</tt>. Exceptions:
+      <ul><li><tt>public static final</tt> constants are useful and safe</li>
+      <li>Some objects, such as <tt>System.out</tt>, need to be accessible to all programs (<tt>public</tt>)</li>
+      <li>Occasionally, classes in a package must collaborate very closely (give some fields package access); inner classes are usually better</li></ul>
+   <li>Methods: <tt>public</tt> or <tt>private</tt></li>
+   <li>Classes and interfaces: <tt>public</tt> or package
+       <ul><li>Better alternative to package access: inner classes
+       <ul><li>In general, inner classes should not be <tt>public</tt> (some exceptions exist, e.g., <tt>Ellipse2D.Double</tt>)</li></ul></li></ul></li>
+   <li>Beware of accidental package access (forgetting <tt>public</tt> or <tt>private</tt>)</li>
+</ul>
+
+
+
+<div onclick="document.location='slide046.html'"><hr>
+<center><small><a href="slide044.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide046.html">next</a></small></center>
+</div>
+</body>
+</html>

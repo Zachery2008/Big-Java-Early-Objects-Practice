@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>Horstmann Chapter 16</title>
+</head>
+
+
+<body>
+<div onclick="document.location='slide030.html'">
+<center><small><a href="slide028.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide030.html">next</a></small></center>
+<hr></div>
+<h2>A Sample Program</h2>
+<ul>
+  <li><tt>RandomAccessFile</tt> class stores binary data</li>
+  <li><tt>readInt</tt> and <tt>writeInt</tt> read/write integers as four-byte quantities</li>
+  <li><tt>readDouble</tt> and <tt>writeDouble</tt> use 8 bytes
+     <pre>double x = f.readDouble();
+f.writeDouble(x);</pre></li>
+  <li>To find out how many bank accounts are in the file
+<pre>public int size() throws IOException
+{
+   return (int) (file.length() / RECORD_SIZE); // RECORD_SIZE is 12 bytes:
+                                               // 4 bytes for the account number and
+                                               // 8 bytes for the balance
+}</pre></li>
+</ul>
+
+
+
+<div onclick="document.location='slide030.html'"><hr>
+<center><small><a href="slide028.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide030.html">next</a></small></center>
+</div>
+</body>
+</html>

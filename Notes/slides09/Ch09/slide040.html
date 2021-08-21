@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 9</title>
+  <style type="text/css">
+OL.withloweralpha { list-style-type: lower-alpha }
+  </style>
+</head>
+
+<body>
+<div onclick="document.location='slide041.html'">
+<center><small><a href="slide039.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide041.html">next</a></small></center>
+<hr></div>
+<h2>Scope of Local Variables</h2>
+<ul>
+  <li>Scope of variable: Region of program in which the variable can be
+accessed</li>
+  <li>Scope of a local variable extends from its declaration to end of
+the block that encloses it</li>
+  <li>Sometimes the same variable name is used in two methods:
+    <pre>public class RectangleTester<br>{<br>   public static double area(Rectangle rect)<br>   {<br>      <b>double r</b> = rect.getWidth() * rect.getHeight();<br>      return r;<br>   }<br>   public static void main(String[] args)<br>   {<br>      <b>Rectangle r</b> = new Rectangle(5, 10, 20, 30);<br>      double a = area(r);<br>      System.out.println(r);<br>   }<br>}</pre>
+These variables are independent from each other; their scopes are
+disjoint </li>
+</ul>
+
+<div onclick="document.location='slide041.html'"><hr>
+<center><small><a href="slide039.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide041.html">next</a></small></center>
+</div>
+</body>
+</html>

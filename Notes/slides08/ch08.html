@@ -1,0 +1,621 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="">
+  <title>Horstmann Chapter 8</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+
+<body>
+<h2>Chapter 8</h2>
+
+<h1>Arrays and Array Lists</h1>
+<br>
+
+
+<h2>Chapter Goals</h2>
+<ul>
+  <li>To become familiar with using arrays and array lists</li>
+  <li>To learn about wrapper classes, auto-boxing and the generalized
+    <tt>for</tt> loop</li>
+  <li>To study common array algorithms</li>
+  <li>To learn how to use two-dimensional arrays</li>
+  <li>To understand when to choose array lists and arrays in your
+  programs</li>
+  <li>To implement partially filled arrays</li>
+</ul>
+<br>
+
+
+<h2>Arrays</h2>
+<ul>
+  <li>Array: Sequence of values of the same type</li>
+  <li>Construct array:<br>
+    <tt>new double[10]</tt></li>
+  <li>Store in variable of type <tt>double[]<br>
+    double[] data = new double[10];</tt></li>
+  <li>When array is created, all values are initialized depending on array
+    type:
+    <ul>
+      <li>Numbers: 0</li>
+      <li>Boolean: <tt>false</tt></li>
+      <li>Object References: <tt>null</tt></li>
+    </ul>
+  </li>
+</ul>
+
+<h2>Arrays<br>
+</h2>
+<img src="images/array-ref.png" alt="">
+
+<h2>Arrays</h2>
+<ul>
+  <li>Use <tt>[]</tt> to access an element<br>
+    <tt>data[2] = 29.95;</tt> <br>
+    <img src="images/array-store.png" alt=""></li>
+</ul>
+
+<h2>Arrays<br>
+</h2>
+<ul>
+  <li>Using the value stored: <br>
+    <tt>System.out.println("The value of this data item is " +
+  data[4]);</tt></li>
+  <li>Get array length as <tt>data.length</tt>. (Not a method!)</li>
+  <li>Index values range from <tt>0</tt> to <tt>length - 1</tt></li>
+  <li>Accessing a nonexistent element results in a bounds error<br>
+    <tt>double[] data = new double[10];<br>
+    data[10] = 29.95; // ERROR</tt></li>
+  <li>Limitation: Arrays have fixed length</li>
+</ul>
+
+<h2>Syntax 8.1: Array Construction</h2>
+
+<table bgcolor="#ffffff" border="1" cellpadding="10" width="60%">
+  <tbody>
+    <tr>
+      <td>
+        <table border="0">
+          <tbody>
+            <tr>
+              <td width="5%"> </td>
+              <td><pre>new <i>typeName</i>[<i>length</i>]</pre>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Example:</h3>
+
+        <table border="0">
+          <tbody>
+            <tr>
+              <td width="5%"> </td>
+              <td><pre>new double[10]</pre>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Purpose:</h3>
+        To construct an array with a given number of elements</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+
+<h2>Syntax 8.2: Array Element Access</h2>
+
+<table bgcolor="#ffffff" border="1" cellpadding="10" width="50%">
+  <tbody>
+    <tr>
+      <td>
+        <table border="0">
+          <tbody>
+            <tr>
+              <td width="5%"> </td>
+              <td><pre><i>arrayReference</i>[<i>index</i>]</pre>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Example:</h3>
+
+        <table border="0">
+          <tbody>
+            <tr>
+              <td width="5%"> </td>
+              <td><tt>data[2]</tt></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Purpose:</h3>
+        To access an element in an array</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+
+<h2>Self Check</h2>
+<ol>
+  <li>What elements does the data array contain after the following
+    statements?
+    <pre>double[] data = new double[10];<br>for (int i = 0; i &lt; data.length; i++) data[i] = i * i;</pre>
+  </li>
+  <li>What do the following program segments print? Or, if there is an error,
+    describe the error and specify whether it is detected at compile-time or
+    at run-time.
+    <ol class="withloweralpha">
+      <li><tt>double[] a = new double[10];<br>
+        System.out.println(a[0]);</tt></li>
+      <li><tt>double[] b = new double[10];<br>
+        System.out.println(b[10]);</tt></li>
+      <li><tt>double[] c;<br>
+        System.out.println(c[0]);</tt></li>
+    </ol>
+  </li>
+</ol>
+
+<h2>Answers</h2>
+<ol>
+  <li>0, 1, 4, 9, 16, 25, 36, 49, 64, 81, but not 100</li>
+  <li><ol class="withloweralpha">
+      <li>0</li>
+      <li>a run-time error: array index out of bounds</li>
+      <li>a compile-time error: c is not initialized</li>
+    </ol>
+  </li>
+</ol>
+<br>
+
+
+<h2>Array Lists</h2>
+<ul>
+  <li>The <tt>ArrayList</tt> class manages a sequence of objects</li>
+  <li>Can grow and shrink as needed</li>
+  <li><tt>ArrayList</tt> class supplies methods for many common tasks, such
+    as inserting and removing elements</li>
+  <li>The <tt>ArrayList</tt> class is a generic class:
+    <tt>ArrayList&lt;T&gt;</tt> collects objects of type <tt>T</tt>: <br>
+
+    <pre>ArrayList&lt;BankAccount&gt; accounts = new ArrayList&lt;BankAccount&gt;();<br>accounts.add(new BankAccount(1001));<br>accounts.add(new BankAccount(1015));<br>accounts.add(new BankAccount(1022));</pre>
+  </li>
+  <li><tt>size</tt> method yields number of elements<br>
+  </li>
+</ul>
+
+<h2>Retrieving Array List Elements</h2>
+<ul>
+  <li>Use <tt>get</tt> method</li>
+  <li>Index starts at 0</li>
+  <li><tt>BankAccount anAccount = accounts.get(2); // gets the third element
+    of the array list</tt></li>
+  <li>Bounds error if index is out of range</li>
+  <li>Most common bounds error:<br>
+
+    <pre>int i = accounts.size();<br>anAccount = accounts.get(i); // Error<br>// legal index values are 0. . .i-1</pre>
+  </li>
+</ul>
+
+<h2>Adding Elements</h2>
+<ul>
+  <li><tt>set</tt> overwrites an existing value<br>
+
+    <pre>BankAccount anAccount = new BankAccount(1729);<br>accounts.set(2, anAccount);</pre>
+  </li>
+  <li><tt>add</tt> adds a new value before the index
+    <pre>accounts.add(i, a)</pre>
+  </li>
+</ul>
+<img src="images/add-element.png" alt="">
+
+<h2>Removing Elements</h2>
+<ul>
+  <li><tt>remove</tt> removes an element at an index
+    <pre>accounts.remove(i)</pre>
+    <br>
+  </li>
+</ul>
+<img src="images/remove-element.png" alt="">
+
+<h2>File ArrayListTester.java</h2>
+<iframe src="code/arraylist/ArrayListTester.java.html" class="code">
+Your browser does not support the &amp;amp;lt;iframe&amp;amp;gt; tag.</iframe>
+
+
+<h2>File BankAccount.java</h2>
+<iframe src="code/arraylist/BankAccount.java.html" class="code">
+Your browser does not support the &amp;amp;lt;iframe&amp;amp;gt; tag.</iframe>
+<br>
+
+
+<h3>Output</h3>
+<pre>   size=3<br>   first account number=1008<br>   last account number=1729</pre>
+
+<h2>Self Check</h2>
+<ol>
+  <li value="3">How do you construct an array of 10 strings? An array list of
+    strings?</li>
+  <li>What is the content of <tt>names</tt> after the following statements?
+    <pre>ArrayList&lt;String&gt; names = new ArrayList&lt;String&gt;();<br>names.add("A");<br>names.add(0, "B");<br>names.add("C");<br>names.remove(1);</pre>
+  </li>
+</ol>
+
+<h2>Answers</h2>
+<ol>
+  <li value="3"><pre>new String[10];<br>new ArrayList&lt;String&gt;();</pre>
+  </li>
+  <li><tt>names</tt> contains the strings <tt>"B"</tt> and <tt>"C"</tt> at
+    positions 0 and 1</li>
+</ol>
+<br>
+
+
+<h2>Wrappers</h2>
+<ul>
+  <li>You cannot insert primitive types directly into array lists</li>
+  <li>To treat primitive type values as objects, you must use wrapper classes:
+    <pre>ArrayList&lt;Double&gt; data = new ArrayList&lt;Double&gt;();<br>data.add(29.95);<br>double x = data.get(0);</pre>
+    <img src="images/wrapper.png" alt=""></li>
+</ul>
+
+<h2>Wrappers<br>
+</h2>
+<ul>
+  <li>There are wrapper classes for all eight primitive types:<br>
+    <img src="images/wrappers.png" alt=""></li>
+</ul>
+
+<h2>Auto-boxing</h2>
+<ul>
+  <li>Auto-boxing: Starting with Java 5.0, conversion between primitive types
+    and the corresponding wrapper classes is automatic.<br>
+
+    <pre>Double d = 29.95; // auto-boxing; same as Double d = new Double(29.95);<br>double x = d; // auto-unboxing; same as double x = d.doubleValue();</pre>
+  </li>
+  <li>Auto-boxing even works inside arithmetic expressions
+    <pre>Double e = d + 1;</pre>
+    Means:
+    <ul>
+      <li>auto-unbox <tt>d</tt> into a <tt>double</tt></li>
+      <li>add 1</li>
+      <li>auto-box the result into a new <tt>Double</tt></li>
+      <li>store a reference to the newly created wrapper object in
+      <tt>e</tt></li>
+    </ul>
+  </li>
+</ul>
+<br>
+
+
+<h2>Self Check</h2>
+<ol>
+  <li value="5">What is the difference between the types <tt>double</tt> and
+    <tt>Double</tt>?</li>
+  <li>Suppose <tt>data</tt> is an <tt>ArrayList&lt;Double&gt;</tt> of size
+    &gt; 0. How do you increment the element with index 0?</li>
+</ol>
+
+<h2>Answers</h2>
+<ol>
+  <li value="5"><tt>double</tt> is one of the eight primitive types.
+    <tt>Double</tt> is a class type.</li>
+  <li><tt>data.set(0, data.get(0) + 1);</tt></li>
+</ol>
+<br>
+
+
+<h2>The Generalized <tt>for</tt> Loop</h2>
+<ul>
+  <li>Traverses all elements of a collection:<br>
+
+    <pre>double[] data = . . .;<br>double sum = 0;<br>for (double e : data) // You should read this loop as "for each e in data"<br>{<br>   sum = sum + e;<br>}</pre>
+  </li>
+  <li>Traditional alternative:<br>
+
+    <pre>double[] data = . . .;<br>double sum = 0;<br>for (int i = 0; i &lt; data.length; i++)<br>{<br>   double e = data[i];<br>   sum = sum + e;<br>}<br></pre>
+  </li>
+</ul>
+
+<h2>The Generalized <tt>for</tt> Loop</h2>
+<ul>
+  <li>Works for <tt>ArrayLists</tt> too:<br>
+
+    <pre>ArrayList&lt;BankAccount&gt; accounts = . . . ;<br>double sum = 0;<br>for (BankAccount a : accounts)<br>{<br>   sum = sum + a.getBalance();<br>}<br></pre>
+  </li>
+  <li>Equivalent to the following ordinary <tt>for</tt> loop:
+    <pre>double sum = 0;<br>for (int i = 0; i &lt; accounts.size(); i++)<br>{<br>   BankAccount a = accounts.get(i);<br>   sum = sum + a.getBalance();<br>}</pre>
+  </li>
+</ul>
+
+<h2>Syntax 8.3: The "for each" Loop</h2>
+
+<table bgcolor="#ffffff" border="1" cellpadding="10" width="80%">
+  <tbody>
+    <tr>
+      <td>
+        <table border="0">
+          <tbody>
+            <tr>
+              <td width="5%"> </td>
+              <td><pre>for (<i>Type variable</i> : <i>collection</i>)<br>   <i>statement</i></pre>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Example:</h3>
+
+        <table border="0">
+          <tbody>
+            <tr>
+              <td width="5%"> </td>
+              <td><pre>for (double e : data)<br>   sum = sum + e;</pre>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Purpose:</h3>
+        To execute a loop for each element in the collection. In each
+        iteration, the variable is assigned the next element of the
+        collection. Then the statement is executed.</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+
+<h2>Self Check</h2>
+<ol>
+  <li value="7">Write a "for each" loop that prints all elements in the array
+    data</li>
+  <li>Why is the "for each" loop not an appropriate shortcut for the
+    following ordinary <tt>for</tt> loop?
+    <pre>for (int i = 0; i &lt; data.length; i++) data[i] = i * i;</pre>
+  </li>
+</ol>
+
+<h2>Answers</h2>
+<ol>
+  <li value="7"><tt>for (double x : data) System.out.println(x);</tt></li>
+  <li>The loop writes a value into <tt>data[i]</tt>. The "for each" loop does
+    not have the index variable <tt>i</tt>.</li>
+</ol>
+<br>
+
+
+<h2>Simple Array Algorithms: Counting Matches</h2>
+
+<p>Check all elements and count the matches until you reach the end of the
+array list.</p>
+<pre>public class Bank<br>{<br>   public int count(double atLeast)<br>   {<br>      int matches = 0;<br>      for (BankAccount a : accounts)<br>      {<br>         if (a.getBalance() &gt;= atLeast) matches++;<br>            // Found a match<br>      }<br>      return matches;<br>   }<br>   . . .<br>   private ArrayList&lt;BankAccount&gt; accounts;<br>}<br></pre>
+
+<h2>Simple Array Algorithms: Finding a Value</h2>
+
+<p>Check all elements until you have found a match.</p>
+<pre>public class Bank<br>{<br>   public BankAccount find(int accountNumber)<br>   {<br>      for (BankAccount a : accounts)<br>      {<br>         if (a.getAccountNumber() == accountNumber) // Found a match<br>            return a;<br>      }<br>      return null; // No match in the entire array list<br>   }<br>   . . .<br>}<br></pre>
+
+<h2>Simple Array Algorithms: Finding the Maximum or Minimum</h2>
+<ul>
+  <li>Initialize a candidate with the starting element</li>
+  <li>Compare candidate with remaining elements</li>
+  <li>Update it if you find a larger or smaller value</li>
+  <li>Example:
+    <pre>BankAccount largestYet = accounts.get(0);<br>for (int i = 1; i &lt; accounts.size(); i++)<br>{<br>   BankAccount a = accounts.get(i);<br>   if (a.getBalance() &gt; largestYet.getBalance())<br>      largestYet = a;<br>}<br>return largestYet;<br></pre>
+  </li>
+  <li>Works only if there is at least one element in the array list</li>
+  <li>If list is empty, return null
+    <pre>if (accounts.size() == 0) return null;<br>BankAccount largestYet = accounts.get(0);<br>. . .<br></pre>
+  </li>
+</ul>
+<br>
+
+
+<h2>File Bank.java</h2>
+<iframe src="code/bank/Bank.java.html" class="code">
+Your browser does not support the &amp;amp;lt;iframe&amp;amp;gt; tag.</iframe>
+
+
+<h2>File BankTester.java</h2>
+<iframe src="code/bank/BankTester.java.html" class="code">
+Your browser does not support the &amp;amp;lt;iframe&amp;amp;gt; tag.</iframe>
+<br>
+
+
+<h3>Output</h3>
+<pre>   2 accounts with balance &gt;= 15000.0<br>   Account with number 1015 has balance 10000.0<br>   Account with number 1001 has the largest balance.</pre>
+
+<h2>Self Check</h2>
+<ol>
+  <li value="9">What does the <tt>find</tt> method do if there are two bank
+    accounts with a matching account number?</li>
+  <li>Would it be possible to use a "for each" loop in the
+    <tt>getMaximum</tt> method?</li>
+</ol>
+
+<h2>Answers</h2>
+<ol>
+  <li value="9">It returns the first match that it finds</li>
+  <li>Yes, but the first comparison would always fail</li>
+</ol>
+<br>
+
+
+<h2>Two-Dimensional Arrays</h2>
+<ul>
+  <li>When constructing a two-dimensional array, you specify how many rows
+    and columns you need:<br>
+
+    <pre>final int ROWS = 3;<br>final int COLUMNS = 3;<br>String[][] board = new String[ROWS][COLUMNS];</pre>
+  </li>
+  <li>You access elements with an index pair <tt>a[i][j]</tt>
+    <pre>board[i][j] = "x";</pre>
+  </li>
+</ul>
+
+<h2>A Tic-Tac-Toe Board</h2>
+<img src="images/tictactoe.png" alt="">
+
+<h2>Traversing Two-Dimensional Arrays</h2>
+It is common to use two nested loops when filling or searching:<br>
+
+<pre>for (int i = 0; i &lt; ROWS; i++)<br>   for (int j = 0; j &lt; COLUMNS; j++)<br>      board[i][j] = " ";</pre>
+
+<h2>File TicTacToe.java</h2>
+<iframe src="code/twodim/TicTacToe.java.html" class="code">
+Your browser does not support the &amp;amp;lt;iframe&amp;amp;gt; tag.</iframe>
+
+
+<h2>File TicTacToeTester.java</h2>
+<iframe src="code/twodim/TicTacToeTester.java.html" class="code">
+Your browser does not support the &amp;amp;lt;iframe&amp;amp;gt; tag.</iframe>
+
+
+<h2>Output</h2>
+<pre>   |   |<br>   |   |<br>   |   |<br>   Row for x (-1 to exit): <font color="BLUE">1</font>
+   Column for x: <font color="BLUE">2</font>
+   |   |
+   |  x|
+   |   
+   Row for o (-1 to exit): <font color="BLUE">0</font>
+   Column for o: <font color="BLUE">0</font>
+   |o  |
+   |  x|
+   |   |
+   Row for x (-1 to exit): <font color="BLUE">-1</font></pre>
+
+<h2>Self Check</h2>
+<ol>
+  <li value="11">How do you declare and initialize a 4-by-4 array of
+  integers?</li>
+  <li>How do you count the number of spaces in the tic-tac-toe board?</li>
+</ol>
+
+<h2>Answers</h2>
+<ol>
+  <li value="11"><tt>int[][] array = new int[4][4];</tt></li>
+  <li><pre>int count = 0;<br>for (int i = 0; i &lt; ROWS; i++)<br>   for (int j = 0; j &lt; COLUMNS; j++)<br>      if (board[i][j] == ' ') count++;</pre>
+  </li>
+</ol>
+<br>
+
+
+<h2>Copying Arrays: Copying Array References</h2>
+<ul>
+  <li>Copying an array variable yields a second reference to the same
+    array<br>
+    <tt>double[] data = new double[10];<br>
+    // fill array . . .<br>
+    double[] prices = data;<br>
+     <br>
+    <img src="images/two-array-refs.png" alt=""> <br>
+    </tt></li>
+</ul>
+
+<h2>Copying Arrays: Cloning Arrays</h2>
+<ul>
+  <li>Use <tt>clone</tt> to make true copy<br>
+    <tt>double[] prices = (double[]) data.clone();</tt><br>
+     <br>
+    <img src="images/clone.png" alt=""> <br>
+  </li>
+</ul>
+
+<h2>Copying Arrays: Copying Array Elements</h2>
+<tt>System.arraycopy(from, fromStart, to, toStart, count);</tt><br>
+ <br>
+<img src="images/arraycopy.png" alt=""> <br>
+
+
+<h2>Adding an Element to an Array</h2>
+<tt>System.arraycopy(data, i, data, i + 1, data.length - i - 1);<br>
+data[i] = x;</tt><br>
+ <br>
+<img src="images/add-array.png" alt="">
+
+<h2>Removing an Element from an Array</h2>
+<tt>System.arraycopy(data, i + 1, data, i, data.length - i - 1);</tt><br>
+ <br>
+<img src="images/remove-array.png" alt="">
+
+<h2>Growing an Array</h2>
+<ul>
+  <li>If the array is full and you need more space, you can grow the
+    array:<br>
+
+    <ol>
+      <li>Create a new, larger array.
+        <pre>double[] newData = new double[2 * data.length];</pre>
+      </li>
+      <li>Copy all elements into the new array
+        <pre>System.arraycopy(data, 0, newData, 0, data.length);</pre>
+      </li>
+      <li>Store the reference to the new array in the array variable
+        <pre>data = newData;</pre>
+      </li>
+    </ol>
+  </li>
+</ul>
+
+<h2>Growing an Array</h2>
+<img src="images/growing-array.png" alt=""><br>
+
+
+<h2>Self Check</h2>
+<ol>
+  <li value="13">How do you add or remove elements in the middle of an array
+    list?</li>
+  <li>Why do we double the length of the array when it has run out of space
+    rather than increasing it by one element?</li>
+</ol>
+
+<h2>Answers</h2>
+<ol>
+  <li value="13">Use the <tt>insert</tt> and <tt>remove</tt> methods.</li>
+  <li>Allocating a new array and copying the elements is time-consuming. You
+    wouldn't want to go through the process every time you add an
+  element.</li>
+</ol>
+<br>
+
+
+<h2>Make Parallel Arrays into Arrays of Objects</h2>
+<ul>
+  <li><pre>// Don't do this<br>int[] accountNumbers;<br>double[] balances;</pre>
+    <img src="images/parallel.png" alt=""></li>
+</ul>
+
+<h2>Make Parallel Arrays into Arrays of Objects</h2>
+<ul>
+  <li>Avoid parallel arrays by changing them into arrays of objects:<br>
+    <tt>BankAccount[] = accounts;</tt><br>
+    <img src="images/non-parallel.png" alt=""></li>
+</ul>
+
+<h2>Partially Filled Arrays</h2>
+<ul>
+  <li>Array length = maximum number of elements in array</li>
+  <li>Usually, array is partially filled</li>
+  <li>Need companion variable to keep track of current size</li>
+  <li>Uniform naming convention:<br>
+    <tt>final int DATA<b>_LENGTH</b> = 100;<br>
+    double[] data = new double[DATA_LENGTH];<br>
+    int data<b>Size</b> = 0;</tt></li>
+  <li>Update <tt>dataSize</tt> as array is filled:<br>
+    <tt>data[dataSize] = x;<br>
+    dataSize++;</tt></li>
+</ul>
+
+<h2>Partially Filled Arrays</h2>
+<img src="images/partially-filled.png" alt=""> <br>
+
+
+<h2>An Early Internet Worm</h2>
+<img src="images/worm.png" alt=""> <br>
+</body>
+</html>

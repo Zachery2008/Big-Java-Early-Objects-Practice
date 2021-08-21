@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 11</title>
+   
+</head>
+
+<body>
+<div onclick="document.location='slide035.html'">
+<center><small><a href="slide033.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide035.html">next</a></small></center>
+<hr></div>
+<h2>Syntax 11.3: Inner Classes</h2>
+<table cellpadding="10" width="100%" border="1" bgcolor="#ffffff">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td valign="TOP">Declared inside a method
+            <pre>class <i>OuterClassName</i>
+{
+  <i>method signature</i>
+  {
+     . . .
+     class <i>InnerClassName</i>
+     {
+        <i>// methods
+        // fields</i>
+     }
+     . . .
+  }
+  . . .
+}</pre>
+</td><td width="5%">&nbsp;</td>
+<td valign="TOP">Declared inside the class
+<pre>class <i>OuterClassName</i>
+{
+   <i>// methods
+   // fields</i>
+   <i>accessSpecifier</i> class <i>InnerClassName</i>
+   {
+      <i>// methods
+      // fields</i>
+   }
+   . . .
+}</pre></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><pre>public class Tester
+{
+   public static void main(String[] args)
+   {
+      class RectangleMeasurer implements Measurer
+      {
+         . . .
+      }
+      . . .
+   }
+}</pre></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+To define an inner class whose scope is restricted to a single method or the methods of a
+single class</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+
+
+<div onclick="document.location='slide035.html'"><hr>
+<center><small><a href="slide033.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide035.html">next</a></small></center>
+</div>
+</body>
+</html>

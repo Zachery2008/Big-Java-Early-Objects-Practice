@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 19</title>
+</head>
+
+<body>
+<div onclick="document.location='slide015.html'">
+<center><small><a href="slide013.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide015.html">next</a></small></center>
+<hr></div>
+<h2>Adding and Removing from a LinkedList</h2>
+<ul>
+  <li>The <tt>remove</tt> method
+    <ul>
+      <li>Removes and </li>
+      <li>Returns the object that was returned by the last call to <tt>next</tt>
+or <tt>previous</tt></li>
+    </ul>
+    <pre>//Remove all names that fulfill a certain condition<br>while (iterator.hasNext())<br>{<br>   String name = iterator.next();<br>   if (name <i>fulfills condition</i>)<br>      iterator.remove();<br>}</pre>
+  </li>
+  <li>Be careful when calling <tt>remove</tt>:
+    <ul>
+      <li>It can be called only once after calling <tt>next</tt> or <tt>previous</tt></li>
+      <li>You cannot call it immediately after a call to <tt>add</tt></li>
+      <li>If you call it improperly, it throws an <tt>IllegalStateException</tt></li>
+    </ul>
+  </li>
+</ul>
+
+<div onclick="document.location='slide015.html'"><hr>
+<center><small><a href="slide013.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide015.html">next</a></small></center>
+</div>
+</body>
+</html>

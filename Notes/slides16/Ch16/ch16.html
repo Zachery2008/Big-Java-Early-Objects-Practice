@@ -1,0 +1,512 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>Horstmann Chapter 16</title>
+</head>
+
+<body>
+<div><h2>Chapter 16</h2>
+
+
+<h1>Streams</h1></div>
+
+<h2>Chapter Goals</h2>
+<ul>
+  <li>To be able to read and write text files</li>
+  <li>To become familiar with the concepts of text and binary formats</li>
+  <li>To learn about encryption</li>
+  <li>To understand when to use sequential and random file access</li>
+  <li>To be able to read and write objects using serialization</li>
+</ul>
+
+
+<h2>Reading Text Files</h2>
+<ul>
+  <li>Simplest way to read text: use <tt>Scanner</tt> class</li>
+  <li>To read from a disk file, construct a <tt>FileReader</tt></li>
+  <li>Then, use the <tt>FileReader</tt> to construct a <tt>Scanner</tt> object
+  <pre>FileReader reader = new FileReader("input.txt");
+Scanner in = new Scanner(reader);</pre></li>
+  <li>Use the <tt>Scanner</tt> methods to read data from file
+     <ul><li><tt>next</tt>, <tt>nextLine</tt>, <tt>nextInt</tt>, and <tt>nextDouble</tt></li></ul></li>
+</ul>
+
+
+<h2>Writing Text Files</h2>
+<ul>
+  <li>To write to a file, construct a <tt>PrintWriter</tt> object
+    <pre>PrintWriter out = new PrintWriter("output.txt");</pre></li>
+  <li>If file already exists, it is emptied before the new data are written into it</li>
+  <li>If file doesn't exist, an empty file is created</li>
+  <li>Use <tt>print</tt> and <tt>println</tt> to write into a <tt>PrintWriter</tt>:
+    <pre>out.println(29.95);
+out.println(new Rectangle(5, 10, 15, 25));
+out.println("Hello, World!");</pre></li>
+  <li>You must close a file when you are done processing it:
+    <pre>out.close();</pre>
+    Otherwise, not all of the output may be written to the disk file</li>
+</ul>
+
+
+<h2>A Sample Program</h2>
+<ul>
+<li>Reads all lines of a file and sends them to the output file, preceded by line numbers</li>
+<li>Sample input file:
+<pre>Mary had a little lamb
+Whose fleece was white as snow.
+And everywhere that Mary went,
+The lamb was sure to go!</pre></li>
+<li>Program produces the output file:
+<pre>/* 1 */ Mary had a little lamb
+/* 2 */ Whose fleece was white as snow.
+/* 3 */ And everywhere that Mary went,
+/* 4 */ The lamb was sure to go!</pre></li>
+<li>Program can be used for numbering Java source files</li>
+</ul>
+
+
+<h2>File LineNumberer.java</h2>
+<iframe src="code/text/LineNumberer.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Self Check</h2>
+<ol>
+<li>What happens when you supply the same name for the input and output files to the <tt>LineNumberer</tt> program?</li>
+<li>What happens when you supply the name of a nonexistent input file to the <tt>LineNumberer</tt> program?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li>When the <tt>PrintWriter</tt> object is created, the output file is emptied. Sadly, that is
+the same file as the input file. The input file is now empty and the <tt>while</tt> loop
+exits immediately.</li>
+<li>The program catches a <tt>FileNotFoundException</tt>, prints an error message, and
+terminates.</li>
+</ol>
+<br>
+
+
+<h2>File Dialog Boxes</h2>
+<img src="images/JFileChooser.png" alt="">
+  <pre>JFileChooser chooser = new JFileChooser();
+FileReader in = null;
+if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+{
+   File selectedFile = chooser.getSelectedFile();
+   reader = new FileReader(selectedFile);
+   . . .
+}</pre>
+
+
+<h2>Text and Binary Formats</h2>
+<ul>
+  <li>Two ways to store data:
+     <ul><li>Text format</li>
+     <li>Binary format</li></ul></li>
+</ul>
+
+
+<h2>Text Format</h2>
+<ul>
+  <li>Human-readable form</li>
+  <li>Sequence of characters
+    <ul>
+      <li> Integer 12,345 stored as characters <tt>'1' '2' '3' '4' '5'</tt></li>
+    </ul>
+  </li>
+  <li>Use <tt>Reader</tt> and <tt>Writer</tt> and their subclasses to process input and output</li>
+  <li>To read:
+     <pre>FileReader reader = new FileReader("input.txt");</pre></li>
+  <li>To write
+     <pre>FileWriter writer = new FileWriter("output.txt");</pre></li>
+</ul>
+
+
+<h2>Binary Format</h2>
+<ul>
+  <li>Data items are represented in <i>bytes</i></li>
+  <li>Integer 12,345 stored as a sequence of four bytes <tt>0 0 48 57</tt></li>
+  <li>Use <tt>InputStream</tt> and <tt>OutputStream </tt>and their subclasses</li>
+  <li>More compact and more efficient</li>
+  <li>To read:
+     <pre>FileInputStream inputStream = new FileInputStream("input.bin");</pre></li>
+  <li>To write
+     <pre>FileOutputStream outputStream = new FileOutputStream("output.bin");</pre></li>
+</ul>
+
+
+<h2>Reading a Single Character from a File in Text Format</h2>
+<ul>
+  <li>Use <tt>read</tt> method of <tt>Reader</tt> class to read a single character
+    <ul>
+      <li>returns the next character as an int </li>
+      <li>or the integer -1 at end of file </li>
+    </ul>
+    <pre>Reader reader = . . .;
+int next = reader.read();
+char c;
+if (next != -1)
+   c = (char) next;</pre>
+  </li>
+</ul>
+
+
+<h2>Reading a Single Character from a File in Binary Format</h2>
+<ul>
+  <li>Use <tt>read</tt> method of <tt>InputStream</tt> class to read a single byte
+    <ul>
+      <li>returns the next byte as an int </li>
+      <li>or the integer -1 at end of file </li>
+    </ul>
+    <pre>InputStream in = . . .;
+int next = in.read();
+byte b;
+if (next != -1)
+   b = (byte) next;</pre>
+  </li>
+</ul>
+
+
+<h2>Text and Binary Format</h2>
+<ul>
+  <li>Use <tt>write</tt> method to write a single character or byte</li>
+  <li><tt>read</tt> and <tt>write</tt> are the only input and output methods provided by the file input and output classes</li>
+  <li>Java stream package principle: each class should have a very focused responsibility</li>
+  <li>Job of <tt>FileInputStream</tt>: interact with files and get bytes</li>
+  <li>To read numbers, strings, or other objects, combine class with other classes</li>
+</ul>
+ 
+
+<h2>Self Check</h2>
+<ol>
+<li value="3">Suppose you need to read an image file that contains color values for each pixel
+in the image. Will you use a <tt>Reader</tt> or an <tt>InputStream</tt>?</li>
+<li>Why do the read methods of the <tt>Reader</tt> and <tt>InputStream</tt> classes return an <tt>int</tt>
+and not a <tt>char</tt> or <tt>byte</tt>?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="3">Image data is stored in a binary format&#150;try loading an image file into a text
+editor, and you won't see much text. Therefore, you should use an <tt>InputStream</tt>.</li>
+<li>They return a special value of -1 to indicate that no more input is available. If
+the return type had been <tt>char</tt> or <tt>byte</tt>, no special value would have been available
+that is distinguished from a legal data value.</li>
+</ol>
+<br>
+
+
+<h2>An Encryption Program</h2>
+<ul>
+  <li>File encryption
+    <ul><li>To scramble it so that it is readable only to those who know the encryption method and secret keyword</li></ul></li>
+  <li>To use Caesar cipher
+    <ul>
+      <li>Choose an encryption key&#150;a number between 1 and 25 </li>
+      <li>Example: If the key is 3, replace A with D, B with E, . . .
+         <br><img src="images/caesarcipher.png" alt=""></li>
+      <li>To decrypt, use the negative of the encryption key</li>
+    </ul>
+  </li>
+</ul>
+ 
+
+<h2>To Encrypt Binary Data</h2>
+<pre>int next = in.read();
+if (next == -1)
+   done = true;
+else
+{
+   byte b = (byte) next;    //call the method to encrypt the byte
+   byte c = encrypt(b);
+   out.write(c);
+}</pre>
+ 
+
+<h2>File Encryptor.java</h2>
+<iframe src="code/caesar/Encryptor.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File EncryptorTester.java</h2>
+<iframe src="code/caesar/EncryptorTester.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="5">Decrypt the following message: <tt>Khoor/#Zruog$</tt>.</li>
+<li>Can you use this program to encrypt a binary file, for example, an image file?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="5">It is "Hello, World!", encrypted with a key of 3.</li>
+<li>Yes&#150;the program uses streams and encrypts each byte.</li>
+</ol>
+<br>
+
+
+<h2>Public Key Encryption</h2>
+<img src="images/publickey.png" alt="">
+<br>
+
+
+<h2>Random Access vs. Sequential Access</h2>
+<ul>
+  <li>Sequential access
+    <ul>
+      <li>A file is processed a byte at a time</li>
+      <li>It can be inefficient</li>
+    </ul>
+  </li>
+  <li>Random access
+    <ul>
+      <li>Allows access at arbitrary locations in the file</li>
+      <li>Only disk files support random access
+          <ul><li><tt>System.in</tt> and <tt>System.out</tt> do not</li></ul></li>
+      <li>Each disk file has a special file pointer position
+          <ul><li>You can read or write at the position where the pointer is</li></ul></li>
+    </ul>
+  <br><img src="images/random_sequential.png" alt=""></li>
+</ul>
+
+
+<h2><tt>RandomAccessFile</tt></h2>
+<ul>
+  <li>You can open a file either for
+     <ul><li>Reading only ("r")</li>
+     <li>Reading and writing ("rw")</li></ul>
+  <pre> RandomAccessFile f = new RandomAcessFile("bank.dat","rw");</pre></li>
+  <li>To move the file pointer to a specific byte
+  <pre> f.seek(n);</pre></li>
+  <li>To get the current position of the file pointer.
+    <pre> long n = f.getFilePointer();  // of type "long" because files can be very large</pre> 
+  </li>
+  <li>To find the number of bytes in a file
+    <pre> long fileLength = f.length(); </pre>
+  </li>
+</ul>
+
+
+<h2>A Sample Program</h2>
+<ul>
+  <li>Use a random access file to store a set of bank accounts</li>
+  <li>Program lets you pick an account and deposit money into it</li>
+  <li>To manipulate a data set in a file, pay special attention to data formatting
+     <ul><li>Suppose we store the data as text
+          <br>Say account 1001 has a balance of $900, and account 1015 has a balance of 0
+          <br><img src="images/random1.png" alt="">
+          <br>We want to deposit $100 into account 1001
+          <br><img src="images/random2.png" alt="">
+          <br>If we now simply write out the new value, the result is
+          <br><img src="images/random3.png" alt=""></li></ul></li>
+</ul>
+
+
+<h2>A Sample Program</h2>
+<ul>
+   <li>Better way to manipulate a data set in a file:
+         <ul><li>Give each value a fixed size that is sufficiently large</li>
+         <li>Every record has the same size</li>
+         <li>Easy to skip quickly to a given record</li>
+         <li>To store numbers, it is easier to store them in binary format</li></ul></li>
+</ul>
+
+
+<h2>A Sample Program</h2>
+<ul>
+  <li><tt>RandomAccessFile</tt> class stores binary data</li>
+  <li><tt>readInt</tt> and <tt>writeInt</tt> read/write integers as four-byte quantities</li>
+  <li><tt>readDouble</tt> and <tt>writeDouble</tt> use 8 bytes
+     <pre>double x = f.readDouble();
+f.writeDouble(x);</pre></li>
+  <li>To find out how many bank accounts are in the file
+<pre>public int size() throws IOException
+{
+   return (int) (file.length() / RECORD_SIZE); // RECORD_SIZE is 12 bytes:
+                                               // 4 bytes for the account number and
+                                               // 8 bytes for the balance
+}</pre></li>
+</ul>
+
+
+<h2>A Sample Program</h2>
+<ul>
+  <li>To read the nth account in the file
+     <pre>public BankAccount read(int n)
+      throws IOException
+{
+   file.seek(n * RECORD_SIZE);
+   int accountNumber = file.readInt();
+   double balance = file.readDouble();
+   return new BankAccount(accountNumber, balance);
+}</pre></li>
+</ul>
+
+
+<h2>A Sample Program</h2>
+<ul>
+  <li>To write the nth account in the file
+     <pre>public void write(int n, BankAccount account)
+      throws IOException
+{
+   file.seek(n * RECORD_SIZE);
+   file.writeInt(account.getAccountNumber());
+   file.writeDouble(account.getBalance());
+}</pre></li>
+</ul>
+
+
+<h2>File BankDataTester.java</h2>
+<iframe src="code/random/BankDataTester.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File BankData.java</h2>
+<iframe src="code/random/BankData.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Output</h2>
+<pre>Account number: <code class="blue">1001</code>
+Amount to deposit: <code class="blue">100</code>
+adding new account
+Done? (Y/N) <code class="blue">N</code>
+Account number: <code class="blue">1018</code>
+Amount to deposit: <code class="blue">200</code>
+adding new account
+Done? (Y/N) <code class="blue">N</code>
+Account number: <code class="blue">1001</code>
+Amount to deposit: <code class="blue">1000</code>
+new balance=1100.0
+Done? (Y/N) <code class="blue">Y</code></pre>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="7">Why doesn't <tt>System.out</tt> support random access?</li>
+<li>What is the advantage of the binary format for storing numbers? What is the disadvantage?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="7">Suppose you print something, and then you call <tt>seek(0)</tt>, and print again to the
+same location. It would be difficult to reflect that behavior in the console window.</li>
+<li>Advantage: The numbers use a fixed amount of storage space, making it
+possible to change their values without affecting surrounding data.
+Disadvantage: You cannot read a binary file with a text editor.</li>
+</ol>
+<br>
+
+
+<h2>Object Streams</h2>
+<ul>
+  <li><tt>ObjectOutputStream</tt> class can save a entire objects to disk</li>
+  <li><tt>ObjectInputStream</tt> class can read objects back in from disk</li>
+  <li>Objects are saved in binary format; hence, you use streams</li>
+</ul>
+ 
+
+<h2>Writing a <tt>BankAccount</tt> Object to a File</h2>
+<ul>
+<li>The object output stream saves all instance variables
+<pre>BankAccount b = . . .;
+ObjectOutputStream out = new ObjectOutputStream(
+      new FileOutputStream("bank.dat"));
+out.writeObject(b);</pre></li>
+</ul>
+
+<h2>Reading a <tt>BankAccount</tt> Object from a File</h2>
+<ul>
+  <li><tt>readObject</tt> returns an <tt>Object</tt> reference</li>
+  <li>Need to remember the types of the objects that you saved and use a cast
+<pre>ObjectInputStream in = new ObjectInputStream(
+      new FileInputStream("bank.dat"));
+BankAccount b = (BankAccount) in.readObject();</pre></li>
+  <li><tt>readObject </tt>method can throw a <tt>ClassNotFoundException</tt></li>
+  <li>It is a checked exception</li>
+  <li>You must catch or declare it </li>
+</ul>
+ 
+
+<h2>Write and Read an <tt>ArrayList</tt> to a File</h2>
+<ul>
+<li>Write
+ <pre>ArrayList&lt;BankAccount&gt; a = new ArrayList&lt;BankAccount&gt;();
+// Now add many BankAccount objects into a
+out.writeObject(a);</pre>
+</li>
+<li>Read
+  <pre>ArrayList&lt;BankAccount&gt; a = (ArrayList&lt;BankAccount&gt;) in.readObject();</pre>
+</li>
+</ul>
+
+
+<h2>Serializable</h2>
+<ul>
+  <li>Objects that are written to an object stream must belong to a class <br>
+    that implements the <tt>Serializable</tt> interface.
+    <pre>class BankAccount implements Serializable
+{
+   . . .
+}</pre>
+  </li>
+  <li><tt>Serializable</tt> interface has no methods.</li>
+  <li>Serialization: process of saving objects to a stream
+  <ul><li>Each object is assigned a serial number on the stream</li>
+  <li>If the same object is saved twice, only serial number is written out the second time</li>
+  <li>When reading, duplicate serial numbers are restored as references to the same object</li></ul></li>
+</ul>
+
+
+<h2>File SerialTester.java</h2>
+<iframe src="code/serial/SerialTester.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Output</h2>
+First Program Run
+<pre>   1001:20100.0
+   1015:10000.0
+</pre>
+
+Second Program Run
+<pre>   1001:20200.0
+   1015:10000.0
+</pre>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="9">Why is it easier to save an object with an <tt>ObjectOutputStream</tt> than a
+<tt>RandomAccessFile</tt>?</li>
+<li>What do you have to do to the <tt>Coin</tt> class so that its objects can be saved in an
+<tt>ObjectOutputStream</tt>?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="9">You can save the entire object with a single <tt>writeObject</tt> call. With a
+<tt>RandomAccessFile</tt>, you have to save each field separately.</li>
+<li>Add implements <tt>Serializable</tt> to the class definition.</li>
+</ol>
+<br>
+
+</body>
+</html>

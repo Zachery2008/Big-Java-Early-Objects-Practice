@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 18</title>
+</head>
+
+<body>
+<div onclick="document.location='slide007.html'">
+<center><small><a href="slide005.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide007.html">next</a></small></center>
+<hr></div>
+<h2>Handling the General Case</h2>
+<ul>
+  <li>Assume we know the area of the smaller, colored triangle<br>
+    <b><font color="#ff0000"><code class="blue">[] <br>
+[][]<br>
+[][][]</code></font><br>
+    <tt> [][][][]</tt></b></li>
+  <li>Area of larger triangle can be calculated as:<br>
+    <tt>smallerArea + width</tt></li>
+  <li>To get the area of the smaller triangle
+    <ul>
+      <li>Make a smaller triangle and ask it for its area<br>
+        <pre>Triangle smallerTriangle = new Triangle(width - 1);<br>int smallerArea = smallerTriangle.getArea();<br></pre>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<div onclick="document.location='slide007.html'"><hr>
+<center><small><a href="slide005.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide007.html">next</a></small></center>
+</div>
+</body>
+</html>

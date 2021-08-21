@@ -1,0 +1,598 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 4</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+<body>
+<h2>Chapter 4</h2>
+<h1>Fundamental Data Types </h1>
+<br>
+<h2>Chapter Goals</h2>
+<ul>
+  <li>To understand integer and floating-point numbers</li>
+  <li>To recognize the limitations of the numeric types</li>
+  <li>To become aware of causes for overflow and roundoff errors</li>
+  <li>To understand the proper use of constants</li>
+  <li>To write arithmetic expressions in Java</li>
+  <li>To use the <tt>String</tt> type to define and manipulate
+character strings</li>
+  <li>To learn how to read program input and produce formatted output</li>
+</ul>
+<h2>Number Types</h2>
+<ul>
+  <li><tt>int: </tt>integers, no fractional part<br>
+    <tt>1, -4, 0</tt></li>
+  <li><tt>double: </tt>floating-point numbers (double precision)<br>
+    <tt>0.5, -3.11111, 4.3E24, 1E-14</tt></li>
+  <li>A numeric computation overflows if the result falls outside the
+range for the number type<br>
+    <tt>int n = 1000000;<br>
+System.out.println(n * n); // prints -727379968</tt></li>
+  <li>Java: 8 primitive types, including four integer types and two
+floating point types</li>
+</ul>
+<h2>Primitive Types</h2>
+<br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">Type<br>
+      </td>
+      <td style="vertical-align: top;">Description<br>
+      </td>
+      <td style="vertical-align: top;">Size<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">int<br>
+      </td>
+      <td style="vertical-align: top;">The integer type, with range
+-2,147,483,648 . . . 2,147,483,647</td>
+      <td style="vertical-align: top;">4 bytes<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">byte<br>
+      </td>
+      <td style="vertical-align: top;">The type describing a single
+byte, with range -128 . . . 127<br>
+      </td>
+      <td style="vertical-align: top;">1 byte<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">short<br>
+      </td>
+      <td style="vertical-align: top;">The short integer type, with
+range -32768 . . . 32767<br>
+      </td>
+      <td style="vertical-align: top;">2 bytes<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">long<br>
+      </td>
+      <td style="vertical-align: top;">The long integer type, with
+range -9,223,372,036,854,775,808 . . . -9,223,372,036,854,775,807</td>
+      <td style="vertical-align: top;">8 bytes<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">double<br>
+      </td>
+      <td style="vertical-align: top;">The double-precision
+floating-point type, with a range of about &plusmn;10<sup>308</sup> and
+about 15 significant decimal digits<br>
+      </td>
+      <td style="vertical-align: top;">8 bytes<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">float<br>
+      </td>
+      <td style="vertical-align: top;">The single-precision
+floating-point type, with a range of about &plusmn;10<sup>38</sup> and
+about 7 significant decimal digits</td>
+      <td style="vertical-align: top;">4 bytes<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">char<br>
+      </td>
+      <td style="vertical-align: top;">The character type, representing
+code units in the Unicode encoding scheme<br>
+      </td>
+      <td style="vertical-align: top;">2 bytes<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">boolean<br>
+      </td>
+      <td style="vertical-align: top;">The type with the two truth
+values <span style="font-family: monospace;">false</span> and <span
+ style="font-family: monospace;">true</span><br>
+      </td>
+      <td style="vertical-align: top;">1 bit<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2>Number Types: Floating-point Types</h2>
+<ul>
+  <li>Rounding errors occur when an exact conversion between numbers is
+not possible<br>
+    <tt>double f = 4.35;<br>
+System.out.println(100 * f); // prints 434.99999999999994</tt></li>
+  <li>Java: Illegal to assign a floating-point expression to an integer
+variable<br>
+    <tt>double balance = 13.75; <br>
+int dollars = balance; // Error</tt></li>
+  <li>Casts: used to convert a value to a different type<br>
+    <tt>int dollars = (int) balance; // OK</tt><br>
+Cast discards fractional part.</li>
+  <li><tt>Math.round</tt> converts a floating-point number to nearest
+integer<br>
+    <tt>long rounded = Math.round(balance); // if balance is 13.75, then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//
+rounded is set to 14</tt></li>
+</ul>
+<h2>Syntax 4.1: Cast</h2>
+<table bgcolor="#ffffff" border="1" cellpadding="10" width="50%">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><tt>(</tt><i>typeName</i><tt>)</tt> <i>expression</i><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><tt>(int) (balance * 100)</tt><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+To convert an expression to a different type</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li>Which are the most commonly used number types in Java?</li>
+  <li>When does the cast <tt>(long) x</tt> yield a different result
+from the call <tt>Math.round(x)</tt>?</li>
+  <li>How do you round the <tt>double</tt> value <tt>x</tt> to the
+nearest <tt>int</tt> value, assuming that you know that it is less
+than 2 &middot; 10<sup>9</sup>?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li><tt>int</tt> and <tt>double</tt></li>
+  <li>When the fractional part of <tt>x</tt> is &#8805; 0.5</li>
+  <li>By using a cast: <tt>(int) Math.round(x)</tt></li>
+</ol>
+<br>
+<h2>Constants: <tt>final</tt></h2>
+<ul>
+  <li>A <tt>final</tt> variable is a constant</li>
+  <li>Once its value has been set, it cannot be changed</li>
+  <li>Named constants make programs easier to read and maintain</li>
+  <li>Convention: use all-uppercase names for constants<br>
+    <pre>final double QUARTER_VALUE = 0.25;<br>final double DIME_VALUE = 0.1;<br>final double NICKEL_VALUE = 0.05;<br>final double PENNY_VALUE = 0.01;<br>payment = dollars + quarters * QUARTER_VALUE + dimes * DIME_VALUE<br>   + nickels * NICKEL_VALUE + pennies * PENNY_VALUE;</pre>
+  </li>
+</ul>
+<h2>Constants: <tt>static final</tt></h2>
+<ul>
+  <li>If constant values are needed in several methods, declare them
+together with the instance fields of a class and tag them as <tt>static</tt>
+and <tt>final</tt></li>
+  <li>Give <tt>static final</tt> constants public access to enable
+other classes to use them<br>
+    <pre>public class Math<br>{<br>   . . .<br>   public static final double E = 2.7182818284590452354;<br>   public static final double PI = 3.14159265358979323846;<br>}<br><br>
+double circumference = Math.PI * diameter;
+    </pre>
+  </li>
+</ul>
+<h2>Syntax 4.2: Constant Definition</h2>
+<table bgcolor="#ffffff" border="1" cellpadding="10" width="85%">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td>In a method: <br>
+            <tt>final</tt> <i>typeName variableName</i><i> <tt>=</tt>
+expression </i><tt>;</tt><br>
+&nbsp;<br>
+In a class: <br>
+            <i>accessSpecifier</i> <tt>static final</tt> <i>typeName
+variableName</i> <tt>= </tt><i>expression</i><tt>;</tt> </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><tt>final double NICKEL_VALUE = 0.05; <br>
+public static final double LITERS_PER_GALLON = 3.785;</tt></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+To define a constant in a method or a class</td>
+    </tr>
+  </tbody>
+</table>
+<h2>File CashRegister.java</h2>
+<iframe src="code/cashregister/CashRegister.java.html" class="code">
+Your browser does not support the &amp;amp;lt;iframe&amp;amp;gt; tag.
+</iframe>
+<h2>File CashRegisterTester.java</h2>
+<iframe src="code/cashregister/CashRegisterTester.java.html"
+ class="code">
+Your browser does not support the &amp;amp;lt;iframe&amp;amp;gt; tag.
+</iframe><br>
+<h3>Output</h3>
+<pre>   Change=0.25<br>   Change=2.0</pre>
+<h2>Self Check</h2>
+<ol>
+  <li value="4">What is the difference between the following two
+statements?<br>
+    <tt>final double CM_PER_INCH = 2.54;</tt><br>
+and<br>
+    <tt>public static final double CM_PER_INCH = 2.54;</tt></li>
+  <li>What is wrong with the following statement?<br>
+    <tt>double circumference = 3.14 * diameter;</tt></li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="4">The first definition is used inside a method, the
+second inside a class</li>
+  <li>(1) You should use a named constant, not the "magic number" 3.14<br>
+(2) 3.14 is not an accurate representation of &#960;</li>
+</ol>
+<br>
+<h2>Assignment, Increment, and Decrement</h2>
+<ul>
+  <li>Assignment is not the same as mathematical equality:<br>
+    <tt>items = items + 1;</tt></li>
+  <li><tt>items++</tt> is the same as <tt>items = items + 1</tt></li>
+  <li><tt>items--</tt> subtracts 1 from <tt>items</tt></li>
+</ul>
+<h2>Assignment, Increment, and Decrement</h2>
+<br>
+<img src="images/increment.png" alt="">
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li value="6">What is the meaning of the following statement?<br>
+    <tt>balance = balance + amount;</tt></li>
+  <li>What is the value of <tt>n</tt> after the following sequence of
+statements?
+    <pre>n--;<br>n++;<br>n--;</pre>
+  </li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="6">The statement adds the <tt>amount</tt> value to the <tt>balance</tt>
+variable</li>
+  <li>One less than it was before</li>
+</ol>
+<br>
+<h2>Arithmetic Operations</h2>
+<ul>
+  <li><tt>/</tt> is the division operator</li>
+  <li>If both arguments are integers, the result is an integer. The
+remainder
+is discarded</li>
+  <li><tt>7.0 / 4</tt> yields <tt>1.75<br>
+7 / 4</tt> yields <tt>1 </tt></li>
+  <li>Get the remainder with <tt>%</tt> (pronounced "modulo")<br>
+    <tt>7 % 4</tt> is <tt>3</tt></li>
+</ul>
+<h2>Arithmetic Operations</h2>
+<pre>final int PENNIES_PER_NICKEL = 5;<br>final int PENNIES_PER_DIME = 10;<br>final int PENNIES_PER_QUARTER = 25;<br>final int PENNIES_PER_DOLLAR = 100;<br><br>// Compute total value in pennies<br>int total = dollars * PENNIES_PER_DOLLAR + quarters * PENNIES_PER_QUARTER<br>+ nickels * PENNIES_PER_NICKEL + dimes * PENNIES_PER_DIME + pennies;<br><br>// Use integer division to convert to dollars, cents<br>int dollars = total / PENNIES_PER_DOLLAR;<br>int cents = total % PENNIES_PER_DOLLAR;<br></pre>
+<ul>
+</ul>
+<h2>The <tt>Math</tt> class</h2>
+<ul>
+  <li>Math class: contains methods like <tt>sqrt</tt> and <tt>pow</tt></li>
+  <li>To compute <i>x<sup>n</sup></i>, you write <tt>Math.pow(x, n)</tt></li>
+  <li>However, to compute <i>x<sup>2</sup></i> it is significantly
+more efficient simply to compute <tt>x * x</tt></li>
+  <li>To take the square root of a number, use the <tt>Math.sqrt</tt>;
+for example, <tt>Math.sqrt(x)</tt></li>
+  <li>In Java,<br>
+    <img src="images/equation.png" alt=""><br>
+can be represented as<br>
+    <tt>(-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a)</tt></li>
+</ul>
+<h2>Mathematical Methods in Java</h2>
+<table border="1" cellpadding="2" cellspacing="2" width="100%">
+  <tbody>
+    <tr>
+      <td valign="top"><tt>Math.sqrt(x)</tt><br>
+      </td>
+      <td valign="top">square root<br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>Math.pow(x, y)</tt><br>
+      </td>
+      <td valign="top">power <i>x<sup>y</sup></i><br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>Math.exp(x)</tt><br>
+      </td>
+      <td valign="top"><i>e<sup>x</sup></i><br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>Math.log(x)</tt><br>
+      </td>
+      <td valign="top">natural log<br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>Math.sin(x), Math.cos(x), Math.tan(x)</tt><br>
+      </td>
+      <td valign="top">sine, cosine, tangent (<i>x</i> in radian)<br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>Math.round(x)</tt><br>
+      </td>
+      <td valign="top">closest integer to <i>x</i><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><span
+ style="font-family: monospace;">Math.min(x, y), Math.max(x, y)</span><br>
+      </td>
+      <td style="vertical-align: top;">minimum, maximum<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2>Analyzing an Expression</h2>
+<img src="images/analyze-expression.png" alt="">
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li value="8">What is the value of <tt>1729 / 100</tt>? Of <tt>1729
+% 100</tt>?</li>
+  <li>Why doesn't the following statement compute the average of <tt>s1</tt>,
+    <tt>s2</tt>, and <tt>s3</tt>?<br>
+    <tt>double average = s1 + s2 + s3 / 3; // Error</tt></li>
+  <li>What is the value of <tt>Math.sqrt(Math.pow(x, 2) + Math.pow(y,
+2))</tt> in mathematical notation?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="8">17 and 29</li>
+  <li>Only <tt>s3</tt> is divided by 3. To get the correct result, use
+parentheses. Moreover, if <tt>s1</tt>, <tt>s2</tt>, and <tt>s3</tt>
+are integers, you must divide by 3.0 to avoid integer division:<br>
+    <tt>(s1 + s2 + s3) / 3.0</tt></li>
+  <li><img src="images/ans_10.png" alt=""></li>
+</ol>
+<br>
+<h2>Calling Static Methods</h2>
+<ul>
+  <li>A <tt>static</tt> method does not operate on an object
+    <pre>double x = 4;<br>double root = x.sqrt(); // Error</pre>
+  </li>
+  <li>Static methods are defined inside classes</li>
+  <li>Naming convention: Classes start with an uppercase letter;
+objects start with a lowercase letter<br>
+    <pre>Math<br>System.out</pre>
+  </li>
+</ul>
+<h2>Syntax 4.3: Static Method Call</h2>
+<table bgcolor="#ffffff" border="1" cellpadding="10" width="80%">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><i>ClassName<tt>.</tt></i><i> methodName</i><tt>(</tt><i>parameters</i><tt>)</tt><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><tt>Math.sqrt(4)<br>
+            </tt> </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+To invoke a static method (a method that does not operate on an object)
+and
+supply its parameters</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Self Check</h2>
+<ol>
+  <li value="11">Why can't you call <tt>x.pow(y)</tt> to compute <i>x<sup>y</sup></i>?</li>
+  <li>Is the call <tt>System.out.println(4)</tt> a static method call?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="11"><tt>x</tt> is a number, not an object, and you cannot
+invoke methods on numbers</li>
+  <li>No&#8211;the <tt>println</tt> method is called on the object <tt>System.out</tt></li>
+</ol>
+<br>
+<h2>Strings</h2>
+<ul>
+  <li>A string is a sequence of characters</li>
+  <li>Strings are objects of the <tt>String</tt> class</li>
+  <li>String constants: <br>
+    <tt>"Hello, World!"</tt></li>
+  <li>String variables:<br>
+    <tt>String message = "Hello, World!";</tt> </li>
+  <li>String length:<br>
+    <tt>int n = message.length();</tt></li>
+  <li>Empty string: <tt>""</tt></li>
+</ul>
+<h2>Concatenation</h2>
+<ul>
+  <li>Use the <tt>+</tt> operator:
+    <pre>String name = "Dave";<br>String message = "Hello, " + name;<br>   // message is <tt>"Hello, Dave"</tt></pre>
+  </li>
+  <li>If one of the arguments of the <tt>+</tt> operator is a string,
+the other is converted to a string
+    <pre>String a = "Agent";<br>int n = 7;<br>String bond = a + n; // bond is Agent7</pre>
+  </li>
+</ul>
+<h2>Concatenation in Print Statements<br>
+</h2>
+<ul>
+  <li>Useful to reduce the number of <tt>System.out.print</tt>
+instructions
+    <pre>System.out.print("The total is ");<br>System.out.println(total);</pre>
+versus
+    <pre>System.out.println("The total is " + total);</pre>
+  </li>
+</ul>
+<h2>Converting between Strings and Numbers</h2>
+<ul>
+  <li>Convert to number:<br>
+    <tt>int n = Integer.parseInt(str);<br>
+double x = Double.parseDouble(x);</tt></li>
+  <li>Convert to string:<br>
+    <tt>String str = "" + n;<br>
+str = Integer.toString(n); </tt></li>
+</ul>
+<h2>Substrings</h2>
+<ul>
+  <li>
+    <pre>String greeting = "Hello, World!";<br>String sub = greeting.substring(0, 5); // sub is "Hello"</pre>
+  </li>
+  <li>Supply start and &#8220;past the end&#8221; position</li>
+  <li>First position is at 0<br>
+    <img src="images/positions.png" alt=""></li>
+  <li>Substring length is &#8220;past the end&#8221; - start<br>
+    <img src="images/substring.png" alt=""></li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="13">Assuming the String variable <tt>s</tt> holds the
+value <tt>"Agent"</tt>, what is the effect of the assignment <tt>s =
+s + s.length()</tt>?</li>
+  <li>Assuming the <tt>String</tt> variable <tt>river</tt> holds the
+value <tt>"Mississippi"</tt>, what is the
+value of <tt>river.substring(1, 2)</tt>? Of <tt>river.substring(2,
+river.length() - 3)</tt>?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="13"><tt>s</tt> is set to the string <tt>Agent5</tt></li>
+  <li>The strings "<tt>i</tt>" and "<tt>ssissi</tt>"</li>
+</ol>
+<br>
+<h2>International Alphabets</h2>
+<img src="images/german_keyboard.png" alt="">
+<h2>International Alphabets</h2>
+<img src="images/thai_alphabet.png" alt="">
+<h2>International Alphabets</h2>
+<img src="images/chinese_menu.png" alt=""><br>
+<h2>Reading Input</h2>
+<ul>
+  <li><tt>System.in</tt> has minimal set of features&#8211;it can only read
+one byte at a time</li>
+  <li>In Java 5.0, <tt>Scanner</tt> class was added to read keyboard
+input in a convenient manner</li>
+  <li>
+    <pre>Scanner in = new Scanner(System.in);<br>System.out.print("Enter quantity: ");<br>int quantity = in.nextInt();</pre>
+  </li>
+  <li><span style="font-family: monospace;">nextDouble</span> reads a <span
+ style="font-family: monospace;">double</span></li>
+  <li><span style="font-family: monospace;"><span
+ style="font-family: monospace;">nextLine</span></span> reads a line
+(until user hits Enter)<br>
+  </li>
+  <li><span style="font-family: monospace;">nextWord</span> reads a
+word (until any white space)<br>
+  </li>
+</ul>
+<ul>
+</ul>
+<h2>File InputTester.java</h2>
+<iframe src="code/cashregister/InputTester.java.html" class="code">
+Your browser does not support the &amp;amp;lt;iframe&amp;amp;gt; tag.
+</iframe><br>
+<h3>Output
+</h3>
+<pre>   Enter price: <font color="BLUE">7.55</font>
+   Enter dollars: <font
+ color="BLUE">10</font>
+   Enter quarters: <font color="BLUE">2</font>
+   Enter dimes: <font
+ color="BLUE">1</font>
+   Enter nickels: <font color="BLUE">0</font>
+   Enter pennies: <font
+ color="BLUE">0</font>
+   Your change is 3.05</pre>
+<h2>Reading Input From a Dialog Box</h2>
+<img src="images/input-dialog.png" alt=""><br>
+<br>
+<h2>Reading Input From a Dialog Box</h2>
+<ul>
+  <li><tt>String input = JOptionPane.showInputDialog(<i>prompt</i>)</tt></li>
+  <li>Convert strings to numbers if necessary:<br>
+    <tt>int count = Integer.parseInt(input);</tt></li>
+  <li>Conversion throws an exception if user doesn't supply a
+number&#8211;see chapter 15</li>
+  <li>Add <tt>System.exit(0)</tt> to the <tt>main</tt> method of any
+program that uses <tt>JOptionPane</tt></li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="15">Why can't input be read directly from <tt>System.in</tt>?</li>
+  <li>Suppose <tt>in</tt> is a <tt>Scanner</tt> object that reads
+from <tt>System.in</tt>, and your program calls<br>
+    <tt>String name = in.next();</tt><br>
+What is the value of <tt>name</tt> if the user enters <tt>John Q.
+Public</tt>?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="15">The class only has a method to read a single byte. It
+would be very tedious to form characters, strings, and numbers from
+those bytes.</li>
+  <li>The value is "<tt>John</tt>". The <tt>next</tt> method reads the
+next <i>word</i>.</li>
+</ol>
+<br>
+</body>
+</html>

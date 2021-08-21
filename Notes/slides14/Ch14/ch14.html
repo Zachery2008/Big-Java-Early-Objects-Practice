@@ -1,0 +1,544 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 14</title>
+</head>
+  <body>
+<div><h2>Chapter 14</h2>
+     
+
+<h1>Graphical User Interfaces</h1>
+   <br></div>
+     
+<h2>Chapter Goals</h2>
+<ul>
+  <li>To use inheritance to customize frames</li>
+  <li>To understand how user-interface components are added to a container</li>
+  <li>To understand the use of layout managers to arrange user-interface components in a container</li>
+  <li>To become familiar with common user-interface components, such as buttons, combo boxes, text areas, and menus</li>
+  <li>To build programs that handle events from user-interface components</li>
+  <li>To learn how to browse the Java documentation</li>
+</ul>
+
+     
+<h2>Using Inheritance to Customize Frames</h2>     
+<ul>
+  <li>Use inheritance for complex frames to make programs easier to understand</li>
+  <li>Design a subclass of <tt>JFrame</tt></li>
+  <li>Store the components as instance fields</li>
+  <li>Initialize them in the constructor of your subclass</li>
+  <li>If initialization code gets complex, simply add some helper methods</li>
+</ul>
+
+     
+<h2>Example: Investment Viewer Program</h2>
+<iframe src="code/frame/InvestmentFrame.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+<h2>Example: Investment Viewer Program</h2>
+Of course, we still need a class with a <tt>main</tt> method:
+<iframe src="code/frame/InvestmentFrameViewer.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Self Check</h2>
+<ol>
+<li>How many Java source files are required by the investment viewer application when we use inheritance to define the frame class?</li>
+<li>Why does the <tt>InvestmentFrame</tt> constructor call <tt>setSize(FRAME_WIDTH, FRAME_HEIGHT)</tt>, whereas the <tt>main</tt> method of the investment viewer class in Chapter 12 called <tt>frame.setSize(FRAME_WIDTH, FRAME_HEIGHT)</tt>?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li>Three: <tt>InvestmentFrameViewer</tt>, <tt>InvestmentFrame</tt>, and <tt>BankAccount</tt>.</li>
+<li>The <tt>InvestmentFrame</tt> constructor adds the panel to <i>itself</i>.</li>
+</ol>
+<br>
+     
+      
+<h2>Layout Management</h2>
+<ul>
+  <li>Up to now, we have had limited control over layout of components
+     <ul><li>When we used a panel, it arranged the components from the left to the right</li></ul></li>
+  <li>User-interface components are arranged by placing them inside containers</li>
+  <li>Each container has a <i>layout manager</i> that directs the arrangement of its components</li>
+  <li>Three useful layout managers:
+  <ul><li>border layout</li>
+  <li>flow layout</li>
+  <li>grid layout</li></ul></li>
+</ul>
+
+
+<h2>Layout Management</h2>
+<ul>
+     <li>By default, <tt>JPanel</tt> places components from left to right and starts a new row when needed</li>
+     <li>Panel layout carried out by <tt>FlowLayout</tt> layout manager</li>
+     <li>Can set other layout managers<br>
+                 
+    <pre>panel.setLayout(new BorderLayout());<br></pre>
+     </li>
+     
+</ul>
+     
+
+<h2>Border Layout</h2>
+    
+<ul>
+     <li>Border layout groups container into five areas:
+         <br>center, north, west, south and east
+         <br><img src="images/border_layout.png" alt=""></li>
+     <li>Default layout manager for a frame (technically, the frame's content pane)</li>
+     <li>When adding a component, specify the position like this:
+         <pre>panel.add(component, BorderLayout.NORTH);</pre></li>
+     <li>Expands each component to fill the entire allotted area
+         <br>If that is not desirable, place each component inside a panel</li>
+</ul>
+     
+     
+<h2>Grid Layout</h2>
+<ul>
+     <li>Arranges components in a grid with a fixed number of rows and columns</li>
+     <li>Resizes each component so that they all have same size</li>
+     <li>Expands each component to fill the entire allotted area</li>
+     <li>Add the components, row by row, left to right:
+       <pre>JPanel numberPanel = new JPanel();
+numberPanel.setLayout(new GridLayout(4, 3));
+numberPanel.add(button7);
+numberPanel.add(button8);
+numberPanel.add(button9);
+numberPanel.add(button4);
+. . .</pre>
+       <img src="images/grid_layout.png" alt=""></li>
+</ul>
+
+
+<h2>Grid Bag Layout</h2>
+<ul>
+  <li>Tabular arrangement of components
+     <ul><li>Columns can have different sizes</li>
+     <li>Components can span multiple columns</li></ul></li>
+  <li>Quite complex to use</li>
+  <li>Not covered in the book</li>
+  <li>Fortunately, you can create acceptable-looking layouts by nesting panels
+     <ul><li>Give each panel an appropriate layout manager</li>
+     <li>Panels don't have visible borders</li>
+     <li>Use as many panels as needed to organize components</li></ul></li>
+</ul>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="3">How do you add two buttons to the north area of a frame?</li>
+<li>How can you stack three buttons on top of each other?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="3">First add them to a panel, then add the panel to the north end of a frame.</li>
+<li>Place them inside a panel with a <tt>GridLayout</tt> that has three rows and one column.</li>
+</ol>
+<br>
+     
+    
+<h2>Choices</h2>
+<ul>
+  <li>Radio buttons</li>
+  <li>Check boxes</li>
+  <li>Combo boxes</li>
+</ul>
+<img src="images/choices.png" alt="">
+
+     
+<h2>Radio Buttons</h2>
+<ul>
+     <li>For a small set of mutually exclusive choices, use radio buttons or a combo box</li>
+     <li>In a radio button set, only one button can be selected at a time</li>
+     <li>When a button is selected, previously selected button in set is automatically turned off</li>
+     <li>In previous figure, font sizes are mutually exclusive:
+        <pre>JRadioButton smallButton = new JRadioButton("Small");
+JRadioButton mediumButton = new JRadioButton("Medium");
+JRadioButton largeButton = new JRadioButton("Large");
+
+// Add radio buttons into a ButtonGroup so that 
+// only one button in group is on at any time
+ButtonGroup group = new ButtonGroup();
+group.add(smallButton);
+group.add(mediumButton);
+group.add(largeButton);</pre></li>
+</ul>
+
+   
+<h2>Radio Buttons</h2>
+<ul>
+  <li>Button group does not place buttons close to each other on container</li>
+  <li>It is your job to arrange buttons on screen</li>
+  <li><tt>isSelected</tt>: called to find out if a button is currently selected or not
+     <pre>if (largeButton.isSelected()) size = LARGE_SIZE;</pre></li>
+  <li>Call <tt>setSelected(true)</tt> on a radio button in group before making the enclosing frame visible</li>
+</ul>
+
+
+<h2>Borders</h2>
+<ul>
+  <li>Place a border around a panel to group its contents visually
+  <li><tt>EtchedBorder</tt>: three-dimensional etched effect</li>
+  <li>Can add a border to any component, but most commonly to panels:
+     <pre>JPanel panel = new JPanel();
+panel.setBorder(new EtchedBorder());</pre></li>
+  <li><tt>TitledBorder</tt>: a border with a title
+     <pre>panel.setBorder(new TitledBorder(new EtchedBorder(), "Size"));</pre></li>
+</ul>
+     
+<h2>Check Boxes</h2>
+<ul>
+  <li>Two states: checked and unchecked</li>
+  <li>Use one checkbox for a binary choice</li>
+  <li>Use a group of check boxes when one selection does not exclude another</li>
+  <li>Example: "bold" and "italic" in previous figure</li>
+  <li>Construct by giving the name in the constructor:
+      <pre>JCheckBox italicCheckBox = new JCheckBox("Italic");</pre></li>
+  <li>Don't place into a button group</li>
+</ul>
+
+
+<h2>Combo Boxes</h2>
+<ul>
+  <li>For a large set of choices, use a combo box
+     <ul><li>Uses less space than radio buttons</li></ul></li>
+  <li>"Combo": combination of a list and a text field
+     <ul><li>The text field displays the name of the current selection</li></ul>
+<br><img src="images/combo_box.png" alt=""></li>
+</ul>
+
+
+<h2>Combo Boxes</h2>
+<ul>
+  <li>If combo box is editable, user can type own selection
+     <ul><li>Use <tt>setEditable</tt> method</li></ul></li>
+  <li>Add strings with <tt>addItem</tt> method:
+     <pre>JComboBox facenameCombo = new JComboBox();
+facenameCombo.addItem("Serif");
+facenameCombo.addItem("SansSerif");
+. . .</pre></li>
+  <li>Get user selection with <tt>getSelectedItem</tt> (return type is <tt>Object</tt>)<br>
+     <pre>String selectedString
+      = (String) facenameCombo.getSelectedItem();</pre></li>
+  <li>Select an item with <tt>setSelectedItem</tt></li>
+</ul>
+
+
+<h2>Radio Buttons, Check Boxes, and Combo Boxes</h2>
+<ul>
+  <li>They generate an <tt>ActionEvent</tt> whenever the user selects an item</li>
+  <li>An example: <tt>ChoiceFrame</tt>
+      <br><img src="images/components.png" alt="">
+  <ul><li>All components notify the same listener object</li>
+  <li>When user clicks on any component, we ask each component for its current content</li>
+  <li>Then redraw text sample with the new font</li></ul></li>
+</ul>
+
+
+<h2>Classes of the Font Choice Program</h2>
+<img src="images/uml.png" alt="">
+
+
+<h2>File ChoiceFrameViewer.java</h2>
+<iframe src="code/choice/ChoiceFrameViewer.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+     
+<h2>File ChoiceFrame.java</h2>
+<iframe src="code/choice/ChoiceFrame.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="5">What is the advantage of a <tt>JComboBox</tt> over a set of radio buttons? What is the
+disadvantage?</li>
+<li>Why do all user interface components in the <tt>ChoiceFrame</tt> class share the same
+listener?</li>
+<li>Why was the combo box placed inside a panel? What would have happened if it
+had been added directly to the control panel?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="5">If you have many options, a set of radio buttons takes up a large area. A combo
+box can show many options without using up much space. But the user cannot
+see the options as easily.</li>
+<li>When any of the component settings is changed, the program simply queries all
+of them and updates the label.</li>
+<li>To keep it from growing too large. It would have grown to the same width and
+height as the two panels below it.</li>
+</ol>
+<br>
+
+
+<h2>Advanced Topic: Layout Management</h2>
+<ul>
+  <li><b>Step 1:</b> Make a sketch of your desired component layout
+     <br><img src="images/step1.png" alt=""></li>
+  <li><b>Step 2:</b> Find groupings of adjacent components with the same layout
+     <br><img src="images/step2.png" alt=""></li>
+</ul>
+
+
+<h2>Advanced Topic: Layout Management</h2>
+<ul>
+  <li><b>Step 3:</b> Identify layouts for each group</li>
+  <li><b>Step 4:</b> Group the groups together
+     <br><img src="images/step4.png" alt=""></li>
+  <li><b>Step 5:</b> Write the code to generate the layout</li>
+</ul>
+
+
+<h2>Menus</h2>
+<ul>
+  <li>A frame contains a menu bar</li>
+  <li>The menu bar contains menus</li>
+  <li>A menu contains submenus and menu items
+      <br> <img src="images/menus.png" alt=""></li>
+</ul>
+
+
+<h2>Menu Items</h2>
+<ul>
+  <li>Add menu items and submenus with the <tt>add</tt> method:
+    <pre>JMenuItem fileExitItem = new JMenuItem("Exit");
+fileMenu.add(fileExitItem);</pre></li>
+  <li>A menu item has no further submenus</li>
+  <li>Menu items generate action events</li>
+  <li>Add a listener to each menu item:
+     <pre>fileExitItem.addActionListener(listener);</pre></li>
+  <li>Add action listeners only to menu items, not to menus or the menu bar</li>
+</ul>
+
+     
+<h2>A Sample Program</h2>
+<ul>
+  <li>Builds up a small but typical menu</li>
+  <li>Traps action events from menu items</li>
+  <li>To keep program readable, use a separate method for each menu or set of related menus
+     <ul><li><tt>createFaceItem</tt>: creates menu item to change the font face</li>
+     <li><tt>createSizeItem</tt></li>
+     <li><tt>createStyleItem</tt></li></ul></li>
+</ul>
+
+     
+<h2>File MenuFrameViewer.java</h2>
+<iframe src="code/menu/MenuFrameViewer.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+ 
+    
+<h2>File MenuFrame.java</h2>
+<iframe src="code/menu/MenuFrame.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+     
+
+<h2>Self Check</h2>
+<ol>
+<li value="8">Why do <tt>JMenu</tt> objects not generate action events?</li>
+<li>Why is the <tt>name</tt> parameter in the <tt>createFaceItem</tt> method declared as <tt>final</tt>?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="8">When you open a menu, you have not yet made a selection. Only <tt>JMenuItem</tt>
+objects correspond to selections.</li>
+<li>The parameter variable is accessed in a method of an inner class.</li>
+</ol>
+<br>
+
+
+<h2>Text Areas</h2>
+<ul>
+  <li>Use a <tt>JTextArea</tt> to show multiple lines of text</li>
+  <li>You can specify the number of rows and columns:
+     <pre>final int ROWS = 10;
+final int COLUMNS = 30;
+JTextArea textArea = new JTextArea(ROWS, COLUMNS);</pre></li>
+  <li><tt>setText</tt>: to set the text of a text field or text area</li>
+  <li><tt>append</tt>: to add text to the end of a text area</li>
+  <li>Use newline characters to separate lines:
+     <pre>textArea.append(account.getBalance() + "\n");</pre></li>
+  <li>To use for display purposes only:
+     <pre>textArea.setEditable(false); // program can call setText and append to change it</pre></li>
+</ul>
+
+<h2>Text Areas</h2>
+<ul>
+  <li>To add scroll bars to a text area:
+     <pre>JTextArea textArea = new JTextArea(ROWS, COLUMNS);
+JScrollPane scrollPane = new JScrollPane(textArea);</pre>
+<img src="images/text_area.png" alt=""></li>
+</ul>
+
+
+<h2>File TextAreaViewer.java</h2>
+<iframe src="code/textarea/TextAreaViewer.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="10">What is the difference between a text field and a text area?</li>
+<li>Why did the <tt>TextAreaViewer</tt> program call <tt>textArea.setEditable(false)</tt>?</li>
+<li>How would you modify the <tt>TextAreaViewer</tt> program if you didn't want to use scroll bars?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="10">A text field holds a single line of text; a text area holds multiple lines.</li>
+<li>The text area is intended to display the program output. It does not collect user input.</li>
+<li>Don't construct a <tt>JScrollPane</tt> and add the <tt>textArea</tt> object directly to the frame.</li>
+</ol>
+<br>
+
+
+<h2>Exploring the Swing Documentation</h2>
+<ul>
+  <li>For more sophisticated effects, explore the Swing documentation</li>
+  <li>The documentation can be quite intimidating at first glance</li>
+  <li>Next example will show how to use the documentation to your advantage</li>
+</ul>
+
+
+<h2>Example: A Color Mixer</h2>
+<ul>
+  <li>It should be fun to mix your own colors, with a slider for the red, green, and blue values
+    <br><img src="images/mixer.png" alt=""></li>
+</ul>
+
+
+<h2>Example: A Color Mixer</h2>
+<ul>
+  <li>How do you know if there is a slider?
+    <ul><li>Buy a book that illustrates all Swing components</li>
+    <li>Run sample application included in the JDK that shows off all Swing components</li>
+    <li>Look at the names of all of the classes that start with J
+       <ul><li><tt>JSlider</tt> seems like a good candidate</li></ul></li></ul></li>
+  <li>Next, ask a few questions:
+    <ul><li>How do I construct a <tt>JSlider</tt>?</li>
+    <li>How can I get notified when the user has moved it?</li>
+    <li>How can I tell to which value the user has set it?</li></ul></li>
+  <li>After mastering sliders, you can find out how to set tick marks, etc.</li>
+</ul>
+
+
+<h2>The Swing Demo Set</h2>
+<img src="images/swing.png" alt="">
+
+
+<h2>Example: A Color Mixer</h2>
+<ul>
+  <li>There are over 50 methods in <tt>JSlider</tt> class and over 250 inherited methods</li>
+  <li>Some method descriptions look scary
+     <br><img src="images/api.png" alt=""></li>
+  <li>Develop the ability to separate fundamental concepts from ephemeral minutiae</li>
+</ul>
+
+
+<h2>How do I construct a <tt>JSlider</tt>?</h2>
+<ul>
+  <li>Look at the Java version 5.0 API documentation</li>
+  <li>There are six constructors for the <tt>JSlider</tt> class</li>
+  <li>Learn about one or two of them</li>
+  <li>Strike a balance somewhere between the trivial and the bizarre</li>
+  <li>Too limited:
+      <br><tt>public JSlider()</tt>
+      <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a horizontal slider with the range 0 to 100 and an initial value of 50</li>
+  <li>Bizarre:
+      <br><tt>public JSlider(BoundedRangeModel brm)</tt>
+      <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a horizontal slider using the specified <tt>BoundedRangeModel</tt></li>
+  <li>Useful:
+      <br><tt>public JSlider(int min, int max, int value)</tt>
+      <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a horizontal slider using the specified <tt>min</tt>, <tt>max</tt>, and <tt>value</tt>.</li>
+</ul>
+
+
+<h2>How can I get notified when the user has moved a <tt>JSlider</tt>?</h2>
+<ul>
+  <li>There is no <tt>addActionListener</tt> method</li>
+  <li>There is a method
+      <br><tt>public void addChangeListener(ChangeListener l)</tt></li>
+  <li>Click on the <tt>ChangeListener</tt> link to learn more</li>
+  <li>It has a single method:
+      <br><tt>void stateChanged(ChangeEvent e)</tt></li>
+  <li>Apparently, method is called whenever user moves the slider</li>
+  <li>What is a <tt>ChangeEvent</tt>?
+     <ul><li>It inherits <tt>getSource</tt> method from superclass <tt>EventObject</tt></li>
+     <li><tt>getSource</tt>: tells us which component generated this event</li></ul></li>
+</ul>
+
+
+<h2>How can I tell to which value the user has set a <tt>JSlider</tt>?</h2>
+<ul>
+  <li>Now we have a plan:
+     <ol><li>Add a change event listener to each slider</li>
+     <li>When slider is changed, <tt>stateChanged</tt> method is called</li>
+     <li>Find out the new value of the slider</li>
+     <li>Recompute color value</li>
+     <li>Repaint color panel</li></ol></li>
+  <li>Need to get the current value of the slider</li>
+  <li>Look at all the methods that start with get; you find:
+      <br><tt>public int getValue()</tt>
+      <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the slider's value.</li>
+</ul>
+
+
+<h2>The Components of the <tt>SliderFrame</tt></h2>
+<img src="images/SliderFrame.png" alt="">
+<br>
+
+
+<h2>Classes of the <tt>SliderFrameViewer</tt> Program</h2>
+<img src="images/SliderFrameViewer.png" alt="">
+<br>
+
+
+<h2>File SliderFrameViewer.java</h2>
+<iframe src="code/slider/SliderFrameViewer.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>SliderFrame.java</h2>
+<iframe src="code/slider/SliderFrame.java.html" class="code">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="13">Suppose you want to allow users to pick a color from a color dialog box. Which
+class would you use? Look in the API documentation.</li>
+<li>Why does a slider emit change events and not action events?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="13"><tt>JColorChooser.</tt></li>
+<li>Action events describe one-time changes, such as button clicks. Change events describe continuous changes.</li>
+</ol>
+<br>
+
+
+<h2>Visual Programming</h2>
+<img src="images/netbeans.png" alt="">
+<br>
+
+</body>
+</html>

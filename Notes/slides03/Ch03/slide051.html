@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 3</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+
+<body>
+<div onclick="document.location='slide052.html'">
+<center><small><a href="slide050.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide052.html">next</a></small></center>
+</div><hr>
+<h2>Implicit Parameters and <tt>this</tt></h2>
+<ul>
+  <li>Every method has one implicit parameter</li>
+  <li>The implicit parameter is always called <tt>this</tt></li>
+  <li>Exception: Static methods do not have an implicit parameter (more
+on Chapter 9)</li>
+  <li>
+    <pre>double newBalance = balance + amount;<br>// actually means<br>double newBalance = <font
+ color="BLUE">this</font>.balance + amount;</pre>
+  </li>
+  <li>When you refer to an instance field in a method, the compiler
+automatically applies it to the <tt>this</tt> parameter
+    <pre>momsSavings.deposit(500);</pre>
+  </li>
+</ul>
+
+<hr>
+<div onclick="document.location='slide052.html'">
+<center><small><a href="slide050.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide052.html">next</a></small></center>
+</div>
+</body>
+</html>

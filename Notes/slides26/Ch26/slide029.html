@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 26</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide030.html'">
+<center><small><a href="slide028.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide030.html">next</a></small></center>
+<hr></div>
+<h2>Parsing XML Documents </h2>
+<ul>
+  <li>To evaluate an XPath expression in Java, create an XPath object
+    <pre>XPathFactory xpfactory = XPathFactory.newInstance();
+XPath path = xpfactory.newXPath();</pre></li>
+  <li>Then call the <tt>evaluate</tt> method
+    <pre>String result = path.evaluate(expression, doc)</pre>
+    <ul><li><tt>expression</tt> is an XPath expression</li>
+    <li><tt>doc</tt> is the <tt>Document</tt> object that represents the XML document<br>&nbsp;</li></ul></li>
+  <li>For example,
+    <pre>String result = path.evaluate("/items/item[2]/product/price", doc)</pre>
+    sets result to the string "<tt>19.95</tt>".</li>
+</ul>
+
+
+
+<div onclick="document.location='slide030.html'"><hr>
+<center><small><a href="slide028.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide030.html">next</a></small></center>
+</div>
+</body>
+</html>

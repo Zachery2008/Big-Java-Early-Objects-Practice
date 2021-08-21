@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 15</title>
+</head>
+
+<body>
+<div onclick="document.location='slide004.html'">
+<center><small><a href="slide002.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide004.html">next</a></small></center>
+<hr></div>
+<h2>Error Handling</h2>
+<ul>
+   <li>Traditional approach: Method returns error code</li>
+   <li>Problem: Forget to check for error code
+      <ul><li>Failure notification may go undetected</li></ul></li>
+   <li>Problem: Calling method may not be able to do anything about failure
+      <ul><li>Program must fail too and let its caller worry about it</li>
+      <li>Many method calls would need to be checked</li></ul></li>
+   <li>Instead of programming for success<br>
+     <tt>x.doSomething()<br></tt>
+     you would always be programming for failure:<br>
+     <tt>if (!x.doSomething()) return false;</tt></li>
+ 
+</ul>
+ 
+
+<div onclick="document.location='slide004.html'"><hr>
+<center><small><a href="slide002.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide004.html">next</a></small></center>
+</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 9</title>
+  <style type="text/css">
+OL.withloweralpha { list-style-type: lower-alpha }
+  </style>
+</head>
+
+<body>
+<div onclick="document.location='slide042.html'">
+<center><small><a href="slide040.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide042.html">next</a></small></center>
+<hr></div>
+<h2>Scope of Local Variables</h2>
+<ul>
+  <li>Scope of a local variable cannot contain the definition of
+another variable with the same name
+    <pre><b>Rectangle r</b> = new Rectangle(5, 10, 20, 30);<br>if (x &gt;= 0)<br>{<br>   double r = Math.sqrt(x);<br>   // Error&#8211;can't declare another variable called r here<br>   . . .<br>}</pre>
+  </li>
+  <li>However, can have local variables with identical names if scopes
+do not overlap
+    <pre>if (x &gt;= 0)<br>{<br>   double r = Math.sqrt(x);<br>   . . .<br>} // Scope of r ends here<br>else<br>{<br>   Rectangle r = new Rectangle(5, 10, 20, 30);<br>   // OK&#8211;it is legal to declare another r here<br>   . . .<br>}</pre>
+  </li>
+</ul>
+
+<div onclick="document.location='slide042.html'"><hr>
+<center><small><a href="slide040.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide042.html">next</a></small></center>
+</div>
+</body>
+</html>

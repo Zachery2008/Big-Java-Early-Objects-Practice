@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 15</title>
+</head>
+
+<body>
+<center><small><a href="slide039.html">previous</a> | 
+<a href="slide001.html">start</a></small></center>
+<hr>
+<h2>Answers</h2>
+<ol>
+<li value="11">It would not be able to do much with them. The <tt>DataSetReader</tt> class is a reusable class that may be used for systems with different languages and different user interfaces. Thus, it cannot engage in a dialog with the program user.</li>
+<li><tt>DataSetTester.main</tt> calls <tt>DataSetReader.readFile</tt>, which calls <tt>readData</tt>. The call <tt>in.hasNextInt()</tt> returns <tt>false</tt>, and <tt>readData</tt> throws a <tt>BadDataException</tt>. The <tt>readFile</tt> method doesn't catch it, so it propagates back to <tt>main</tt>, where it is caught.</li>
+</ol>
+
+
+<hr>
+<center><small><a href="slide039.html">previous</a> | 
+<a href="slide001.html">start</a></small></center> 
+
+</body>
+</html>

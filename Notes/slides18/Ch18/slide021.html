@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 18</title>
+</head>
+
+<body>
+<div onclick="document.location='slide022.html'">
+<center><small><a href="slide020.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide022.html">next</a></small></center>
+<hr></div>
+<h2>To Generate All Permutations</h2>
+<ul>
+  <li>Finally, add the removed letter to front of all permutations of
+the shorter word
+    <pre>for (String s : shorterWordPermutations)<br>{<br>   result.add(word.charAt(i) + s);<br>}</pre>
+  </li>
+  <li>Special case: simplest possible string is the empty string;
+single permutation, itself</li>
+</ul>
+
+<div onclick="document.location='slide022.html'"><hr>
+<center><small><a href="slide020.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide022.html">next</a></small></center>
+</div>
+</body>
+</html>

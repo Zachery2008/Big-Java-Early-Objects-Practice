@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 19</title>
+</head>
+
+<body>
+<div onclick="document.location='slide059.html'">
+<center><small><a href="slide057.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide059.html">next</a></small></center>
+<hr></div>
+<h2>Binary Search</h2>
+<ul>
+  <li>Count the number of visits to search an sorted array of size <i>n</i>
+    <ul>
+      <li>We visit one element (the middle element) then search either
+the left or right subarray</li>
+      <li>Thus: &nbsp;&nbsp;&nbsp;&nbsp;T(<i>n</i>) = T(<i>n</i>/2) + 1</li>
+    </ul>
+  </li>
+  <li>If <i>n</i> is <i>n</i>/2, then &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T(<i>n</i>/2)
+= T(<i>n</i>/4) + 1</li>
+  <li>Substituting into the original equation:&nbsp;&nbsp;&nbsp;&nbsp;
+T(<i>n</i>) = T(<i>n</i>/4) + 2</li>
+  <li>This generalizes to:&nbsp;&nbsp;&nbsp;&nbsp;T(<i>n</i>) = T(<i>n</i>/2<sup><i>k</i></sup>)
++ <i>k</i></li>
+</ul>
+
+<div onclick="document.location='slide059.html'"><hr>
+<center><small><a href="slide057.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide059.html">next</a></small></center>
+</div>
+</body>
+</html>

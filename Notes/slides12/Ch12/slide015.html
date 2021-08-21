@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 12</title>
+</head>
+
+<body>
+<div onclick="document.location='slide016.html'">
+<center><small><a href="slide014.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide016.html">next</a></small></center>
+<hr></div>
+<h2>Processing Text Input</h2>
+<ul>
+  <li>Use <tt>JTextField</tt> components to provide space for user input
+      <br><tt>final int FIELD_WIDTH = 10; // In characters<br>
+       final JTextField rateField = new JTextField(FIELD_WIDTH);</tt></li>
+  <li>Place a <tt>JLabel</tt> next to each text field
+      <br><tt>JLabel rateLabel = new JLabel("Interest Rate: ");</tt></li>
+  <li>Supply a button that the user can press to indicate that the input is ready for processing
+      <br><img src="images/textfield.png" alt=""></li>
+  <li>The button's <tt>actionPerformed</tt> method reads the user input from the text fields (use <tt>getText</tt>)
+<pre>class AddInterestListener implements ActionListener
+{
+   public void actionPerformed(ActionEvent event)
+   {
+      double rate = Double.parseDouble(rateField.getText());
+      . . .
+   }
+}</pre></li>
+</ul>
+
+
+
+<div onclick="document.location='slide016.html'"><hr>
+<center><small><a href="slide014.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide016.html">next</a></small></center>
+</div>
+</body>
+</html>

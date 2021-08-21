@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Horstmann Chapter 8</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+
+<body>
+<div onclick="document.location='slide032.html'">
+<center><small><a href="slide030.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide032.html">next</a></small></center>
+</div><hr>
+<h2>Simple Array Algorithms: Finding the Maximum or Minimum</h2>
+<ul>
+  <li>Initialize a candidate with the starting element</li>
+  <li>Compare candidate with remaining elements</li>
+  <li>Update it if you find a larger or smaller value</li>
+  <li>Example:
+    <pre>BankAccount largestYet = accounts.get(0);<br>for (int i = 1; i &lt; accounts.size(); i++)<br>{<br>   BankAccount a = accounts.get(i);<br>   if (a.getBalance() &gt; largestYet.getBalance())<br>      largestYet = a;<br>}<br>return largestYet;<br></pre>
+  </li>
+  <li>Works only if there is at least one element in the array list</li>
+  <li>If list is empty, return null
+    <pre>if (accounts.size() == 0) return null;<br>BankAccount largestYet = accounts.get(0);<br>. . .<br></pre>
+  </li>
+</ul>
+<br>
+
+<hr>
+<div onclick="document.location='slide032.html'">
+<center><small><a href="slide030.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide032.html">next</a></small></center>
+</div>
+</body>
+</html>

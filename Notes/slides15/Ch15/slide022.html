@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 15</title>
+</head>
+
+<body>
+<div onclick="document.location='slide023.html'">
+<center><small><a href="slide021.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide023.html">next</a></small></center>
+<hr></div>
+<h2>The <tt>finally</tt> Clause</h2>
+ 
+<pre>FileReader reader = new FileReader(filename);
+try
+{
+   Scanner in = new Scanner(reader);
+   readData(in);
+}
+finally
+{
+   reader.close(); // if an exception occurs, finally clause is also
+                   // executed before exception is passed to its handler
+}</pre>
+
+
+
+<div onclick="document.location='slide023.html'"><hr>
+<center><small><a href="slide021.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide023.html">next</a></small></center>
+</div>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 19</title>
+</head>
+
+<body>
+<div onclick="document.location='slide025.html'">
+<center><small><a href="slide023.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide025.html">next</a></small></center>
+<hr></div>
+<h2>Insertion Sort</h2>
+<ul>
+  <li>Assume initial sequence <tt>a[0] . . . a[k]</tt> is sorted (<tt>k
+= 0</tt>):
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">
+          <div align="left">11</div>
+          </td>
+          <td>
+          <div align="left">9 </div>
+          </td>
+          <td>
+          <div align="left">16</div>
+          </td>
+          <td>
+          <div align="left">5 </div>
+          </td>
+          <td>
+          <div align="left">7</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>Add <tt>a[1]</tt>; element needs to be inserted before <tt>11</tt>
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">
+          <div align="left">9</div>
+          </td>
+          <td bgcolor="#9999cc">
+          <div align="left">11</div>
+          </td>
+          <td>
+          <div align="left">16</div>
+          </td>
+          <td>
+          <div align="left">5 </div>
+          </td>
+          <td>
+          <div align="left">7</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>Add <tt>a[2]</tt>
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">
+          <div align="left">9</div>
+          </td>
+          <td bgcolor="#9999cc">
+          <div align="left">11</div>
+          </td>
+          <td bgcolor="#9999cc">
+          <div align="left">16</div>
+          </td>
+          <td>
+          <div align="left">5</div>
+          </td>
+          <td>
+          <div align="left">7</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>Add <tt>a[3]</tt>
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">
+          <div align="left">5</div>
+          </td>
+          <td bgcolor="#9999cc">
+          <div align="left">9</div>
+          </td>
+          <td bgcolor="#9999cc">
+          <div align="left">11</div>
+          </td>
+          <td bgcolor="#9999cc">
+          <div align="left">16</div>
+          </td>
+          <td>
+          <div align="left">7</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>Finally, add <tt>a[4]</tt>
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">
+          <div align="left">5</div>
+          </td>
+          <td bgcolor="#9999cc">
+          <div align="left">9</div>
+          </td>
+          <td bgcolor="#9999cc">
+          <div align="left">11</div>
+          </td>
+          <td bgcolor="#9999cc">
+          <div align="left">16</div>
+          </td>
+          <td bgcolor="#9999cc">
+          <div align="left">7</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<div onclick="document.location='slide025.html'"><hr>
+<center><small><a href="slide023.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide025.html">next</a></small></center>
+</div>
+</body>
+</html>

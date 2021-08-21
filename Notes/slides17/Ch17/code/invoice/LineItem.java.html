@@ -1,0 +1,40 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">02: </font></b><font color="#7a9ecd">   Describes a quantity an article to purchase.</font>
+<b><font color="#006cb8">03: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">04: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> <font color="#000000">LineItem</font>
+<b><font color="#006cb8">05: </font></b><font color="#000000">{</font>  
+<b><font color="#006cb8">06: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">07: </font></b><font color="#7a9ecd">      Constructs an item from the product and quantity.</font>
+<b><font color="#006cb8">08: </font></b><font color="#7a9ecd">      @param aProduct the product</font>
+<b><font color="#006cb8">09: </font></b><font color="#7a9ecd">      @param aQuantity the item quantity</font>
+<b><font color="#006cb8">10: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">11: </font></b>   <font color="#d05b76">public</font> <font color="#000000">LineItem</font><font color="#000000">(</font><font color="#000000">Product</font> <font color="#000000">aProduct</font><font color="#000000">,</font> <font color="#d05b76">int</font> <font color="#000000">aQuantity</font><font color="#000000">)</font>
+<b><font color="#006cb8">12: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">13: </font></b>      <font color="#000000">theProduct</font> <font color="#000000">=</font> <font color="#000000">aProduct</font><font color="#000000">;</font>
+<b><font color="#006cb8">14: </font></b>      <font color="#000000">quantity</font> <font color="#000000">=</font> <font color="#000000">aQuantity</font><font color="#000000">;</font>
+<b><font color="#006cb8">15: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">16: </font></b>   
+<b><font color="#006cb8">17: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">18: </font></b><font color="#7a9ecd">      Computes the total cost of this line item.</font>
+<b><font color="#006cb8">19: </font></b><font color="#7a9ecd">      @return the total price</font>
+<b><font color="#006cb8">20: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">21: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">double</font> <font color="#000000">getTotalPrice</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">22: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">23: </font></b>      <font color="#d05b76">return</font> <font color="#000000">theProduct</font><font color="#000000">.</font><font color="#000000">getPrice</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">*</font> <font color="#000000">quantity</font><font color="#000000">;</font>
+<b><font color="#006cb8">24: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">25: </font></b>   
+<b><font color="#006cb8">26: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">27: </font></b><font color="#7a9ecd">      Formats this item.</font>
+<b><font color="#006cb8">28: </font></b><font color="#7a9ecd">      @return a formatted string of this item</font>
+<b><font color="#006cb8">29: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">30: </font></b>   <font color="#d05b76">public</font> <font color="#000000">String</font> <font color="#000000">format</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">31: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">32: </font></b>      <font color="#d05b76">return</font> <font color="#000000">String</font><font color="#000000">.</font><font color="#000000">format</font><font color="#000000">(</font><font color="#00a99d">"%-30s%8.2f%5d%8.2f"</font><font color="#000000">,</font> 
+<b><font color="#006cb8">33: </font></b>            <font color="#000000">theProduct</font><font color="#000000">.</font><font color="#000000">getDescription</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">,</font> <font color="#000000">theProduct</font><font color="#000000">.</font><font color="#000000">getPrice</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">,</font> 
+<b><font color="#006cb8">34: </font></b>            <font color="#000000">quantity</font><font color="#000000">,</font> <font color="#000000">getTotalPrice</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">35: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">36: </font></b>
+<b><font color="#006cb8">37: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">int</font> <font color="#000000">quantity</font><font color="#000000">;</font>
+<b><font color="#006cb8">38: </font></b>   <font color="#d05b76">private</font> <font color="#000000">Product</font> <font color="#000000">theProduct</font><font color="#000000">;</font>
+<b><font color="#006cb8">39: </font></b><font color="#000000">}</font>
+</tt></pre>

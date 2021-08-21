@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 27</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide033.html'">
+<center><small><a href="slide031.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide033.html">next</a></small></center>
+<hr></div>
+<h2>JavaBeans Components: An Example</h2>
+<ul>
+  <li>Use a <tt>DateFormat</tt> object to get a time string:
+    <pre>DateFormat timeFormatter = DateFormat.getTimeInstance();
+timeFormatter.setTimeZone(zone);
+Date now = new Date();
+// Suppose the server is in New York, and it's noon there
+System.out.println(timeFormatter.format(now));
+// Prints 9:00:00 AM</pre></li>
+</ul>
+
+
+
+<div onclick="document.location='slide033.html'"><hr>
+<center><small><a href="slide031.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide033.html">next</a></small></center>
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 4</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+
+<body>
+<div onclick="document.location='slide011.html'">
+<center><small><a href="slide009.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide011.html">next</a></small></center>
+</div><hr>
+<h2>Constants: <tt>static final</tt></h2>
+<ul>
+  <li>If constant values are needed in several methods, declare them
+together with the instance fields of a class and tag them as <tt>static</tt>
+and <tt>final</tt></li>
+  <li>Give <tt>static final</tt> constants public access to enable
+other classes to use them<br>
+    <pre>public class Math<br>{<br>   . . .<br>   public static final double E = 2.7182818284590452354;<br>   public static final double PI = 3.14159265358979323846;<br>}<br><br>
+double circumference = Math.PI * diameter;
+    </pre>
+  </li>
+</ul>
+
+<hr>
+<div onclick="document.location='slide011.html'">
+<center><small><a href="slide009.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide011.html">next</a></small></center>
+</div>
+</body>
+</html>

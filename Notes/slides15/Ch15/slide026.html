@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 15</title>
+</head>
+
+<body>
+<div onclick="document.location='slide027.html'">
+<center><small><a href="slide025.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide027.html">next</a></small></center>
+<hr></div>
+<h2>Answers</h2>
+<ol>
+<li value="7">If it had been declared inside the <tt>try</tt> block, its scope would only have extended
+to the end of the <tt>try</tt> block, and the <tt>catch</tt> clause could not have closed it.</li>
+<li>The <tt>FileReader</tt> constructor throws an exception. The <tt>finally</tt> clause is executed.
+Since <tt>reader</tt> is <tt>null</tt>, the call to <tt>close</tt> is not executed. Next, a <tt>catch</tt> clause
+that matches the <tt>FileNotFoundException</tt> is located. If none exists, the program
+terminates.</li>
+</ol>
+<br>
+
+
+
+<div onclick="document.location='slide027.html'"><hr>
+<center><small><a href="slide025.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide027.html">next</a></small></center>
+</div>
+</body>
+</html>

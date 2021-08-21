@@ -1,0 +1,148 @@
+<pre><tt><b><font color="#006cb8">001: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">io</font><font color="#000000">.</font><font color="#000000">IOException</font><font color="#000000">;</font>
+<b><font color="#006cb8">002: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">sql</font><font color="#000000">.</font><font color="#000000">SQLException</font><font color="#000000">;</font>
+<b><font color="#006cb8">003: </font></b>
+<b><font color="#006cb8">004: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">005: </font></b><font color="#7a9ecd">   An ATM that accesses a bank.</font>
+<b><font color="#006cb8">006: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">007: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> <font color="#000000">ATM</font> 
+<b><font color="#006cb8">008: </font></b><font color="#000000">{</font>  
+<b><font color="#006cb8">009: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">010: </font></b><font color="#7a9ecd">      Constructs an ATM for a given bank.</font>
+<b><font color="#006cb8">011: </font></b><font color="#7a9ecd">      @param aBank the bank to which this ATM connects</font>
+<b><font color="#006cb8">012: </font></b><font color="#7a9ecd">   */</font>    
+<b><font color="#006cb8">013: </font></b>   <font color="#d05b76">public</font> <font color="#000000">ATM</font><font color="#000000">(</font><font color="#000000">Bank</font> <font color="#000000">aBank</font><font color="#000000">)</font>
+<b><font color="#006cb8">014: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">015: </font></b>      <font color="#000000">theBank</font> <font color="#000000">=</font> <font color="#000000">aBank</font><font color="#000000">;</font>
+<b><font color="#006cb8">016: </font></b>      <font color="#000000">reset</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">017: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">018: </font></b>
+<b><font color="#006cb8">019: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">020: </font></b><font color="#7a9ecd">      Resets the ATM to the initial state.</font>
+<b><font color="#006cb8">021: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">022: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">reset</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">023: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">024: </font></b>      <font color="#000000">customerNumber</font> <font color="#000000">=</font> <font color="#000000">-</font><font color="#89c976">1</font><font color="#000000">;</font>
+<b><font color="#006cb8">025: </font></b>      <font color="#000000">currentAccount</font> <font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">;</font>
+<b><font color="#006cb8">026: </font></b>      <font color="#000000">state</font> <font color="#000000">=</font> <font color="#000000">START</font><font color="#000000">;</font>             
+<b><font color="#006cb8">027: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">028: </font></b>
+<b><font color="#006cb8">029: </font></b>   <font color="#7a9ecd">/** </font>
+<b><font color="#006cb8">030: </font></b><font color="#7a9ecd">      Sets the current customer number </font>
+<b><font color="#006cb8">031: </font></b><font color="#7a9ecd">      and sets state to PIN. </font>
+<b><font color="#006cb8">032: </font></b><font color="#7a9ecd">      (Precondition: state is START)</font>
+<b><font color="#006cb8">033: </font></b><font color="#7a9ecd">      @param number the customer number.</font>
+<b><font color="#006cb8">034: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">035: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">setCustomerNumber</font><font color="#000000">(</font><font color="#d05b76">int</font> <font color="#000000">number</font><font color="#000000">)</font> 
+<b><font color="#006cb8">036: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">037: </font></b>      <font color="#d05b76">assert</font> <font color="#000000">state</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#000000">START</font><font color="#000000">;</font>
+<b><font color="#006cb8">038: </font></b>      <font color="#000000">customerNumber</font> <font color="#000000">=</font> <font color="#000000">number</font><font color="#000000">;</font>
+<b><font color="#006cb8">039: </font></b>      <font color="#000000">state</font> <font color="#000000">=</font> <font color="#000000">PIN</font><font color="#000000">;</font>
+<b><font color="#006cb8">040: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">041: </font></b>
+<b><font color="#006cb8">042: </font></b>   <font color="#7a9ecd">/** </font>
+<b><font color="#006cb8">043: </font></b><font color="#7a9ecd">      Finds customer in bank.</font>
+<b><font color="#006cb8">044: </font></b><font color="#7a9ecd">      If found sets state to ACCOUNT, else to START.</font>
+<b><font color="#006cb8">045: </font></b><font color="#7a9ecd">      (Precondition: state is PIN)</font>
+<b><font color="#006cb8">046: </font></b><font color="#7a9ecd">      @param pin the PIN of the current customer</font>
+<b><font color="#006cb8">047: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">048: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">selectCustomer</font><font color="#000000">(</font><font color="#d05b76">int</font> <font color="#000000">pin</font><font color="#000000">)</font> 
+<b><font color="#006cb8">049: </font></b>         <font color="#d05b76">throws</font> <font color="#000000">SQLException</font>
+<b><font color="#006cb8">050: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">051: </font></b>      <font color="#d05b76">assert</font> <font color="#000000">state</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#000000">PIN</font><font color="#000000">;</font>
+<b><font color="#006cb8">052: </font></b>      <font color="#000000">currentCustomer</font> 
+<b><font color="#006cb8">053: </font></b>            <font color="#000000">=</font> <font color="#000000">theBank</font><font color="#000000">.</font><font color="#000000">findCustomer</font><font color="#000000">(</font><font color="#000000">customerNumber</font><font color="#000000">,</font> <font color="#000000">pin</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">054: </font></b>      <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">currentCustomer</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">)</font> 
+<b><font color="#006cb8">055: </font></b>         <font color="#000000">state</font> <font color="#000000">=</font> <font color="#000000">START</font><font color="#000000">;</font>
+<b><font color="#006cb8">056: </font></b>      <font color="#d05b76">else</font> 
+<b><font color="#006cb8">057: </font></b>         <font color="#000000">state</font> <font color="#000000">=</font> <font color="#000000">ACCOUNT</font><font color="#000000">;</font>
+<b><font color="#006cb8">058: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">059: </font></b>   
+<b><font color="#006cb8">060: </font></b>   <font color="#7a9ecd">/** </font>
+<b><font color="#006cb8">061: </font></b><font color="#7a9ecd">      Sets current account to checking or savings. Sets </font>
+<b><font color="#006cb8">062: </font></b><font color="#7a9ecd">      state to TRANSACT. </font>
+<b><font color="#006cb8">063: </font></b><font color="#7a9ecd">      (Precondition: state is ACCOUNT or TRANSACT)</font>
+<b><font color="#006cb8">064: </font></b><font color="#7a9ecd">      @param account one of CHECKING or SAVINGS</font>
+<b><font color="#006cb8">065: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">066: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">selectAccount</font><font color="#000000">(</font><font color="#d05b76">int</font> <font color="#000000">account</font><font color="#000000">)</font>
+<b><font color="#006cb8">067: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">068: </font></b>      <font color="#d05b76">assert</font> <font color="#000000">state</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#000000">ACCOUNT</font> <font color="#000000">|</font><font color="#000000">|</font> <font color="#000000">state</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#000000">TRANSACT</font><font color="#000000">;</font>
+<b><font color="#006cb8">069: </font></b>      <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">account</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#000000">CHECKING</font><font color="#000000">)</font>
+<b><font color="#006cb8">070: </font></b>         <font color="#000000">currentAccount</font> <font color="#000000">=</font> <font color="#000000">currentCustomer</font><font color="#000000">.</font><font color="#000000">getCheckingAccount</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">071: </font></b>      <font color="#d05b76">else</font>
+<b><font color="#006cb8">072: </font></b>         <font color="#000000">currentAccount</font> <font color="#000000">=</font> <font color="#000000">currentCustomer</font><font color="#000000">.</font><font color="#000000">getSavingsAccount</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">073: </font></b>      <font color="#000000">state</font> <font color="#000000">=</font> <font color="#000000">TRANSACT</font><font color="#000000">;</font>
+<b><font color="#006cb8">074: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">075: </font></b>
+<b><font color="#006cb8">076: </font></b>   <font color="#7a9ecd">/** </font>
+<b><font color="#006cb8">077: </font></b><font color="#7a9ecd">      Withdraws amount from current account. </font>
+<b><font color="#006cb8">078: </font></b><font color="#7a9ecd">      (Precondition: state is TRANSACT)</font>
+<b><font color="#006cb8">079: </font></b><font color="#7a9ecd">      @param value the amount to withdraw</font>
+<b><font color="#006cb8">080: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">081: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">withdraw</font><font color="#000000">(</font><font color="#d05b76">double</font> <font color="#000000">value</font><font color="#000000">)</font>
+<b><font color="#006cb8">082: </font></b>         <font color="#d05b76">throws</font> <font color="#000000">SQLException</font>
+<b><font color="#006cb8">083: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">084: </font></b>      <font color="#d05b76">assert</font> <font color="#000000">state</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#000000">TRANSACT</font><font color="#000000">;</font>
+<b><font color="#006cb8">085: </font></b>      <font color="#000000">currentAccount</font><font color="#000000">.</font><font color="#000000">withdraw</font><font color="#000000">(</font><font color="#000000">value</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">086: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">087: </font></b>
+<b><font color="#006cb8">088: </font></b>   <font color="#7a9ecd">/** </font>
+<b><font color="#006cb8">089: </font></b><font color="#7a9ecd">      Deposits amount to current account. </font>
+<b><font color="#006cb8">090: </font></b><font color="#7a9ecd">      (Precondition: state is TRANSACT)</font>
+<b><font color="#006cb8">091: </font></b><font color="#7a9ecd">      @param value the amount to deposit</font>
+<b><font color="#006cb8">092: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">093: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">deposit</font><font color="#000000">(</font><font color="#d05b76">double</font> <font color="#000000">value</font><font color="#000000">)</font>
+<b><font color="#006cb8">094: </font></b>         <font color="#d05b76">throws</font> <font color="#000000">SQLException</font>
+<b><font color="#006cb8">095: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">096: </font></b>      <font color="#d05b76">assert</font> <font color="#000000">state</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#000000">TRANSACT</font><font color="#000000">;</font>
+<b><font color="#006cb8">097: </font></b>      <font color="#000000">currentAccount</font><font color="#000000">.</font><font color="#000000">deposit</font><font color="#000000">(</font><font color="#000000">value</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">098: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">099: </font></b>
+<b><font color="#006cb8">100: </font></b>   <font color="#7a9ecd">/** </font>
+<b><font color="#006cb8">101: </font></b><font color="#7a9ecd">      Gets the balance of the current account. </font>
+<b><font color="#006cb8">102: </font></b><font color="#7a9ecd">      (Precondition: state is TRANSACT)</font>
+<b><font color="#006cb8">103: </font></b><font color="#7a9ecd">      @return the balance</font>
+<b><font color="#006cb8">104: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">105: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">double</font> <font color="#000000">getBalance</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">106: </font></b>         <font color="#d05b76">throws</font> <font color="#000000">SQLException</font>
+<b><font color="#006cb8">107: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">108: </font></b>      <font color="#d05b76">assert</font> <font color="#000000">state</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#000000">TRANSACT</font><font color="#000000">;</font>
+<b><font color="#006cb8">109: </font></b>      <font color="#d05b76">return</font> <font color="#000000">currentAccount</font><font color="#000000">.</font><font color="#000000">getBalance</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">110: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">111: </font></b>
+<b><font color="#006cb8">112: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">113: </font></b><font color="#7a9ecd">      Moves back to the previous state.</font>
+<b><font color="#006cb8">114: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">115: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">back</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">116: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">117: </font></b>      <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">state</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#000000">TRANSACT</font><font color="#000000">)</font>
+<b><font color="#006cb8">118: </font></b>         <font color="#000000">state</font> <font color="#000000">=</font> <font color="#000000">ACCOUNT</font><font color="#000000">;</font>
+<b><font color="#006cb8">119: </font></b>      <font color="#d05b76">else</font> <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">state</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#000000">ACCOUNT</font><font color="#000000">)</font>
+<b><font color="#006cb8">120: </font></b>         <font color="#000000">state</font> <font color="#000000">=</font> <font color="#000000">PIN</font><font color="#000000">;</font>
+<b><font color="#006cb8">121: </font></b>      <font color="#d05b76">else</font> <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">state</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#000000">PIN</font><font color="#000000">)</font>
+<b><font color="#006cb8">122: </font></b>         <font color="#000000">state</font> <font color="#000000">=</font> <font color="#000000">START</font><font color="#000000">;</font>
+<b><font color="#006cb8">123: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">124: </font></b>
+<b><font color="#006cb8">125: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">126: </font></b><font color="#7a9ecd">      Gets the current state of this ATM.</font>
+<b><font color="#006cb8">127: </font></b><font color="#7a9ecd">      @return the current state</font>
+<b><font color="#006cb8">128: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">129: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">int</font> <font color="#000000">getState</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">130: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">131: </font></b>      <font color="#d05b76">return</font> <font color="#000000">state</font><font color="#000000">;</font>
+<b><font color="#006cb8">132: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">133: </font></b>
+<b><font color="#006cb8">134: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">int</font> <font color="#000000">state</font><font color="#000000">;</font>
+<b><font color="#006cb8">135: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">int</font> <font color="#000000">customerNumber</font><font color="#000000">;</font>
+<b><font color="#006cb8">136: </font></b>   <font color="#d05b76">private</font> <font color="#000000">Customer</font> <font color="#000000">currentCustomer</font><font color="#000000">;</font>
+<b><font color="#006cb8">137: </font></b>   <font color="#d05b76">private</font> <font color="#000000">BankAccount</font> <font color="#000000">currentAccount</font><font color="#000000">;</font>
+<b><font color="#006cb8">138: </font></b>   <font color="#d05b76">private</font> <font color="#000000">Bank</font> <font color="#000000">theBank</font><font color="#000000">;</font>
+<b><font color="#006cb8">139: </font></b>   
+<b><font color="#006cb8">140: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">final</font> <font color="#d05b76">int</font> <font color="#000000">START</font> <font color="#000000">=</font> <font color="#89c976">1</font><font color="#000000">;</font>
+<b><font color="#006cb8">141: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">final</font> <font color="#d05b76">int</font> <font color="#000000">PIN</font> <font color="#000000">=</font> <font color="#89c976">2</font><font color="#000000">;</font>
+<b><font color="#006cb8">142: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">final</font> <font color="#d05b76">int</font> <font color="#000000">ACCOUNT</font> <font color="#000000">=</font> <font color="#89c976">3</font><font color="#000000">;</font>
+<b><font color="#006cb8">143: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">final</font> <font color="#d05b76">int</font> <font color="#000000">TRANSACT</font> <font color="#000000">=</font> <font color="#89c976">4</font><font color="#000000">;</font>
+<b><font color="#006cb8">144: </font></b>
+<b><font color="#006cb8">145: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">final</font> <font color="#d05b76">int</font> <font color="#000000">CHECKING</font> <font color="#000000">=</font> <font color="#89c976">1</font><font color="#000000">;</font>
+<b><font color="#006cb8">146: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">final</font> <font color="#d05b76">int</font> <font color="#000000">SAVINGS</font> <font color="#000000">=</font> <font color="#89c976">2</font><font color="#000000">;</font>
+<b><font color="#006cb8">147: </font></b><font color="#000000">}</font>
+</tt></pre>

@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 15</title>
+</head>
+
+<body>
+<div onclick="document.location='slide038.html'">
+<center><small><a href="slide036.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide038.html">next</a></small></center>
+<hr></div>
+<h2>Scenario</h2>
+<ol>
+  <li><tt>DataSetTester.main</tt> calls <tt>DataSetReader.readFile</tt></li>
+  <li><tt>readFile</tt> calls <tt>readData</tt></li>
+  <li><tt>readData</tt> calls <tt>readValue</tt></li>
+  <li><tt>readValue</tt> doesn't find expected value and throws <tt>BadDataException</tt></li>
+  <li><tt>readValue</tt> has no handler for exception and terminates</li>
+  <li><tt>readData</tt> has no handler for exception and terminates</li>
+  <li><tt>readFile</tt> has no handler for exception and terminates after executing <tt>finally</tt> clause</li>
+  <li><tt>DataSetTester.main</tt> has handler for <tt>BadDataException</tt>; handler prints a message, and user is given another chance to enter file name</li>
+</ol>
+
+
+
+<div onclick="document.location='slide038.html'"><hr>
+<center><small><a href="slide036.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide038.html">next</a></small></center>
+</div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#000000">import</font> java<font color="#000000">.</font>awt<font color="#000000">.</font>Graphics<font color="#000000">;</font>
+<b><font color="#006cb8">02: </font></b><font color="#000000">import</font> java<font color="#000000">.</font>awt<font color="#000000">.</font>Graphics2D<font color="#000000">;</font>
+<b><font color="#006cb8">03: </font></b><font color="#000000">import</font> javax<font color="#000000">.</font>swing<font color="#000000">.</font>JComponent<font color="#000000">;</font>
+<b><font color="#006cb8">04: </font></b>
+<b><font color="#006cb8">05: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">06: </font></b><font color="#7a9ecd">   This component draws two car shapes.</font>
+<b><font color="#006cb8">07: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">08: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> CarComponent <font color="#d05b76">extends</font> JComponent
+<b><font color="#006cb8">09: </font></b><font color="#000000">{</font>  
+<b><font color="#006cb8">10: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">paintComponent</font><font color="#000000">(</font>Graphics g<font color="#000000">)</font>
+<b><font color="#006cb8">11: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">12: </font></b>      Graphics2D g2 <font color="#000000">=</font> <font color="#000000">(</font>Graphics2D<font color="#000000">)</font> g<font color="#000000">;</font>
+<b><font color="#006cb8">13: </font></b>
+<b><font color="#006cb8">14: </font></b>      Car car1 <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Car</font><font color="#000000">(</font><font color="#89c976">0</font><font color="#000000">,</font> <font color="#89c976">0</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">15: </font></b>      
+<b><font color="#006cb8">16: </font></b>      <font color="#d05b76">int</font> x <font color="#000000">=</font> <font color="#000000">getWidth</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">-</font> Car<font color="#000000">.</font>WIDTH<font color="#000000">;</font>
+<b><font color="#006cb8">17: </font></b>      <font color="#d05b76">int</font> y <font color="#000000">=</font> <font color="#000000">getHeight</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">-</font> Car<font color="#000000">.</font>HEIGHT<font color="#000000">;</font>
+<b><font color="#006cb8">18: </font></b>
+<b><font color="#006cb8">19: </font></b>      Car car2 <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Car</font><font color="#000000">(</font>x<font color="#000000">,</font> y<font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">20: </font></b>
+<b><font color="#006cb8">21: </font></b>      car1<font color="#000000">.</font><font color="#000000">draw</font><font color="#000000">(</font>g2<font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">22: </font></b>      car2<font color="#000000">.</font><font color="#000000">draw</font><font color="#000000">(</font>g2<font color="#000000">)</font><font color="#000000">;</font>      
+<b><font color="#006cb8">23: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">24: </font></b><font color="#000000">}</font>
+</tt></pre>

@@ -1,0 +1,634 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 6</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+<body>
+<h2>Chapter 6</h2>
+<h1>Decisions </h1>
+<br>
+<h2>Chapter Goals</h2>
+<ul>
+  <li>To be able to implement decisions using <tt>if</tt> statements</li>
+  <li>To understand how to group statements into blocks</li>
+  <li>To learn how to compare integers, floating-point numbers,
+strings, and objects</li>
+  <li>To recognize the correct ordering of decisions in multiple
+branches</li>
+  <li>To program conditions using Boolean operators and variables</li>
+</ul>
+<h2>The <tt>if</tt> Statement</h2>
+<ul>
+  <li>The <tt>if</tt> statement lets a program carry out different
+actions depending on a condition
+    <pre>if (amount &lt;= balance)<br>   balance = balance - amount;</pre>
+  </li>
+</ul>
+<img src="images/flow-if.png" alt="">
+<br>
+<h2>The <tt>if</tt>/<tt>else</tt> Statement<br>
+</h2>
+<pre>if (amount &lt;= balance)<br>   balance = balance - amount;<br>else<br>   balance = balance - OVERDRAFT_PENALTY;</pre>
+<br>
+<img src="images/flow-ifelse.png" alt="">
+<br>
+<h2>Statement Types</h2>
+<ul>
+  <li>Simple statement<br>
+    <tt>balance = balance - amount;</tt><br>
+  </li>
+  <li>Compound statement<br>
+    <tt>if (balance &gt;= amount) balance = balance - amount;<br>
+    </tt>Also <tt>while</tt>, <tt>for</tt>, etc. (loop
+statements&#8211;Chapter 7)</li>
+  <li>Block statement<br>
+    <tt>{<br>
+&nbsp; &nbsp; double newBalance = balance - amount;<br>
+&nbsp; &nbsp; balance = newBalance;<br>
+}</tt></li>
+</ul>
+<h2>Syntax 6.1: The <tt>if</tt> Statement</h2>
+<table bgcolor="#ffffff" border="1" cellpadding="10" width="70%">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><tt>if(<i>condition</i>)<br>
+&nbsp; &nbsp;<i>statement</i><br>
+            <br>
+if </tt><tt>(<i>condition</i>)<br>
+&nbsp; &nbsp;<i>statement<sub>1</sub></i></tt><br>
+            <tt>else<br>
+            </tt><tt><i>&nbsp; &nbsp;statement<sub>2</sub></i></tt><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td>
+            <pre>if (amount &lt;= balance)<br>   balance = balance - amount;<br><br>if (amount &lt;= balance)<br>   balance = balance - amount;<br>else<br>   balance = balance - OVERDRAFT_PENALTY;</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+To execute a statement when a condition is true or false</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2>Syntax 6.2: Block Statement</h2>
+<table bgcolor="#ffffff" border="1" cellpadding="10" width="70%">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><tt>{<br>
+&nbsp; &nbsp;<i>statement<sub>1</sub></i><br>
+            </tt><tt> &nbsp; &nbsp;<i>statement<sub>2</sub><br>
+&nbsp; &nbsp;. . .</i><br>
+}</tt><br>
+            <br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td>
+            <pre>{<br>   double newBalance = balance - amount;<br>   balance = newBalance;<br>}</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+To group several statements together to form a single statement</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li>Why did we use the condition <tt>amount &lt;= balance</tt> and
+not <tt>amount &lt; balance</tt> in the example for the <tt>if/else</tt>
+statement?</li>
+  <li>What is logically wrong with the statement
+    <pre>if (amount &lt;= balance)<br>   newBalance = balance - amount; balance = newBalance;</pre>
+and how do you fix it?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li>If the withdrawal amount equals the balance, the result should be
+a zero balance and no penalty</li>
+  <li>Only the first assignment statement is part of the <tt>if</tt>
+statement. Use braces to group both assignment statements into a block
+statement</li>
+</ol>
+<br>
+<h2>Comparing Values: Relational Operators</h2>
+<ul>
+  <li>Relational operators compare values<br>
+    <table border="1" cellpadding="2" cellspacing="2" width="50%">
+      <tbody>
+        <tr>
+          <td valign="top">Java<br>
+          </td>
+          <td valign="top">Math Notation<br>
+          </td>
+          <td valign="top">Description<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top"><tt>&gt;</tt><br>
+          </td>
+          <td valign="top">&gt;<br>
+          </td>
+          <td valign="top">Greater than<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top"><tt>&gt;=</tt><br>
+          </td>
+          <td valign="top">&#8805;<br>
+          </td>
+          <td valign="top">Greater than or equal<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top"><tt>&lt;</tt><br>
+          </td>
+          <td valign="top">&lt;<br>
+          </td>
+          <td valign="top">Less than<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top"><tt>&lt;=</tt><br>
+          </td>
+          <td valign="top">&#8804;<br>
+          </td>
+          <td valign="top">Less than or equal<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top"><tt>==</tt><br>
+          </td>
+          <td valign="top">=<br>
+          </td>
+          <td valign="top">Equal<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top"><tt>!=</tt><br>
+          </td>
+          <td valign="top">&#8800;<br>
+          </td>
+          <td valign="top">Not equal<br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>The <tt>==</tt> denotes equality testing
+    <pre>a = 5; // Assign 5 to a<br>if (a == 5) . . . // Test whether a equals 5</pre>
+  </li>
+</ul>
+<h2>Comparing Floating-Point Numbers</h2>
+<ul>
+  <li>Consider this code:<br>
+    <pre>double r = Math.sqrt(2);<br>double d = r * r -2;<br>if (d == 0)<br>   System.out.println("sqrt(2)squared minus 2 is 0");<br>else<br>   System.out.println("sqrt(2)squared minus 2 is not 0 but " + d);</pre>
+  </li>
+  <li>It prints:<br>
+    <tt>&nbsp;sqrt(2)squared minus 2 is not 0 but 4.440892098500626E-16</tt></li>
+</ul>
+<h2>Comparing Floating-Point Numbers<br>
+</h2>
+<ul>
+  <li>To avoid roundoff errors, don't use <tt>==</tt> to compare
+floating-point numbers</li>
+  <li>To compare floating-point numbers test whether they are <i>close
+enough</i>: |<i>x</i> - <i>y</i>| &#8804; &#949;
+    <pre>final double EPSILON = 1E-14;<br>if (Math.abs(x - y) &lt;= EPSILON)<br>   // x is approximately equal to y</pre>
+  </li>
+  <li>&#949; is a small number such as 10<sup>-14</sup></li>
+</ul>
+<h2>Comparing Strings</h2>
+<ul>
+  <li>Don't use <tt>==</tt> for strings!<br>
+    <tt>if (input == "Y") // WRONG!!!</tt></li>
+  <li>Use <tt>equals</tt> method:<br>
+    <tt>if (input.equals("Y"))</tt><br>
+  </li>
+  <li><tt>==</tt> tests identity, <tt>equals</tt> tests equal contents<br>
+  </li>
+  <li>Case insensitive test ("Y" or "y")<br>
+    <tt>if (input.equalsIgnoreCase("Y"))</tt></li>
+  <li><tt>s.compareTo(t)</tt> &lt; 0 means: <br>
+    <tt>s</tt> comes before <tt>t</tt> in the dictionary</li>
+  <li>"car"comes before "cargo"</li>
+  <li>All uppercase letters come before lowercase: <br>
+"Hello" comes before "car"<br>
+  </li>
+</ul>
+<h2>Lexicographic Comparison</h2>
+<img src="images/lexicographic.png" alt="">
+<br>
+<h2>Comparing Objects</h2>
+<ul>
+  <li><tt>==</tt> tests for identity, <tt>equals</tt> for identical
+content</li>
+  <li><tt>Rectangle box1 = new Rectangle(5, 10, 20, 30);<br>
+Rectangle box2 = box1;<br>
+Rectangle box3 = new Rectangle(5, 10, 20, 30);<br>
+    </tt></li>
+  <li><tt>box1 != box3</tt>, <br>
+but <tt>box1.equals(box3)</tt></li>
+  <li><tt>box1 == box2</tt><br>
+  </li>
+  <li>Caveat: <tt>equals</tt> must be defined for the class</li>
+</ul>
+<h2>Object Comparison</h2>
+<img src="images/comparing-objects.png" alt="">
+<br>
+<h2>Testing for <tt>null</tt></h2>
+<ul>
+  <li><tt>null</tt> reference refers to no object
+    <pre>String middleInitial = null; // Not set<br>if ( . . . )<br>   middleInitial = middleName.substring(0, 1);</pre>
+  </li>
+  <li>Can be used in tests:<br>
+    <pre>if (middleInitial == null)<br>   System.out.println(firstName + " " + lastName);<br>else<br>   System.out.println(firstName + " " + middleInitial + ". " + lastName);</pre>
+  </li>
+  <li>Use <tt>==</tt>, not <tt>equals</tt>, to test for <tt>null</tt></li>
+  <li><tt>null</tt> is not the same as the empty string <tt>""</tt></li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="3">What is the value of <tt>s.length()</tt> if <tt>s</tt>
+is
+    <ol class="withloweralpha">
+      <li value="a">the empty string <tt>""</tt>?</li>
+      <li>the string <tt>" "</tt> containing a space?</li>
+      <li><tt>null</tt>?</li>
+    </ol>
+  </li>
+  <li>Which of the following comparisons are syntactically incorrect?
+Which of them are syntactically correct, but logically questionable?
+    <pre>String a = "1";<br>String b = "one";<br>double x = 1;<br>double y = 3 * (1.0 / 3);</pre>
+    <ol class="withloweralpha">
+      <li><tt>a == "1"</tt></li>
+      <li><tt>a == null</tt></li>
+      <li><tt>a.equals("")</tt></li>
+      <li><tt>a == b</tt></li>
+      <li><tt>a == x</tt></li>
+      <li><tt>x == y</tt></li>
+      <li><tt>x - y == null</tt></li>
+      <li><tt>x.equals(y)</tt></li>
+    </ol>
+  </li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="3">(a) 0; (b) 1; (c) an exception is thrown</li>
+  <li>Syntactically incorrect: e, g, h. Logically questionable: a, d, f</li>
+</ol>
+<br>
+<h2>Multiple Alternatives: Sequences of Comparisons</h2>
+<ul>
+  <li><tt>if (<i>condition1</i>)<br>
+&nbsp;&nbsp; <i>statement1</i>;<br>
+else if (<i>condition2</i>)<br>
+&nbsp;&nbsp; <i>statement2</i>;<br>
+. . .<br>
+else<br>
+&nbsp;&nbsp; <i>statement4</i>;</tt></li>
+  <li>The first matching condition is executed</li>
+  <li>Order matters<br>
+    <tt>if (richter &gt;= 0) // always passes<br>
+&nbsp; &nbsp;r = "Generally not felt by people";<br>
+else if (richter &gt;= 3.5) // not tested<br>
+&nbsp; &nbsp;r = "Felt by many people, no destruction";<br>
+. . .</tt></li>
+  <li>Don't omit <tt>else<br>
+if (richter &gt;= 8.0)<br>
+&nbsp; &nbsp;r = "Most structures fall";<br>
+if (richter &gt;= 7.0) // omitted else--ERROR<br>
+&nbsp; &nbsp;r = "Many buildings destroyed</tt></li>
+</ul>
+<h2>File Earthquake.java</h2>
+<iframe src="code/quake/Earthquake.java.html" class="code">
+Your browser does not support the
+&amp;amp;amp;lt;iframe&amp;amp;amp;gt; tag.
+</iframe>
+<h2>File EarthquakeTester.java</h2>
+<iframe src="code/quake/EarthquakeTester.java.html" class="code">
+Your browser does not support the
+&amp;amp;amp;lt;iframe&amp;amp;amp;gt; tag.
+</iframe><br>
+<h3>Output</h3>
+<pre>   Enter a magnitude on the Richter scale: <font color="BLUE">7.1</font>
+   Many buildings destroyed</pre>
+<br>
+<h2>Multiple Alternatives: Nested Branches</h2>
+<ul>
+  <li>Branch inside another branch<br>
+    <pre>if (<i>condition1</i>)<br>{<br>   if (<i>condition1a</i>)<br>      <i>statement1a</i>;<br>   else<br>      <i>statement1b</i>;<br>}<br>else<br>   <i>statement2</i>;<br></pre>
+  </li>
+</ul>
+<h2>Tax Schedule</h2>
+<br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td colspan="2" style="vertical-align: top;">If your filing
+status is Single<br>
+      </td>
+      <td colspan="2" style="vertical-align: top;">If your filing
+status is Married<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Tax Bracket<br>
+      </td>
+      <td style="vertical-align: top;">Percentage<br>
+      </td>
+      <td style="vertical-align: top;">Tax Bracket<br>
+      </td>
+      <td style="vertical-align: top;">Percentage<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">$0 . . . $21,450<br>
+      </td>
+      <td style="vertical-align: top;">15%<br>
+      </td>
+      <td style="vertical-align: top;">0 . . . $35,800<br>
+      </td>
+      <td style="vertical-align: top;">15%<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Amount over $21,450, up to
+$51,900<br>
+      </td>
+      <td style="vertical-align: top;">28%<br>
+      </td>
+      <td style="vertical-align: top;">Amount over $35,800, up to
+$86,500<br>
+      </td>
+      <td style="vertical-align: top;">28%<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Amount over $51,900</td>
+      <td style="vertical-align: top;">31%<br>
+      </td>
+      <td style="vertical-align: top;">Amount over $86,500</td>
+      <td style="vertical-align: top;">31%<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+&nbsp;
+<br>
+<h2>Nested Branches</h2>
+<ul>
+  <li>Compute taxes due, given filing status and income figure: (1)
+branch on the filing status, (2) for each filing status, branch on
+income level</li>
+  <li>The two-level decision process is reflected in two levels of <tt>if</tt>
+statements</li>
+  <li>We say that the income test is <i>nested</i> inside the test for
+filing status</li>
+</ul>
+<img src="images/tax.png" alt="">
+<br>
+<h2>File TaxReturn.java</h2>
+<iframe src="code/tax/TaxReturn.java.html" class="code">
+Your browser does not support the
+&amp;amp;amp;lt;iframe&amp;amp;amp;gt; tag.
+</iframe>
+<h2>File TaxReturnTester.java</h2>
+<iframe src="code/tax/TaxReturnTester.java.html" class="code">
+Your browser does not support the
+&amp;amp;amp;lt;iframe&amp;amp;amp;gt; tag.
+</iframe><br>
+<h3>Output</h3>
+<pre>   Please enter your income: <font color="BLUE">50000</font>
+   Please enter S (single) or M (married): <font
+ color="BLUE">S</font>
+   The tax is 11211.5</pre>
+<h2>Self Check</h2>
+<ol>
+  <li value="5">The <tt>if/else/else</tt> statement for the earthquake
+strength first tested for higher values, then descended to lower
+values. Can you reverse that order?</li>
+  <li>Some people object to higher tax rates for higher incomes,
+claiming that you might end up with less money after taxes when you get
+a raise for working hard. What is the flaw in this argument?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="5">Yes, if you also reverse the comparisons:
+    <pre>if (richter &lt; 3.5)<br>   r = "Generally not felt by people";<br>else if (richter &lt; 4.5)<br>   r = "Felt by many people, no destruction";<br>else if (richter &lt; 6.0)<br>   r = "Damage to poorly constructed buildings";<br>. . .</pre>
+  </li>
+  <li>The higher tax rate is only applied on the income in the higher
+bracket. Suppose you are single and make $51,800. Should you try to get
+a $200 raise? Absolutely&#8211;you get to keep 72% of the first $100 and 69%
+of the next $100</li>
+</ol>
+<br>
+<h2>Using Boolean Expressions: The <tt>boolean</tt> Type</h2>
+<img src="images/boole.png" alt="" style="width: 240px; height: 327px;"
+ align="middle">
+<ul>
+  <li>George Boole (1815-1864): pioneer in the study of logic</li>
+  <li>value of expression <tt>amount &lt; 1000</tt> is <tt>true</tt>
+or <tt>
+false</tt>.<br>
+  </li>
+  <li><tt>boolean</tt> type: one of these 2 truth values</li>
+</ul>
+<h2>Using Boolean Expressions: Predicate Method</h2>
+<ul>
+  <li>A predicate method returns a <tt>boolean</tt> value<br>
+    <tt>public boolean isOverdrawn()<br>
+{<br>
+&nbsp; &nbsp;return balance &lt; 0; <br>
+}</tt></li>
+  <li>Use in conditions<br>
+    <tt>if (harrysChecking.isOverdrawn())</tt> <tt>. . .</tt> <br>
+  </li>
+  <li>Useful predicate methods in <tt>Character</tt> class:<br>
+    <tt>isDigit<br>
+isLetter<br>
+isUpperCase<br>
+isLowerCase</tt><br>
+  </li>
+  <li><tt>if (Character.isUpperCase(ch)) . . .</tt></li>
+  <li>Useful predicate methods in <tt>Scanner</tt> class: <tt>hasNextInt()</tt>
+and <tt>hasNextDouble()</tt><br>
+    <tt>if (in.hasNextInt()) n = in.nextInt();</tt></li>
+</ul>
+<h2>Using Boolean Expressions: The Boolean Operators</h2>
+<ul>
+  <li><tt>&amp;&amp;</tt>&nbsp; and<br>
+  </li>
+  <li><tt>||</tt>&nbsp; or<br>
+  </li>
+  <li><tt>!</tt>&nbsp;&nbsp; not<br>
+  </li>
+  <li><tt>if (0 &lt; amount &amp;&amp; amount &lt; 1000) . . . </tt><br>
+  </li>
+  <li><tt>if (input.equals("S") || input.equals("M")) . . .</tt><br>
+  </li>
+</ul>
+<h2><tt>&amp;&amp;</tt> and <tt>||</tt> Operators</h2>
+<img src="images/flow-andor.png" alt="">
+<br>
+<h2>Truth Tables</h2>
+<table border="1" cellpadding="2" cellspacing="2" width="30%">
+  <tbody>
+    <tr>
+      <td valign="top">A<br>
+      </td>
+      <td valign="top">B<br>
+      </td>
+      <td valign="top">A <tt>&amp;&amp;</tt> B<br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>true</tt><br>
+      </td>
+      <td valign="top"><tt>true</tt><br>
+      </td>
+      <td valign="top"><tt>true</tt><br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>true</tt><br>
+      </td>
+      <td valign="top"><tt>false</tt><br>
+      </td>
+      <td valign="top"><tt>false</tt><br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>false</tt><br>
+      </td>
+      <td valign="top"><i>Any</i><br>
+      </td>
+      <td valign="top"><tt>false</tt><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<table border="1" cellpadding="2" cellspacing="2" width="30%">
+  <tbody>
+    <tr>
+      <td valign="top">A<br>
+      </td>
+      <td valign="top">B<br>
+      </td>
+      <td valign="top">A <tt>||</tt> B<br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>true</tt><br>
+      </td>
+      <td valign="top"><i>Any</i><br>
+      </td>
+      <td valign="top"><tt>true</tt><br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>false</tt><br>
+      </td>
+      <td valign="top"><tt>true</tt><br>
+      </td>
+      <td valign="top"><tt>true</tt><br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>false</tt><br>
+      </td>
+      <td valign="top"><tt>false</tt><br>
+      </td>
+      <td valign="top"><tt>false</tt><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<table border="1" cellpadding="2" cellspacing="2" width="30%">
+  <tbody>
+    <tr>
+      <td valign="top">A<br>
+      </td>
+      <td valign="top"><tt>!</tt> A<br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>true</tt><br>
+      </td>
+      <td valign="top"><tt>false</tt><br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>false</tt><br>
+      </td>
+      <td valign="top"><tt>true</tt><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2>Using Boolean Variables</h2>
+<ul>
+  <li><tt>private boolean married;</tt></li>
+  <li>Set to truth value:<br>
+    <tt>married = input.equals("M");</tt><br>
+  </li>
+  <li>Use in conditions:<br>
+    <tt>if (married) . . . else . . .<br>
+if (!married) . . .</tt></li>
+  <li>Also called <i>flag</i></li>
+  <li>It is considered gauche to write a test such as<br>
+    <tt>if (married == true) . . . // Don't</tt><br>
+Just use the simpler test<br>
+    <tt>if (married) . . .</tt></li>
+</ul>
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li value="7">When does the statement<br>
+    <tt>system.out.println (x &gt; 0 || x &lt; 0);</tt><br>
+print <tt>false</tt>?</li>
+  <li>Rewrite the following expression, avoiding the comparison with <tt>false</tt>:<br>
+    <tt>if (Character.isDigit(ch) == false) . . .</tt></li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="7">When <tt>x</tt> is zero</li>
+  <li><tt>if (!Character.isDigit(ch)) . . .</tt></li>
+</ol>
+<br>
+</body>
+</html>

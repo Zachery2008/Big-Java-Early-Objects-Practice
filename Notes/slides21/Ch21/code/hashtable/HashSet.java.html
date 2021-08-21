@@ -1,0 +1,187 @@
+<pre><tt><b><font color="#006cb8">001: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">util</font><font color="#000000">.</font><font color="#000000">AbstractSet</font><font color="#000000">;</font>
+<b><font color="#006cb8">002: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">util</font><font color="#000000">.</font><font color="#000000">Iterator</font><font color="#000000">;</font>
+<b><font color="#006cb8">003: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">util</font><font color="#000000">.</font><font color="#000000">NoSuchElementException</font><font color="#000000">;</font>
+<b><font color="#006cb8">004: </font></b>
+<b><font color="#006cb8">005: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">006: </font></b><font color="#7a9ecd">   A hash set stores an unordered collection of objects, using</font>
+<b><font color="#006cb8">007: </font></b><font color="#7a9ecd">   a hash table.</font>
+<b><font color="#006cb8">008: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">009: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> <font color="#000000">HashSet</font> <font color="#d05b76">extends</font> <font color="#000000">AbstractSet</font>
+<b><font color="#006cb8">010: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">011: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">012: </font></b><font color="#7a9ecd">      Constructs a hash table.</font>
+<b><font color="#006cb8">013: </font></b><font color="#7a9ecd">      @param bucketsLength the length of the buckets array</font>
+<b><font color="#006cb8">014: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">015: </font></b>   <font color="#d05b76">public</font> <font color="#000000">HashSet</font><font color="#000000">(</font><font color="#d05b76">int</font> <font color="#000000">bucketsLength</font><font color="#000000">)</font>
+<b><font color="#006cb8">016: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">017: </font></b>      <font color="#000000">buckets</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Node</font><font color="#000000">[</font><font color="#000000">bucketsLength</font><font color="#000000">]</font><font color="#000000">;</font>
+<b><font color="#006cb8">018: </font></b>      <font color="#000000">size</font> <font color="#000000">=</font> <font color="#89c976">0</font><font color="#000000">;</font>
+<b><font color="#006cb8">019: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">020: </font></b>
+<b><font color="#006cb8">021: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">022: </font></b><font color="#7a9ecd">      Tests for set membership.</font>
+<b><font color="#006cb8">023: </font></b><font color="#7a9ecd">      @param x an object</font>
+<b><font color="#006cb8">024: </font></b><font color="#7a9ecd">      @return true if x is an element of this set</font>
+<b><font color="#006cb8">025: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">026: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">boolean</font> <font color="#000000">contains</font><font color="#000000">(</font><font color="#000000">Object</font> <font color="#000000">x</font><font color="#000000">)</font>
+<b><font color="#006cb8">027: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">028: </font></b>      <font color="#d05b76">int</font> <font color="#000000">h</font> <font color="#000000">=</font> <font color="#000000">x</font><font color="#000000">.</font><font color="#000000">hashCode</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">029: </font></b>      <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">h</font> <font color="#000000">&lt;</font> <font color="#89c976">0</font><font color="#000000">)</font> <font color="#000000">h</font> <font color="#000000">=</font> <font color="#000000">-</font><font color="#000000">h</font><font color="#000000">;</font>
+<b><font color="#006cb8">030: </font></b>      <font color="#000000">h</font> <font color="#000000">=</font> <font color="#000000">h</font> <font color="#000000">%</font> <font color="#000000">buckets</font><font color="#000000">.</font><font color="#000000">length</font><font color="#000000">;</font>
+<b><font color="#006cb8">031: </font></b>      
+<b><font color="#006cb8">032: </font></b>      <font color="#000000">Node</font> <font color="#000000">current</font> <font color="#000000">=</font> <font color="#000000">buckets</font><font color="#000000">[</font><font color="#000000">h</font><font color="#000000">]</font><font color="#000000">;</font>
+<b><font color="#006cb8">033: </font></b>      <font color="#d05b76">while</font> <font color="#000000">(</font><font color="#000000">current</font> <font color="#000000">!</font><font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">)</font>
+<b><font color="#006cb8">034: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">035: </font></b>         <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">current</font><font color="#000000">.</font><font color="#000000">data</font><font color="#000000">.</font><font color="#000000">equals</font><font color="#000000">(</font><font color="#000000">x</font><font color="#000000">)</font><font color="#000000">)</font> <font color="#d05b76">return</font> <font color="#d05b76">true</font><font color="#000000">;</font>
+<b><font color="#006cb8">036: </font></b>         <font color="#000000">current</font> <font color="#000000">=</font> <font color="#000000">current</font><font color="#000000">.</font><font color="#000000">next</font><font color="#000000">;</font>
+<b><font color="#006cb8">037: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">038: </font></b>      <font color="#d05b76">return</font> <font color="#d05b76">false</font><font color="#000000">;</font>
+<b><font color="#006cb8">039: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">040: </font></b>
+<b><font color="#006cb8">041: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">042: </font></b><font color="#7a9ecd">      Adds an element to this set.</font>
+<b><font color="#006cb8">043: </font></b><font color="#7a9ecd">      @param x an object</font>
+<b><font color="#006cb8">044: </font></b><font color="#7a9ecd">      @return true if x is a new object, false if x was</font>
+<b><font color="#006cb8">045: </font></b><font color="#7a9ecd">      already in the set</font>
+<b><font color="#006cb8">046: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">047: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">boolean</font> <font color="#000000">add</font><font color="#000000">(</font><font color="#000000">Object</font> <font color="#000000">x</font><font color="#000000">)</font>
+<b><font color="#006cb8">048: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">049: </font></b>      <font color="#d05b76">int</font> <font color="#000000">h</font> <font color="#000000">=</font> <font color="#000000">x</font><font color="#000000">.</font><font color="#000000">hashCode</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">050: </font></b>      <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">h</font> <font color="#000000">&lt;</font> <font color="#89c976">0</font><font color="#000000">)</font> <font color="#000000">h</font> <font color="#000000">=</font> <font color="#000000">-</font><font color="#000000">h</font><font color="#000000">;</font>
+<b><font color="#006cb8">051: </font></b>      <font color="#000000">h</font> <font color="#000000">=</font> <font color="#000000">h</font> <font color="#000000">%</font> <font color="#000000">buckets</font><font color="#000000">.</font><font color="#000000">length</font><font color="#000000">;</font>
+<b><font color="#006cb8">052: </font></b>      
+<b><font color="#006cb8">053: </font></b>      <font color="#000000">Node</font> <font color="#000000">current</font> <font color="#000000">=</font> <font color="#000000">buckets</font><font color="#000000">[</font><font color="#000000">h</font><font color="#000000">]</font><font color="#000000">;</font>
+<b><font color="#006cb8">054: </font></b>      <font color="#d05b76">while</font> <font color="#000000">(</font><font color="#000000">current</font> <font color="#000000">!</font><font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">)</font>
+<b><font color="#006cb8">055: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">056: </font></b>         <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">current</font><font color="#000000">.</font><font color="#000000">data</font><font color="#000000">.</font><font color="#000000">equals</font><font color="#000000">(</font><font color="#000000">x</font><font color="#000000">)</font><font color="#000000">)</font> 
+<b><font color="#006cb8">057: </font></b>            <font color="#d05b76">return</font> <font color="#d05b76">false</font><font color="#000000">;</font> <font color="#7a9ecd">// Already in the set</font>
+<b><font color="#006cb8">058: </font></b>         <font color="#000000">current</font> <font color="#000000">=</font> <font color="#000000">current</font><font color="#000000">.</font><font color="#000000">next</font><font color="#000000">;</font>
+<b><font color="#006cb8">059: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">060: </font></b>      <font color="#000000">Node</font> <font color="#000000">newNode</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Node</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">061: </font></b>      <font color="#000000">newNode</font><font color="#000000">.</font><font color="#000000">data</font> <font color="#000000">=</font> <font color="#000000">x</font><font color="#000000">;</font>
+<b><font color="#006cb8">062: </font></b>      <font color="#000000">newNode</font><font color="#000000">.</font><font color="#000000">next</font> <font color="#000000">=</font> <font color="#000000">buckets</font><font color="#000000">[</font><font color="#000000">h</font><font color="#000000">]</font><font color="#000000">;</font>
+<b><font color="#006cb8">063: </font></b>      <font color="#000000">buckets</font><font color="#000000">[</font><font color="#000000">h</font><font color="#000000">]</font> <font color="#000000">=</font> <font color="#000000">newNode</font><font color="#000000">;</font>
+<b><font color="#006cb8">064: </font></b>      <font color="#000000">size</font><font color="#000000">+</font><font color="#000000">+</font><font color="#000000">;</font>
+<b><font color="#006cb8">065: </font></b>      <font color="#d05b76">return</font> <font color="#d05b76">true</font><font color="#000000">;</font>
+<b><font color="#006cb8">066: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">067: </font></b>
+<b><font color="#006cb8">068: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">069: </font></b><font color="#7a9ecd">      Removes an object from this set.</font>
+<b><font color="#006cb8">070: </font></b><font color="#7a9ecd">      @param x an object</font>
+<b><font color="#006cb8">071: </font></b><font color="#7a9ecd">      @return true if x was removed from this set, false</font>
+<b><font color="#006cb8">072: </font></b><font color="#7a9ecd">      if x was not an element of this set</font>
+<b><font color="#006cb8">073: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">074: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">boolean</font> <font color="#000000">remove</font><font color="#000000">(</font><font color="#000000">Object</font> <font color="#000000">x</font><font color="#000000">)</font>
+<b><font color="#006cb8">075: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">076: </font></b>      <font color="#d05b76">int</font> <font color="#000000">h</font> <font color="#000000">=</font> <font color="#000000">x</font><font color="#000000">.</font><font color="#000000">hashCode</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">077: </font></b>      <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">h</font> <font color="#000000">&lt;</font> <font color="#89c976">0</font><font color="#000000">)</font> <font color="#000000">h</font> <font color="#000000">=</font> <font color="#000000">-</font><font color="#000000">h</font><font color="#000000">;</font>
+<b><font color="#006cb8">078: </font></b>      <font color="#000000">h</font> <font color="#000000">=</font> <font color="#000000">h</font> <font color="#000000">%</font> <font color="#000000">buckets</font><font color="#000000">.</font><font color="#000000">length</font><font color="#000000">;</font>
+<b><font color="#006cb8">079: </font></b>      
+<b><font color="#006cb8">080: </font></b>      <font color="#000000">Node</font> <font color="#000000">current</font> <font color="#000000">=</font> <font color="#000000">buckets</font><font color="#000000">[</font><font color="#000000">h</font><font color="#000000">]</font><font color="#000000">;</font>
+<b><font color="#006cb8">081: </font></b>      <font color="#000000">Node</font> <font color="#000000">previous</font> <font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">;</font>
+<b><font color="#006cb8">082: </font></b>      <font color="#d05b76">while</font> <font color="#000000">(</font><font color="#000000">current</font> <font color="#000000">!</font><font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">)</font>
+<b><font color="#006cb8">083: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">084: </font></b>         <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">current</font><font color="#000000">.</font><font color="#000000">data</font><font color="#000000">.</font><font color="#000000">equals</font><font color="#000000">(</font><font color="#000000">x</font><font color="#000000">)</font><font color="#000000">)</font> 
+<b><font color="#006cb8">085: </font></b>         <font color="#000000">{</font>
+<b><font color="#006cb8">086: </font></b>            <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">previous</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">)</font> <font color="#000000">buckets</font><font color="#000000">[</font><font color="#000000">h</font><font color="#000000">]</font> <font color="#000000">=</font> <font color="#000000">current</font><font color="#000000">.</font><font color="#000000">next</font><font color="#000000">;</font>
+<b><font color="#006cb8">087: </font></b>            <font color="#d05b76">else</font> <font color="#000000">previous</font><font color="#000000">.</font><font color="#000000">next</font> <font color="#000000">=</font> <font color="#000000">current</font><font color="#000000">.</font><font color="#000000">next</font><font color="#000000">;</font>
+<b><font color="#006cb8">088: </font></b>            <font color="#000000">size</font><font color="#000000">-</font><font color="#000000">-</font><font color="#000000">;</font>
+<b><font color="#006cb8">089: </font></b>            <font color="#d05b76">return</font> <font color="#d05b76">true</font><font color="#000000">;</font>
+<b><font color="#006cb8">090: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">091: </font></b>         <font color="#000000">previous</font> <font color="#000000">=</font> <font color="#000000">current</font><font color="#000000">;</font>
+<b><font color="#006cb8">092: </font></b>         <font color="#000000">current</font> <font color="#000000">=</font> <font color="#000000">current</font><font color="#000000">.</font><font color="#000000">next</font><font color="#000000">;</font>
+<b><font color="#006cb8">093: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">094: </font></b>      <font color="#d05b76">return</font> <font color="#d05b76">false</font><font color="#000000">;</font>
+<b><font color="#006cb8">095: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">096: </font></b>
+<b><font color="#006cb8">097: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">098: </font></b><font color="#7a9ecd">      Returns an iterator that traverses the elements of this set.</font>
+<b><font color="#006cb8">099: </font></b><font color="#7a9ecd">      @param a hash set iterator</font>
+<b><font color="#006cb8">100: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">101: </font></b>   <font color="#d05b76">public</font> <font color="#000000">Iterator</font> <font color="#000000">iterator</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">102: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">103: </font></b>      <font color="#d05b76">return</font> <font color="#d05b76">new</font> <font color="#000000">HashSetIterator</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">104: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">105: </font></b>
+<b><font color="#006cb8">106: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">107: </font></b><font color="#7a9ecd">      Gets the number of elements in this set.</font>
+<b><font color="#006cb8">108: </font></b><font color="#7a9ecd">      @return the number of elements</font>
+<b><font color="#006cb8">109: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">110: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">int</font> <font color="#000000">size</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">111: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">112: </font></b>      <font color="#d05b76">return</font> <font color="#000000">size</font><font color="#000000">;</font>
+<b><font color="#006cb8">113: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">114: </font></b>
+<b><font color="#006cb8">115: </font></b>   <font color="#d05b76">private</font> <font color="#000000">Node</font><font color="#000000">[</font><font color="#000000">]</font> <font color="#000000">buckets</font><font color="#000000">;</font>
+<b><font color="#006cb8">116: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">int</font> <font color="#000000">size</font><font color="#000000">;</font>
+<b><font color="#006cb8">117: </font></b>
+<b><font color="#006cb8">118: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">class</font> <font color="#000000">Node</font>
+<b><font color="#006cb8">119: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">120: </font></b>      <font color="#d05b76">public</font> <font color="#000000">Object</font> <font color="#000000">data</font><font color="#000000">;</font>
+<b><font color="#006cb8">121: </font></b>      <font color="#d05b76">public</font> <font color="#000000">Node</font> <font color="#000000">next</font><font color="#000000">;</font>
+<b><font color="#006cb8">122: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">123: </font></b>
+<b><font color="#006cb8">124: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">class</font> <font color="#000000">HashSetIterator</font> <font color="#d05b76">implements</font> <font color="#000000">Iterator</font>
+<b><font color="#006cb8">125: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">126: </font></b>      <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">127: </font></b><font color="#7a9ecd">         Constructs a hash set iterator that points to the</font>
+<b><font color="#006cb8">128: </font></b><font color="#7a9ecd">         first element of the hash set.</font>
+<b><font color="#006cb8">129: </font></b><font color="#7a9ecd">      */</font>
+<b><font color="#006cb8">130: </font></b>      <font color="#d05b76">public</font> <font color="#000000">HashSetIterator</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">131: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">132: </font></b>         <font color="#000000">current</font> <font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">;</font>
+<b><font color="#006cb8">133: </font></b>         <font color="#000000">bucket</font> <font color="#000000">=</font> <font color="#000000">-</font><font color="#89c976">1</font><font color="#000000">;</font>
+<b><font color="#006cb8">134: </font></b>         <font color="#000000">previous</font> <font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">;</font>
+<b><font color="#006cb8">135: </font></b>         <font color="#000000">previousBucket</font> <font color="#000000">=</font> <font color="#000000">-</font><font color="#89c976">1</font><font color="#000000">;</font>
+<b><font color="#006cb8">136: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">137: </font></b>      
+<b><font color="#006cb8">138: </font></b>      <font color="#d05b76">public</font> <font color="#d05b76">boolean</font> <font color="#000000">hasNext</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">139: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">140: </font></b>         <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">current</font> <font color="#000000">!</font><font color="#000000">=</font> <font color="#d05b76">null</font> <font color="#000000">&amp;</font><font color="#000000">&amp;</font> <font color="#000000">current</font><font color="#000000">.</font><font color="#000000">next</font> <font color="#000000">!</font><font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">)</font> 
+<b><font color="#006cb8">141: </font></b>            <font color="#d05b76">return</font> <font color="#d05b76">true</font><font color="#000000">;</font>
+<b><font color="#006cb8">142: </font></b>         <font color="#d05b76">for</font> <font color="#000000">(</font><font color="#d05b76">int</font> <font color="#000000">b</font> <font color="#000000">=</font> <font color="#000000">bucket</font> <font color="#000000">+</font> <font color="#89c976">1</font><font color="#000000">;</font> <font color="#000000">b</font> <font color="#000000">&lt;</font> <font color="#000000">buckets</font><font color="#000000">.</font><font color="#000000">length</font><font color="#000000">;</font> <font color="#000000">b</font><font color="#000000">+</font><font color="#000000">+</font><font color="#000000">)</font>
+<b><font color="#006cb8">143: </font></b>            <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">buckets</font><font color="#000000">[</font><font color="#000000">b</font><font color="#000000">]</font> <font color="#000000">!</font><font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">)</font> <font color="#d05b76">return</font> <font color="#d05b76">true</font><font color="#000000">;</font>
+<b><font color="#006cb8">144: </font></b>         <font color="#d05b76">return</font> <font color="#d05b76">false</font><font color="#000000">;</font>
+<b><font color="#006cb8">145: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">146: </font></b>       
+<b><font color="#006cb8">147: </font></b>      <font color="#d05b76">public</font> <font color="#000000">Object</font> <font color="#000000">next</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">148: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">149: </font></b>         <font color="#000000">previous</font> <font color="#000000">=</font> <font color="#000000">current</font><font color="#000000">;</font>
+<b><font color="#006cb8">150: </font></b>         <font color="#000000">previousBucket</font> <font color="#000000">=</font> <font color="#000000">bucket</font><font color="#000000">;</font>
+<b><font color="#006cb8">151: </font></b>         <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">current</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#d05b76">null</font> <font color="#000000">|</font><font color="#000000">|</font> <font color="#000000">current</font><font color="#000000">.</font><font color="#000000">next</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">)</font> 
+<b><font color="#006cb8">152: </font></b>         <font color="#000000">{</font>
+<b><font color="#006cb8">153: </font></b>            <font color="#7a9ecd">// Move to next bucket</font>
+<b><font color="#006cb8">154: </font></b>            <font color="#000000">bucket</font><font color="#000000">+</font><font color="#000000">+</font><font color="#000000">;</font>
+<b><font color="#006cb8">155: </font></b>
+<b><font color="#006cb8">156: </font></b>            <font color="#d05b76">while</font> <font color="#000000">(</font><font color="#000000">bucket</font> <font color="#000000">&lt;</font> <font color="#000000">buckets</font><font color="#000000">.</font><font color="#000000">length</font> 
+<b><font color="#006cb8">157: </font></b>                  <font color="#000000">&amp;</font><font color="#000000">&amp;</font> <font color="#000000">buckets</font><font color="#000000">[</font><font color="#000000">bucket</font><font color="#000000">]</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">)</font>
+<b><font color="#006cb8">158: </font></b>               <font color="#000000">bucket</font><font color="#000000">+</font><font color="#000000">+</font><font color="#000000">;</font>
+<b><font color="#006cb8">159: </font></b>            <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">bucket</font> <font color="#000000">&lt;</font> <font color="#000000">buckets</font><font color="#000000">.</font><font color="#000000">length</font><font color="#000000">)</font> 
+<b><font color="#006cb8">160: </font></b>               <font color="#000000">current</font> <font color="#000000">=</font> <font color="#000000">buckets</font><font color="#000000">[</font><font color="#000000">bucket</font><font color="#000000">]</font><font color="#000000">;</font>
+<b><font color="#006cb8">161: </font></b>            <font color="#d05b76">else</font>
+<b><font color="#006cb8">162: </font></b>               <font color="#d05b76">throw</font> <font color="#d05b76">new</font> <font color="#000000">NoSuchElementException</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">163: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">164: </font></b>         <font color="#d05b76">else</font> <font color="#7a9ecd">// Move to next element in bucket</font>
+<b><font color="#006cb8">165: </font></b>            <font color="#000000">current</font> <font color="#000000">=</font> <font color="#000000">current</font><font color="#000000">.</font><font color="#000000">next</font><font color="#000000">;</font> 
+<b><font color="#006cb8">166: </font></b>         <font color="#d05b76">return</font> <font color="#000000">current</font><font color="#000000">.</font><font color="#000000">data</font><font color="#000000">;</font>
+<b><font color="#006cb8">167: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">168: </font></b>
+<b><font color="#006cb8">169: </font></b>      <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">remove</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">170: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">171: </font></b>         <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">previous</font> <font color="#000000">!</font><font color="#000000">=</font> <font color="#d05b76">null</font> <font color="#000000">&amp;</font><font color="#000000">&amp;</font> <font color="#000000">previous</font><font color="#000000">.</font><font color="#000000">next</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#000000">current</font><font color="#000000">)</font>
+<b><font color="#006cb8">172: </font></b>            <font color="#000000">previous</font><font color="#000000">.</font><font color="#000000">next</font> <font color="#000000">=</font> <font color="#000000">current</font><font color="#000000">.</font><font color="#000000">next</font><font color="#000000">;</font>
+<b><font color="#006cb8">173: </font></b>         <font color="#d05b76">else</font> <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">previousBucket</font> <font color="#000000">&lt;</font> <font color="#000000">bucket</font><font color="#000000">)</font> 
+<b><font color="#006cb8">174: </font></b>            <font color="#000000">buckets</font><font color="#000000">[</font><font color="#000000">bucket</font><font color="#000000">]</font> <font color="#000000">=</font> <font color="#000000">current</font><font color="#000000">.</font><font color="#000000">next</font><font color="#000000">;</font> 
+<b><font color="#006cb8">175: </font></b>         <font color="#d05b76">else</font>
+<b><font color="#006cb8">176: </font></b>            <font color="#d05b76">throw</font> <font color="#d05b76">new</font> <font color="#000000">IllegalStateException</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">177: </font></b>         <font color="#000000">current</font> <font color="#000000">=</font> <font color="#000000">previous</font><font color="#000000">;</font>
+<b><font color="#006cb8">178: </font></b>         <font color="#000000">bucket</font> <font color="#000000">=</font> <font color="#000000">previousBucket</font><font color="#000000">;</font>
+<b><font color="#006cb8">179: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">180: </font></b>
+<b><font color="#006cb8">181: </font></b>      <font color="#d05b76">private</font> <font color="#d05b76">int</font> <font color="#000000">bucket</font><font color="#000000">;</font>
+<b><font color="#006cb8">182: </font></b>      <font color="#d05b76">private</font> <font color="#000000">Node</font> <font color="#000000">current</font><font color="#000000">;</font>
+<b><font color="#006cb8">183: </font></b>      <font color="#d05b76">private</font> <font color="#d05b76">int</font> <font color="#000000">previousBucket</font><font color="#000000">;</font>
+<b><font color="#006cb8">184: </font></b>      <font color="#d05b76">private</font> <font color="#000000">Node</font> <font color="#000000">previous</font><font color="#000000">;</font>
+<b><font color="#006cb8">185: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">186: </font></b><font color="#000000">}</font>
+</tt></pre>

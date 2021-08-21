@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 19</title>
+</head>
+
+<body>
+<div onclick="document.location='slide038.html'">
+<center><small><a href="slide036.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide038.html">next</a></small></center>
+<hr></div>
+<h2>The Linked List Iterator's <tt>remove</tt> Method</h2>
+<ul>
+  <li> If the element to be removed is the first element, call <tt>removeFirst</tt></li>
+  <li>Otherwise, the node preceding the element to be removed needs to
+have its <tt>next</tt> reference updated to skip the removed
+element</li>
+  <li>If the <tt>previous</tt> reference equals <tt>position</tt>:
+    <ul>
+      <li>this call does not immediately follow a call to <tt>next</tt></li>
+      <li>throw an <tt>IllegalArgumentException</tt></li>
+    </ul>
+  </li>
+  <li>It is illegal to call <tt>remove</tt> twice in a row
+    <ul>
+      <li><tt>remove</tt> sets the <tt>previous</tt> reference to <tt>position</tt></li>
+    </ul>
+  </li>
+</ul>
+
+<div onclick="document.location='slide038.html'"><hr>
+<center><small><a href="slide036.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide038.html">next</a></small></center>
+</div>
+</body>
+</html>

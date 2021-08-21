@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 11</title>
+   
+</head>
+
+<body>
+<div onclick="document.location='slide045.html'">
+<center><small><a href="slide043.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide045.html">next</a></small></center>
+<hr></div>
+<h2>Accessing Surrounding Variables</h2>
+<ul>
+  <li>The actionPerformed method can access variables
+from the surrounding scope, like this:
+<pre>public static void main(String[] args)
+{
+   . . .
+   final Rectangle box = new Rectangle(5, 10, 20, 30);
+
+   class Mover implements ActionListener
+   {
+      public void actionPerformed(ActionEvent event)
+      {
+         // Move the rectangle
+         box.translate(1, 1);
+      }
+   }
+   . . .
+}</pre></li>
+  <li>Local variables that are accessed by an inner-class method must be declared as final</li>
+  <li>Inner class can access fields of surrounding class that belong to the object that constructed the inner class object</li>
+  <li>An inner class object created inside a static method can only access static surrounding fields</li>
+</ul>
+
+
+
+<div onclick="document.location='slide045.html'"><hr>
+<center><small><a href="slide043.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide045.html">next</a></small></center>
+</div>
+</body>
+</html>

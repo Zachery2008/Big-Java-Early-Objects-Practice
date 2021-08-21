@@ -1,0 +1,57 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">sql</font><font color="#000000">.</font><font color="#000000">Connection</font><font color="#000000">;</font>
+<b><font color="#006cb8">02: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">sql</font><font color="#000000">.</font><font color="#000000">DriverManager</font><font color="#000000">;</font>
+<b><font color="#006cb8">03: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">sql</font><font color="#000000">.</font><font color="#000000">SQLException</font><font color="#000000">;</font>
+<b><font color="#006cb8">04: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">io</font><font color="#000000">.</font><font color="#000000">FileInputStream</font><font color="#000000">;</font>
+<b><font color="#006cb8">05: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">io</font><font color="#000000">.</font><font color="#000000">IOException</font><font color="#000000">;</font>
+<b><font color="#006cb8">06: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">util</font><font color="#000000">.</font><font color="#000000">Properties</font><font color="#000000">;</font>
+<b><font color="#006cb8">07: </font></b>
+<b><font color="#006cb8">08: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">09: </font></b><font color="#7a9ecd">   A simple data source for getting database connections. </font>
+<b><font color="#006cb8">10: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">11: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> <font color="#000000">SimpleDataSource</font>
+<b><font color="#006cb8">12: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">13: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">14: </font></b><font color="#7a9ecd">      Initializes the data source.</font>
+<b><font color="#006cb8">15: </font></b><font color="#7a9ecd">      @param fileName the name of the property file that </font>
+<b><font color="#006cb8">16: </font></b><font color="#7a9ecd">      contains the database driver, URL, username, and password</font>
+<b><font color="#006cb8">17: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">18: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">void</font> <font color="#000000">init</font><font color="#000000">(</font><font color="#000000">String</font> <font color="#000000">fileName</font><font color="#000000">)</font>
+<b><font color="#006cb8">19: </font></b>         <font color="#d05b76">throws</font> <font color="#000000">IOException</font><font color="#000000">,</font> <font color="#000000">ClassNotFoundException</font>
+<b><font color="#006cb8">20: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">21: </font></b>      <font color="#000000">Properties</font> <font color="#000000">props</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Properties</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">22: </font></b>      <font color="#000000">FileInputStream</font> <font color="#000000">in</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">FileInputStream</font><font color="#000000">(</font><font color="#000000">fileName</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">23: </font></b>      <font color="#000000">props</font><font color="#000000">.</font><font color="#000000">load</font><font color="#000000">(</font><font color="#000000">in</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">24: </font></b>
+<b><font color="#006cb8">25: </font></b>      <font color="#000000">String</font> <font color="#000000">driver</font> <font color="#000000">=</font> <font color="#000000">props</font><font color="#000000">.</font><font color="#000000">getProperty</font><font color="#000000">(</font><font color="#00a99d">"jdbc.driver"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">26: </font></b>      <font color="#000000">url</font> <font color="#000000">=</font> <font color="#000000">props</font><font color="#000000">.</font><font color="#000000">getProperty</font><font color="#000000">(</font><font color="#00a99d">"jdbc.url"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">27: </font></b>      <font color="#000000">username</font> <font color="#000000">=</font> <font color="#000000">props</font><font color="#000000">.</font><font color="#000000">getProperty</font><font color="#000000">(</font><font color="#00a99d">"jdbc.username"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">28: </font></b>      <font color="#000000">password</font> <font color="#000000">=</font> <font color="#000000">props</font><font color="#000000">.</font><font color="#000000">getProperty</font><font color="#000000">(</font><font color="#00a99d">"jdbc.password"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">29: </font></b>
+<b><font color="#006cb8">30: </font></b>      <font color="#000000">Class</font><font color="#000000">.</font><font color="#000000">forName</font><font color="#000000">(</font><font color="#000000">driver</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">31: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">32: </font></b>
+<b><font color="#006cb8">33: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">34: </font></b><font color="#7a9ecd">      Gets a connection to the database.</font>
+<b><font color="#006cb8">35: </font></b><font color="#7a9ecd">      @return the database connection</font>
+<b><font color="#006cb8">36: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">37: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#000000">Connection</font> <font color="#000000">getConnection</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#d05b76">throws</font> <font color="#000000">SQLException</font>
+<b><font color="#006cb8">38: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">39: </font></b>      <font color="#d05b76">return</font> <font color="#000000">DriverManager</font><font color="#000000">.</font><font color="#000000">getConnection</font><font color="#000000">(</font><font color="#000000">url</font><font color="#000000">,</font> <font color="#000000">username</font><font color="#000000">,</font> <font color="#000000">password</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">40: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">41: </font></b>
+<b><font color="#006cb8">42: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">static</font> <font color="#000000">String</font> <font color="#000000">url</font><font color="#000000">;</font>
+<b><font color="#006cb8">43: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">static</font> <font color="#000000">String</font> <font color="#000000">username</font><font color="#000000">;</font>
+<b><font color="#006cb8">44: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">static</font> <font color="#000000">String</font> <font color="#000000">password</font><font color="#000000">;</font>
+<b><font color="#006cb8">45: </font></b><font color="#000000">}</font>
+<b><font color="#006cb8">46: </font></b>
+<b><font color="#006cb8">47: </font></b>
+<b><font color="#006cb8">48: </font></b>
+<b><font color="#006cb8">49: </font></b>
+<b><font color="#006cb8">50: </font></b>
+<b><font color="#006cb8">51: </font></b>
+<b><font color="#006cb8">52: </font></b>
+<b><font color="#006cb8">53: </font></b>
+<b><font color="#006cb8">54: </font></b>
+<b><font color="#006cb8">55: </font></b>
+<b><font color="#006cb8">56: </font></b>
+</tt></pre>

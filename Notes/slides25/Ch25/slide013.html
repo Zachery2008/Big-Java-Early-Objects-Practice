@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 25</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide014.html'">
+<center><small><a href="slide012.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide014.html">next</a></small></center>
+<hr></div>
+<h2>An Invoice Table</h2>
+<ul>
+  <li>For other objects, it is not so easy to come up with an equivalent database table structure</li>
+  <li>Consider an invoice; each invoice object contains a reference to a customer object:
+<pre>public class Invoice
+{
+   . . .
+   private int invoiceNumber;
+   private Customer theCustomer;
+   . . .
+}</pre></li>
+  <li>You might consider simply entering all the customer data into the invoice tables
+    <ul><li>It is wasteful</li>
+    <li>It is dangerous; on a change, you can forget to update all occurrences</li></ul></li>
+  <li>In a Java program, neither of these problems occur
+    <ul><li>Multiple <tt>Invoice</tt> objects can contain references to a single <tt>Customer</tt></li></ul></li>
+</ul>
+
+
+
+<div onclick="document.location='slide014.html'"><hr>
+<center><small><a href="slide012.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide014.html">next</a></small></center>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">io</font><font color="#000000">.</font><font color="#000000">FileNotFoundException</font><font color="#000000">;</font>
+<b><font color="#006cb8">02: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">io</font><font color="#000000">.</font><font color="#000000">IOException</font><font color="#000000">;</font>
+<b><font color="#006cb8">03: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">util</font><font color="#000000">.</font><font color="#000000">Scanner</font><font color="#000000">;</font>
+<b><font color="#006cb8">04: </font></b>
+<b><font color="#006cb8">05: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> <font color="#000000">DataSetTester</font>
+<b><font color="#006cb8">06: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">07: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">void</font> <font color="#000000">main</font><font color="#000000">(</font><font color="#000000">String</font><font color="#000000">[</font><font color="#000000">]</font> <font color="#000000">args</font><font color="#000000">)</font>
+<b><font color="#006cb8">08: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">09: </font></b>      <font color="#000000">Scanner</font> <font color="#000000">in</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Scanner</font><font color="#000000">(</font><font color="#000000">System</font><font color="#000000">.</font><font color="#000000">in</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">10: </font></b>      <font color="#000000">DataSetReader</font> <font color="#000000">reader</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">DataSetReader</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">11: </font></b>      
+<b><font color="#006cb8">12: </font></b>      <font color="#d05b76">boolean</font> <font color="#000000">done</font> <font color="#000000">=</font> <font color="#d05b76">false</font><font color="#000000">;</font>
+<b><font color="#006cb8">13: </font></b>      <font color="#d05b76">while</font> <font color="#000000">(</font><font color="#000000">!</font><font color="#000000">done</font><font color="#000000">)</font> 
+<b><font color="#006cb8">14: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">15: </font></b>         <font color="#d05b76">try</font> 
+<b><font color="#006cb8">16: </font></b>         <font color="#000000">{</font>
+<b><font color="#006cb8">17: </font></b>            <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font><font color="#00a99d">"Please enter the file name: "</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">18: </font></b>            <font color="#000000">String</font> <font color="#000000">filename</font> <font color="#000000">=</font> <font color="#000000">in</font><font color="#000000">.</font><font color="#000000">next</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">19: </font></b>            
+<b><font color="#006cb8">20: </font></b>            <font color="#d05b76">double</font><font color="#000000">[</font><font color="#000000">]</font> <font color="#000000">data</font> <font color="#000000">=</font> <font color="#000000">reader</font><font color="#000000">.</font><font color="#000000">readFile</font><font color="#000000">(</font><font color="#000000">filename</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">21: </font></b>            <font color="#d05b76">double</font> <font color="#000000">sum</font> <font color="#000000">=</font> <font color="#89c976">0</font><font color="#000000">;</font>
+<b><font color="#006cb8">22: </font></b>            <font color="#d05b76">for</font> <font color="#000000">(</font><font color="#d05b76">double</font> <font color="#000000">d</font> <font color="#000000">:</font> <font color="#000000">data</font><font color="#000000">)</font> <font color="#000000">sum</font> <font color="#000000">=</font> <font color="#000000">sum</font> <font color="#000000">+</font> <font color="#000000">d</font><font color="#000000">;</font> 
+<b><font color="#006cb8">23: </font></b>            <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font><font color="#00a99d">"The sum is "</font> <font color="#000000">+</font> <font color="#000000">sum</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">24: </font></b>            <font color="#000000">done</font> <font color="#000000">=</font> <font color="#d05b76">true</font><font color="#000000">;</font>
+<b><font color="#006cb8">25: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">26: </font></b>         <font color="#d05b76">catch</font> <font color="#000000">(</font><font color="#000000">FileNotFoundException</font> <font color="#000000">exception</font><font color="#000000">)</font>
+<b><font color="#006cb8">27: </font></b>         <font color="#000000">{</font>
+<b><font color="#006cb8">28: </font></b>            <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font><font color="#00a99d">"File not found."</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">29: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">30: </font></b>         <font color="#d05b76">catch</font> <font color="#000000">(</font><font color="#000000">BadDataException</font> <font color="#000000">exception</font><font color="#000000">)</font>
+<b><font color="#006cb8">31: </font></b>         <font color="#000000">{</font>
+<b><font color="#006cb8">32: </font></b>            <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font><font color="#00a99d">"Bad data: "</font> <font color="#000000">+</font> <font color="#000000">exception</font><font color="#000000">.</font><font color="#000000">getMessage</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">33: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">34: </font></b>         <font color="#d05b76">catch</font> <font color="#000000">(</font><font color="#000000">IOException</font> <font color="#000000">exception</font><font color="#000000">)</font>
+<b><font color="#006cb8">35: </font></b>         <font color="#000000">{</font>
+<b><font color="#006cb8">36: </font></b>            <font color="#000000">exception</font><font color="#000000">.</font><font color="#000000">printStackTrace</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">37: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">38: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">39: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">40: </font></b><font color="#000000">}</font>
+</tt></pre>

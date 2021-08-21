@@ -1,0 +1,36 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#000000">import</font> java<font color="#000000">.</font>util<font color="#000000">.</font>Scanner<font color="#000000">;</font>
+<b><font color="#006cb8">02: </font></b>
+<b><font color="#006cb8">03: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">04: </font></b><font color="#7a9ecd">   This program tests the TicTacToe class by prompting the</font>
+<b><font color="#006cb8">05: </font></b><font color="#7a9ecd">   user to set positions on the board and printing out the</font>
+<b><font color="#006cb8">06: </font></b><font color="#7a9ecd">   result.</font>
+<b><font color="#006cb8">07: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">08: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> TicTacToeTester
+<b><font color="#006cb8">09: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">10: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">void</font> <font color="#000000">main</font><font color="#000000">(</font>String<font color="#000000">[</font><font color="#000000">]</font> args<font color="#000000">)</font>
+<b><font color="#006cb8">11: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">12: </font></b>      Scanner in <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Scanner</font><font color="#000000">(</font>System<font color="#000000">.</font>in<font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">13: </font></b>      String player <font color="#000000">=</font> <font color="#00a99d">"x"</font><font color="#000000">;</font>
+<b><font color="#006cb8">14: </font></b>      TicTacToe game <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">TicTacToe</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">15: </font></b>      <font color="#d05b76">boolean</font> done <font color="#000000">=</font> <font color="#d05b76">false</font><font color="#000000">;</font>
+<b><font color="#006cb8">16: </font></b>      <font color="#d05b76">while</font> <font color="#000000">(</font><font color="#000000">!</font>done<font color="#000000">)</font>
+<b><font color="#006cb8">17: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">18: </font></b>         System<font color="#000000">.</font>out<font color="#000000">.</font><font color="#000000">print</font><font color="#000000">(</font>game<font color="#000000">.</font><font color="#000000">toString</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font> 
+<b><font color="#006cb8">19: </font></b>         System<font color="#000000">.</font>out<font color="#000000">.</font><font color="#000000">print</font><font color="#000000">(</font>
+<b><font color="#006cb8">20: </font></b>               <font color="#00a99d">"Row for "</font> <font color="#000000">+</font> player <font color="#000000">+</font> <font color="#00a99d">" (-1 to exit): "</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">21: </font></b>         <font color="#d05b76">int</font> row <font color="#000000">=</font> in<font color="#000000">.</font><font color="#000000">nextInt</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">22: </font></b>         <font color="#d05b76">if</font> <font color="#000000">(</font>row <font color="#000000">&lt;</font> <font color="#89c976">0</font><font color="#000000">)</font> done <font color="#000000">=</font> <font color="#d05b76">true</font><font color="#000000">;</font>
+<b><font color="#006cb8">23: </font></b>         <font color="#d05b76">else</font>
+<b><font color="#006cb8">24: </font></b>         <font color="#000000">{</font>
+<b><font color="#006cb8">25: </font></b>            System<font color="#000000">.</font>out<font color="#000000">.</font><font color="#000000">print</font><font color="#000000">(</font><font color="#00a99d">"Column for "</font> <font color="#000000">+</font> player <font color="#000000">+</font> <font color="#00a99d">": "</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">26: </font></b>            <font color="#d05b76">int</font> column <font color="#000000">=</font> in<font color="#000000">.</font><font color="#000000">nextInt</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">27: </font></b>            game<font color="#000000">.</font><font color="#000000">set</font><font color="#000000">(</font>row<font color="#000000">,</font> column<font color="#000000">,</font> player<font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">28: </font></b>            <font color="#d05b76">if</font> <font color="#000000">(</font>player<font color="#000000">.</font><font color="#000000">equals</font><font color="#000000">(</font><font color="#00a99d">"x"</font><font color="#000000">)</font><font color="#000000">)</font> 
+<b><font color="#006cb8">29: </font></b>               player <font color="#000000">=</font> <font color="#00a99d">"o"</font><font color="#000000">;</font> 
+<b><font color="#006cb8">30: </font></b>            <font color="#d05b76">else</font> 
+<b><font color="#006cb8">31: </font></b>               player <font color="#000000">=</font> <font color="#00a99d">"x"</font><font color="#000000">;</font>    
+<b><font color="#006cb8">32: </font></b>         <font color="#000000">}</font>
+<b><font color="#006cb8">33: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">34: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">35: </font></b><font color="#000000">}</font>
+</tt></pre>

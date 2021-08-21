@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 9</title>
+  <style type="text/css">
+OL.withloweralpha { list-style-type: lower-alpha }
+  </style>
+</head>
+
+<body>
+<div onclick="document.location='slide036.html'">
+<center><small><a href="slide034.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide036.html">next</a></small></center>
+<hr></div>
+<h2>Static Fields</h2>
+<ul>
+  <li>A static field belongs to the class, not to any object of the
+class. Also called <i>class field</i>.</li>
+  <li>
+    <pre>public class BankAccount<br>{<br>   . . .<br>   private double balance;<br>   private int accountNumber;<br>   private static int lastAssignedNumber = 1000;<br>}</pre>
+If <tt>lastAssignedNumber</tt> was not <tt>static</tt>, each instance
+of <tt>BankAccount</tt> would have its own value of <tt>lastAssignedNumber</tt></li>
+  <li>
+    <pre>public BankAccount()<br>{<br>   // Generates next account number to be assigned<br>   lastAssignedNumber++; // Updates the static field<br>   // Assigns field to account number of this bank account<br>   accountNumber = lastAssignedNumber; // Sets the instance field<br>}</pre>
+  </li>
+  <li>Minimize the use of static fields. (Static final fields are ok.)</li>
+</ul>
+
+<div onclick="document.location='slide036.html'"><hr>
+<center><small><a href="slide034.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide036.html">next</a></small></center>
+</div>
+</body>
+</html>

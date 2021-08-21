@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 23</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide052.html'">
+<center><small><a href="slide050.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide052.html">next</a></small></center>
+<hr></div>
+<h2>Condition Objects</h2>
+<ul>
+  <li>Calling <tt>await</tt>
+    <ul><li>Makes current thread wait</li>
+    <li>Allows another thread to acquire the lock object</li></ul></li>
+  <li>To unblock, another thread must execute <tt>signalAll</tt> <i>on the same condition object</i>
+    <pre>sufficientFundsCondition.signalAll();</pre></li>
+  <li><tt>signalAll</tt> unblocks all threads waiting on the condition</li>
+  <li><tt>signal</tt>: randomly picks just one thread waiting on the object and unblocks it</li>
+  <li><tt>signal</tt>  can be more efficient, but you need to know that every waiting thread can proceed</li>
+  <li>Recommendation: always call <tt>signalAll</tt></li>
+</ul>
+
+
+
+
+<div onclick="document.location='slide052.html'"><hr>
+<center><small><a href="slide050.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide052.html">next</a></small></center>
+</div>
+</body>
+</html>

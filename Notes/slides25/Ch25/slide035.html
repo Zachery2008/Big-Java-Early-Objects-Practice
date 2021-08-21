@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 25</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide036.html'">
+<center><small><a href="slide034.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide036.html">next</a></small></center>
+<hr></div>
+<h2>Joins</h2>
+<ul>
+  <li> The information you want may be spread over multiple tables</li>
+  <li><em><tt>TableName.ColumnName</tt></em> denotes the column in a particular table
+    <ul><li>Use <tt>Product.Product_Code</tt> to specify the <tt>Product_Code</tt> column in the <tt>Product</tt> table </li>
+    <li>Use <tt>Item.Product_Code</tt> to specify the <tt>Product_Code</tt> column in the <tt>Item</tt> table</li></ul></li>
+  <li>To select all invoices that include a car vacuum
+<pre>SELECT Item.Invoice_Number
+   FROM Product, Item
+   WHERE Product.Description = 'Car vacuum'
+      AND Product.Product_Code = Item.Product_Code</pre>
+   <img src="images/view4.png" alt=""></li>
+</ul>
+ 
+
+
+<div onclick="document.location='slide036.html'"><hr>
+<center><small><a href="slide034.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide036.html">next</a></small></center>
+</div>
+</body>
+</html>

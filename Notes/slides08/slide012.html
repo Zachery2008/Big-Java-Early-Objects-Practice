@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Horstmann Chapter 8</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+
+<body>
+<div onclick="document.location='slide013.html'">
+<center><small><a href="slide011.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide013.html">next</a></small></center>
+</div><hr>
+<h2>Retrieving Array List Elements</h2>
+<ul>
+  <li>Use <tt>get</tt> method</li>
+  <li>Index starts at 0</li>
+  <li><tt>BankAccount anAccount = accounts.get(2); // gets the third
+element of the array list</tt></li>
+  <li>Bounds error if index is out of range</li>
+  <li>Most common bounds error:<br>
+    <pre>int i = accounts.size();<br>anAccount = accounts.get(i); // Error<br>// legal index values are 0. . .i-1</pre>
+  </li>
+</ul>
+
+<hr>
+<div onclick="document.location='slide013.html'">
+<center><small><a href="slide011.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide013.html">next</a></small></center>
+</div>
+</body>
+</html>

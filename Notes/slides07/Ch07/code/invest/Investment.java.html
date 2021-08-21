@@ -1,0 +1,58 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">02: </font></b><font color="#7a9ecd">   A class to monitor the growth of an investment that </font>
+<b><font color="#006cb8">03: </font></b><font color="#7a9ecd">   accumulates interest at a fixed annual rate.</font>
+<b><font color="#006cb8">04: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">05: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> Investment
+<b><font color="#006cb8">06: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">07: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">08: </font></b><font color="#7a9ecd">      Constructs an Investment object from a starting balance and</font>
+<b><font color="#006cb8">09: </font></b><font color="#7a9ecd">      interest rate.</font>
+<b><font color="#006cb8">10: </font></b><font color="#7a9ecd">      @param aBalance the starting balance</font>
+<b><font color="#006cb8">11: </font></b><font color="#7a9ecd">      @param aRate the interest rate in percent</font>
+<b><font color="#006cb8">12: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">13: </font></b>   <font color="#d05b76">public</font> <font color="#000000">Investment</font><font color="#000000">(</font><font color="#d05b76">double</font> aBalance<font color="#000000">,</font> <font color="#d05b76">double</font> aRate<font color="#000000">)</font>
+<b><font color="#006cb8">14: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">15: </font></b>      balance <font color="#000000">=</font> aBalance<font color="#000000">;</font>
+<b><font color="#006cb8">16: </font></b>      rate <font color="#000000">=</font> aRate<font color="#000000">;</font>
+<b><font color="#006cb8">17: </font></b>      years <font color="#000000">=</font> <font color="#89c976">0</font><font color="#000000">;</font>
+<b><font color="#006cb8">18: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">19: </font></b>
+<b><font color="#006cb8">20: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">21: </font></b><font color="#7a9ecd">      Keeps accumulating interest until a target balance has</font>
+<b><font color="#006cb8">22: </font></b><font color="#7a9ecd">      been reached.</font>
+<b><font color="#006cb8">23: </font></b><font color="#7a9ecd">      @param targetBalance the desired balance</font>
+<b><font color="#006cb8">24: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">25: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">waitForBalance</font><font color="#000000">(</font><font color="#d05b76">double</font> targetBalance<font color="#000000">)</font>
+<b><font color="#006cb8">26: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">27: </font></b>      <font color="#d05b76">while</font> <font color="#000000">(</font>balance <font color="#000000">&lt;</font> targetBalance<font color="#000000">)</font>
+<b><font color="#006cb8">28: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">29: </font></b>         years<font color="#000000">+</font><font color="#000000">+</font><font color="#000000">;</font>   
+<b><font color="#006cb8">30: </font></b>         <font color="#d05b76">double</font> interest <font color="#000000">=</font> balance <font color="#000000">*</font> rate <font color="#000000">/</font> <font color="#89c976">100</font><font color="#000000">;</font>
+<b><font color="#006cb8">31: </font></b>         balance <font color="#000000">=</font> balance <font color="#000000">+</font> interest<font color="#000000">;</font>
+<b><font color="#006cb8">32: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">33: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">34: </font></b>
+<b><font color="#006cb8">35: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">36: </font></b><font color="#7a9ecd">      Gets the current investment balance.</font>
+<b><font color="#006cb8">37: </font></b><font color="#7a9ecd">      @return the current balance</font>
+<b><font color="#006cb8">38: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">39: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">double</font> <font color="#000000">getBalance</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">40: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">41: </font></b>      <font color="#d05b76">return</font> balance<font color="#000000">;</font>
+<b><font color="#006cb8">42: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">43: </font></b>
+<b><font color="#006cb8">44: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">45: </font></b><font color="#7a9ecd">      Gets the number of years this investment has accumulated</font>
+<b><font color="#006cb8">46: </font></b><font color="#7a9ecd">      interest.</font>
+<b><font color="#006cb8">47: </font></b><font color="#7a9ecd">      @return the number of years since the start of the investment</font>
+<b><font color="#006cb8">48: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">49: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">int</font> <font color="#000000">getYears</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">50: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">51: </font></b>      <font color="#d05b76">return</font> years<font color="#000000">;</font>
+<b><font color="#006cb8">52: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">53: </font></b>
+<b><font color="#006cb8">54: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">double</font> balance<font color="#000000">;</font>
+<b><font color="#006cb8">55: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">double</font> rate<font color="#000000">;</font>
+<b><font color="#006cb8">56: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">int</font> years<font color="#000000">;</font>
+<b><font color="#006cb8">57: </font></b><font color="#000000">}</font>
+</tt></pre>

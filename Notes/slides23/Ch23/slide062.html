@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 23</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide063.html'">
+<center><small><a href="slide061.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide063.html">next</a></small></center>
+<hr></div>
+<h2>Selection Sort Algorithm Animation: Implementation</h2>
+<ul>
+  <li>At each point of interest, algorithm needs to pause so user can observe the graphical output</li>
+  <li>We need a <tt>pause</tt> method that repaints component and sleeps for a small delay:
+<pre>public void pause(int steps)
+      throws InterruptedException
+{
+   component.repaint();
+   Thread.sleep(steps * DELAY);
+}</pre></li>
+  <li>Delay is proportional to the number of steps involved</li>
+  <li><tt>pause</tt> should be called at various places in the algorithm</li>
+</ul>
+
+
+
+<div onclick="document.location='slide063.html'"><hr>
+<center><small><a href="slide061.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide063.html">next</a></small></center>
+</div>
+</body>
+</html>

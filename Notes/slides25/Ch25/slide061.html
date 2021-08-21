@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 25</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide062.html'">
+<center><small><a href="slide060.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide062.html">next</a></small></center>
+<hr></div>
+<h2>Executing SQL Statements</h2>
+<ul>
+  <li>Use the <tt>executeUpdate</tt> method of the <tt>Statement</tt> class to
+    execute an <tt>UPDATE</tt> statement </li>
+  <li>The method returns the number of rows effected
+    <pre>String command = "UPDATE Item"
+      + " SET Quantity = Quantity + 1"
+      + " WHERE Invoice_Number = '11731'";
+int count = stat.executeUpdate(command);</pre></li>
+</ul>
+
+
+
+<div onclick="document.location='slide062.html'"><hr>
+<center><small><a href="slide060.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide062.html">next</a></small></center>
+</div>
+</body>
+</html>

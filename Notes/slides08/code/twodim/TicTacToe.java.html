@@ -1,0 +1,54 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">02: </font></b><font color="#7a9ecd">   A 3 x 3 tic-tac-toe board.</font>
+<b><font color="#006cb8">03: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">04: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> TicTacToe
+<b><font color="#006cb8">05: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">06: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">07: </font></b><font color="#7a9ecd">      Constructs an empty board.</font>
+<b><font color="#006cb8">08: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">09: </font></b>   <font color="#d05b76">public</font> <font color="#000000">TicTacToe</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">10: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">11: </font></b>      board <font color="#000000">=</font> <font color="#d05b76">new</font> String<font color="#000000">[</font>ROWS<font color="#000000">]</font><font color="#000000">[</font>COLUMNS<font color="#000000">]</font><font color="#000000">;</font>
+<b><font color="#006cb8">12: </font></b>      <font color="#7a9ecd">// Fill with spaces</font>
+<b><font color="#006cb8">13: </font></b>      <font color="#d05b76">for</font> <font color="#000000">(</font><font color="#d05b76">int</font> i <font color="#000000">=</font> <font color="#89c976">0</font><font color="#000000">;</font> i <font color="#000000">&lt;</font> ROWS<font color="#000000">;</font> i<font color="#000000">+</font><font color="#000000">+</font><font color="#000000">)</font>
+<b><font color="#006cb8">14: </font></b>         <font color="#d05b76">for</font> <font color="#000000">(</font><font color="#d05b76">int</font> j <font color="#000000">=</font> <font color="#89c976">0</font><font color="#000000">;</font> j <font color="#000000">&lt;</font> COLUMNS<font color="#000000">;</font> j<font color="#000000">+</font><font color="#000000">+</font><font color="#000000">)</font>
+<b><font color="#006cb8">15: </font></b>            board<font color="#000000">[</font>i<font color="#000000">]</font><font color="#000000">[</font>j<font color="#000000">]</font> <font color="#000000">=</font> <font color="#00a99d">" "</font><font color="#000000">;</font>
+<b><font color="#006cb8">16: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">17: </font></b>
+<b><font color="#006cb8">18: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">19: </font></b><font color="#7a9ecd">      Sets a field in the board. The field must be unoccupied.</font>
+<b><font color="#006cb8">20: </font></b><font color="#7a9ecd">      @param i the row index </font>
+<b><font color="#006cb8">21: </font></b><font color="#7a9ecd">      @param j the column index </font>
+<b><font color="#006cb8">22: </font></b><font color="#7a9ecd">      @param player the player ("x" or "o")</font>
+<b><font color="#006cb8">23: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">24: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">set</font><font color="#000000">(</font><font color="#d05b76">int</font> i<font color="#000000">,</font> <font color="#d05b76">int</font> j<font color="#000000">,</font> String player<font color="#000000">)</font>
+<b><font color="#006cb8">25: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">26: </font></b>      <font color="#d05b76">if</font> <font color="#000000">(</font>board<font color="#000000">[</font>i<font color="#000000">]</font><font color="#000000">[</font>j<font color="#000000">]</font><font color="#000000">.</font><font color="#000000">equals</font><font color="#000000">(</font><font color="#00a99d">" "</font><font color="#000000">)</font><font color="#000000">)</font>
+<b><font color="#006cb8">27: </font></b>         board<font color="#000000">[</font>i<font color="#000000">]</font><font color="#000000">[</font>j<font color="#000000">]</font> <font color="#000000">=</font> player<font color="#000000">;</font>
+<b><font color="#006cb8">28: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">29: </font></b>
+<b><font color="#006cb8">30: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">31: </font></b><font color="#7a9ecd">      Creates a string representation of the board, such as</font>
+<b><font color="#006cb8">32: </font></b><font color="#7a9ecd">      |x  o|</font>
+<b><font color="#006cb8">33: </font></b><font color="#7a9ecd">      |  x |</font>
+<b><font color="#006cb8">34: </font></b><font color="#7a9ecd">      |   o|</font>
+<b><font color="#006cb8">35: </font></b><font color="#7a9ecd">      @return the string representation</font>
+<b><font color="#006cb8">36: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">37: </font></b>   <font color="#d05b76">public</font> String <font color="#000000">toString</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">38: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">39: </font></b>      String r <font color="#000000">=</font> <font color="#00a99d">""</font><font color="#000000">;</font>
+<b><font color="#006cb8">40: </font></b>      <font color="#d05b76">for</font> <font color="#000000">(</font><font color="#d05b76">int</font> i <font color="#000000">=</font> <font color="#89c976">0</font><font color="#000000">;</font> i <font color="#000000">&lt;</font> ROWS<font color="#000000">;</font> i<font color="#000000">+</font><font color="#000000">+</font><font color="#000000">)</font>
+<b><font color="#006cb8">41: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">42: </font></b>         r <font color="#000000">=</font> r <font color="#000000">+</font> <font color="#00a99d">"|"</font><font color="#000000">;</font>
+<b><font color="#006cb8">43: </font></b>         <font color="#d05b76">for</font> <font color="#000000">(</font><font color="#d05b76">int</font> j <font color="#000000">=</font> <font color="#89c976">0</font><font color="#000000">;</font> j <font color="#000000">&lt;</font> COLUMNS<font color="#000000">;</font> j<font color="#000000">+</font><font color="#000000">+</font><font color="#000000">)</font>         
+<b><font color="#006cb8">44: </font></b>            r <font color="#000000">=</font> r <font color="#000000">+</font> board<font color="#000000">[</font>i<font color="#000000">]</font><font color="#000000">[</font>j<font color="#000000">]</font><font color="#000000">;</font>
+<b><font color="#006cb8">45: </font></b>         r <font color="#000000">=</font> r <font color="#000000">+</font> <font color="#00a99d">"|\n"</font><font color="#000000">;</font>
+<b><font color="#006cb8">46: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">47: </font></b>      <font color="#d05b76">return</font> r<font color="#000000">;</font>
+<b><font color="#006cb8">48: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">49: </font></b>
+<b><font color="#006cb8">50: </font></b>   <font color="#d05b76">private</font> String<font color="#000000">[</font><font color="#000000">]</font><font color="#000000">[</font><font color="#000000">]</font> board<font color="#000000">;</font>
+<b><font color="#006cb8">51: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">static</font> <font color="#d05b76">final</font> <font color="#d05b76">int</font> ROWS <font color="#000000">=</font> <font color="#89c976">3</font><font color="#000000">;</font>
+<b><font color="#006cb8">52: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">static</font> <font color="#d05b76">final</font> <font color="#d05b76">int</font> COLUMNS <font color="#000000">=</font> <font color="#89c976">3</font><font color="#000000">;</font>
+<b><font color="#006cb8">53: </font></b><font color="#000000">}</font>
+</tt></pre>

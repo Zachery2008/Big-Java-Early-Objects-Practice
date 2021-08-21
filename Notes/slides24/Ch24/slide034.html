@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 24</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide035.html'">
+<center><small><a href="slide033.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide035.html">next</a></small></center>
+<hr></div>
+<h2>A Client Program &#150; Scanners and Writers</h2>
+<ul>
+  <li> <tt>InputStream</tt> and <tt>OutputStream</tt> send and receive bytes</li>
+  <li>To send and receive text, use a scanner and a writer
+    <pre>Scanner in = new Scanner(instream);
+PrintWriter out = new PrintWriter(outstream);</pre>
+  </li>
+  <li>A <tt>PrintWriter</tt> <i>buffers</i> the characters and only sends when the buffer is full
+    <ul><li>Buffering increases performance</li></ul></li>
+  <li>When sending a command, you want the whole command to be sent now
+    <ul><li><i>Flush</i> the buffer manually:
+<pre>out.print(<i>command</i>);
+out.flush();</pre></li></ul>
+    </li>
+</ul>
+
+
+
+<div onclick="document.location='slide035.html'"><hr>
+<center><small><a href="slide033.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide035.html">next</a></small></center>
+</div>
+</body>
+</html>

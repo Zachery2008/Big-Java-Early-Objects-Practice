@@ -1,0 +1,665 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 19</title>
+</head>
+<body>
+<div>
+<h2>Chapter 20</h2>
+<h1>An Introduction to Data Structures</h1>
+<br>
+</div>
+<h2>Chapter Goals</h2>
+<ul>
+  <li>To learn how to use the linked lists provided in the standard
+library</li>
+  <li>To be able to use iterators to traverse linked lists</li>
+  <li>To understand the implementation of linked lists</li>
+  <li>To distinguish between abstract and concrete data types</li>
+  <li>To know the efficiency of fundamental operations of lists and
+arrays</li>
+  <li>To become familiar with the stack and queue types</li>
+</ul>
+<h2>Using Linked Lists</h2>
+<ul>
+  <li>A linked list consists of a number of nodes, each of which has a
+reference to the next node</li>
+  <li>Adding and removing elements in the middle of a linked list is
+efficient</li>
+  <li>Visiting the elements of a linked list in sequential order is
+efficient</li>
+  <li>Random access is not efficient</li>
+</ul>
+<h2>Inserting an Element into a Linked List</h2>
+<img src="images/linked_insert.png" alt="">
+<h2>Java's <tt>LinkedList</tt> class</h2>
+<ul>
+  <li>Generic class
+    <ul>
+      <li>Specify type of elements in angle brackets: <tt>LinkedList&lt;Product&gt;</tt></li>
+    </ul>
+  </li>
+  <li>Package: <tt>java.util</tt></li>
+  <li>Easy access to first and last elements with methods<br>
+    <pre>void addFirst(E obj)<br>void addLast(E obj)<br>E getFirst()<br>E getLast()<br>E removeFirst()<br>E removeLast()</pre>
+  </li>
+</ul>
+<h2>List Iterator</h2>
+<ul>
+  <li><tt>ListIterator</tt> type</li>
+  <li>Gives access to elements inside a linked list</li>
+  <li>Encapsulates a position anywhere inside the linked list</li>
+  <li>Protects the linked list while giving access</li>
+</ul>
+<h2>A List Iterator</h2>
+<img src="images/listIterator.png" alt="">
+<h2>A Conceptual View of the List Iterator</h2>
+<img src="images/conceptual.png" alt="">
+<h2>List Iterator</h2>
+<ul>
+  <li>Think of an iterator as pointing between two elements
+    <ul>
+      <li>Analogy: like the cursor in a word processor points between
+two characters</li>
+    </ul>
+  </li>
+  <li>The <tt>listIterator</tt> method of the <tt>LinkedList</tt>
+class gets a list iterator
+    <pre>LinkedList&lt;String&gt; employeeNames = . . .;<br>ListIterator&lt;String&gt; iterator = employeeNames.listIterator();</pre>
+  </li>
+</ul>
+<h2>List Iterator</h2>
+<ul>
+  <li>Initially, the iterator points before the first element</li>
+  <li>The <tt>next</tt> method moves the iterator
+    <pre>iterator.next();</pre>
+  </li>
+  <li> <tt>next</tt> throws a <tt>NoSuchElementException</tt> if you
+are already past the end of the list</li>
+  <li> <tt>hasNext</tt> returns true if there is a next element
+    <pre>if (iterator.hasNext())<br>    iterator.next();</pre>
+  </li>
+</ul>
+<h2>List Iterator</h2>
+<ul>
+  <li>The <tt>next</tt> method returns the element that the iterator
+is passing
+    <pre>while iterator.hasNext()<br>{<br>   String name = iterator.next();<br>   <i>Do something with</i> name<br>}</pre>
+  </li>
+  <li>Shorthand:
+    <pre>for (String name : employeeNames)<br>{<br>   <i>Do something with</i> name<br>}</pre>
+Behind the scenes, the <tt>for</tt> loop uses an iterator to visit all
+list elements</li>
+</ul>
+<h2>List Iterator</h2>
+<ul>
+  <li><tt>LinkedList</tt> is a <i>doubly linked list</i>
+    <ul>
+      <li>Class stores two links:
+        <ul>
+          <li>One to the next element, and</li>
+          <li>One to the previous element</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li> To move the list position backwards, use:
+    <ul>
+      <li><tt>hasPrevious</tt></li>
+      <li><tt>previous</tt> </li>
+    </ul>
+  </li>
+</ul>
+<h2>Adding and Removing from a LinkedList</h2>
+<ul>
+  <li>The <tt>add</tt> method:
+    <ul>
+      <li>Adds an object after the iterator</li>
+      <li>Moves the iterator position past the new element </li>
+    </ul>
+    <pre>iterator.add("Juliet");</pre>
+  </li>
+</ul>
+<h2>Adding and Removing from a LinkedList</h2>
+<ul>
+  <li>The <tt>remove</tt> method
+    <ul>
+      <li>Removes and </li>
+      <li>Returns the object that was returned by the last call to <tt>next</tt>
+or <tt>previous</tt></li>
+    </ul>
+    <pre>//Remove all names that fulfill a certain condition<br>while (iterator.hasNext())<br>{<br>   String name = iterator.next();<br>   if (name <i>fulfills condition</i>)<br>      iterator.remove();<br>}</pre>
+  </li>
+  <li>Be careful when calling <tt>remove</tt>:
+    <ul>
+      <li>It can be called only once after calling <tt>next</tt> or <tt>previous</tt></li>
+      <li>You cannot call it immediately after a call to <tt>add</tt></li>
+      <li>If you call it improperly, it throws an <tt>IllegalStateException</tt></li>
+    </ul>
+  </li>
+</ul>
+<h2>Sample Program</h2>
+<ul>
+  <li><tt>ListTester</tt> is a sample program that
+    <ul>
+      <li>Inserts strings into a list</li>
+      <li>Iterates through the list, adding and removing elements</li>
+      <li>Prints the list</li>
+    </ul>
+  </li>
+</ul>
+<h2>File ListTester.java</h2>
+<iframe src="code/uselist/ListTester.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Output</h2>
+<pre>Dick<br>Harry<br>Juliet<br>Nina<br>Tom</pre>
+<h2>Self Check</h2>
+<ol>
+  <li>Do linked lists take more storage space than arrays of the same
+size?</li>
+  <li>Why don't we need iterators with arrays?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li>Yes, for two reasons. You need to store the node references, and
+each node is a
+separate object. (There is a fixed overhead to store each object in the
+virtual
+machine.)</li>
+  <li>An integer index can be used to access any array location.</li>
+</ol>
+<br>
+<h2>Implementing Linked Lists</h2>
+<ul>
+  <li>Previous section: Java's <tt>LinkedList</tt> class</li>
+  <li>Now, we will look at the implementation of a simplified version
+of this class</li>
+  <li>It will show you how the list operations manipulate the links as
+the list is modified</li>
+  <li>To keep it simple, we will implement a singly linked list
+    <ul>
+      <li>Class will supply direct access only to the first list
+element, not the last one</li>
+    </ul>
+  </li>
+  <li>Our list will not use a type parameter
+    <ul>
+      <li>Store raw <tt>Object</tt> values and insert casts when
+retrieving them</li>
+    </ul>
+  </li>
+</ul>
+<h2>Implementing Linked Lists</h2>
+<ul>
+  <li><tt>Node</tt>: stores an object and a reference to the next node</li>
+  <li>Methods of linked list class and iterator class have frequent
+access to the <tt>Node</tt> instance variables</li>
+  <li>To make it easier to use:
+    <ul>
+      <li>We do not make the instance variables private</li>
+      <li>We make <tt>Node</tt> a private inner class of <tt>LinkedList</tt></li>
+      <li>It is safe to leave the instance variables public
+        <ul>
+          <li>None of the list methods returns a <tt>Node</tt> object</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<h2>Implementing Linked Lists</h2>
+<pre>public class LinkedList<br>{<br>   . . .<br>   <code class="blue">private class Node<br>   {<br>      public Object data;<br>      public Node next;<br>   }</code>
+}</pre>
+<h2>Implementing Linked Lists</h2>
+<ul>
+  <li><tt>LinkedList</tt> class
+    <ul>
+      <li>Holds a reference <tt>first</tt> to the first node</li>
+      <li>Has a method to get the first element</li>
+    </ul>
+  </li>
+</ul>
+<h2>Implementing Linked Lists</h2>
+<pre>public class LinkedList<br>{<br>   public LinkedList()<br>   {<br>      first = null;<br>   }<br><br>   public Object getFirst()<br>   {<br>      if (first == null)<br>         throw new NoSuchElementException();<br>      return first.data;<br>   }<br><br>   . . .<br>   <code
+ class="blue">private Node first;</code>
+}</pre>
+<h2>Adding a New First Element</h2>
+<ul>
+  <li>When a new node is added to the list
+    <ul>
+      <li>It becomes the head of the list</li>
+      <li>The old list head becomes its next node</li>
+    </ul>
+  </li>
+</ul>
+<h2>Adding a New First Element</h2>
+<ul>
+  <li>The <tt>addFirst</tt> method
+    <pre>public class LinkedList<br>{<br>   . . .<br>   public void addFirst(Object obj)<br>   {<br>      Node newNode = new Node(); <img
+ src="images/one.png" alt="">
+      newNode.data = obj;
+      newNode.next = first; <img
+ src="images/two.png" alt="">
+      first = newNode; <img
+ src="images/three.png" alt="">
+   }
+   . . .
+}</pre>
+  </li>
+</ul>
+<h2>Adding a Node to the Head of a Linked List</h2>
+<img src="images/adding.png" alt="">
+<h2>Removing the First Element</h2>
+<ul>
+  <li>When the first element is removed
+    <ul>
+      <li>The data of the first node are saved and later returned as
+the method result</li>
+      <li>The successor of the first node becomes the first node of the
+shorter list</li>
+      <li>The old node will be garbage collected when there are no
+further references to it</li>
+    </ul>
+  </li>
+</ul>
+<h2>Removing the First Element</h2>
+<ul>
+  <li>The <tt>removeFirst</tt> method
+    <pre>public class LinkedList<br>{<br>   . . .<br>   public Object removeFirst()<br>   {<br>      if (first == null)<br>         throw new NoSuchElementException();<br>      Object obj = first.data;<br>      first = first.next; <img
+ src="images/one.png" alt="">
+      return obj;
+   }
+   . . .
+}</pre>
+  </li>
+</ul>
+<h2>Removing the First Node from a Linked List</h2>
+<img src="images/removing_first.png" alt="">
+<h2>Linked List Iterator</h2>
+<ul>
+  <li>We define <tt>LinkedListIterator</tt>: private inner class of <tt>LinkedList</tt></li>
+  <li>Implements a simplified <tt>ListIterator</tt> interface</li>
+  <li>Has access to the <tt>first</tt> field and private <tt>Node</tt>
+class</li>
+  <li>Clients of <tt>LinkedList</tt> don't actually know the name of
+the iterator class
+    <ul>
+      <li>They only know it is a class that implements the <tt>ListIterator</tt>
+interface</li>
+    </ul>
+  </li>
+</ul>
+<h2>LinkedListIterator</h2>
+<ul>
+  <li>The <tt>LinkListIterator</tt> class
+    <pre>public class LinkedList<br>{<br>   . . .<br>   public ListIterator listIterator()<br>   {<br>      return new LinkedListIterator();<br>   }<br><br>   private class LinkedListIterator implements ListIterator<br>   {<br>      public LinkedListIterator()<br>      {<br>         position = null;<br>         previous = null;<br>      }<br><br>      . . .<br>      private Node position;<br>      private Node previous;<br>   }<br>   . . .<br>}</pre>
+  </li>
+</ul>
+<h2>The Linked List Iterator's <tt>next</tt> Method</h2>
+<ul>
+  <li><tt>position</tt>: reference to the last visited node</li>
+  <li>Also, store a reference to the last reference before that</li>
+  <li><tt>next</tt> method: <tt>position</tt> reference is advanced to
+    <tt>position.next</tt></li>
+  <li>Old position is remembered in <tt>previous</tt></li>
+  <li>If the iterator points before the first element of the list, <br>
+then the old <tt>position</tt> is <tt>null</tt> and <tt>position</tt>
+must be set to <tt>first</tt></li>
+</ul>
+<h2>The Linked List Iterator's <tt>next</tt> Method</h2>
+<pre>public Object next()<br>{<br>   if (!hasNext())<br>      throw new NoSuchElementException();<br>   previous = position; // Remember for remove<br><br>   if (position == null)<br>      position = first;<br>   else<br>      position = position.next;<br><br>   return position.data;<br>}</pre>
+<h2>The Linked List Iterator's <tt>hasNext</tt> Method</h2>
+<ul>
+  <li>The <tt>next</tt> method should only be called when the iterator
+is not at the end of the list</li>
+  <li>The iterator is at the end
+    <ul>
+      <li>if the list is empty <tt>(first == null)</tt></li>
+      <li>if there is no element after the current position <tt>(position.next
+== null)</tt></li>
+    </ul>
+  </li>
+</ul>
+<h2>The Linked List Iterator's <tt>hasNext </tt>Method</h2>
+<pre>private class LinkedListIterator implements ListIterator<br>{<br>  . . .<br>   public boolean hasNext()<br>   {<br>      if (position == null)<br>         return first != null;<br>      else<br>         return position.next != null;<br>   }<br>   . . .<br>}</pre>
+<h2>The Linked List Iterator's <tt>remove</tt> Method</h2>
+<ul>
+  <li> If the element to be removed is the first element, call <tt>removeFirst</tt></li>
+  <li>Otherwise, the node preceding the element to be removed needs to
+have its <tt>next</tt> reference updated to skip the removed
+element</li>
+  <li>If the <tt>previous</tt> reference equals <tt>position</tt>:
+    <ul>
+      <li>this call does not immediately follow a call to <tt>next</tt></li>
+      <li>throw an <tt>IllegalArgumentException</tt></li>
+    </ul>
+  </li>
+  <li>It is illegal to call <tt>remove</tt> twice in a row
+    <ul>
+      <li><tt>remove</tt> sets the <tt>previous</tt> reference to <tt>position</tt></li>
+    </ul>
+  </li>
+</ul>
+<h2>The Linked List Iterator's <tt>remove</tt> Method</h2>
+<pre>public void remove()<br>{<br>   if (previous == position)<br>      throw new IllegalStateException();<br>   if (position == first)<br>   {<br>      removeFirst();<br>   }<br>   else<br>   {<br>      previous.next = position.next; <img
+ src="images/one.png" alt="">
+   }
+   position = previous; <img
+ src="images/two.png" alt="">
+}</pre>
+<h2>Removing a Node From the Middle of a Linked List</h2>
+<img src="images/removing_middle.png" alt="">
+<h2>The Linked List Iterator's <tt>set</tt> Method</h2>
+<ul>
+  <li>Changes the data stored in the previously visited element</li>
+  <li>The <tt>set</tt> method
+    <pre>public void set(Object obj)<br>{<br>   if (position == null)<br>      throw new NoSuchElementException();<br>   position.data = obj;<br>}</pre>
+  </li>
+</ul>
+<h2>The Linked List Iterator's <tt>add</tt> Method</h2>
+<ul>
+  <li>The most complex operation is the addition of a node</li>
+  <li><tt>add</tt> inserts the new node after the current position</li>
+  <li>Sets the successor of the new node to the successor of the
+current position</li>
+</ul>
+<h2>The Linked List Iterator's <tt>add</tt> Method</h2>
+<pre>public void add(Object obj)<br>{<br>   if (position == null)<br>   {<br>      addFirst(obj);<br>      position = first;<br>   }<br>   else<br>   {<br>      Node newNode = new Node();<br>      newNode.data = obj;<br>      newNode.next = position.next;  <img
+ src="images/one.png" alt="">
+      position.next = newNode;  <img
+ src="images/two.png" alt="">
+      position = newNode;  <img
+ src="images/three.png" alt="">
+   }
+   previous = position; <img
+ src="images/four.png" alt="">
+}</pre>
+<h2>Adding a Node to the Middle of a Linked List</h2>
+<img src="images/adding_middle.png" alt="">
+<h2>File LinkedList.java</h2>
+<iframe src="code/impllist/LinkedList.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>File ListIterator.java</h2>
+<iframe src="code/impllist/ListIterator.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Self Check</h2>
+<ol>
+  <li value="3">Trace through the <tt>addFirst</tt> method when adding
+an element to an empty list.</li>
+  <li>Conceptually, an iterator points between elements (see Figure 3).
+Does the
+position reference point to the element to the left or to the element
+to the right?</li>
+  <li>Why does the <tt>add</tt> method have two separate cases?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="3">When the list is empty, <tt>first</tt> is <tt>null</tt>.
+A new <tt>Node</tt> is allocated. It's <tt>data</tt> field is set
+to the newly inserted object. It's <tt>next</tt> field is set to <tt>null</tt>
+because <tt>first</tt> is <tt>null</tt>.
+The <tt>first</tt> field is set to the new node. The result is a
+linked list of length 1.</li>
+  <li>It points to the element to the left. You can see that by tracing
+out the first call
+to <tt>next</tt>. It leaves position to point to the first node.</li>
+  <li>If position is <tt>null</tt>, we must be at the head of the
+list, and inserting an element
+requires updating the <tt>first</tt> reference. If we are in the
+middle of the list, the
+    <tt>first</tt> reference should not be changed.</li>
+</ol>
+<br>
+<h2>Abstract and Concrete Data Types</h2>
+<ul>
+  <li>There are two ways of looking at a linked list
+    <ul>
+      <li>To think of the concrete implementation of such a list
+        <ul>
+          <li>Sequence of node objects with links between them</li>
+        </ul>
+      </li>
+      <li>Think of the abstract concept of the linked list
+        <ul>
+          <li>Ordered sequence of data items that can be traversed with
+an iterator</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<h2>Abstract and Concrete Data Types</h2>
+<img src="images/concrete_abstract.png" alt="">
+<br>
+<h2>Abstract Data Types</h2>
+<ul>
+  <li>Define the fundamental operations on the data</li>
+  <li>Do not specify an implementation</li>
+</ul>
+<h2>Abstract and Concrete Array Type<br>
+</h2>
+<ul>
+  <li>As with a linked list, there are two ways of looking at an array
+list</li>
+  <li>Concrete implementation: a partially filled array of object
+references</li>
+  <li>We don't usually think about the concrete implementation when
+using an array list
+    <ul>
+      <li>We take the abstract point of view</li>
+    </ul>
+  </li>
+  <li>Abstract view: ordered sequence of data items, each of which can
+be accessed by an integer index</li>
+</ul>
+<h2>Abstract and Concrete Data Types</h2>
+<img src="images/array_list.png" alt="">
+<br>
+<h2>Abstract and Concrete Data Types</h2>
+<ul>
+  <li>Concrete implementations of a linked list and an array list are
+quite different</li>
+  <li>The abstractions seem to be similar at first glance</li>
+  <li>To see the difference, consider the public interfaces stripped
+down to their minimal essentials</li>
+</ul>
+<h2>Fundamental Operations on Array List</h2>
+<pre>public class ArrayList<br>{<br>   public Object get(int index) { . . . }<br>   public void set(int index, Object value) { . . . }<br>   . . .<br>}</pre>
+<h2>Fundamental Operations on Linked List</h2>
+<pre>public class LinkedList<br>{<br>   public ListIterator listIterator() { . . . }<br>   . . .<br>}<br><br>public interface ListIterator<br>{<br>   Object next();<br>   boolean hasNext();<br>   void add(Object value);<br>   void remove();<br>   void set(Object value);<br>   . . .<br>}</pre>
+<h2>Abstract and Concrete Data Types</h2>
+<ul>
+  <li><tt>ArrayList</tt>: combines the interfaces of an array and a list</li>
+  <li>Both <tt>ArrayList</tt> and <tt>LinkedList</tt> implement an
+interface called <tt>List</tt>
+    <ul>
+      <li><tt>List</tt> defines operations for random access and for
+sequential access</li>
+    </ul>
+  </li>
+  <li>Terminology is not in common use outside the Java library</li>
+  <li>More traditional terminology: <i>array</i> and <i>list</i></li>
+  <li>Java library provides concrete implementations <tt>ArrayList</tt>
+and <tt>LinkedList</tt> for these abstract types</li>
+  <li>Java arrays are another implementation of the abstract array type</li>
+</ul>
+<h2>Efficiency of Operations for Arrays and Lists</h2>
+<ul>
+  <li>Adding or removing an element
+    <ul>
+      <li>A fixed number of node references need to be modified<br>
+to add or remove a node, regardless of the size of the list</li>
+      <li>In big-Oh notation: &nbsp;&nbsp;&nbsp; &nbsp;<i>O</i>(1)</li>
+    </ul>
+  </li>
+  <li>Adding or removing an element
+    <ul>
+      <li>On average <i>n</i>/2 elements need to be moved</li>
+      <li>In big-Oh notation: &nbsp;&nbsp;&nbsp; <i>O</i>(<i>n</i>)</li>
+    </ul>
+  </li>
+</ul>
+<h2>Efficiency of Operations for Arrays and Lists</h2>
+<table border="1">
+  <tbody>
+    <tr>
+      <td><!--R1C1--> Operation </td>
+      <td><!--R1C2--> Array </td>
+      <td><!--R1C3--> List </td>
+    </tr>
+    <tr>
+      <td><!--R2C1--> Random access </td>
+      <td><!--R2C2--> <i>O</i>(1) </td>
+      <td><!--R2C3--> <i>O</i>(<i>n</i>) </td>
+    </tr>
+    <tr>
+      <td><!--R3C1--> Linear traversal step </td>
+      <td><!--R3C2--> <i>O</i>(1) </td>
+      <td><!--R3C3--> <i>O</i>(1) </td>
+    </tr>
+    <tr>
+      <td><!--R4C1--> Add/remove an element </td>
+      <td><!--R4C2--> <i>O</i>(<i>n</i>) </td>
+      <td><!--R4C3--> <i>O</i>(1) </td>
+    </tr>
+  </tbody>
+</table>
+<h2>Abstract Data Types</h2>
+<ul>
+  <li>Abstract list
+    <ul>
+      <li>Ordered sequence of items that can be traversed sequentially</li>
+      <li>Allows for insertion and removal of elements at any position</li>
+    </ul>
+  </li>
+  <li>Abstract array
+    <ul>
+      <li>Ordered sequence of items with random access via an integer
+index</li>
+    </ul>
+  </li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="6">What is the advantage of viewing a type abstractly?</li>
+  <li>How would you sketch an abstract view of a doubly linked list? A
+concrete view?</li>
+  <li>How much slower is the binary search algorithm for a linked list
+compared to
+the linear search algorithm?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="6">You can focus on the essential characteristics of the
+data type without being
+distracted by implementation details.</li>
+  <li>The abstract view would be like Figure 9, but with arrows in both
+directions.
+The concrete view would be like Figure 8, but with references to the
+previous
+node added to each node.</li>
+  <li>To locate the middle element takes <i>n</i> / 2 steps. To locate
+the middle of the subinterval
+to the left or right takes another <i>n</i> / 4 steps. The next lookup
+takes <i>n</i> / 8
+steps. Thus, we expect almost <i>n</i> steps to locate an element. At
+this point, you
+are better off just making a linear search that, on average, takes <i>n</i>
+/ 2 steps.</li>
+</ol>
+<br>
+<h2>Stacks and Queues</h2>
+<ul>
+  <li>Stack: collection of items with "last in first out" retrieval</li>
+  <li>Queue: collection of items with "first in first out" retrieval</li>
+</ul>
+<h2>Stack</h2>
+<ul>
+  <li> Allows insertion and removal of elements only at one end
+    <ul>
+      <li>Traditionally called the <i>top</i> of the stack</li>
+    </ul>
+  </li>
+  <li>New items are added to the top of the stack</li>
+  <li>Items are removed at the top of the stack</li>
+  <li>Called <i>last in, first out</i> or LIFO order</li>
+  <li>Traditionally, addition and removal operations are called <tt>push</tt>
+and <tt>pop</tt></li>
+  <li>Think of a stack of books</li>
+</ul>
+<h2>A Stack of Books</h2>
+<img src="images/books.png" alt="">
+<h2>Queue</h2>
+<ul>
+  <li>Add items to one end of the queue (the tail)</li>
+  <li>Remove items from the other end of the queue (the head)</li>
+  <li>Queues store items in a <i>first in, first out</i> or FIFO
+fashion</li>
+  <li>Items are removed in the same order in which they have been added</li>
+  <li>Think of people lining up
+    <ul>
+      <li>People join the tail of the queue and wait until they have
+reached the head of the queue</li>
+    </ul>
+  </li>
+</ul>
+<h2>A Queue</h2>
+<img src="images/queue.png" alt="">
+<h2>Stacks and Queues: Uses in Computer Science</h2>
+<ul>
+  <li>Queue
+    <ul>
+      <li>Event queue of all events, kept by the Java GUI system</li>
+      <li>Queue of print jobs</li>
+    </ul>
+  </li>
+  <li>Stack
+    <ul>
+      <li>Run-time stack that a processor or virtual machine keeps to
+organize the variables of nested methods</li>
+    </ul>
+  </li>
+</ul>
+<h2>Abstract Data Type Stack</h2>
+<ul>
+  <li><tt>Stack</tt>: concrete implementation of a stack in the Java
+library
+    <pre>Stack&lt;String&gt; s = new Stack&lt;String&gt;();<br>s.push("A");<br>s.push("B");<br>s.push("C");<br>// The following loop prints C, B, and A<br>while (s.size() &gt; 0)<br>   System.out.println(s.pop());</pre>
+  </li>
+  <li>Uses an array to implement a stack</li>
+</ul>
+<h2>Abstract Data Type Queue </h2>
+<ul>
+  <li>Queue implementations in the standard library are designed for
+use with multithreaded programs</li>
+  <li>However, it is simple to implement a basic queue yourself</li>
+</ul>
+<h2>A Queue Implementation</h2>
+<iframe src="code/LinkedListQueue.java.txt" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Self Check</h2>
+<ol>
+  <li value="9">Draw a sketch of the abstract queue type, similar to
+Figures 9 and 11.</li>
+  <li>Why wouldn't you want to use a stack to manage print jobs?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="9"><img src="images/self_check_9.png" alt=""></li>
+  <li>Stacks use a "last in, first out" discipline. If you are the
+first one to submit a
+print job and lots of people add print jobs before the printer has a
+chance to
+deal with your job, they get their printouts first, and you have to
+wait until all
+other jobs are completed.</li>
+</ol>
+<br>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 25</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide081.html'">
+<center><small><a href="slide079.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide081.html">next</a></small></center>
+<hr></div>
+<h2>Case Study: A Bank Database</h2>
+<pre>public double getBalance()
+      throws SQLException
+{
+   Connection conn = SimpleDataSource.getConnection();
+   try
+   {
+      double balance = 0
+      PreparedStatement stat = conn.prepareStatement(
+            "SELECT Balance FROM Account WHERE Account_Number = ?");
+      stat.setInt(1, accountNumber);
+
+      ResultSet result = stat.executeQuery();
+      if (result.next())
+         balance = result.getDouble(1);
+      return balance;
+   }
+   finally
+   {
+      conn.close();
+   }
+}</pre>
+
+
+
+<div onclick="document.location='slide081.html'"><hr>
+<center><small><a href="slide079.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide081.html">next</a></small></center>
+</div>
+</body>
+</html>

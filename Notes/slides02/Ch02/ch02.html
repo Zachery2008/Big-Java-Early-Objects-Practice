@@ -1,0 +1,619 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 2</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+<body>
+<h2>Chapter 2</h2>
+<h1>Using Objects</h1>
+<br>
+<h2>Chapter Goals</h2>
+<ul>
+  <li>To learn about variables</li>
+  <li>To understand the concepts of classes and objects<br>
+  </li>
+  <li>To be able to call methods</li>
+  <li>To be able to browse the API documentation</li>
+  <li>To realize the difference between objects and object references</li>
+</ul>
+<h2>Types and Variables</h2>
+<ul>
+  <li>Every value has a type</li>
+  <li>Variable declaration examples:<br>
+    <tt>String greeting = "Hello, World!";</tt><br>
+    <tt>PrintStream printer = System.out;</tt><br>
+    <tt>int luckyNumber = 13;</tt><br>
+  </li>
+  <li>Variables
+    <ul>
+      <li>Store values</li>
+      <li>Can be used in place of the objects they store</li>
+    </ul>
+  </li>
+</ul>
+<h2>Syntax 2.1: Variable Definition</h2>
+<table bgcolor="#ffffff" border="1" cellpadding="10" width="80%">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><i>typeName variableName</i> <tt>=</tt> <i>value</i><tt>;</tt><br>
+or<br>
+&nbsp;<i>typeName variableName</i><tt>;</tt><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><tt>String greeting = "Hello, Dave!";</tt> </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+To define a new variable of a particular type and optionally supply an
+initial
+value</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Identifiers</h2>
+<ul>
+  <li>Identifier: name of a variable, method, or class</li>
+  <li>Rules for identifiers in Java:
+    <ul>
+      <li>Can be made up of letters, digits, and the underscore (_)
+character</li>
+      <li>Cannot start with a digit</li>
+      <li>Cannot use other symbols such as ? or %</li>
+      <li>Spaces are not permitted inside identifiers</li>
+      <li>You cannot use reserved words</li>
+      <li>They are case sensitive</li>
+    </ul>
+  </li>
+  <li>By convention, variable names start with a lowercase letter</li>
+  <li>By convention, class names start with an uppercase letter</li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li>What is the type of the values <tt>0</tt> and <tt>"0"</tt>?</li>
+  <li>Which of the following are legal identifiers?
+    <pre>Greeting1<br>g<br>void<br>101dalmatians<br>Hello, World<br>&lt;greeting&gt;</pre>
+  </li>
+  <li>Define a variable to hold your name. Use camel case in the
+variable name.</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li><tt>int</tt> and <tt>String</tt></li>
+  <li>Only the first two are legal identifiers</li>
+  <li><tt>String myName = "John Q. Public";</tt></li>
+</ol>
+<br>
+<h2>The Assignment Operator</h2>
+<ul>
+  <li>Assignment operator: =</li>
+  <li>Not used as a statement about equality<br>
+  </li>
+  <li>Used to change the value of a variable<br>
+    <tt>int luckyNumber = 13;</tt><img src="images/one.png" alt=""><br>
+    <tt>luckyNumber = 12;</tt><img src="images/two.png" alt=""><br>
+    <img src="images/assignment.png" alt=""> </li>
+</ul>
+<h2>Uninitialized Variables<br>
+</h2>
+<ul>
+  <li>Error:<br>
+  </li>
+  <br>
+  <tt>int luckyNumber;</tt><br>
+  <tt>System.out.println(luckyNumber);<br>
+&nbsp;&nbsp; // ERROR - uninitialized
+variable</tt><br>
+  <img src="images/uninitialized.png" alt=""><br>
+</ul>
+<h2>Syntax 2.2: Assignment</h2>
+<table bgcolor="#ffffff" border="1" cellpadding="10" width="80%">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><i>variableName = value</i><tt>;</tt><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><tt>luckyNumber = 12;</tt> </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+To assign a new value to a previously defined variable.</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Self Check</h2>
+<ol>
+  <li value="4">Is <tt>12 = 12</tt> a valid expression in the Java
+language?</li>
+  <li>How do you change the value of the greeting variable to <tt>"Hello,
+Nina!"</tt>?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="4">No, the left-hand side of the <tt>=</tt> operator must
+be a variable</li>
+  <li><tt>greeting = "Hello, Nina!";</tt><br>
+Note that<br>
+    <tt>String greeting = "Hello, Nina!";</tt><br>
+is not the right answer&#8211;that statement defines a new variable</li>
+</ol>
+<br>
+<h2>Objects and Classes</h2>
+<ul>
+  <li>Object: entity that you can manipulate in your programs (by
+calling methods)</li>
+  <li>Each object belongs to a class. For example, <tt>System.out</tt>
+belongs to the class <tt>PrintStream</tt><br>
+    <img src="images/PrintStream.png" alt=""></li>
+</ul>
+<h2>Methods</h2>
+<ul>
+  <li>Method: Sequence of instructions that accesses the data of an
+object</li>
+  <li>You manipulate objects by calling its methods</li>
+  <li>Class: Set of objects with the same behavior</li>
+  <li>Class determines legal methods<br>
+    <tt>String greeting = "Hello";</tt><br>
+    <tt>greeting.println() // Error</tt><br>
+    <tt>greeting.length() // OK</tt></li>
+  <li>Public Interface: Specifies what you can do with the objects of a
+class</li>
+</ul>
+<h2>A Representation of Two String Objects</h2>
+<img src="images/strings.png" alt=""><br>
+<h2>String Methods</h2>
+<ul>
+  <li><tt>length</tt>: counts the number of characters in a string
+    <pre>String greeting = "Hello, World!";<br>int n = greeting.length(); // sets n to 13</pre>
+  </li>
+  <li><tt>toUpperCase</tt>:
+creates another String object that contains the characters of the
+original string, with lowercase letters converted to uppercase
+    <pre>String river = "Mississippi";<br>String bigRiver = river.toUpperCase(); // sets bigRiver to "MISSISSIPPI"</pre>
+  </li>
+  <li>When applying a method to an object, make sure method is defined
+in the appropriate class
+    <pre>System.out.length(); // This method call is an error</pre>
+  </li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="6">How can you compute the length of the string <tt>"Mississippi"</tt>?</li>
+  <li>How can you print out the uppercase version of <tt>"Hello,
+World!"</tt>?</li>
+  <li>Is it legal to call <tt>river.println()</tt>? Why or why not?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="6"><tt>river.length()</tt> or <tt>"Mississippi".length()</tt></li>
+  <li><tt>System.out.println(greeting.toUpperCase());</tt></li>
+  <li>It is not legal. The variable <tt>river</tt> has type <tt>String</tt>.
+The <tt>println</tt> method is not a
+method of the <tt>String</tt> class.</li>
+</ol>
+<h2>Implicit and Explicit Parameters</h2>
+<ul>
+  <li>Parameter (explicit parameter): Input to a method. Not all
+methods have explicit parameters.<br>
+    <tt>System.out.println(<b><font color="blue">greeting</font></b>)</tt>
+    <br>
+    <tt>greeting.length() // has no explicit parameter</tt></li>
+  <li>Implicit parameter: The object on which a method is invoked<br>
+    <tt><b><font color="blue">System.out</font></b>.println(greeting)</tt></li>
+</ul>
+<img src="images/passing_parameter.png" alt="">
+<h2>Return Values</h2>
+<ul>
+  <li>Return value: A result that the method has computed for use by
+the code that called it<br>
+    <tt>int n = greeting.length(); // return value stored in n</tt></li>
+</ul>
+<img src="images/noparameter.png" alt="">
+<h2>Passing Return Values</h2>
+<ul>
+  <li>You can also use the return value as a parameter of another
+method:<br>
+    <tt>System.out.println(greeting.length());</tt></li>
+  <li>Not all methods return values. Example: <tt>println</tt></li>
+</ul>
+<img src="images/passing_result.png" alt=""><br>
+<h2>A More Complex Call</h2>
+<ul>
+  <li><tt>replace</tt> method carries out a search-and-replace
+operation
+    <pre>river.replace("issipp", "our") // constructs a new string ("Missouri")</pre>
+  </li>
+  <li>This method call has
+    <ul>
+      <li>one implicit parameter: the string <tt>"Mississippi"</tt></li>
+      <li>two explicit parameters: the strings <tt>"issipp"</tt> and <tt>"our"</tt></li>
+      <li>a return value: the string <tt>"Missouri"</tt></li>
+    </ul>
+  </li>
+</ul>
+<img src="images/calling_method.png" alt="">
+<h2>Method Definitions</h2>
+<ul>
+  <li>Method definition specifies types of explicit
+parameters and return value</li>
+  <li>Type of implicit parameter = current class; not mentioned in
+method definition</li>
+  <li>Example: Class <span style="font-family: monospace;">String</span>
+defines
+    <pre>public int length() <br>   // return type: int<br>   // no explicit parameter<br>public String replace(String target, String replacement)<br>   // return type: String; <br>   // two explicit parameters of type String</pre>
+  </li>
+</ul>
+<h2>Method Definitions</h2>
+<ul>
+  <li>If method returns no value, the return type is declared as <tt>void</tt>
+    <pre>public void println(String output) // in class PrintStream</pre>
+  </li>
+  <li>A method name is overloaded if a class has more than one method
+with the same name (but different parameter types)
+    <pre>public void println(String output)<br>public void println(int output)</pre>
+  </li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="9">What are the implicit parameters, explicit parameters,
+and return values in the
+method call <tt>river.length()</tt>?</li>
+  <li>What is the result of the call <tt>river.replace("p", "s")</tt>?</li>
+  <li>What is the result of the call <tt>greeting.replace("World",
+"Dave").length()</tt>?</li>
+  <li>How is the <tt>toUpperCase</tt> method defined in the <tt>String</tt>
+class?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="9">The implicit parameter is <tt>river</tt>. There is no
+explicit parameter. The return value
+is 11</li>
+  <li><tt>"Mississi<font color="blue">ss</font>i"</tt></li>
+  <li>12</li>
+  <li>As <tt>public String toUpperCase()</tt>, with no explicit
+parameter and return type <tt>String</tt>.</li>
+</ol>
+<br>
+<h2>Number Types</h2>
+<ul>
+  <li>Integers: <tt>short</tt>, <tt>int</tt>, <tt>long</tt><br>
+    <tt>13</tt></li>
+  <li>Floating point numbers: <tt>float</tt>, <tt>double</tt> <br>
+    <tt>1.3<br>
+0.00013</tt></li>
+  <li>When a floating-point number is multiplied or divided by 10, only
+the position of the decimal point changes; it "floats". This
+representation is related to the "scientific" notation 1.3 &times; 10<sup>-4</sup>.
+    <br>
+    <tt>1.3E-4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 1.3 &times;
+10<sup>-4</sup> written in Java</tt></li>
+  <li>Numbers are not objects; numbers types are primitive types</li>
+</ul>
+<h2>Arithmetic Operations<br>
+</h2>
+<ul>
+  <li>Operators: <tt>+</tt> <tt>-</tt> <tt>*</tt><br>
+    <tt>10 + n<br>
+n - 1<br>
+10 * n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 10 &times; n</tt></li>
+  <li>As in mathematics, the <tt>*</tt> operator binds more strongly
+than the <tt>+</tt> operator <br>
+    <tt>x + y * 2&nbsp;&nbsp;&nbsp;&nbsp;// means the sum of x and y * 2<br>
+(x + y) * 2&nbsp;&nbsp;// multiplies the sum of x and y with 2</tt></li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="13">Which number type would you use for storing the area
+of a circle?</li>
+  <li>Why is the expression <tt>13.println()</tt> an error?</li>
+  <li>Write an expression to compute the average of the values <tt>x</tt>
+and <tt>y</tt>.</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="13"><tt>double</tt></li>
+  <li>An <tt>int</tt> is not an object, and you cannot call a method
+on it</li>
+  <li><tt>(x + y) * 0.5</tt></li>
+</ol>
+<br>
+<h2>Rectangular Shapes and Rectangle Objects</h2>
+<ul>
+  <li>Objects of type <tt>Rectangle</tt> <span
+ style="font-style: italic;">describe</span> rectangular shapes <br>
+    <img src="images/rects.png" alt=""></li>
+</ul>
+<h2>Rectangular Shapes and Rectangle Objects</h2>
+<ul>
+  <li>A <tt>Rectangle</tt> object isn't a rectangular shape&#8211;it is an
+object that contains a set of numbers that describe the rectangle <br>
+    <img src="images/rectangles.png" alt=""></li>
+</ul>
+<h2>Constructing Objects</h2>
+<tt>&nbsp;&nbsp;&nbsp;new Rectangle(5, 10, 20, 30)</tt><br>
+<ul>
+  <li>Detail:
+    <ol>
+      <li>The <span style="font-family: monospace;">new</span>
+operator makes a <tt>Rectangle</tt> object</li>
+      <li>It uses the parameters (in this case, <tt>5</tt>, <tt>10</tt>,
+        <tt>20</tt>, and <tt>30</tt>) to initialize the data of the
+object</li>
+      <li>It returns the object</li>
+    </ol>
+  </li>
+  <li>Usually the output of the new operator is stored in a variable
+    <pre>Rectangle box = new Rectangle(5, 10, 20, 30);</pre>
+  </li>
+</ul>
+<h2>Constructing Objects</h2>
+<ul>
+  <li>The process of creating a new object is called <i>construction</i></li>
+  <li>The four values <tt>5</tt>, <tt>10</tt>, <tt>20</tt>, and <tt>30</tt>
+are called the <i>construction parameters</i></li>
+  <li>Some classes let you construct objects in multiple ways
+    <pre>new Rectangle()<br>   // constructs a rectangle with its top-left corner<br>   // at the origin (0, 0), width 0, and height 0</pre>
+  </li>
+</ul>
+<h2>Syntax 2.3: Object Construction</h2>
+<table bgcolor="#ffffff" border="1" cellpadding="10" width="80%">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td>
+            <pre><tt>new</tt><i>&nbsp;ClassName</i>(<i>parameters</i>)</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><tt>new Rectangle(5, 10, 20, 30)<br>
+new Rectangle()</tt></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+To construct a new object, initialize it with the construction
+parameters, and return a reference to the constructed object</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li value="16">How do you construct a square with center (100, 100)
+and side length 20?</li>
+  <li>What does the following statement print?<br>
+    <tt>System.out.println(new Rectangle().getWidth());</tt></li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="16"><tt>new Rectangle(90, 90, 20, 20)</tt></li>
+  <li>0</li>
+</ol>
+<br>
+<h2>Accessor and Mutator Methods</h2>
+<ul>
+  <li>Accessor method: does not change the state of its implicit
+parameter<br>
+    <tt>double width = box.getWidth();</tt></li>
+  <li>Mutator method: changes the state of its implicit parameter<br>
+    <tt>box.translate(15, 25);</tt><br>
+    <img src="images/translate.png" alt=""></li>
+</ul>
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li value="18">Is the <tt>toUpperCase</tt> method of the <tt>String</tt>
+class an accessor or a mutator?</li>
+  <li>Which call to <tt>translate</tt> is needed to move the <tt>box</tt>
+rectangle so that its top-left corner is the origin (0, 0)?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="18">An accessor&#8211;it doesn't modify the original string but
+returns a new string with uppercase letters</li>
+  <li><tt>box.translate(-5, -10)</tt>, provided the method is called
+immediately after storing the new rectangle into box</li>
+</ol>
+<br>
+<h2>Implementing a Test Program</h2>
+<ol>
+  <li>Provide a new class</li>
+  <li>Supply a <tt>main</tt> method</li>
+  <li>Inside the <tt>main</tt> method, construct one or more objects</li>
+  <li>Apply methods to the objects</li>
+  <li>Display the results of the method calls</li>
+</ol>
+<h2>Importing Packages</h2>
+Don't forget to include appropriate packages:
+<ul>
+  <li>Java classes are grouped into packages</li>
+  <li>Import library classes by specifying the package and class name:<br>
+    <tt>import java.awt.Rectangle</tt>;</li>
+  <li>You don't need to import classes in the <tt>java.lang</tt>
+package
+such as <tt>String</tt> and <tt>System</tt></li>
+</ul>
+<h2>Syntax 2.4 : Importing a Class from a Package</h2>
+<table bgcolor="#ffffff" border="1" cellpadding="10" width="80%">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><tt>import</tt> <i>packageName</i><tt>.</tt><i>ClassName</i><tt>;</tt><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><tt>import java.awt.Rectangle; </tt></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+To import a class from a package for use in a program.<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2>File MoveTester.java</h2>
+<iframe src="code/rectangle/MoveTester.java.html" class="code">
+Your browser does not support the
+&amp;amp;amp;amp;amp;lt;iframe&amp;amp;amp;amp;amp;gt; tag.
+</iframe><br>
+<h3>Output
+</h3>
+<pre>   After moving, the top-left corner is:<br>   20<br>   35</pre>
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li value="20">The <tt>Random</tt> class is defined in the <tt>java.util</tt>
+package. What do you need to do in
+order to use that class in your program?</li>
+  <li>Why doesn't the <tt>MoveTester</tt> program print the width and
+height of the rectangle?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="20">Add the statement <tt>import java.util.Random;</tt>
+at the top of your program</li>
+  <li>Because the <tt>translate</tt> method doesn't modify the shape
+of the rectangle</li>
+</ol>
+<br>
+<h2>Testing Classes in an Interactive Environment</h2>
+<img src="images/testing_bluej.png" alt="">
+<br>
+<h2>The API Documentation</h2>
+<ul>
+  <li>API: Application Programming Interface</li>
+  <li>Lists classes and methods in the Java library</li>
+  <li><a href="http://java.sun.com/j2se/1.5/docs/api/index.html">http://java.sun.com/j2se/1.5/docs/api/index.html</a></li>
+</ul>
+<br>
+<h2>The API Documentation of the Standard Java Library</h2>
+<img src="images/api.png" alt="">
+<br>
+<h2>The API Documentation for the Rectangle Class</h2>
+<img src="images/api_doc.png" alt="">
+<br>
+<br>
+<h2>Javadoc Method Summary</h2>
+<img src="images/method_summary.png" alt="">
+<br>
+<br>
+<h2><tt>translate</tt> Method Documentation</h2>
+<img src="images/translate_doc.png" alt="">
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li value="22">Look at the API documentation of the <tt>String</tt>
+class. Which method would you
+use to obtain the string <tt>"hello, world!"</tt> from the string <tt>"Hello,
+World!"</tt>?</li>
+  <li>In the API documentation of the <tt>String</tt> class, look at
+the description of the <tt>trim</tt> method. What is the result of
+applying trim to the
+string <tt>" Hello, Space ! "</tt>?
+(Note the spaces in the string.)</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="22"><tt>toLowerCase</tt></li>
+  <li><tt>"Hello, Space !"</tt>&#8211;only the leading and trailing spaces
+are trimmed</li>
+</ol>
+<br>
+<br>
+<h2>Object References</h2>
+<ul>
+  <li>Describe the location of objects</li>
+  <li>The <tt>new</tt> operator returns a reference to a new object<br>
+    <tt>Rectangle box = new Rectangle();</tt></li>
+  <li>Multiple object variables can refer to the same object<br>
+    <tt>Rectangle box = new Rectangle(5, 10, 20, 30);<br>
+Rectangle box2 = box;<br>
+box2.translate(15, 25);</tt> </li>
+  <li>Primitive type variables &#8800; object variables</li>
+</ul>
+<br>
+<h2>Object Variables and Number Variables</h2>
+<img src="images/initialized.png" alt=""><br>
+&nbsp; <img src="images/shared.png" alt="">
+<br>
+&nbsp; <img src="images/number_variable.png" alt="">
+<br>
+<h2>Copying Numbers</h2>
+<pre>   int luckyNumber = 13;<br>   int luckyNumber2 = luckyNumber;<br>   luckyNumber2 = 12;<br></pre>
+<img src="images/copying_numbers.png" alt=""><br>
+<h2>Copying Object References</h2>
+<pre>   Rectangle box = new Rectangle(5, 10, 20, 30);<br>   Rectangle box2 = box;<br>   box2.translate(15, 25);<br></pre>
+<img src="images/copying_references.png" alt=""><br>
+<h2>Self Check</h2>
+<ol>
+  <li value="24">What is the effect of the assignment <tt>greeting2 =
+greeting</tt>?</li>
+  <li>After calling <tt>greeting2.toUpperCase()</tt>, what are the
+contents of <tt>greeting</tt> and <tt>greeting2</tt>?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="24">Now <tt>greeting</tt> and <tt>greeting2</tt> both
+refer to the same <tt>String</tt> object.</li>
+  <li>Both variables still refer to the same string, and the string has
+not been modified. Recall that the <tt>toUpperCase</tt> method
+constructs a new string that contains uppercase characters, leaving the
+original string unchanged.</li>
+</ol>
+<br>
+<h2>Mainframes&#8211;When Dinosaurs Ruled the Earth</h2>
+<img src="images/mainframe.png" alt="">
+<br>
+</body>
+</html>

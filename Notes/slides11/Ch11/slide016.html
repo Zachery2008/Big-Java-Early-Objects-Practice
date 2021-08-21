@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 11</title>
+   
+</head>
+
+<body>
+<div onclick="document.location='slide017.html'">
+<center><small><a href="slide015.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide017.html">next</a></small></center>
+<hr></div>
+<h2>Casts</h2>
+<ul>
+  <li>Add coin objects to <tt>DataSet<br>
+ DataSet coinData = new DataSet();<br>
+ coinData.add(new Coin(0.25, "quarter"));<br>
+ coinData.add(new Coin(0.1, "dime"));<br>
+ . . .<br>
+Measurable max = coinData.getMaximum(); // Get the largest coin</tt></li>
+  <li>What can you do with it? It's not of type <tt>Coin<br>
+ String name = max.getName(); // ERROR</tt></li>
+  <li>You need a cast to convert from an interface type to a class type</li>
+  <li>You know it's a coin, but the compiler doesn't. Apply a cast:<br>
+    <tt>Coin maxCoin = (Coin) max;<br>
+ String name = maxCoin.getName();</tt></li>
+  <li>If you are wrong and <tt>max</tt> isn't a coin, the compiler throws an exception</li>
+  <li>Difference with casting numbers:<br>
+      When casting number types you agree to the information loss<br>
+      When casting object types you agree to that risk of causing an exception</li>
+</ul>
+
+
+
+<div onclick="document.location='slide017.html'"><hr>
+<center><small><a href="slide015.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide017.html">next</a></small></center>
+</div>
+</body>
+</html>

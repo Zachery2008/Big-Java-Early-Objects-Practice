@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 15</title>
+</head>
+
+<body>
+<div onclick="document.location='slide036.html'">
+<center><small><a href="slide034.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide036.html">next</a></small></center>
+<hr></div>
+<h2>The <tt>readData</tt> method of the <tt>DataSetReader</tt> class</h2>
+<ul>
+  <li>Reads the number of values</li>
+  <li>Constructs an array</li>
+  <li>Calls <tt>readValue</tt> for each data value
+<pre>private void readData(Scanner in) throws BadDataException
+{
+   if (!in.hasNextInt())
+      throw new BadDataException("Length expected");
+   int numberOfValues = in.nextInt();
+   data = new double[numberOfValues];
+
+   for (int i = 0; i < numberOfValues; i++)
+      readValue(in, i);
+
+   if (in.hasNext())
+      throw new BadDataException("End of file expected");
+}</pre></li>
+  <li>Checks for two potential errors
+    <ol><li>File might not start with an integer</li>
+    <li>File might have additional data after reading all values</li></ol></li>
+  <li>Makes no attempt to catch any exceptions</li>
+</ul>
+
+
+
+<div onclick="document.location='slide036.html'"><hr>
+<center><small><a href="slide034.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide036.html">next</a></small></center>
+</div>
+</body>
+</html>

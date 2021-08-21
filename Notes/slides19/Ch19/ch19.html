@@ -1,0 +1,889 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 19</title>
+</head>
+<body>
+<div>
+<h2>Chapter 19</h2>
+<h1>Sorting and Searching</h1>
+<br>
+</div>
+<h2>Chapter Goals</h2>
+<ul>
+  <li>To study several sorting and searching algorithms</li>
+  <li>To appreciate that algorithms for the same task can differ widely
+in performance</li>
+  <li>To understand the big-Oh notation</li>
+  <li>To learn how to estimate and compare the performance of algorithms</li>
+  <li>To learn how to measure the running time of a program</li>
+</ul>
+<h2>Selection Sort</h2>
+<ul>
+  <li>Sorts an array by repeatedly finding the smallest element of <br>
+the unsorted tail region and moving it to the front</li>
+  <li>Slow when run on large data sets</li>
+  <li>Example: sorting an array of integers
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td>
+          <div align="left">11</div>
+          </td>
+          <td>
+          <div align="left">9 </div>
+          </td>
+          <td>
+          <div align="left">17</div>
+          </td>
+          <td>
+          <div align="left">5 </div>
+          </td>
+          <td>
+          <div align="left">12</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+<h2>Sorting an Array of Integers</h2>
+<ol>
+  <li>Find the smallest and swap it with the first element
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">5 </td>
+          <td>9 </td>
+          <td>17</td>
+          <td>11</td>
+          <td>12</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </li>
+  <li>Find the next smallest. It is already in the correct place
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">5 </td>
+          <td bgcolor="#9999cc">9 </td>
+          <td>17</td>
+          <td>11</td>
+          <td>12</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </li>
+  <li>Find the next smallest and swap it with first element of unsorted
+portion
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">5 </td>
+          <td bgcolor="#9999cc">9 </td>
+          <td bgcolor="#9999cc">11</td>
+          <td>17</td>
+          <td>12</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </li>
+  <li>Repeat
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">5 </td>
+          <td bgcolor="#9999cc">9 </td>
+          <td bgcolor="#9999cc">11</td>
+          <td bgcolor="#9999cc">12</td>
+          <td>17</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </li>
+  <li>When the unsorted portion is of length 1, we are done
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">5 </td>
+          <td bgcolor="#9999cc">9 </td>
+          <td bgcolor="#9999cc">11</td>
+          <td bgcolor="#9999cc">12</td>
+          <td bgcolor="#9999cc">17</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ol>
+<h2>File SelectionSorter.java</h2>
+<iframe src="code/selsort/SelectionSorter.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>File SelectionSortTester.java</h2>
+<iframe src="code/selsort/SelectionSortTester.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>File ArrayUtil.java</h2>
+<iframe src="code/selsort/ArrayUtil.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Output</h2>
+<pre>65 46 14 52 38 2 96 39 14 33 13 4 24 99 89 77 73 87 36 81<br>2 4 13 14 14 24 33 36 38 39 46 52 65 73 77 81 87 89 96 99</pre>
+<h2>Self Check</h2>
+<ol>
+  <li>Why do we need the <tt>temp</tt> variable in the <tt>swap</tt>
+method? What would happen if
+you simply assigned <tt>a[i]</tt> to <tt>a[j]</tt> and <tt>a[j]</tt>
+to <tt>a[i]</tt>?</li>
+  <li>What steps does the selection sort algorithm go through to sort
+the sequence
+    <tt>6 5 4 3 2 1</tt>?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li>Dropping the <tt>temp</tt> variable would not work. Then <tt>a[i]</tt>
+and <tt>a[j]</tt> would end up
+being the same value.</li>
+  <li><br>
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">1 </td>
+          <td>5 <br>
+          </td>
+          <td>4<br>
+          </td>
+          <td>3<br>
+          </td>
+          <td>2</td>
+          <td valign="top">6<br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">1 </td>
+          <td bgcolor="#9999cc">2 </td>
+          <td>4<br>
+          </td>
+          <td>3<br>
+          </td>
+          <td>5<br>
+          </td>
+          <td valign="top">6<br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">1</td>
+          <td bgcolor="#9999cc">2 <br>
+          </td>
+          <td bgcolor="#9999cc">3<br>
+          </td>
+          <td bgcolor="#9999cc">4<br>
+          </td>
+          <td bgcolor="#9999cc">5</td>
+          <td bgcolor="#9999cc" valign="top">6<br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </li>
+</ol>
+<br>
+<h2>Profiling the Selection Sort Algorithm</h2>
+<ul>
+  <li>We want to measure the time the algorithm takes to execute <br>
+    <ul>
+      <li>Exclude the time the program takes to load</li>
+      <li>Exclude output time</li>
+    </ul>
+  </li>
+  <li>Create a <tt>StopWatch</tt> class to measure execution time of
+an algorithm<br>
+    <ul>
+      <li>It can start, stop and give elapsed time</li>
+      <li>Use <tt>System.currentTimeMillis</tt> method</li>
+    </ul>
+  </li>
+  <li>Create a <tt>StopWatch</tt> object
+    <ul>
+      <li>Start the stopwatch just before the sort</li>
+      <li>Stop the stopwatch just after the sort</li>
+      <li>Read the elapsed time</li>
+    </ul>
+  </li>
+</ul>
+<h2>File StopWatch.java</h2>
+<iframe src="code/selsort/StopWatch.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>File SelectionSortTimer</h2>
+<iframe src="code/selsort/SelectionSortTimer.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe><br>
+Output
+<pre>   Enter array size: <code class="blue">100000</code>
+   Elapsed time: 27880 milliseconds</pre>
+<h2>Selection Sort on Various Size Arrays<sup>*</sup></h2>
+<table border="1" cellpadding="10" cellspacing="0">
+  <tbody>
+    <tr>
+      <td align="center">n</td>
+      <td align="center">Milliseconds</td>
+    </tr>
+    <tr>
+      <td>10,000</td>
+      <td align="center">772</td>
+    </tr>
+    <tr>
+      <td>20,000</td>
+      <td align="center">3,051</td>
+    </tr>
+    <tr>
+      <td>30,000</td>
+      <td align="center">6,846</td>
+    </tr>
+    <tr>
+      <td>40,000</td>
+      <td align="center">12,188</td>
+    </tr>
+    <tr>
+      <td>50,000</td>
+      <td align="center">19,015</td>
+    </tr>
+    <tr>
+      <td>60,000</td>
+      <td align="center">27,359</td>
+    </tr>
+  </tbody>
+</table>
+<sup>*</sup> Obtained with a Pentium processor, 1.2 GHz, Java 5.0,
+Linux
+<h2>Selection Sort on Various Size Arrays</h2>
+<img src="images/selsort.png" alt=""><br>
+<h2>Selection Sort on Various Size Arrays</h2>
+<ul>
+  <li>Doubling the size of the array more than <br>
+doubles the time needed to sort it
+  </li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="3">Approximately how many seconds would it take to sort a
+data set of 80,000 values?</li>
+  <li>Look at the graph in Figure 1. What mathematical shape does it
+resemble?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="3">Four times as long as 40,000 values, or about 50
+seconds.</li>
+  <li>A parabola.</li>
+</ol>
+<br>
+<h2>Analyzing the Performance of the Selection Sort Algorithm</h2>
+<ul>
+  <li>In an array of size <i>n</i>, count how many times an array
+element is visited
+    <ul>
+      <li>To find the smallest, visit <i>n</i> elements + 2 visits for
+the swap</li>
+      <li>To find the next smallest, visit <i>(n</i> - 1) elements + 2
+visits for the swap</li>
+      <li>The last term is 2 elements visited to find the smallest + 2
+visits for the swap</li>
+    </ul>
+  </li>
+</ul>
+<h2>Analyzing the Performance of the Selection Sort Algorithm</h2>
+<ul>
+  <li>The number of visits:
+    <ul>
+      <li><i>n </i>+ 2 + (<i>n</i> - 1) + 2 + (<i>n</i> - 2) + 2 + . .
+.+ 2 + 2</li>
+      <li>This can be simplified to <i>n</i><sup>2 </sup>/2&nbsp; +
+&nbsp;5<i>n</i>/2 &nbsp;-&nbsp;3</li>
+      <li>5<i>n</i>/2 - 3 is small compared to <i>n</i><sup>2</sup> /2
+&#8211; so let's ignore it</li>
+      <li>Also ignore the 1/2 &#8211; it cancels out when comparing ratios</li>
+    </ul>
+  </li>
+</ul>
+<h2>Analyzing the Performance of the Selection Sort Algorithm</h2>
+<ul>
+  <li>The number of visits is of the order <i>n</i><sup>2</sup></li>
+  <li>Using big-Oh notation: The number of visits is O(<i>n</i><sup>2</sup>)</li>
+  <li>Multiplying the number of elements in an array by <b>2</b>
+multiplies the processing time by<b> 4</b></li>
+  <li>Big-Oh notation "<i>f</i>(<i>n</i>) = <i>O</i>(<i>g</i>(<i>n</i>))"
+    <br>
+expresses that <i>f</i> grows no faster than <i>g</i></li>
+  <li>To convert to big-Oh notation: <br>
+locate fastest-growing term, and ignore constant coefficient</li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="5">If you increase the size of a data set tenfold, how
+much longer does it take to
+sort it with the selection sort algorithm?</li>
+  <li>How large does <i>n</i> need to be so that <i>n</i><sup>2</sup>/2
+is bigger than 5<i>n</i><sup>2</sup>/2 - 3?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="5">It takes about 100 times longer.</li>
+  <li>If n is 4, then <i>n</i><sup>2</sup>/2 is 8 and 5<i>n</i><sup>2</sup>/2
+- 3 is 7.</li>
+</ol>
+<br>
+<h2>Insertion Sort</h2>
+<ul>
+  <li>Assume initial sequence <tt>a[0] . . . a[k]</tt> is sorted (<tt>k
+= 0</tt>):
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">
+          <div align="left">11</div>
+          </td>
+          <td>
+          <div align="left">9 </div>
+          </td>
+          <td>
+          <div align="left">16</div>
+          </td>
+          <td>
+          <div align="left">5 </div>
+          </td>
+          <td>
+          <div align="left">7</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>Add <tt>a[1]</tt>; element needs to be inserted before <tt>11</tt>
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">
+          <div align="left">9</div>
+          </td>
+          <td bgcolor="#9999cc">
+          <div align="left">11</div>
+          </td>
+          <td>
+          <div align="left">16</div>
+          </td>
+          <td>
+          <div align="left">5 </div>
+          </td>
+          <td>
+          <div align="left">7</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>Add <tt>a[2]</tt>
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">
+          <div align="left">9</div>
+          </td>
+          <td bgcolor="#9999cc">
+          <div align="left">11</div>
+          </td>
+          <td bgcolor="#9999cc">
+          <div align="left">16</div>
+          </td>
+          <td>
+          <div align="left">5</div>
+          </td>
+          <td>
+          <div align="left">7</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>Add <tt>a[3]</tt>
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">
+          <div align="left">5</div>
+          </td>
+          <td bgcolor="#9999cc">
+          <div align="left">9</div>
+          </td>
+          <td bgcolor="#9999cc">
+          <div align="left">11</div>
+          </td>
+          <td bgcolor="#9999cc">
+          <div align="left">16</div>
+          </td>
+          <td>
+          <div align="left">7</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>Finally, add <tt>a[4]</tt>
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">
+          <div align="left">5</div>
+          </td>
+          <td bgcolor="#9999cc">
+          <div align="left">9</div>
+          </td>
+          <td bgcolor="#9999cc">
+          <div align="left">11</div>
+          </td>
+          <td bgcolor="#9999cc">
+          <div align="left">16</div>
+          </td>
+          <td bgcolor="#9999cc">
+          <div align="left">7</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+<h2>File InsertionSorter.java</h2>
+<iframe src="code/insertionsort/InsertionSorter.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Merge Sort</h2>
+<ul>
+  <li>Sorts an array by
+    <ul>
+      <li>Cutting the array in half</li>
+      <li>Recursively sorting each half</li>
+      <li>Merging the sorted halves</li>
+    </ul>
+  </li>
+  <li>Dramatically faster than the selection sort</li>
+</ul>
+<h2>Merge Sort Example</h2>
+<ul>
+  <li>Divide an array in half and sort each half<br>
+    <img src="images/merge1.png" alt=""></li>
+  <li>Merge the two sorted arrays into a single sorted array <img
+ src="images/merge.png" alt=""></li>
+</ul>
+<h2>Merge Sort</h2>
+<pre>public void sort()<br>{<br>   if (a.length &lt;= 1) return;<br>   int[] first = new int[a.length / 2];<br>   int[] second = new int[a.length - first.length];<br>   System.arraycopy(a, 0, first, 0, first.length);<br>   System.arraycopy(a, first.length, second, 0, second.length);<br>   MergeSorter firstSorter = new MergeSorter(first);<br>   MergeSorter secondSorter = new MergeSorter(second);<br><code
+ class="blue">   firstSorter.sort();<br>   secondSorter.sort();<br>   merge(first, second);</code>
+}</pre>
+<h2>File MergeSorter.java</h2>
+<iframe src="code/mergesort/MergeSorter.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>File MergeSortTester.java</h2>
+<iframe src="code/mergesort/MergeSortTester.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Output</h2>
+<pre>8 81 48 53 46 70 98 42 27 76 33 24 2 76 62 89 90 5 13 21<br>2 5 8 13 21 24 27 33 42 46 48 53 62 70 76 76 81 89 90 98</pre>
+<h2>Self Check</h2>
+<ol>
+  <li value="7">Why does only one of the two <tt>arraycopy</tt> calls
+at the end of the <tt>merge</tt> method do any work?</li>
+  <li>Manually run the merge sort algorithm on the array 8 7 6 5 4 3 2
+1.</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="7">When the preceding <tt>while</tt> loop ends, the loop
+condition must be false, that is,
+    <br>
+    <tt>iFirst &gt;= first.length</tt> or <tt>iSecond &gt;=
+second.length</tt> (De Morgan's Law).
+    <br>
+Then <tt>first.length - iFirst &lt;= 0</tt> or <tt>iSecond.length -
+iSecond &lt;= 0</tt>.</li>
+  <li>First sort 8 7 6 5. <br>
+Recursively, first sort 8 7. <br>
+Recursively, first sort 8. It's sorted. <br>
+Sort 7. It's sorted. <br>
+Merge them: 7 8. <br>
+Do the same with 6 5 to get 5 6. <br>
+Merge them to 5 6 7 8. <br>
+Do the same with 4 3 2 1: Sort 4 3 by sorting 4 and 3 and merging them
+to 3 4. <br>
+Sort 2 1 by sorting 2 and 1 and merging them to 1 2. <br>
+Merge 3 4 and 1 2 to 1 2 3 4. <br>
+Finally, merge 5 6 7 8 and 1 2 3 4 to 1 2 3 4 5 6 7 8.</li>
+</ol>
+<br>
+<h2>Analyzing the Merge Sort Algorithm</h2>
+<table border="1" cellpadding="10" cellspacing="0">
+  <tbody>
+    <tr>
+      <td align="center">n</td>
+      <td align="center">Merge Sort (milliseconds)</td>
+      <td align="center">Selection Sort (milliseconds)</td>
+    </tr>
+    <tr>
+      <td>10,000</td>
+      <td align="center">31</td>
+      <td align="center">772</td>
+    </tr>
+    <tr>
+      <td>20,000</td>
+      <td align="center">47</td>
+      <td align="center">3,051</td>
+    </tr>
+    <tr>
+      <td>30,000</td>
+      <td align="center">62</td>
+      <td align="center">6,846</td>
+    </tr>
+    <tr>
+      <td>40,000</td>
+      <td align="center">80</td>
+      <td align="center">12,188</td>
+    </tr>
+    <tr>
+      <td>50,000</td>
+      <td align="center">97</td>
+      <td align="center">19,015</td>
+    </tr>
+    <tr>
+      <td>60,000</td>
+      <td align="center">113</td>
+      <td align="center">27,359</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Merge Sort Timing vs. Selection Sort</h2>
+<img src="images/mergesort.png" alt="">
+<br>
+<h2>Analyzing the Merge Sort Algorithm</h2>
+<ul>
+  <li>In an array of size <i>n</i>, count how many times an array
+element is visited </li>
+  <li>Assume <i>n</i> is a power of 2: <i>&nbsp;&nbsp;&nbsp;n</i> = 2<sup><i>m</i></sup></li>
+  <li>Calculate the number of visits to create the two sub-arrays and
+then merge the two sorted arrays
+    <ul>
+      <li>3 visits to merge each element or 3<i>n</i> visits</li>
+      <li>2<i>n</i> visits to create the two sub-arrays</li>
+      <li>total of 5<i>n</i> visits </li>
+    </ul>
+  </li>
+</ul>
+<h2>Analyzing the Merge Sort Algorithm</h2>
+<ul>
+  <li>Let T(<i>n</i>) denote the number of visits to sort an array of <i>n</i>
+elements then
+    <ul>
+      <li>T(<i>n</i>) = T(<i>n</i>/2) + T(<i>n</i>/2) + 5<i>n</i> or</li>
+      <li>T(<i>n</i>) = 2T(<i>n</i>/2) + 5<i>n</i></li>
+    </ul>
+  </li>
+  <li>The visits for an array of size <i>n</i>/2 is:
+&nbsp;&nbsp;&nbsp;T(<i>n</i>/2) = 2T(<i>n</i>/4) + 5<i>n</i>/2
+    <ul>
+      <li>So T(<i>n</i>) = 2 &times; 2T(<i>n</i>/4) +5<i>n</i> + 5<i>n</i></li>
+    </ul>
+  </li>
+  <li>The visits for an array of size <i>n</i>/4 is:
+&nbsp;&nbsp;&nbsp;&nbsp;T(<i>n</i>/4) = 2T(<i>n</i>/8) + 5<i>n</i>/4
+    <ul>
+      <li>So T(<i>n</i>) = 2 &times; 2 &times; 2T(<i>n</i>/8) + 5<i>n</i>
++ 5<i>n</i> + 5<i>n</i></li>
+    </ul>
+  </li>
+</ul>
+<h2>Analyzing Merge Sort Algorithm</h2>
+<ul>
+  <li>Repeating the process <i>k</i> times:&nbsp;&nbsp;&nbsp;&nbsp;T(<i>n</i>)
+= 2<sup><i>k</i></sup>T(<i>n</i>/2<sup><i>k</i></sup>) +5<i>nk</i></li>
+  <li>since <i>n</i> = 2<sup><i>m</i></sup>, when<i> k </i>=<i> m:</i>&nbsp;&nbsp;&nbsp;&nbsp;T(<i>n</i>)
+= 2<sup><i>m</i></sup>T(<i>n</i>/2<sup><i>m</i></sup>) +5<i>nm</i></li>
+  <li>T(<i>n</i>) = <i>n</i>T(1) +5<i>nm</i></li>
+  <li>T(<i>n</i>) = <i>n</i> + 5<i>n</i>log<sub>2</sub>(<i>n</i>)</li>
+</ul>
+<h2>Analyzing Merge Sort Algorithm</h2>
+<ul>
+  <li>To establish growth order
+    <ul>
+      <li>Drop the lower-order term <i>n</i></li>
+      <li>Drop the constant factor 5</li>
+      <li>Drop the base of the logarithm since <br>
+all logarithms are related by a constant factor</li>
+      <li>We are left with <i>n</i> log(<i>n</i>)</li>
+    </ul>
+  </li>
+  <li>Using big-Oh notation: number of visits is O(<i>n</i>log(<i>n</i>))</li>
+</ul>
+<h2>Merge Sort Vs Selection Sort</h2>
+<ul>
+  <li>Selection sort is an O(<i>n</i><sup>2</sup>) algorithm</li>
+  <li>Merge sort is an O(<i>n</i>log(<i>n</i>)) algorithm</li>
+  <li>The <i>n</i>log(<i>n</i>) function grows much more slowly than <i>n</i><sup>2</sup>
+  </li>
+</ul>
+<h2>Sorting in a Java Program</h2>
+<ul>
+  <li>The <tt>Arrays</tt> class implements a sorting method</li>
+  <li>To sort an array of integers
+    <pre>int[] a = . . . ;<br>Arrays.sort(a);</pre>
+  </li>
+  <li>That <tt>sort</tt> method uses the Quicksort algorithm (see
+Advanced Topic 19.3)</li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="9">Given the timing data for the merge sort algorithm in
+the table at the beginning
+of this section, how long would it take to sort an array of 100,000
+values?</li>
+  <li>Suppose you have an array <tt>double[]</tt> values in a Java
+program. How would you sort it?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="9">Approximately 100,000 &times; log(100,000) / 50,000
+&times; log(50,000) = 2 &times; 5 / 4.7 = 2.13
+times the time required for 50,000 values. That's 2.13 &times; 97
+milliseconds or
+approximately 207 milliseconds.</li>
+  <li>By calling <tt>Arrays.sort(values)</tt>.</li>
+</ol>
+<br>
+<h2>The Quicksort Algorithm</h2>
+<ul>
+  <li>Divide and conquer
+    <ol>
+      <li>Partition the range</li>
+      <li>Sort each partition</li>
+    </ol>
+    <br>
+    <img src="images/quicksort.png" alt=""></li>
+</ul>
+<h2>The Quicksort Algorithm</h2>
+<pre>public void sort(int from, int to)<br>{<br>   if (from &gt;= to) return;<br>   int p = partition(from, to);<br>   sort(from, p);<br>   sort(p + 1, to);<br>}</pre>
+<h2>The Quicksort Algorithm</h2>
+<img src="images/partitions.png" alt="">
+<br>
+<h2>The Quicksort Algorithm</h2>
+<pre>private int partition(int from, int to)<br>{<br>   int pivot = a[from];<br>   int i = from - 1;<br>   int j = to + 1;<br>   while (i &lt; j)<br>   {<br>      i++; while (a[i] &lt; pivot) i++;<br>      j--; while (a[j] &gt; pivot) j--;<br>      if (i &lt; j) swap(i, j);<br>   }<br>   return j;<br>}</pre>
+<h2>The First Programmer</h2>
+<img src="images/babbage.png" alt="">
+<br>
+<h2>Searching</h2>
+<ul>
+  <li>Linear search: also called sequential search</li>
+  <li>Examines all values in an array until it finds a match or reaches
+the end</li>
+  <li>Number of visits for a linear search of an array of <i>n</i>
+elements:
+    <ul>
+      <li>The average search visits <i>n</i>/2 elements</li>
+      <li>The maximum visits is <i>n</i></li>
+    </ul>
+  </li>
+  <li>A linear search locates a value in an array in O(<i>n</i>) steps</li>
+</ul>
+<h2>File LinearSearcher.java</h2>
+<iframe src="code/linsearch/LinearSearcher.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>File LinearSearchTester.java</h2>
+<iframe src="code/linsearch/LinearSearchTester.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Output</h2>
+<pre>46 99 45 57 64 95 81 69 11 97 6 85 61 88 29 65 83 88 45 88<br>Enter number to search for, -1 to quit: <code
+ class="blue">11</code>
+Found in position 8</pre>
+<h2>Self Check</h2>
+<ol>
+  <li value="11">Suppose you need to look through 1,000,000 records to
+find a telephone number.
+How many records do you expect to search before finding the number?</li>
+  <li>Why can't you use a "for each" loop <tt>for (int element : a)</tt>
+in the search method?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="11">On average, you'd make 500,000 comparisons.</li>
+  <li>The search method returns the index at which the match occurs,
+not the data stored at that location.</li>
+</ol>
+<br>
+<h2>Binary Search</h2>
+<ul>
+  <li>Locates a value in a sorted array by
+    <ul>
+      <li>Determining whether the value occurs in the first or second
+half</li>
+      <li>Then repeating the search in one of the halves</li>
+    </ul>
+  </li>
+</ul>
+<h2>Binary Search</h2>
+<ul>
+  <li>To search 15: <br>
+    <img src="images/binsearch.png" alt=""></li>
+  <li>15 &#8800; 17: we don't have a match</li>
+</ul>
+<h2>File BinarySearcher.java</h2>
+<iframe src="code/binsearch/BinarySearcher.java.html" class="code">
+Your browser does not support the &amp;lt;iframe&amp;gt; tag.
+</iframe>
+<h2>Binary Search</h2>
+<ul>
+  <li>Count the number of visits to search an sorted array of size <i>n</i>
+    <ul>
+      <li>We visit one element (the middle element) then search either
+the left or right subarray</li>
+      <li>Thus: &nbsp;&nbsp;&nbsp;&nbsp;T(<i>n</i>) = T(<i>n</i>/2) + 1</li>
+    </ul>
+  </li>
+  <li>If <i>n</i> is <i>n</i>/2, then &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T(<i>n</i>/2)
+= T(<i>n</i>/4) + 1</li>
+  <li>Substituting into the original equation:&nbsp;&nbsp;&nbsp;&nbsp;
+T(<i>n</i>) = T(<i>n</i>/4) + 2</li>
+  <li>This generalizes to:&nbsp;&nbsp;&nbsp;&nbsp;T(<i>n</i>) = T(<i>n</i>/2<sup><i>k</i></sup>)
++ <i>k</i></li>
+</ul>
+<h2>Binary Search</h2>
+<ul>
+  <li>Assume <i>n</i> is a power of 2, <i>&nbsp;&nbsp;&nbsp;n</i> = 2<sup><i>m</i></sup>
+    <br>
+where <i>m </i>= log<sub>2</sub>(<i>n</i>)</li>
+  <li>Then:&nbsp;&nbsp;&nbsp;&nbsp;T(<i>n</i>) = 1 + log<sub>2</sub>(<i>n</i>)</li>
+  <li>Binary search is an O(log(<i>n</i>)) algorithm</li>
+</ul>
+<h2>Searching a Sorted Array in a Program</h2>
+<ul>
+  <li>The <tt>Arrays</tt> class contains a static <tt>binarySearch</tt>
+method</li>
+  <li>The method returns either
+    <ul>
+      <li>The index of the element, if element is found</li>
+      <li>Or -<i>k</i> - 1 where<i> k</i> is the position before which <br>
+the element should be inserted
+        <pre>int[] a = { 1, 4, 9 };<br>int v = 7;<br>int pos = Arrays.binarySearch(a, v);<br>   // Returns -3; v should be inserted before position 2</pre>
+      </li>
+    </ul>
+  </li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="13">Suppose you need to look through a sorted array with
+1,000,000 elements to
+find a value. Using the binary search algorithm, how many records do
+you
+expect to search before finding the value?</li>
+  <li>Why is it useful that the <tt>Arrays.binarySearch</tt> method
+indicates the position
+where a missing element should be inserted?</li>
+  <li>Why does <tt>Arrays.binarySearch</tt> return -<i>k</i> - 1 and
+not -<i>k</i> to indicate that a value
+is not present and should be inserted before position <i>k</i>?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="13">You would search about 20. (The binary log of 1,024 is
+10.)</li>
+  <li>Then you know where to insert it so that the array stays sorted,
+and you can keep using binary search.</li>
+  <li>Otherwise, you would not know whether a value is present when the
+method returns 0.</li>
+</ol>
+<br>
+<h2>Sorting Real Data</h2>
+<ul>
+  <li><tt>Arrays.sort</tt> sorts objects of classes that implement <tt>Comparable
+    </tt>interface
+    <pre>public interface Comparable<br>{<br>    int compareTo(Object otherObject);<br>}</pre>
+  </li>
+  <li>The call <tt>a.compareTo(b)</tt> returns
+    <ul>
+      <li>A negative number is <tt>a</tt> should come before <tt>b</tt></li>
+      <li>0 if <tt>a</tt> and <tt>b</tt> are the same</li>
+      <li>A positive number otherwise </li>
+    </ul>
+  </li>
+</ul>
+<h2>Sorting Real Data</h2>
+<ul>
+  <li>Several classes in Java (e.g. <tt>String</tt> and <tt>Date</tt>)
+implement <tt>Comparable</tt></li>
+  <li>You can implement <tt>Comparable</tt> interface for your own
+classes
+    <pre>public class Coin implements Comparable<br>{<br>   . . .<br>   public int compareTo(Object otherObject)<br>   {<br>      Coin other = (Coin) otherObject;<br>      if (value &lt; other.value) return -1;<br>      if (value == other.value) return 0;<br>      return 1;<br>   }<br>   . . .<br>}</pre>
+  </li>
+</ul>
+<h2><tt>CompareTo</tt> Method</h2>
+<ul>
+  <li>The implementation must define a total ordering relationship
+    <ul>
+      <li>Antisymmetric <br>
+If <tt>a.compareTo(b) = 0</tt>, then <tt>b.compareTo(a) = 0</tt><br>
+&nbsp;</li>
+      <li>Reflexive <br>
+        <tt>a.compareTo(a) = 0</tt><br>
+&nbsp;</li>
+      <li>Transitive <br>
+If <tt>a.compareTo(b) = 0</tt> and <tt>b.compareTo(c) = 0</tt>, then <tt>a.compareTo(c)
+= 0</tt></li>
+    </ul>
+  </li>
+</ul>
+<h2>Sorting Real Data</h2>
+<ul>
+  <li>Once your class implements <tt>Comparable</tt>, simply use the <tt>Arrays.sort</tt>
+method:
+    <pre>Coin[] coins = new Coin[n];<br>// Add coins<br>. . .<br>Arrays.sort(coins);</pre>
+  </li>
+  <li>If the objects are stored in an <tt>ArrayList</tt>, use <tt>Collections.sort</tt>:
+    <pre>ArrayList&lt;Coin&gt; coins = new ArrayList&lt;Coin&gt;();<br>// Add coins<br>. . .<br>Collections.sort(coins);</pre>
+  </li>
+  <li><tt>Collections.sort</tt> uses the merge sort algorithm</li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="16">Why can't the <tt>Arrays.sort</tt> method sort an
+array of <tt>Rectangle</tt> objects?</li>
+  <li>What steps would you need to take to sort an array of <tt>BankAccount</tt>
+objects by increasing balance?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="16">The <tt>Rectangle</tt> class does not implement the <tt>Comparable</tt>
+interface.</li>
+  <li>The <tt>BankAccount</tt> class needs to implement the <tt>Comparable</tt>
+interface. Its
+    <tt>compareTo</tt> method must compare the bank balances.</li>
+</ol>
+<br>
+</body>
+</html>

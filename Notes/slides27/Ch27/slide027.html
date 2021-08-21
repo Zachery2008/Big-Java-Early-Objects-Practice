@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 27</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide028.html'">
+<center><small><a href="slide026.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide028.html">next</a></small></center>
+<hr></div>
+<h2>JavaBeans Components</h2>
+<ul>
+  <li>This bean has two properties: <tt>creditCard</tt> and <tt>shopping</tt></li>
+  <li>Do not make any assumptions about the internal representation of properties
+    <ul><li>May have an instance field for every property:
+<pre>private String creditCard;
+private boolean shopping;</pre></li>
+    <li>May store the credit card state in a database
+      <ul><li>get and set methods would contain database operations</li></ul></li>
+    <li>May compute the property value:
+      <pre>public boolean isShopping() { return shoppingCart != null; }</pre></li></ul></li>
+</ul>
+
+
+
+<div onclick="document.location='slide028.html'"><hr>
+<center><small><a href="slide026.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide028.html">next</a></small></center>
+</div>
+</body>
+</html>

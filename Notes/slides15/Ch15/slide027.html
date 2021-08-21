@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 15</title>
+</head>
+
+<body>
+<div onclick="document.location='slide028.html'">
+<center><small><a href="slide026.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide028.html">next</a></small></center>
+<hr></div>
+<h2>Designing Your Own Exception Types</h2>
+<ul>
+   <li>You can design your own exception types&#150;subclasses of <tt>Exception</tt> or <tt>RuntimeException</tt></li>
+   <li><pre>if (amount > balance)
+{
+   throw new InsufficientFundsException(
+      "withdrawal of " + amount + " exceeds balance of " + balance);
+}</pre></li>
+   <li>Make it an unchecked exception&#150;programmer could have avoided it by 
+calling <tt>getBalance</tt> first</li>
+   <li>Extend <tt>RuntimeException</tt> or one of its subclasses</li>
+   <li>Supply two constructors
+     <ol><li>Default constructor</li>
+     <li>A constructor that accepts a message string describing reason for exception</li></ol></li>
+</ul>
+
+ 
+
+<div onclick="document.location='slide028.html'"><hr>
+<center><small><a href="slide026.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide028.html">next</a></small></center>
+</div>
+</body>
+</html>

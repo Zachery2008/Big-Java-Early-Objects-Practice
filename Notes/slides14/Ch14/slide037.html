@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+  <title>Horstmann Chapter 14</title>
+</head>
+
+<body>
+<div onclick="document.location='slide038.html'">
+<center><small><a href="slide036.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide038.html">next</a></small></center>
+<hr></div>
+<h2>Text Areas</h2>
+<ul>
+  <li>Use a <tt>JTextArea</tt> to show multiple lines of text</li>
+  <li>You can specify the number of rows and columns:
+     <pre>final int ROWS = 10;
+final int COLUMNS = 30;
+JTextArea textArea = new JTextArea(ROWS, COLUMNS);</pre></li>
+  <li><tt>setText</tt>: to set the text of a text field or text area</li>
+  <li><tt>append</tt>: to add text to the end of a text area</li>
+  <li>Use newline characters to separate lines:
+     <pre>textArea.append(account.getBalance() + "\n");</pre></li>
+  <li>To use for display purposes only:
+     <pre>textArea.setEditable(false); // program can call setText and append to change it</pre></li>
+</ul>
+
+
+<div onclick="document.location='slide038.html'"><hr>
+<center><small><a href="slide036.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide038.html">next</a></small></center>
+</div>
+</body>
+</html>

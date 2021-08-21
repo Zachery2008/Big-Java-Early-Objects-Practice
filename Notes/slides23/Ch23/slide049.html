@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 23</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide050.html'">
+<center><small><a href="slide048.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide050.html">next</a></small></center>
+<hr></div>
+<h2>Condition Objects</h2>
+<ul>
+  <li>To overcome problem, use a condition object</li>
+  <li>Condition objects allow a thread to temporarily release a lock, and to regain the lock at a later time</li>
+  <li>Each condition object belongs to a specific lock object</li>
+  <li>You obtain a condition object with <tt>newCondition</tt> method of <tt>Lock</tt> interface
+  <pre>public class BankAccount
+{
+   public BankAccount()
+   {
+      balanceChangeLock = new ReentrantLock();
+      sufficientFundsCondition = balanceChangeLock.newCondition();
+      . . .
+   }
+   . . .
+   private Lock balanceChangeLock;
+   private Condition sufficientFundsCondition;
+}</pre></li>
+</ul>
+
+
+<div onclick="document.location='slide050.html'"><hr>
+<center><small><a href="slide048.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide050.html">next</a></small></center>
+</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 23</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide048.html'">
+<center><small><a href="slide046.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide048.html">next</a></small></center>
+<hr></div>
+<h2>Avoiding Deadlocks</h2>
+<ul>
+  <li>A deadlock occurs if no thread can proceed because each thread is waiting
+    for another to do some work first</li>
+  <li>BankAccount example
+    <pre>public void withdraw(double amount)
+{
+   balanceChangeLock.lock();
+   try
+   {
+      while (balance < amount)
+         <em>Wait for the balance to grow</em>
+      . . .
+   }
+   finally
+   {
+      balanceChangeLock.unlock();
+   }
+}</pre>
+  </li>
+</ul>
+
+
+
+<div onclick="document.location='slide048.html'"><hr>
+<center><small><a href="slide046.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide048.html">next</a></small></center>
+</div>
+</body>
+</html>

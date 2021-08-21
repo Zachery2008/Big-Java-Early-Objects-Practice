@@ -1,0 +1,22 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#000000">import</font> javax<font color="#000000">.</font>swing<font color="#000000">.</font>JFrame<font color="#000000">;</font>
+<b><font color="#006cb8">02: </font></b>
+<b><font color="#006cb8">03: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> RectangleViewer
+<b><font color="#006cb8">04: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">05: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">void</font> <font color="#000000">main</font><font color="#000000">(</font>String<font color="#000000">[</font><font color="#000000">]</font> args<font color="#000000">)</font>
+<b><font color="#006cb8">06: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">07: </font></b>      JFrame frame <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">JFrame</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">08: </font></b>
+<b><font color="#006cb8">09: </font></b>      <font color="#d05b76">final</font> <font color="#d05b76">int</font> FRAME_WIDTH <font color="#000000">=</font> <font color="#89c976">300</font><font color="#000000">;</font>
+<b><font color="#006cb8">10: </font></b>      <font color="#d05b76">final</font> <font color="#d05b76">int</font> FRAME_HEIGHT <font color="#000000">=</font> <font color="#89c976">400</font><font color="#000000">;</font>
+<b><font color="#006cb8">11: </font></b>
+<b><font color="#006cb8">12: </font></b>      frame<font color="#000000">.</font><font color="#000000">setSize</font><font color="#000000">(</font>FRAME_WIDTH<font color="#000000">,</font> FRAME_HEIGHT<font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">13: </font></b>      frame<font color="#000000">.</font><font color="#000000">setTitle</font><font color="#000000">(</font><font color="#00a99d">"Two rectangles"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">14: </font></b>      frame<font color="#000000">.</font><font color="#000000">setDefaultCloseOperation</font><font color="#000000">(</font>JFrame<font color="#000000">.</font>EXIT_ON_CLOSE<font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">15: </font></b>
+<b><font color="#006cb8">16: </font></b>      RectangleComponent component <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">RectangleComponent</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">17: </font></b>      frame<font color="#000000">.</font><font color="#000000">add</font><font color="#000000">(</font>component<font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">18: </font></b>
+<b><font color="#006cb8">19: </font></b>      frame<font color="#000000">.</font><font color="#000000">setVisible</font><font color="#000000">(</font><font color="#d05b76">true</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">20: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">21: </font></b><font color="#000000">}</font>
+</tt></pre>

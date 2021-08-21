@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 19</title>
+</head>
+
+<body>
+<div onclick="document.location='slide005.html'">
+<center><small><a href="slide003.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide005.html">next</a></small></center>
+<hr></div>
+<h2>Sorting an Array of Integers</h2>
+<ol>
+  <li>Find the smallest and swap it with the first element
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">5 </td>
+          <td>9 </td>
+          <td>17</td>
+          <td>11</td>
+          <td>12</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </li>
+  <li>Find the next smallest. It is already in the correct place
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">5 </td>
+          <td bgcolor="#9999cc">9 </td>
+          <td>17</td>
+          <td>11</td>
+          <td>12</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </li>
+  <li>Find the next smallest and swap it with first element of unsorted
+portion
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">5 </td>
+          <td bgcolor="#9999cc">9 </td>
+          <td bgcolor="#9999cc">11</td>
+          <td>17</td>
+          <td>12</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </li>
+  <li>Repeat
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">5 </td>
+          <td bgcolor="#9999cc">9 </td>
+          <td bgcolor="#9999cc">11</td>
+          <td bgcolor="#9999cc">12</td>
+          <td>17</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </li>
+  <li>When the unsorted portion is of length 1, we are done
+    <table border="1" width="100">
+      <tbody>
+        <tr>
+          <td bgcolor="#9999cc">5 </td>
+          <td bgcolor="#9999cc">9 </td>
+          <td bgcolor="#9999cc">11</td>
+          <td bgcolor="#9999cc">12</td>
+          <td bgcolor="#9999cc">17</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ol>
+
+<div onclick="document.location='slide005.html'"><hr>
+<center><small><a href="slide003.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide005.html">next</a></small></center>
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Horstmann Chapter 8</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+
+<body>
+<div onclick="document.location='slide026.html'">
+<center><small><a href="slide024.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide026.html">next</a></small></center>
+</div><hr>
+<h2>The Generalized <tt>for</tt> Loop</h2>
+<ul>
+  <li>Works for <tt>ArrayLists</tt> too:<br>
+    <pre>ArrayList&lt;BankAccount&gt; accounts = . . . ;<br>double sum = 0;<br>for (BankAccount a : accounts)<br>{<br>   sum = sum + a.getBalance();<br>}<br></pre>
+  </li>
+  <li>Equivalent to the following ordinary <tt>for</tt> loop:
+    <pre>double sum = 0;<br>for (int i = 0; i &lt; accounts.size(); i++)<br>{<br>   BankAccount a = accounts.get(i);<br>   sum = sum + a.getBalance();<br>}</pre>
+  </li>
+</ul>
+
+<hr>
+<div onclick="document.location='slide026.html'">
+<center><small><a href="slide024.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide026.html">next</a></small></center>
+</div>
+</body>
+</html>

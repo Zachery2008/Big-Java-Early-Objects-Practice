@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Horstmann Chapter 7</title>
+  <link rel="stylesheet" type="text/css" href="../slides.css">
+</head>
+
+<body>
+<div onclick="document.location='slide013.html'">
+<center><small><a href="slide011.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide013.html">next</a></small></center>
+</div><hr>
+<h2>Common Error: Infinite Loops</h2>
+<ul>
+  <li>
+    <pre>int years = 0;<br>while (years &lt; 20)<br>{<br>   double interest = balance * rate / 100;<br>   balance = balance + interest;<br>}</pre>
+  </li>
+  <li>
+    <pre>int years = 20;<br>while (years &gt; 0)<br>{<br>   years++; // Oops, should have been years--<br>   double interest = balance * rate / 100;<br>   balance = balance + interest;<br>}</pre>
+  </li>
+  <li>Loops run forever&#8211;must kill program</li>
+</ul>
+
+<hr>
+<div onclick="document.location='slide013.html'">
+<center><small><a href="slide011.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide013.html">next</a></small></center>
+</div>
+</body>
+</html>

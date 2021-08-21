@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 26</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide039.html'">
+<center><small><a href="slide037.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide039.html">next</a></small></center>
+<hr></div>
+<h2>Creating XML Documents</h2>
+<ul>
+  <li> We can build a <tt>Document</tt> object in a Java program and then save
+    it as an XML document</li>
+  <li>We need a <tt>DocumentBuilder</tt> object to create a new, empty document
+    <pre>DocumentBuilderFactory factory =
+      DocumentBuilderFactory.newInstance();
+DocumentBuilder builder = factory.newDocumentBuilder();
+Document doc = builder.newDocument();  // An empty document
+</pre>
+  </li>
+  <li>The <tt>Document</tt> class has methods to create elements and text nodes</li>
+</ul>
+
+
+
+<div onclick="document.location='slide039.html'"><hr>
+<center><small><a href="slide037.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide039.html">next</a></small></center>
+</div>
+</body>
+</html>

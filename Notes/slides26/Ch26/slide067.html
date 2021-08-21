@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 26</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide068.html'">
+<center><small><a href="slide066.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide068.html">next</a></small></center>
+<hr></div>
+<h2>Parsing with Document Type Definitions</h2>
+<ul>
+  <li>When you parse an XML file with a DTD, tell the parser to ignore white space
+    <pre>factory.setValidating(true);
+factory.setIgnoringElementContentWhitespace(true);</pre></li>
+  <li>If the parser has access to a DTD, it can fill in defaults for attributes</li>
+  <li>For example, suppose a DTD defines a currency attribute for a price element:
+    <pre>&lt;!ATTLIST price currency CDATA "USD"&gt;</pre></li>
+  <li>If a document contains a <tt>price</tt> element without a <tt>currency</tt> attribute, the parser can supply the default:
+    <pre>String attributeValue = priceElement.getAttribute("currency");
+   // Gets "USD" if no currency specified</pre></li>
+</ul>
+
+
+
+<div onclick="document.location='slide068.html'"><hr>
+<center><small><a href="slide066.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide068.html">next</a></small></center>
+</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../slides.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>Horstmann Chapter 23</title>
+
+</head>
+
+<body>
+<div onclick="document.location='slide030.html'">
+<center><small><a href="slide028.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide030.html">next</a></small></center>
+<hr></div>
+<h2>Scenario to Explain Non-zero Result: Race Condition </h2>
+<ol>
+  <li>The first thread <tt>t1</tt> executes the lines
+    <pre>System.out.print("Depositing " + amount);
+double newBalance = balance + amount;</pre>
+The <tt>balance</tt> field is still 0, and the <tt>newBalance</tt> local variable is 100
+  </li>
+  <li><tt>t1</tt> reaches the end of its time slice and <tt>t2</tt> gains control</li>
+  <li><tt>t2</tt> calls the <tt>withdraw</tt> method which withdraws $100 from the balance
+    variable;
+    <br>it is now -100 </li>
+  <li><tt>t2</tt> goes to sleep</li>
+  <li><tt>t1</tt> regains control and picks up where it left off; it executes:
+    <pre>System.out.println(", new balance is " + newBalance);
+balance = newBalance;</pre>
+  The balance is now 100 instead of 0 because the deposit method used the
+    OLD balance</li>
+</ol>
+
+
+
+<div onclick="document.location='slide030.html'"><hr>
+<center><small><a href="slide028.html">previous</a> | 
+<a href="slide001.html">start</a> | 
+<a href="slide030.html">next</a></small></center>
+</div>
+</body>
+</html>

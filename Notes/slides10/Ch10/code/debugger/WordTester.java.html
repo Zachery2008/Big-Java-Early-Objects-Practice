@@ -1,0 +1,26 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">util</font><font color="#000000">.</font><font color="#000000">Scanner</font><font color="#000000">;</font>
+<b><font color="#006cb8">02: </font></b>
+<b><font color="#006cb8">03: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">04: </font></b><font color="#7a9ecd">   This program tests the countSyllables method of the Word class.</font>
+<b><font color="#006cb8">05: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">06: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> <font color="#000000">WordTester</font>
+<b><font color="#006cb8">07: </font></b><font color="#000000">{</font>  
+<b><font color="#006cb8">08: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">void</font> <font color="#000000">main</font><font color="#000000">(</font><font color="#000000">String</font><font color="#000000">[</font><font color="#000000">]</font> <font color="#000000">args</font><font color="#000000">)</font>
+<b><font color="#006cb8">09: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">10: </font></b>      <font color="#000000">Scanner</font> <font color="#000000">in</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Scanner</font><font color="#000000">(</font><font color="#000000">System</font><font color="#000000">.</font><font color="#000000">in</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">11: </font></b>
+<b><font color="#006cb8">12: </font></b>      <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font><font color="#00a99d">"Enter a sentence ending in a period."</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">13: </font></b>
+<b><font color="#006cb8">14: </font></b>      <font color="#000000">String</font> <font color="#000000">input</font><font color="#000000">;</font> 
+<b><font color="#006cb8">15: </font></b>      <font color="#d05b76">do</font>
+<b><font color="#006cb8">16: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">17: </font></b>         <font color="#000000">input</font> <font color="#000000">=</font> <font color="#000000">in</font><font color="#000000">.</font><font color="#000000">next</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">18: </font></b>         <font color="#000000">Word</font> <font color="#000000">w</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Word</font><font color="#000000">(</font><font color="#000000">input</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">19: </font></b>         <font color="#d05b76">int</font> <font color="#000000">syllables</font> <font color="#000000">=</font> <font color="#000000">w</font><font color="#000000">.</font><font color="#000000">countSyllables</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">20: </font></b>         <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font><font color="#00a99d">"Syllables in "</font> <font color="#000000">+</font> <font color="#000000">input</font> <font color="#000000">+</font> <font color="#00a99d">": "</font> 
+<b><font color="#006cb8">21: </font></b>            <font color="#000000">+</font> <font color="#000000">syllables</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">22: </font></b>      <font color="#000000">}</font> 
+<b><font color="#006cb8">23: </font></b>      <font color="#d05b76">while</font> <font color="#000000">(</font><font color="#000000">!</font><font color="#000000">input</font><font color="#000000">.</font><font color="#000000">endsWith</font><font color="#000000">(</font><font color="#00a99d">"."</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">24: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">25: </font></b><font color="#000000">}</font>
+</tt></pre>

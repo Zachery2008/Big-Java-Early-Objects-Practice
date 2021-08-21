@@ -1,0 +1,35 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#000000">import</font> java<font color="#000000">.</font>util<font color="#000000">.</font>Scanner<font color="#000000">;</font>
+<b><font color="#006cb8">02: </font></b>
+<b><font color="#006cb8">03: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">04: </font></b><font color="#7a9ecd">   A class to test the TaxReturn class.</font>
+<b><font color="#006cb8">05: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">06: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> TaxReturnTester
+<b><font color="#006cb8">07: </font></b><font color="#000000">{</font>  
+<b><font color="#006cb8">08: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">void</font> <font color="#000000">main</font><font color="#000000">(</font>String<font color="#000000">[</font><font color="#000000">]</font> args<font color="#000000">)</font>
+<b><font color="#006cb8">09: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">10: </font></b>      Scanner in <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Scanner</font><font color="#000000">(</font>System<font color="#000000">.</font>in<font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">11: </font></b>
+<b><font color="#006cb8">12: </font></b>      System<font color="#000000">.</font>out<font color="#000000">.</font><font color="#000000">print</font><font color="#000000">(</font><font color="#00a99d">"Please enter your income: "</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">13: </font></b>      <font color="#d05b76">double</font> income <font color="#000000">=</font> in<font color="#000000">.</font><font color="#000000">nextDouble</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">14: </font></b>
+<b><font color="#006cb8">15: </font></b>      System<font color="#000000">.</font>out<font color="#000000">.</font><font color="#000000">print</font><font color="#000000">(</font><font color="#00a99d">"Please enter S (single) or M (married): "</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">16: </font></b>      String input <font color="#000000">=</font> in<font color="#000000">.</font><font color="#000000">next</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">17: </font></b>      <font color="#d05b76">int</font> status <font color="#000000">=</font> <font color="#89c976">0</font><font color="#000000">;</font>
+<b><font color="#006cb8">18: </font></b>
+<b><font color="#006cb8">19: </font></b>      <font color="#d05b76">if</font> <font color="#000000">(</font>input<font color="#000000">.</font><font color="#000000">equalsIgnoreCase</font><font color="#000000">(</font><font color="#00a99d">"S"</font><font color="#000000">)</font><font color="#000000">)</font> 
+<b><font color="#006cb8">20: </font></b>         status <font color="#000000">=</font> TaxReturn<font color="#000000">.</font>SINGLE<font color="#000000">;</font>
+<b><font color="#006cb8">21: </font></b>      <font color="#d05b76">else</font> <font color="#d05b76">if</font> <font color="#000000">(</font>input<font color="#000000">.</font><font color="#000000">equalsIgnoreCase</font><font color="#000000">(</font><font color="#00a99d">"M"</font><font color="#000000">)</font><font color="#000000">)</font> 
+<b><font color="#006cb8">22: </font></b>         status <font color="#000000">=</font> TaxReturn<font color="#000000">.</font>MARRIED<font color="#000000">;</font>
+<b><font color="#006cb8">23: </font></b>      <font color="#d05b76">else</font> 
+<b><font color="#006cb8">24: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">25: </font></b>         System<font color="#000000">.</font>out<font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font><font color="#00a99d">"Bad input."</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">26: </font></b>         <font color="#d05b76">return</font><font color="#000000">;</font>
+<b><font color="#006cb8">27: </font></b>      <font color="#000000">}</font>      
+<b><font color="#006cb8">28: </font></b>
+<b><font color="#006cb8">29: </font></b>      TaxReturn aTaxReturn <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">TaxReturn</font><font color="#000000">(</font>income<font color="#000000">,</font> status<font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">30: </font></b>
+<b><font color="#006cb8">31: </font></b>      System<font color="#000000">.</font>out<font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font><font color="#00a99d">"The tax is "</font>
+<b><font color="#006cb8">32: </font></b>            <font color="#000000">+</font> aTaxReturn<font color="#000000">.</font><font color="#000000">getTax</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">33: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">34: </font></b><font color="#000000">}</font>
+</tt></pre>

@@ -1,0 +1,69 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">io</font><font color="#000000">.</font><font color="#000000">InputStream</font><font color="#000000">;</font>
+<b><font color="#006cb8">02: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">io</font><font color="#000000">.</font><font color="#000000">IOException</font><font color="#000000">;</font>
+<b><font color="#006cb8">03: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">io</font><font color="#000000">.</font><font color="#000000">OutputStream</font><font color="#000000">;</font>
+<b><font color="#006cb8">04: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">io</font><font color="#000000">.</font><font color="#000000">PrintWriter</font><font color="#000000">;</font>
+<b><font color="#006cb8">05: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">net</font><font color="#000000">.</font><font color="#000000">Socket</font><font color="#000000">;</font>
+<b><font color="#006cb8">06: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">util</font><font color="#000000">.</font><font color="#000000">Scanner</font><font color="#000000">;</font>
+<b><font color="#006cb8">07: </font></b>
+<b><font color="#006cb8">08: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">09: </font></b><font color="#7a9ecd">   This program demonstrates how to use a socket to communicate</font>
+<b><font color="#006cb8">10: </font></b><font color="#7a9ecd">   with a web server. Supply the name of the host and the</font>
+<b><font color="#006cb8">11: </font></b><font color="#7a9ecd">   resource on the command-line, for example</font>
+<b><font color="#006cb8">12: </font></b><font color="#7a9ecd">   java WebGet java.sun.com index.html</font>
+<b><font color="#006cb8">13: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">14: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> <font color="#000000">WebGet</font>
+<b><font color="#006cb8">15: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">16: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">void</font> <font color="#000000">main</font><font color="#000000">(</font><font color="#000000">String</font><font color="#000000">[</font><font color="#000000">]</font> <font color="#000000">args</font><font color="#000000">)</font> <font color="#d05b76">throws</font> <font color="#000000">IOException</font>
+<b><font color="#006cb8">17: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">18: </font></b>      <font color="#7a9ecd">// Get command-line arguments</font>
+<b><font color="#006cb8">19: </font></b>
+<b><font color="#006cb8">20: </font></b>      <font color="#000000">String</font> <font color="#000000">host</font><font color="#000000">;</font>
+<b><font color="#006cb8">21: </font></b>      <font color="#000000">String</font> <font color="#000000">resource</font><font color="#000000">;</font>
+<b><font color="#006cb8">22: </font></b>
+<b><font color="#006cb8">23: </font></b>      <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">args</font><font color="#000000">.</font><font color="#000000">length</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#89c976">2</font><font color="#000000">)</font>
+<b><font color="#006cb8">24: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">25: </font></b>         <font color="#000000">host</font> <font color="#000000">=</font> <font color="#000000">args</font><font color="#000000">[</font><font color="#89c976">0</font><font color="#000000">]</font><font color="#000000">;</font>
+<b><font color="#006cb8">26: </font></b>         <font color="#000000">resource</font> <font color="#000000">=</font> <font color="#000000">args</font><font color="#000000">[</font><font color="#89c976">1</font><font color="#000000">]</font><font color="#000000">;</font>
+<b><font color="#006cb8">27: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">28: </font></b>      <font color="#d05b76">else</font>
+<b><font color="#006cb8">29: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">30: </font></b>         <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font><font color="#00a99d">"Getting / from java.sun.com"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">31: </font></b>         <font color="#000000">host</font> <font color="#000000">=</font> <font color="#00a99d">"java.sun.com"</font><font color="#000000">;</font>
+<b><font color="#006cb8">32: </font></b>         <font color="#000000">resource</font> <font color="#000000">=</font> <font color="#00a99d">"/"</font><font color="#000000">;</font>
+<b><font color="#006cb8">33: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">34: </font></b>
+<b><font color="#006cb8">35: </font></b>      <font color="#7a9ecd">// Open socket</font>
+<b><font color="#006cb8">36: </font></b>
+<b><font color="#006cb8">37: </font></b>      <font color="#d05b76">final</font> <font color="#d05b76">int</font> <font color="#000000">HTTP_PORT</font> <font color="#000000">=</font> <font color="#89c976">80</font><font color="#000000">;</font>
+<b><font color="#006cb8">38: </font></b>      <font color="#000000">Socket</font> <font color="#000000">s</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Socket</font><font color="#000000">(</font><font color="#000000">host</font><font color="#000000">,</font> <font color="#000000">HTTP_PORT</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">39: </font></b>
+<b><font color="#006cb8">40: </font></b>      <font color="#7a9ecd">// Get streams</font>
+<b><font color="#006cb8">41: </font></b>      
+<b><font color="#006cb8">42: </font></b>      <font color="#000000">InputStream</font> <font color="#000000">instream</font> <font color="#000000">=</font> <font color="#000000">s</font><font color="#000000">.</font><font color="#000000">getInputStream</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">43: </font></b>      <font color="#000000">OutputStream</font> <font color="#000000">outstream</font> <font color="#000000">=</font> <font color="#000000">s</font><font color="#000000">.</font><font color="#000000">getOutputStream</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">44: </font></b>
+<b><font color="#006cb8">45: </font></b>      <font color="#7a9ecd">// Turn streams into scanners and writers</font>
+<b><font color="#006cb8">46: </font></b>
+<b><font color="#006cb8">47: </font></b>      <font color="#000000">Scanner</font> <font color="#000000">in</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">Scanner</font><font color="#000000">(</font><font color="#000000">instream</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">48: </font></b>      <font color="#000000">PrintWriter</font> <font color="#000000">out</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">PrintWriter</font><font color="#000000">(</font><font color="#000000">outstream</font><font color="#000000">)</font><font color="#000000">;</font>      
+<b><font color="#006cb8">49: </font></b>
+<b><font color="#006cb8">50: </font></b>      <font color="#7a9ecd">// Send command</font>
+<b><font color="#006cb8">51: </font></b>
+<b><font color="#006cb8">52: </font></b>      <font color="#000000">String</font> <font color="#000000">command</font> <font color="#000000">=</font> <font color="#00a99d">"GET "</font> <font color="#000000">+</font> <font color="#000000">resource</font> <font color="#000000">+</font> <font color="#00a99d">" HTTP/1.0\n\n"</font><font color="#000000">;</font>
+<b><font color="#006cb8">53: </font></b>      <font color="#000000">out</font><font color="#000000">.</font><font color="#000000">print</font><font color="#000000">(</font><font color="#000000">command</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">54: </font></b>      <font color="#000000">out</font><font color="#000000">.</font><font color="#000000">flush</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">55: </font></b>
+<b><font color="#006cb8">56: </font></b>      <font color="#7a9ecd">// Read server response</font>
+<b><font color="#006cb8">57: </font></b>
+<b><font color="#006cb8">58: </font></b>      <font color="#d05b76">while</font> <font color="#000000">(</font><font color="#000000">in</font><font color="#000000">.</font><font color="#000000">hasNextLine</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font>
+<b><font color="#006cb8">59: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">60: </font></b>         <font color="#000000">String</font> <font color="#000000">input</font> <font color="#000000">=</font> <font color="#000000">in</font><font color="#000000">.</font><font color="#000000">nextLine</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">61: </font></b>         <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font><font color="#000000">input</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">62: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">63: </font></b>
+<b><font color="#006cb8">64: </font></b>      <font color="#7a9ecd">// Always close the socket at the end</font>
+<b><font color="#006cb8">65: </font></b>
+<b><font color="#006cb8">66: </font></b>      <font color="#000000">s</font><font color="#000000">.</font><font color="#000000">close</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>      
+<b><font color="#006cb8">67: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">68: </font></b><font color="#000000">}</font>
+</tt></pre>
